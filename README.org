@@ -1,0 +1,25 @@
+#+TITLE: Corsair’s Dot-files for Mac
+
+These are my dot-files for various programs in Mac OS X, including the
+configuration for
+
+- The super awesome Emacs
+- The suck-less Mutt & Msmtp
+- The awesome Zsh
+- The awesome Tmux
+- The awesome Pentadactyl (a little bit)
+- The super awesome Git (a tiny bit)
+
+Also included are some scripts I use:
+
+- =Change-uid.sh= to properly change UID in Mac OS X
+- =Context-minimal-exec.sh= to run a command temporarily under my
+  installation of [[http://wiki.contextgarden.net/ConTeXt_Standalone][ConTeXt Standalone]].
+- =Rand-sig.py= to randomly choose signatures when sending emails.
+- =Try.sh= to repeat a command until success.
+
+And finally some other scripts I use but are not included (because they
+are hosted in some other places, etc.)
+
+- [[https://github.com/Corsair/Retrmail][Retrmail]], my POP3 client.
+- [[https://gist.github.com/1401473][Generate Zalgo-ified text.]]

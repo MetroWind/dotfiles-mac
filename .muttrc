@@ -1,0 +1,146 @@
+# -*- mode: muttrc; -*-
+
+alternates "chris.corsair@gmail.com"
+# alternates "uky@darksair.org"
+alternates "mingyang.sun@uky.edu"
+alternates "msu225@uky.edu"
+alternates "msu225@g.uky.edu"
+my_hdr X-Operating-System: `uname -s -r -p`
+my_hdr X-Useless-Header: Use the Force, Luke!
+set quit
+auto_view text/html
+# If there is a plain text version of a mail, view it instead of html
+# version.
+alternative_order text/plain text/html
+set move
+unset ascii_chars
+set include 
+folder-hook . "set sort=threads"
+set sort_aux=last-date-sent
+set pager_stop
+set fast_reply
+set resolve
+unset fcc_attach
+set mark_old
+set pager_context=3
+set reverse_alias
+set tilde
+unset markers
+set read_inc=100
+set write_inc=100
+# set charset="utf-8"
+set send_charset="us-ascii:utf-8"
+charset-hook !utf-8 gbk
+set wait_key
+set edit_headers
+set pager_index_lines=4
+set rfc2047_parameters
+# set index_format="%3C|%2N %Z %{%b %d} %-15.15L (%4l) %s"
+folder-hook . 'set index_format="%Z %{%b %d} %-15.15L (%4c) %s"'
+# set editor="emacs -nw -q --load ~/.emacs-quick.el --no-splash"
+set editor="emacsclient -t"
+set signature="rand-sig.py ~/.signatures |"
+
+# Mailing Lists
+subscribe muse-el-discuss@gna.org
+subscribe mutt-users@mutt.org
+subscribe fvwm@fvwm.org
+subscribe fvwm@lists.math.uh.edu
+subscribe fontconfig@fontconfig.org
+subscribe fontconfig@lists.freedesktop.org
+subscribe zsh-users@sunsite.dk
+subscribe zsh-users@zsh.org
+subscribe zeuux-universe@zeuux.org
+subscribe erc-discuss@gnu.org
+subscribe help-octave@cae.wisc.edu
+subscribe help-octave@octave.org
+subscribe help@octave.org
+subscribe ntg-context@ntg.nl
+subscribe .*@googlegroups.com
+
+set sendmail="msmtp"
+set sendmail_wait=10
+set use_from=yes
+set realname="Darksair"
+set from=chris.corsair@gmail.com
+set envelope_from=yes
+
+set folder="~/Mail"
+set record="=sent"
+set spoolfile="=mbox"
+set postponed="=postponed"
+set mbox="=inbox"
+
+mailboxes "=mbox"
+mailboxes "=inbox"
+mailboxes "=sent"
+mailboxes "!"
+# mailboxes "=sent"
+mailboxes "=lists"
+mailboxes "=postponed"
+mailboxes "=crap"
+mailboxes "=useful"             # Useful informations (usually from mailling lists)
+
+folder-hook lists 'push D~r>30d<enter>'
+
+fcc-hook "=s [bm] " =bookmark
+fcc-hook ~l =lists
+fcc-hook . =inbox
+
+send-hook ".*" "set from=chris.corsair@gmail.com ;\
+                set realname=\"Darksair\" ;\
+                set signature=\"rand-sig.py ~/.signatures |\""
+send-hook "~t .*\\.edu>*$ | ~t .*@teragrid\\.org>* | ~t .*@fnal\\.gov>* | ~t .*@nersc\\.gov>*" \
+          "set from=mingyang.sun@uky.edu ;\
+           set realname=\"Mingyang Sun\" ;\
+           set signature=~/.signature"
+
+save-hook "~l" =lists
+
+# --------------- Bindings --------------->
+bind index $ last-entry
+macro index "\Co" "T~O<enter>;WO" # Mark all as read
+# Emacs nav bindings
+bind pager "\Cn" next-line
+bind pager "\Cp" previous-line
+bind pager "<esc>n" next-thread
+bind pager "<esc>p" previous-thread
+bind pager "\Cv" next-page
+bind pager "<esc>v" previous-page
+
+# --------------- Headers --------------->
+# Ignore all headers
+ignore *
+
+# Then un-ignore the ones I want to see
+unignore From:
+unignore To:
+unignore Reply-To:
+unignore Mail-Followup-To:
+unignore Subject:
+unignore Date:
+unignore Organization:
+unignore Newsgroups:
+unignore CC:
+unignore BCC:
+# unignore Message-ID:
+unignore X-Mailer:
+unignore User-Agent:
+unignore X-Junked-Because:
+unignore X-SpamProbe:
+unignore X-Virus-hagbard:
+
+# Now order the visable header lines
+hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
+
+# --------------- Colors --------------->
+color index brightwhite   default "~N"
+source ~/.mutt-color
+color index white         red     "~D"
+
+# --------------- Other Files --------------->
+source ~/.mutt-alias            # Alias
+source ~/.mutt-gpg
+source ~/.mutt-score
+
+push <show-version>

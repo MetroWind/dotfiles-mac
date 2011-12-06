@@ -1,0 +1,4 @@
+:set guioptions=bCrsT
+:set editor='emacsclient <file>'
+
+:highlight StatusLine "font-weight: normal;"

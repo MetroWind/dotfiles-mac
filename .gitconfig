@@ -1,0 +1,29 @@
+[user]
+  email = chris.corsair@gmail.com
+	name = M. Sun
+[core]
+  excludesfile = /Users/corsair/.gitignore_global
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[alias]
+  graph = log --all --graph --oneline --decorate=short

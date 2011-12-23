@@ -17,6 +17,7 @@ Also included are some scripts I use:
   installation of [[http://wiki.contextgarden.net/ConTeXt_Standalone][ConTeXt Standalone]].
 - =Rand-sig.py= to randomly choose signatures when sending emails.
 - =Try.sh= to repeat a command until success.
+- =Appify.py= to convert any executable into an application bundle.
 
 And finally some other scripts I use but are not included (because they
 are hosted in some other places, etc.)

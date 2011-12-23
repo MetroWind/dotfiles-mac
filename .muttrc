@@ -38,7 +38,7 @@ set rfc2047_parameters
 # set index_format="%3C|%2N %Z %{%b %d} %-15.15L (%4l) %s"
 folder-hook . 'set index_format="%Z %{%b %d} %-15.15L (%4c) %s"'
 # set editor="emacs -nw -q --load ~/.emacs-quick.el --no-splash"
-set editor="emacsclient -t"
+set editor="emacsclient"
 set signature="rand-sig.py ~/.signatures |"
 
 # Mailing Lists

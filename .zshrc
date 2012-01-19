@@ -28,7 +28,7 @@ zstyle ':completion:*' prompt "%{${fg_bold[red]}%}# Corrections%{${fg_no_bold[de
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
 zstyle ':completion:*' verbose true
-zstyle :compinstall filename '/home/corsair/.zshrc'
+zstyle :compinstall filename '/Users/corsair/.zshrc'
 
 autoload -Uz compinit
 compinit

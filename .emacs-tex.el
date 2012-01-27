@@ -10,6 +10,8 @@
 (require 'context)
 (add-hook 'TeX-mode-hook 'LaTeX-math-mode)
 (setq TeX-electric-sub-and-superscript t)
+;; What mode to use for new TeX file
+(setq TeX-default-mode 'ConTeXt-mode)
 ; Emacs help for \label, \ref, \cite.  Normally used only with
 ; LaTeX-mode but also useful with plain TeX + eplain and with ConTeXt, so:
 (setq reftex-plug-into-AUCTeX t)

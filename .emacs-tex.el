@@ -5,7 +5,20 @@
 (setq TeX-auto-save t)                  ; Enable parse on save.
 (setq-default TeX-master nil)
 ; make PDF by default (can toggle with C-c C-t C-p
-(add-hook 'TeX-mode-hook '(lambda () (TeX-PDF-mode 1)))
+(add-hook 'TeX-mode-hook (lambda () (TeX-PDF-mode 1)))
+;; Math mode symbols
+(setq LaTeX-math-list
+      '((?\] "Rightarrow")
+        (?\[ "Leftarrow")
+        (?} "to")
+        (?{ "gets")
+        (?= "approx")
+        (?q "theta")
+        (?Q "Theta")
+        (?c "chi")
+        (?o "omega")
+        (?O "Omega")))
+
 (require 'latex)			; defines LaTeX-math-mode
 (require 'context)
 (add-hook 'TeX-mode-hook 'LaTeX-math-mode)
@@ -179,8 +192,6 @@
 (defun deal-with-latex-quote ()
   "If in math mode, insert a literal ', \", or -.  If in normal
   mode, insert a proper pair of quotes, or dash."
-  (define-key cdlatex-mode-map "'" nil)
-
   (define-key LaTeX-mode-map "'"
     (lambda ()
       (interactive)
@@ -205,8 +216,6 @@
 (defun deal-with-context-quote ()
   "If in math mode, insert a literal ', \", or -.  If in normal
   mode, insert a proper pair of quotes, or dash."
-  (define-key cdlatex-mode-map "'" nil)
-
   (define-key ConTeXt-mode-map "'"
     (lambda ()
       (interactive)
@@ -228,26 +237,109 @@
           (insert "-")
         (auto-insert-and-convert-dash)))))
 
-;; CDLaTeX
-(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
-(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
-(add-hook 'LaTeX-mode-hook              ; with AUCTeX LaTeX mode
+(add-hook 'LaTeX-mode-hook
           (lambda ()
             (message "LaTeX-mode loaded.")
-            (turn-on-cdlatex)
             (deal-with-latex-quote)))
-(add-hook 'ConTeXt-mode-hook            ; with AUCTeX LaTeX mode
+(add-hook 'ConTeXt-mode-hook
           (lambda ()
             (message "ConTeXt-mode loaded.")
-            (turn-on-cdlatex)
             (deal-with-context-quote)))
-(add-hook 'latex-mode-hook 'turn-on-cdlatex)   ; with Emacs latex mode
 
 (add-hook 'tex-mode-hook
           '(lambda ()
              (message "tex-mode loaded.")
              (define-key LaTeX-mode-map (kbd "C-c /") 'LaTeX-close-environment)
              (define-key LaTeX-mode-map (kbd "C-TAB") 'indent-according-to-mode)))
+
+;; The tab functionality copied (and modified a bit) from CDLaTeX.
+(defun cdlatex-tab ()
+  "This function is intended to do many cursor movements.
+It is bound to the tab key since tab does nothing useful in a TeX file.
+
+The function first tries to expand any command keyword before point.
+
+If there is none, it cleans up short subscripts and superscripts at point.
+I.e. it changes a^{2} into a^2, since this is more readable.  This feature
+can be disabled by setting `cdlatex-simplify-sub-super-scripts' to nil.
+
+Then it jumps to the next point in a LaTeX text where one would reasonably
+expect that more input can be put in.
+To do that, the cursor is moved according to the following rules:
+
+The cursor stops...
+- before closing brackets if preceding-char is any of -({[]})
+- after  closing brackets, but not if following-char is any of ({[_^
+- just after $, if the cursor was before that $.
+- at end of non-empty lines
+- at the beginning of empty lines
+- before a SPACE at beginning of line
+- after first of several SPACE
+
+Sounds strange? Try it out.
+"
+  (interactive)
+  (catch 'stop
+
+    ;; try command expansion
+    (let ((pos (point)) exp math-mode)
+      (backward-word 1)
+      (while (eq (following-char) ?$) (forward-char 1))
+      (goto-char pos))
+
+    ;; Check for simplification of sub and superscripts
+    (cond
+     ((looking-at "}\\|\\]\\|)")
+      (forward-char -3)
+      (if (looking-at "[_^]{[0-9a-zA-Z]}")
+          ;; sub/super script
+          (progn (forward-char 1)
+                 (delete-char 1)
+                 (forward-char 1)
+                 (delete-char 1))
+        (forward-char 4))
+      (if (looking-at "[^_\\^({\\[]")
+          ;; stop after closing bracket, unless ^_[{( follow
+          (throw 'stop t)))
+     ((= (following-char) ?$)
+      (while (= (following-char) ?$) (forward-char 1))
+      (throw 'stop t))
+     ((= (following-char) ?\ )
+      ;; stop after first of many spaces
+      (forward-char 1)
+      (re-search-forward "[^ ]")
+      (if (/= (preceding-char) ?\n) (forward-char -1)))
+     (t
+      (forward-char 1)))
+
+    ;; move to next possible stopping site and check out the place
+    (while (re-search-forward "[ )}\n]\\|\\]" (point-max) t)
+      (forward-char -1)
+      (cond
+       ((= (following-char) ?\ )
+        ;; stop at first space or b-o-l
+        (if (not (bolp)) (forward-char 1)) (throw 'stop t))
+       ((= (following-char) ?\n)
+        ;; stop at line end, but not after \\
+        (if (and (bolp) (not (eobp)))
+            (throw 'stop t)
+          (if (equal "\\\\" (buffer-substring-no-properties
+                             (- (point) 2) (point)))
+              (forward-char 1)
+            (throw 'stop t))))
+       (t
+        ;; Stop before )}] if preceding-char is any parenthesis
+        (if (or (= (char-syntax (preceding-char)) ?\()
+                (= (char-syntax (preceding-char)) ?\))
+                (= (preceding-char) ?-))
+            (throw 'stop t)
+          (forward-char 1)
+          (if (looking-at "[^_\\^({\\[]")
+              ;; stop after closing bracket, unless ^_[{( follow
+              (throw 'stop t))))))))
+
+(add-hook 'ConTeXt-mode-hook
+          (define-key ConTeXt-mode-map (kbd "TAB") 'cdlatex-tab))
 
 ;; Pretty display for some symbols
 (defun gen-tex-macro-regex (macro)

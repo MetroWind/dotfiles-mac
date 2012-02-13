@@ -83,8 +83,11 @@ mailboxes "=useful"             # Useful informations (usually from mailling lis
 
 folder-hook lists 'push D~r>30d<enter>'
 
-fcc-hook "=s [bm] " =bookmark
 fcc-hook ~l =lists
+# PHY600 computation homeworks
+fcc-hook '(~s "600.*([Hh][Ww]|[Hh]omework) *[0-9]+" | \
+           ~s "([Hh][Ww]|[Hh]omework) *[0-9]+.*600") \
+           (! ~t "rkk@pa\.uky\.edu")' =computation
 fcc-hook . =inbox
 
 send-hook ".*" "set from=chris.corsair@gmail.com ;\

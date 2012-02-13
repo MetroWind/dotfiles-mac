@@ -57,6 +57,7 @@ fi
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     alias ls='gls --color=auto -h -X -F --group-directories-first -v'
+    alias grep='grep --color=auto'
 fi
 
 # Fix Home and End key

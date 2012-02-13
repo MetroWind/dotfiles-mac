@@ -105,8 +105,8 @@ bind pager "\Cn" next-line
 bind pager "\Cp" previous-line
 bind pager "<esc>n" next-thread
 bind pager "<esc>p" previous-thread
-bind pager "\Cv" next-page
-bind pager "<esc>v" previous-page
+bind index,pager "\Cv" next-page
+bind index,pager "<esc>v" previous-page
 
 # --------------- Headers --------------->
 # Ignore all headers

@@ -73,13 +73,13 @@ set mbox="=inbox"
 
 mailboxes "=mbox"
 mailboxes "=inbox"
-mailboxes "=sent"
 mailboxes "!"
 # mailboxes "=sent"
 mailboxes "=lists"
 mailboxes "=postponed"
 mailboxes "=crap"
 mailboxes "=useful"             # Useful informations (usually from mailling lists)
+mailboxes "=computation"
 
 folder-hook lists 'push D~r>30d<enter>'
 

@@ -8,36 +8,30 @@
 (cond
  (linuxp
   (muse-derive-style "wiki-xhtml" "xhtml"
-                     :header "/mnt/shared/text/wiki/.wiki/header.html"
-                     :footer "/mnt/shared/text/wiki/.wiki/footer.html"
+                     :header "/mnt/shared/text/Non-books/Misc/wiki/.wiki/header.html"
+                     :footer "/mnt/shared/text/Non-books/Misc/wiki/.wiki/footer.html"
                      ))
- (aquap
+ (macp
   (muse-derive-style "wiki-xhtml" "xhtml"
-                     :header "/Volumes/Shared/text/wiki/.wiki/header.html"
-                     :footer "/Volumes/Shared/text/wiki/.wiki/footer.html"
+                     :header "/Volumes/Shared/text/Non-books/Misc/wiki/.wiki/header.html"
+                     :footer "/Volumes/Shared/text/Non-books/Misc/wiki/.wiki/footer.html"
                      ))
 )
 
 (cond
  (linuxp
   (setq muse-project-alist
-        '(("muse-test"
-           ("/mnt/shared/text/muse-test" :default "index")
-           (:base "wiki-xhtml" :path "/mnt/shared/text/muse-test/public_html"))
-          ("Wiki"
-           ("/mnt/shared/text/wiki" :default "index")
+        '(("Wiki"
+           ("/mnt/shared/text/Non-books/Misc/wiki" :default "index")
            (:base "wiki-xhtml"
-                  :path "/mnt/shared/text/wiki/publish"
+                  :path "/mnt/shared/text/Non-books/Misc/wiki/publish"
                   :force-publish ("WikiIndex"))))))
- (aquap
+ (macp
   (setq muse-project-alist
-        '(("muse-test"
-           ("/Volumes/Shared/text/muse-test" :default "index")
-           (:base "wiki-xhtml" :path "/Volumes/Shared/text/muse-test/public_html"))
-          ("Wiki"
-           ("/Volumes/Shared/text/wiki" :default "index")
+        '(("Wiki"
+           ("/Volumes/Shared/text/Non-books/Misc/wiki" :default "index")
            (:base "wiki-xhtml"
-                  :path "/Volumes/Shared/text/wiki/publish"
+                  :path "/Volumes/Shared/text/Non-books/Misc/wiki/publish"
                   :force-publish ("WikiIndex"))))))
 )
 

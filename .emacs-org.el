@@ -12,15 +12,16 @@
 
 (cond
  (linuxp
-  (setq org-agenda-files '("/mnt/shared/text/misc/org/plan.org"
-                           "/mnt/shared/text/misc-study/abroad/apply.org")))
- (aquap
-  (setq org-agenda-files '("/Volumes/Shared/text/misc/org/plan.org"
-                           "/Volumes/Shared/text/misc-study/abroad/apply.org")))
+  (setq org-agenda-files '("/mnt/shared/text/Non-books/Misc/org/plan.org")))
+ (macp
+  (setq org-agenda-files '("/Volumes/Shared/text/Non-books/Misc/org/plan.org")))
 )
 
 ;; Set to the location of your Org files on your local system
-(setq org-directory "/mnt/shared/text/misc/org")
+(setq org-directory
+      (cond
+       (linuxp "/mnt/shared/text/Non-books/Misc/org")
+       (macp "/Volumes/Shared/text/Non-books/Misc/org")))
 ;; Set to the name of the file where new notes will be stored
 (setq org-mobile-inbox-for-pull (concat org-directory "/plan.org"))
 ;; Set to <your Dropbox root directory>/MobileOrg.

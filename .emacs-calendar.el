@@ -9,15 +9,15 @@
 ;;path settings
 (cond
  (linuxp
-  (setq diary-file "/mnt/shared/Back up/calendar/diary")
-  (setq todo-file-do "/mnt/shared/Back up/calendar/todo-do")
-  (setq todo-file-done "/mnt/shared/Back up/calendar/todo-done")
-  (setq todo-file-top "/mnt/shared/Back up/calendar/todo-top"))
- (aquap
-  (setq diary-file "/Volumes/Shared/Back up/calendar/diary")
-  (setq todo-file-do "/Volumes/Shared/Back up/calendar/todo-do")
-  (setq todo-file-done "/Volumes/Shared/Back up/calendar/todo-done")
-  (setq todo-file-top "/Volumes/Shared/Back up/calendar/todo-top")))
+  (setq diary-file "/mnt/shared/text/Non-books/Misc/calendar/diary")
+  (setq todo-file-do "/mnt/shared/text/Non-books/Misc/calendar/todo-do")
+  (setq todo-file-done "/mnt/shared/text/Non-books/Misc/calendar/todo-done")
+  (setq todo-file-top "/mnt/shared/text/Non-books/Misc/calendar/todo-top"))
+ (macp
+  (setq diary-file "/Volumes/Shared/text/Non-books/Misc/calendar/diary")
+  (setq todo-file-do "/Volumes/Shared/text/Non-books/Misc/calendar/todo-do")
+  (setq todo-file-done "/Volumes/Shared/text/Non-books/Misc/calendar/todo-done")
+  (setq todo-file-top "/Volumes/Shared/text/Non-books/Misc/calendar/todo-top")))
 
 ;;Appointment Settings
 (setq appt-issue-message t)

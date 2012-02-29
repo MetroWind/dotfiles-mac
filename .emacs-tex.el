@@ -8,16 +8,20 @@
 (add-hook 'TeX-mode-hook (lambda () (TeX-PDF-mode 1)))
 ;; Math mode symbols
 (setq LaTeX-math-list
+      ;; Symbols
       '((?\] "Rightarrow")
         (?\[ "Leftarrow")
         (?} "to")
         (?{ "gets")
         (?= "approx")
+        ;; Greek
         (?q "theta")
         (?Q "Theta")
         (?c "chi")
         (?o "omega")
-        (?O "Omega")))
+        (?O "Omega")
+        ;; Complicated stuff
+        (?/ (lambda () (interactive) (insert "\\Slash{}") (backward-char)))))
 
 (require 'latex)			; defines LaTeX-math-mode
 (require 'context)

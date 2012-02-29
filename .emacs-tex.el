@@ -137,9 +137,9 @@
                          `("MkIV"
                            ,(cond
                              (linuxp
-                              "source ~/software/context/tex/setuptex; context --nonstopmode %t")
+                              "source ~/software/context/tex/setuptex; context --nonstopmode --purge %t")
                              (macp
-                              "source ~/programs/context/tex/setuptex; context --nonstopmode %t"))
+                              "source ~/programs/context/tex/setuptex; context --nonstopmode --purge %t"))
                            TeX-run-TeX nil t))))
 
 (defun set-tex-faces ()

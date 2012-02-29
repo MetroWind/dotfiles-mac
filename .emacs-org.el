@@ -92,11 +92,19 @@ h3
     font-family: serif;
 }
 
-.todo, .done, .timestamp
+.todo, .done, .timestamp, .timestamp-kwd
 {
     font-family: monospace;
-    font-size: 80%;
-    background-color: #ddd;
+    font-size: 50%;
+    background-color: transparent;
+}
+
+.tag
+{
+    font-family: monospace;
+    font-size: 70%;
+    color: #666;
+    background-color: transparent;
 }
 
 pre, code
@@ -105,7 +113,7 @@ pre, code
     color: #b6beb4;
     border: none; 
     font-family: monospace;
-    font-size: 85%;
+    font-size: 80%;
 }
 
 </style>")

@@ -343,7 +343,7 @@ Sounds strange? Try it out.
               (throw 'stop t))))))))
 
 (add-hook 'ConTeXt-mode-hook
-          (define-key ConTeXt-mode-map (kbd "TAB") 'cdlatex-tab))
+          (lambda () (define-key ConTeXt-mode-map (kbd "TAB") 'cdlatex-tab)))
 
 ;; Pretty display for some symbols
 (defun gen-tex-macro-regex (macro)

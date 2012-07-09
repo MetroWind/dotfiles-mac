@@ -161,24 +161,6 @@
 ;; Let tramp recognize passcode prompt on Kraken
 (setq tramp-password-prompt-regexp
       "^.*\\([pP]assword\\|[pP]assphrase\\|PASSCODE\\).*:\0? *")
-;; Set tramp to support zh su/sudo
-;; (setq tramp-password-prompt-regexp
-;;       "^.*\\([pP]assword\\|[pP]assphrase\\|口令\\).*\\(:\\|：\\) *")
-;; (setq tramp-default-method nil)
-;; ;; Set shell-command to support su/sudo
-;; (setq comint-password-prompt-regexp
-;;       (rx (and line-start
-;;                (or
-;;                 "Enter passphrase: "
-;;                 "[sudo] password for "
-;;                 (and (one-or-more not-newline) "'s password: ")
-;;                 (and (or "P" "p") "assword:")
-;;                 (and "Password for '" (one-or-more not-newline) "':")
-;;                 (and "Password for " (one-or-more not-newline))
-;;                 "Retype to confirm: "
-;;                 "Key:"
-;;                 "Again:"
-;;                 (and "Enter pass" (or "phrase" "word") " for")))))
 ;; Non-nil if searches and matches should ignore case.
 (setq case-fold-search t)
 ;; debug when error

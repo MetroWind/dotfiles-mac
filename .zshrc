@@ -103,6 +103,20 @@ rationalise-dot() {
 }
 zle -N rationalise-dot
 
+# If return on empty line, execute `ls'.
+user-ret()
+{
+    if [[ $BUFFER = "" ]] ;then
+        BUFFER="ls"
+        zle end-of-line
+        zle accept-line
+    else
+        zle accept-line
+    fi
+}
+zle -N user-ret
+bindkey "\r" user-ret
+
 # Aliases
 alias ec='emacsclient --no-wait'
 

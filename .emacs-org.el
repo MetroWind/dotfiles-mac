@@ -9,12 +9,16 @@
 (setq org-agenda-include-diary t)
 (setq org-icalendar-include-todo t)
 (setq org-startup-folded nil)           ;Show all content on startup.
+(setq org-todo-keywords '((sequence "TODO" "|" "DONE" "CANCELED")))
+
 
 (cond
  (linuxp
-  (setq org-agenda-files '("/mnt/shared/text/Non-books/Misc/org/plan.org")))
+  (setq org-agenda-files '("/mnt/shared/text/Non-books/Misc/org/plan.org"
+                           "~/document/physics/lattice/doc/tech.org")))
  (macp
-  (setq org-agenda-files '("/Volumes/Shared/text/Non-books/Misc/org/plan.org")))
+  (setq org-agenda-files '("/Volumes/Shared/text/Non-books/Misc/org/plan.org"
+                           "/Volumes/Home/document/physics/lattice/doc/tech.org")))
 )
 
 ;; Set to the location of your Org files on your local system

@@ -4,6 +4,7 @@
 (require 'cal-china)
 ;; (require 'chinese-calendar)
 
+(calendar-set-date-style 'iso)
 (global-set-key (kbd "C-<f11>") 'calendar)
 
 ;;path settings
@@ -23,7 +24,6 @@
 (setq appt-issue-message t)
 (add-hook 'diary-hook 'appt-make-list)
 (setq appt-display-format 'window)
-
 
 ;; make emacs be able to tell me when sunrise and sunset
 (setq calendar-latitude +39.54)

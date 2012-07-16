@@ -1004,8 +1004,9 @@ followed by a dash to an em-dash."
                                                          (server-edit))))))
 
 ;;=============== global bindings ====================>
-(global-set-key (kbd "C-<f10>") 'list-bookmarks)
-(global-set-key (kbd "<C-XF86KbdBrightnessUp>") 'list-bookmarks)
+(if linux-x-p
+    (global-set-key (kbd "<C-XF86KbdBrightnessUp>") 'list-bookmarks)
+  (global-set-key (kbd "C-<f10>") 'list-bookmarks))
 (global-set-key (kbd "s-p") 'previous-buffer)
 (global-set-key (kbd "s-n") 'next-buffer)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
@@ -1041,7 +1042,7 @@ followed by a dash to an em-dash."
         "/Volumes/Shared/images/Logo/My_logo/bloody-smile-nb-128.png")))
 (if macp
     (progn
-      (add-to-list 'default-frame-alist '(height . 65))
+      (add-to-list 'default-frame-alist '(height . 60))
       (add-to-list 'default-frame-alist '(width . 110))
       (setq initial-frame-alist '((top . 52) (left . 300)))
       (if window-system
@@ -1050,8 +1051,9 @@ followed by a dash to an em-dash."
       ;; Main font
       (set-face-attribute
        'default nil
-       :family "Inconsolata"
-       :height 130)
+       :family "The Sans Mono Condensed"
+       :height 125
+       :weight 'light)
       ;; CJK
       (set-fontset-font
        (frame-parameter nil 'font)
@@ -1062,7 +1064,7 @@ followed by a dash to an em-dash."
       (set-fontset-font
        (frame-parameter nil 'font)
        '(#x2000 . #x206f)
-       (font-spec :family "Inconsolata"))
+       (font-spec :family "The Sans Mono Condensed"))
       ;; en-dash, em-dash, and horizontal bar
       (set-fontset-font
        (frame-parameter nil 'font)

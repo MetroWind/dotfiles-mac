@@ -27,7 +27,7 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         mailman mailnull mldonkey mysql nagios \
         named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
         operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
 
 # Only complete host names from ~/.ssh/config for ssh and scp.
 # Knownhosts and /etc/hosts are cluttered with crap.

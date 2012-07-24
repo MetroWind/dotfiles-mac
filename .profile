@@ -3,6 +3,7 @@ export OSCOLORDIR="/System/Library/ColorSync/Profiles;/Library/Application Suppo
 export PATH="$HOME/bin:$HOME/bin/lattice:$HOME/bin/lattice/xqcdio:$PATH"
 export INFOPATH="$HOME/.emacs.d/info:$INFOPATH"
 export EDITOR="emacsclient"
+export PAGER="less -R"
 export HOMEBREW_USE_CLANG=1
 
 # Python

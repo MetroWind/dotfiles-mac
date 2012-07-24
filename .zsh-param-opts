@@ -1,0 +1,34 @@
+# -*- mode: sh; -*-
+
+HISTFILE=~/.histfile
+HISTSIZE=5120
+SAVEHIST=5000
+
+WORDCHARS=_-
+
+# Options
+setopt MAIL_WARNING
+setopt NO_NOTIFY
+setopt NO_AUTO_CD
+setopt INTERACTIVE_COMMENTS
+setopt CDABLE_VARS
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt GLOB_COMPLETE
+setopt LIST_PACKED
+setopt NO_LIST_ROWS_FIRST
+setopt APPEND_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt AUTO_CONTINUE
+setopt LONG_LIST_JOBS
+# Use the system's file locking mechanism instead of an ad-hoc
+# mechanism for locking history files.
+setopt HIST_FCNTL_LOCK
+setopt AUTO_LIST
+setopt AUTO_MENU
+setopt EXTENDED_HISTORY
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+setopt PROMPT_SUBST

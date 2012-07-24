@@ -1,0 +1,17 @@
+# -*- mode: sh; -*-
+
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+    alias ls='gls --color=auto -h -X -F --group-directories-first -v'
+    alias grep='grep --color=auto'
+fi
+
+alias ec='emacsclient --no-wait'
+
+if [ $USER = root ]; then
+    alias wtf="dmesg"
+else
+    alias wtf="sudo dmesg"
+fi
+
+alias rtfm="man"

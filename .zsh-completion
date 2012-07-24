@@ -1,0 +1,36 @@
+# -*- mode: sh; -*-
+
+zstyle ':completion:*' auto-description 'argu.: %d'
+zstyle ':completion:*' completer _expand _complete _match _correct _approximate _prefix
+zstyle ':completion:*:expand:*' group-order all-expansions expansions
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' format "%{${fg_bold[red]}%}# Completing %d%{${fg_no_bold[default]}%}:"
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z} m:{a-zA-Z}={A-Za-z}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+zstyle ':completion:*' match-original both
+zstyle ':completion:*' max-errors 2 numeric
+zstyle ':completion:*:*:*:*:*' menu select=2
+zstyle ':completion:*' prompt "%{${fg_bold[red]}%}# Corrections%{${fg_no_bold[default]}%}: (%e errors)"
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' substitute 1
+zstyle ':completion:*' verbose true
+
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path ${HOME}/.zsh-cache
+
+# Don't complete uninteresting users
+zstyle ':completion:*:*:*:users' ignored-patterns \
+        adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+        dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+        hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+        mailman mailnull mldonkey mysql nagios \
+        named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+        operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+
+
+autoload -Uz compinit
+compinit
+
+zmodload -i zsh/complist

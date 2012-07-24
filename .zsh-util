@@ -1,0 +1,6 @@
+# -*- mode: sh; -*-
+
+function zsh-stats()
+{
+    history | awk '{print $2}' | sort | uniq -c | sort -rn | head
+}

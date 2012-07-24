@@ -57,6 +57,10 @@ subscribe help-octave@octave.org
 subscribe help@octave.org
 subscribe ntg-context@ntg.nl
 subscribe .*@googlegroups.com
+subscribe ietf-http-wg@w3.org
+subscribe public-web-perf@w3.org
+subscribe chromium-dev@chromium.org
+subscribe python-dev@python.org
 
 set sendmail="msmtp"
 set sendmail_wait=10

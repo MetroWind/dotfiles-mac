@@ -29,6 +29,16 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         operator pcap postfix postgres privoxy pulse pvm quagga radvd \
         rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
 
+# Only complete host names from ~/.ssh/config for ssh and scp.
+# Knownhosts and /etc/hosts are cluttered with crap.
+# See https://github.com/EspadaV8/oh-my-zsh/commit/42b5a1ddcd8bde26ea79e778ea81e03d1566cc0f
+# and https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/completion.zsh
+[ -r ~/.ssh/config ] && _ssh_config_hosts=(${(s: :)${(ps:\t:)${(f)"$(<$HOME/.ssh/config|grep '^Host '|grep -v '\*')"}#Host}#Hostname}) || _ssh_config_hosts=()
+hosts=(
+  "$_ssh_config_hosts[@]"
+  localhost
+)
+zstyle ':completion:*:(ssh|scp):*:hosts' hosts $hosts
 
 autoload -Uz compinit
 compinit

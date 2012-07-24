@@ -41,19 +41,6 @@ SAVEHIST=1000
 
 WORDCHARS=_-
 
-# Put /usr/local/bin before /usr/bin
-LocalBinIndex=${path[(i)/usr/local/bin]}
-if [ ${LocalBinIndex} -le ${#path} ]; then
-    UsrBinIndex=${path[(i)/usr/bin]}
-    path[${LocalBinIndex}]=()
-    BeforeUsrBin=
-    if [ ${UsrBinIndex} -gt 1 ]; then
-        BeforeUsrBin=(${path[1,${UsrBinIndex}-1]})
-    fi
-    AfterUsrBin=(${path[${UsrBinIndex},-1]}) # Contains /usr/bin
-    path=(${BeforeUsrBin} /usr/local/bin ${AfterUsrBin})
-fi
-
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     alias ls='gls --color=auto -h -X -F --group-directories-first -v'

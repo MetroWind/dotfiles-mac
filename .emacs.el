@@ -48,7 +48,7 @@
 (add-to-list 'custom-theme-load-path 
              (expand-file-name "~/.emacs.d/themes/"))
 
-(if linuxp (add-to-list 'load-path (expand-file-name "~/.emacs.d/w3m")))
+(if (or linuxp macp) (add-to-list 'load-path (expand-file-name "~/.emacs.d/w3m")))
 (load-file (expand-file-name "~/.emacs-passwd.el"))
 
 ;; =============== Coding and Language ===============>
@@ -78,7 +78,7 @@
 ;;=========== Some basic settings ==============================>
 (setq custom-file "~/.emacs-custom.el") ; Go away, custom!!!  Go away!!
 (setenv "COLUMNS" "80")                 ; Kill the dumb COLUMN warning from `ls'
-(setq user-full-name "Corsair")
+(setq user-full-name "Darksair")
 (setq user-mail-address "chris.corsair@gmail.com")
 (setq mail-user-agent 'message-user-agent)
 (setq default-major-mode 'text-mode)
@@ -242,6 +242,8 @@
 ;; Don't open new frame when open file by dragging and emacsclient in
 ;; Mac.
 (if macp (setq ns-pop-up-frames nil))
+;; PATH
+(setq exec-path (cons "/usr/local/bin" exec-path))
 
 ;; =============== C Mode ===============>
 (add-hook 'c-mode-common-hook
@@ -936,7 +938,7 @@ followed by a dash to an em-dash."
 ;;        (lambda () (pabbrev-mode 1)))
 
 ;; W3M
-(if linuxp (require 'w3m-load))
+(if (or linuxp macp) (require 'w3m-load))
 ;; Code folding
 ;; (load "folding" 'nomessage 'noerror)
 ;; (folding-mode-add-find-file-hook)
@@ -1002,6 +1004,10 @@ followed by a dash to an em-dash."
                                                          (interactive)
                                                          (save-buffer)
                                                          (server-edit))))))
+
+;; Command-log mode
+(autoload 'command-log-mode "command-log-mode" "Load command-log-mode minor mode")
+(autoload 'global-command-log-mode "command-log-mode" "Load command-log-mode global mode")
 
 ;;=============== global bindings ====================>
 (if linux-x-p

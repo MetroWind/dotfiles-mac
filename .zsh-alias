@@ -15,3 +15,5 @@ else
 fi
 
 alias rtfm="man"
+alias bin2xml="plutil -convert xml1"
+alias xml2bin="plutil -convert binary1"

@@ -32,3 +32,5 @@ setopt EXTENDED_HISTORY
 setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 setopt PROMPT_SUBST
+# Enable awesome glob modifiers like ^.
+setopt EXTENDED_GLOB

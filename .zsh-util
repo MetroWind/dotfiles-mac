@@ -4,3 +4,6 @@ function zsh-stats()
 {
     history | awk '{print $2}' | sort | uniq -c | sort -rn | head
 }
+
+# The super-awesome zmv!!
+autoload -U zmv

@@ -21,7 +21,7 @@ source ${HOME}/.zsh-alias
 
 PROMPT="$PR_STITLE%{${fg[cyan]}%}$SHLVL%{${fg_bold[cyan]}%}-> %{${fg_no_bold[cyan]}%}%60<...<%~%<<
 %{${fg_bold[yellow]}%}%n%{${fg_bold[white]}%}@%m%#%{$reset_color%} "
-RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info) %{$reset_color%}'
+RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="g:"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""

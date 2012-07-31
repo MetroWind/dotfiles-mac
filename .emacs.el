@@ -507,6 +507,12 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 
+;; YAML mode
+(autoload 'yaml-mode "yaml-mode" "YAML major mode.")
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-hook 'yaml-mode-hook (lambda () (setq tab-width 2)))
+
 ;; =============== Home-made Functions ===============>
 (defun match-paren (arg)
   "Go to the matching paren if on a paren; otherwise insert %."

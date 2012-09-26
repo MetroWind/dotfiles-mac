@@ -303,49 +303,62 @@
      "\\^\\^" "^_^"
      (replace-regexp-in-string
       "…………" "^_^"
-    str)))))
+      str)))))
 
 (add-hook 'erc-send-pre-hook
-  (lambda (s1)
-    (setq str (erc-my-replace s1))))
+          (lambda (s1)
+            (setq str (erc-my-replace s1))))
 
-(if linuxp
-    ((lambda ()
-      (defun erc-play-sound (file-name)
-        (call-process "/usr/bin/aplay" nil 0 nil file-name))
-      ;;   (shell-command (concat "aplay \"" file-name "\" &")))
+(cond (linuxp
+       (progn
+         (defun erc-play-sound (file-name)
+           (call-process "/usr/bin/aplay" nil 0 nil file-name))
+         ;;   (shell-command (concat "aplay \"" file-name "\" &")))
 
-      ;; (defun erc-osd-display (text)
-      ;;   (call-process "/bin/sh" nil 0 nil "-c"
-      ;;                 (concat "echo '" (replace-regexp-in-string 
-      ;;                                   "^<\\(.*\\)> \\(.*\\)"
-      ;;                                   "<span foreground=\"yellow\">&lt;\\1&gt;</span> \\2"
-      ;;                                   text)
-      ;;                         "' | ghosd_cat -F 'Consolas 12' -d 2000 -m 200 -s 0 -x 50 -y 2")))
-      (defun erc-osd-display (text)
-        (let ((nick (replace-regexp-in-string "^<\\(.*\\)> \\(.*\\)"
-                                              "\\1" text))
-              (msg (replace-regexp-in-string "^<\\(.*\\)> \\(.*\\)"
-                                             "\\2" text)))
-          (call-process "/usr/bin/notify-send" nil 0 nil nick msg
-                        "-i" "notification-message-IM")
-          ))
+         ;; (defun erc-osd-display (text)
+         ;;   (call-process "/bin/sh" nil 0 nil "-c"
+         ;;                 (concat "echo '" (replace-regexp-in-string
+         ;;                                   "^<\\(.*\\)> \\(.*\\)"
+         ;;                                   "<span foreground=\"yellow\">&lt;\\1&gt;</span> \\2"
+         ;;                                   text)
+         ;;                         "' | ghosd_cat -F 'Consolas 12' -d 2000 -m 200 -s 0 -x 50 -y 2")))
+         (defun erc-osd-display (text)
+           (let ((nick (replace-regexp-in-string "^<\\(.*\\)> \\(.*\\)"
+                                                 "\\1" text))
+                 (msg (replace-regexp-in-string "^<\\(.*\\)> \\(.*\\)"
+                                                "\\2" text)))
+             (call-process "/usr/bin/notify-send" nil 0 nil nick msg
+                           "-i" "notification-message-IM")
+             ))
 
-      ;; Sound notification
-      (setq erc-play-command "aplay")
-      (add-hook 'erc-insert-pre-hook
-                (lambda (msg-str)
-                  (if (and (string= erc-session-server erc-bitlbee-server)
-                           (string-match "^<" msg-str)
-                           (not (string-match "^<root>" (propertize msg-str 'face nil))))
-                      ((lambda ()
-                         (erc-play-sound "/mnt/shared/sounds/mac/New Mail.wav")
-                         (erc-osd-display (substring msg-str 0 -1))))))
-                t)
+         ;; Sound notification
+         (setq erc-play-command "aplay")
+         (add-hook 'erc-insert-pre-hook
+                   (lambda (msg-str)
+                     (if (and (string= erc-session-server erc-bitlbee-server)
+                              (string-match "^<" msg-str)
+                              (not (string-match "^<root>" (propertize msg-str 'face nil))))
+                         ((lambda ()
+                            (erc-play-sound "/mnt/shared/sounds/mac/New Mail.wav")
+                            (erc-osd-display (substring msg-str 0 -1))))))
+                   t)
 
-      (add-hook 'erc-text-matched-hook
-                (lambda (match-type nickuserhost message)
-                  (if (and (eq match-type 'current-nick)
-                           (not (string= erc-session-server erc-bitlbee-server)))
-                      (erc-play-sound "/mnt/shared/sounds/mac/New Messages.wav"))))
-)))
+         (add-hook 'erc-text-matched-hook
+                   (lambda (match-type nickuserhost message)
+                     (if (and (eq match-type 'current-nick)
+                              (not (string= erc-session-server erc-bitlbee-server)))
+                         (erc-play-sound "/mnt/shared/sounds/mac/New Messages.wav"))))))
+
+      (macp
+       (progn
+         (defun erc-notify (nick msg)
+           (let ((coding-system-for-read 'utf-8)
+                 (coding-system-for-write 'utf-8))
+             (call-process "~/bin/notify.sh" nil 0 nil
+                           "-t" nick
+                           msg)))
+         (add-hook 'erc-text-matched-hook
+                   (lambda (match-type nickuserhost message)
+                     (if (and (eq match-type 'current-nick)
+                              (not (string= erc-session-server erc-bitlbee-server)))
+                         (erc-notify nickuserhost message)))))))

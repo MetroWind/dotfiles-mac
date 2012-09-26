@@ -286,6 +286,8 @@
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 ;; Whether the indentation should be controlled by the syntactic context.
 (setq c-syntactic-indentation t)
+;; Make make command print directory information
+(setq compile-command "make -w")
 
 ;; =============== Other programming settings =========>
 ;; Subword
@@ -1045,7 +1047,6 @@ followed by a dash to an em-dash."
                 'execute-extended-command) ; Used to be `eval-defun'.
 
 ;; =============== Look and Feel ===============>
-
 (cond
  (linuxp (setq fancy-splash-image
                "/mnt/shared/images/Logo/My_logo/bloody-smile-nb-128.png"))
@@ -1186,6 +1187,7 @@ followed by a dash to an em-dash."
             :foreground "#556664"))
        ))
 )
+
 ;; =============== add other file ====================>
 (load-file (expand-file-name "~/.emacs-erc.el"))
 (if linuxp (load-file (expand-file-name "~/.emacs-dict.el")))

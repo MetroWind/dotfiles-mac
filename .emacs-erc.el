@@ -16,7 +16,7 @@
 (setq erc-nick-minbif "Corsair")
 (setq erc-bitlbee-server "localhost")
 ;; (setq erc-away-nickname "Awaysair")
-(setq erc-user-full-name "Corsair Sun")
+(setq erc-user-full-name "Darksair Sun")
 
 
 (erc-services-mode 1)
@@ -47,25 +47,26 @@
 
 ;; Channel specific prompt
 (setq erc-prompt (lambda ()
-                   (if (and (boundp 'erc-default-recipients) 
+                   (if (and (boundp 'erc-default-recipients)
                             (erc-default-target))
                        (erc-propertize (concat (erc-default-target) ">")
-                                       'read-only t 
-                                       'rear-nonsticky t 
+                                       'read-only t
+                                       'rear-nonsticky t
                                        'front-nonsticky t)
-                     (erc-propertize (concat "ERC>") 
-                                     'read-only t 
-                                     'rear-nonsticky t 
+                     (erc-propertize (concat "ERC>")
+                                     'read-only t
+                                     'rear-nonsticky t
                                      'front-nonsticky t))))
 
 (setq erc-autojoin-channels-alist '(("freenode.net"
                                      ;; "#ubuntu-cn" "#archlinux"
                                      ;; "#xmonad" "#ppmm"
                                      ;; "#emacs")
-                                     "#ubuntu-cn" "#ppmm"
+                                     "#ubuntu-cn" "#ppmm" "#archlinux-cn"
                                      ;; "#context"
                                      )
-                                    ("oftc.net" "#arch-cn" "#njulug")))
+                                    ("oftc.net" "#arch-cn" "#njulug")
+                                    ("esper.net" "#minecraft-cn")))
 (setq erc-pals '("juansheng" "sven" "steamedfish" "sungamma" "aBiNg"))
 
 (setq erc-quit-reason-various-alist
@@ -104,23 +105,19 @@
                             ("\\(\\^?:-?)\\)\\W" 1 "smile")))
 (erc-smiley-enable)
 
-;; SSL
-;; (setq tls-program '("openssl s_client -copnnect %h:%p -no_ssl2 -ign_eof -CAfile /home/corsair/.cert/CAs.pem -cert /home/corsair/.cert/oftc/nick.pem"
-;;                     "gnutls-cli --priority secure256 --x509cafile /home/corsair/.cert/CAs.pem --x509certfile /home/corsair/.cert/oftc/nick.pem -p %p %h" 
-;;                     "gnutls-cli --priority secure256 -p %p %h"))
-
 ;; Work around for oftc auto-identify
 (add-hook 'erc-after-connect
           (lambda (SERVER NICK)
-             (cond
-              ((string-match "oftc\\.net" SERVER)
-               (erc-message "PRIVMSG" (concat "NickServ identify " oftcpw))))))
+            (cond
+             ((string-match "oftc\\.net" SERVER)
+              (erc-message "PRIVMSG" (concat "NickServ identify " oftcpw))))))
 
 ;; Functions
 (defun erc-start ()
   (interactive)
-  (erc :server "irc.freenode.net" :port 6667 :nick erc-nick :password freenodepw :full-name "Darksair")
-  (erc-tls :server "irc.oftc.net" :port 6697 :nick erc-nick-oftc :password oftcpw :full-name "Corsair"))
+  (erc :server "irc.freenode.net" :port 6667 :nick erc-nick :password freenodepw :full-name "Darksair Sun")
+  (erc-tls :server "irc.oftc.net" :port 6697 :nick erc-nick-oftc :password oftcpw :full-name "Darksair Sun")
+  (erc-tls :server "irc.esper.net" :port 6697 :nick erc-nick :password freenodepw :full-name "Darksair Sun"))
 
 (defun erc-minbif ()
   (interactive)
@@ -132,53 +129,13 @@
   (erc :server erc-bitlbee-server :port 6667 :nick erc-nick :password bitlbeepw))
 (add-hook 'erc-join-hook 'bitlbee-identify)
 (defun bitlbee-identify ()
-   "If we're on the bitlbee server, send the identify command to
+  "If we're on the bitlbee server, send the identify command to
  the &bitlbee channel."
-   (when (and (string= erc-bitlbee-server erc-session-server)
-              (string= "&bitlbee" (buffer-name)))
-     (erc-message "PRIVMSG" (format "%s identify %s" 
-                                    (erc-default-target) 
-                                    bitlbeepw))))
-
-;; A hack so that when unaway in oftc, change nick to `erc-nick-oftc'
-;; instead of `erc-nick'
-;; (defun erc-process-away (proc away-p)
-;;   "Toggle the away status of the user depending on the value of AWAY-P.
-
-;; If nil, set the user as away.
-;; If non-nil, return from being away."
-;;   (let ((sessionbuf (process-buffer proc)))
-;;     (when sessionbuf
-;;       (with-current-buffer sessionbuf
-;; 	(when erc-away-nickname
-;; 	  (erc-log (format "erc-process-away: away-nick: %s, away-p: %s"
-;;                        erc-away-nickname away-p))
-;; 	  (erc-cmd-NICK (if away-p
-;;                         erc-away-nickname
-;;                       (if (string= (erc-current-network) "oftc")
-;;                           erc-nick-oftc
-;;                         erc-nick))))
-;; 	(cond
-;; 	 (away-p
-;; 	  (setq erc-away (current-time)))
-;; 	 (t
-;; 	  (let ((away-time erc-away))
-;; 	    ;; away must be set to NIL BEFORE sending anything to prevent
-;; 	    ;; an infinite recursion
-;; 	    (setq erc-away nil)
-;; 	    (save-excursion
-;; 	      (set-buffer (erc-active-buffer))
-;; 	      (when erc-public-away-p
-;; 		(erc-send-action
-;; 		 (erc-default-target)
-;; 		 (if away-time
-;; 		     (format "is back (gone for %s)"
-;; 			     (erc-sec-to-time
-;; 			      (erc-time-diff
-;; 			       (erc-emacs-time-to-erc-time away-time)
-;; 			       (erc-current-time))))
-;; 		   "is back")))))))))
-;;     (erc-update-mode-line)))
+  (when (and (string= erc-bitlbee-server erc-session-server)
+             (string= "&bitlbee" (buffer-name)))
+    (erc-message "PRIVMSG" (format "%s identify %s"
+                                   (erc-default-target)
+                                   bitlbeepw))))
 
 (defun erc-cmd-THINK (&rest line)
   (let ((text
@@ -227,21 +184,21 @@
 ;; Show elisp
 (defun erc-cmd-EL (&rest form)
   "Show a elisp."
-  (erc-send-message (concat 
+  (erc-send-message (concat
                      (erc-trim-string (mapconcat 'identity form " "))
                      "  <-- hit C-x C-e here")))
 
 ;; Show info page
 (defun erc-cmd-INFO (&rest ignore)
-      "Send current info node."
-      (unless (get-buffer "*info*")
+  "Send current info node."
+  (unless (get-buffer "*info*")
 	(error "No *info* buffer"))
-      (let (output)
+  (let (output)
 	(with-current-buffer "*info*"
 	  (let* ((file (file-name-nondirectory Info-current-file))
-		 (node Info-current-node))
+             (node Info-current-node))
 	    (setq output (format "(info \"(%s)%s\") <-- hit C-x C-e to evaluate"
-				 file node))))
+                             file node))))
 	(erc-send-message output)))
 
 ;; Show off :-p
@@ -259,7 +216,7 @@
                        memb)))
     (erc-send-action (erc-default-target) show)))
 (defalias 'erc-cmd-SO 'erc-cmd-SHOWOFF)
-  
+
 (defun erc-cmd-DETAILED-SHOWOFF (&rest ignore)
   "Show off implementation enriched with even more with details"
   (let* ((chnl (erc-buffer-list))
@@ -292,17 +249,17 @@
 ;; Now playing~ :-)
 (if linuxp
     ((lambda ()
-      (defun mpd-erc-np ()
-        (concat "is listening to "
-                (let* ((string (shell-command-to-string "mpc")))
-                  (string-match "[^/]*$" string)
-                  (match-string 0 string))))
-      (defun erc-cmd-NP ()
-        (let ((np (mpd-erc-np)))
-          (if (string-match "\n" np)
-              nil
-            (erc-send-action (erc-default-target) (mpd-erc-np)))))
-)))
+       (defun mpd-erc-np ()
+         (concat "is listening to "
+                 (let* ((string (shell-command-to-string "mpc")))
+                   (string-match "[^/]*$" string)
+                   (match-string 0 string))))
+       (defun erc-cmd-NP ()
+         (let ((np (mpd-erc-np)))
+           (if (string-match "\n" np)
+               nil
+             (erc-send-action (erc-default-target) (mpd-erc-np)))))
+       )))
 ;; Say hi to everyone, use with CAUTION!!
 (defun erc-cmd-HI ()
   (defun hi-to-nicks (nick-list)

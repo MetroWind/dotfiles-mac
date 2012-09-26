@@ -1,8 +1,9 @@
 # -*- mode: sh; -*-
 
+# Print statistics of the last 100 commands.
 function zsh-stats()
 {
-    history | awk '{print $2}' | sort | uniq -c | sort -rn | head
+    fc -l -1 -100 | awk '{print $2}' | sort | uniq -c | sort -rn | head
 }
 
 # The super-awesome zmv!!

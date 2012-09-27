@@ -954,18 +954,6 @@ followed by a dash to an em-dash."
 ;; Anything
 (require 'anything)
 
-;; Remember-mode
-(require 'remember)
-;; Setting up for Org mode
-(setq remember-annotation-functions '(org-remember-annotation))
-(setq remember-handler-functions '(org-remember-handler))
-(cond
- (linuxp
-  (setq org-default-notes-file "/mnt/shared/text/Non-books/Misc/org/plan.org"))
- (macp
-  (setq org-default-notes-file "/Volumes/Shared/text/Non-books/Misc/org/plan.org")))
-(add-hook 'remember-mode-hook 'org-remember-apply-template)
-
 ;; Protect buffers
 (require 'keep-buffers)
 (keep-buffers-erase-on-kill nil)

@@ -11,21 +11,20 @@
 (setq org-startup-folded nil)           ;Show all content on startup.
 (setq org-todo-keywords '((sequence "TODO" "|" "DONE" "CANCELED")))
 
-
-(cond
- (linuxp
-  (setq org-agenda-files '("/mnt/shared/text/Non-books/Misc/org/plan.org"
-                           "~/document/physics/lattice/doc/tech.org")))
- (macp
-  (setq org-agenda-files '("/Volumes/Shared/text/Non-books/Misc/org/plan.org"
-                           "/Volumes/Home/document/physics/lattice/doc/tech.org")))
-)
-
 ;; Set to the location of your Org files on your local system
 (setq org-directory
       (cond
        (linuxp "/mnt/shared/text/Non-books/Misc/org")
        (macp "/Volumes/Shared/text/Non-books/Misc/org")))
+
+(cond
+ (linuxp
+  (setq org-agenda-files `(,(concat org-directory "/plan.org")
+                           "~/document/physics/lattice/doc/tech.org")))
+ (macp
+  (setq org-agenda-files `(,(concat org-directory "/plan.org")
+                           "/Volumes/Home/document/physics/lattice/doc/tech.org"))))
+
 ;; Set to the name of the file where new notes will be stored
 (setq org-mobile-inbox-for-pull (concat org-directory "/plan.org"))
 ;; Set to <your Dropbox root directory>/MobileOrg.

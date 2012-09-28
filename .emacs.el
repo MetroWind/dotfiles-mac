@@ -1027,6 +1027,7 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "M-RET") 'toggle-line-wrap)
 (global-set-key "%" 'match-paren)
 (global-set-key (kbd "M-C") 'compile)
+(global-set-key (kbd "s-,") (lambda () (interactive) (find-file "~/.emacs.el")))
 
 ;; Smex
 (global-set-key (kbd "M-x") 'smex)

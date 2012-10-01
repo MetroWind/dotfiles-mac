@@ -515,6 +515,20 @@
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 (add-hook 'yaml-mode-hook (lambda () (setq tab-width 2)))
 
+;; Octave mode
+(autoload 'octave-mode "octave-mode" nil t)
+(add-hook 'octave-mode-hook
+          (lambda ()
+            (abbrev-mode 1)
+            (auto-fill-mode 1)
+            (if (eq window-system 'x)
+                (font-lock-mode 1))))
+
+;; Mathematica mode
+;; From <http://chasen.org/~daiti-m/dist/math++.el>
+(autoload 'math-mode "math++" nil t)
+(add-to-list 'auto-mode-alist '("\\.math$" . math-mode))
+
 ;; =============== Home-made Functions ===============>
 (defun match-paren (arg)
   "Go to the matching paren if on a paren; otherwise insert %."

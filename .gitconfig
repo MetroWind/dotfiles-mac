@@ -27,3 +27,5 @@
 
 [alias]
   graph = log --all --graph --oneline --decorate=short
+[alias]
+  stat = status -sb

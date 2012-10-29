@@ -138,12 +138,8 @@
 (add-hook 'ConTeXt-mode-hook 
           (lambda()
             (add-to-list 'TeX-command-list 
-                         `("MkIV"
-                           ,(cond
-                             (linuxp
-                              "source ~/software/context/tex/setuptex; context --nonstopmode --purge %t")
-                             (macp
-                              "source ~/programs/context/tex/setuptex; context --nonstopmode --purge %t"))
+                         '("MkIV"
+                           "~/bin/context-minimal-exec.sh context --nonstopmode --purge %t"
                            TeX-run-TeX nil t))))
 
 (defun set-tex-faces ()

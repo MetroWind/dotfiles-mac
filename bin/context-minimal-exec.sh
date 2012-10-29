@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/zsh
 
 TeXSetup=$HOME/programs/context/tex/setuptex
 Args=$*
 
-sh -c "source $TeXSetup; $Args"
+zsh -c "source $TeXSetup; $Args"

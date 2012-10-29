@@ -1,9 +1,26 @@
 # -*- mode: sh; -*-
 
+# Print the length of $1!!!!!
+# http://stackoverflow.com/q/2267155/782130
+function strlen()
+{
+    echo ${#${(S%%)1//(\%([KF1]|)\{*\}|\%[Bbkf])}}
+    return 0
+}
+
 # Print statistics of the last 100 commands.
 function zsh-stats()
 {
-    fc -l -1 -100 | awk '{print $2}' | sort | uniq -c | sort -rn | head
+    fc -l -1 -500 | grep -vE '(zsh-stats|echo|cd|print)' |
+    awk '{print $2}' | sort | uniq -c | sort -rn | head |
+    while read Line; do
+        Stat=(${(s/ /)Line})
+        printf "%15.15s" "${Stat[2]} "
+        for i in {1..${Stat[1]}}; do
+            print -n "+"
+        done
+        print " ${Stat[1]}"
+    done
 }
 
 # The super-awesome zmv!!

@@ -516,7 +516,7 @@
 (add-hook 'yaml-mode-hook (lambda () (setq tab-width 2)))
 
 ;; Octave mode
-(autoload 'octave-mode "octave-mode" nil t)
+(autoload 'octave-mode "octave-mod" nil t)
 (add-hook 'octave-mode-hook
           (lambda ()
             (abbrev-mode 1)

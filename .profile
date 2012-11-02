@@ -3,7 +3,7 @@ export OSCOLORDIR="/System/Library/ColorSync/Profiles;/Library/Application Suppo
 export PATH="$HOME/bin:$HOME/bin/lattice:$HOME/bin/lattice/xqcdio:$PATH"
 export INFOPATH="$HOME/.emacs.d/info:$INFOPATH"
 export EDITOR="/usr/local/bin/emacsclient"
-export PAGER="less -R"
+export PAGER="most"
 export HOMEBREW_CC="clang"
 export PKG_CONFIG_PATH=/usr/local/Library/Homebrew/pkgconfig:${PKG_CONFIG_PATH}
 

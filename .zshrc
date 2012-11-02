@@ -19,13 +19,14 @@ source ${HOME}/.zsh-alias
 # completion
 # compdef pacman-color=pacman
 
-PROMPT="$PR_STITLE%{${fg[cyan]}%}$SHLVL%{${fg_bold[cyan]}%}-> %{${fg_no_bold[cyan]}%}%60<...<%~%<<
-%{${fg_bold[yellow]}%}%n%{${fg_bold[white]}%}@%m%#%{$reset_color%} "
+PROMPT=$'$PR_STITLE%{${fg[cyan]}%}$SHLVL%{${fg_bold[cyan]}%}-> %{${fg_no_bold[cyan]}%}%60<...<%~%<<
+%{${fg_bold[yellow]}%}%n%{${fg_bold[white]}%}@%m$(getGitPrompt)%{$reset_color%} '
 RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="g:"
+ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="\u2622"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u29f0"
+ZSH_THEME_GIT_PROMPT_ADDED="\u2963"
+ZSH_THEME_GIT_PROMPT_CLEAN="%#"
 
 source $HOME/.profile

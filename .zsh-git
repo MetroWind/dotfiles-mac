@@ -15,9 +15,8 @@ function current_repository() {
 # get the name of the branch we are on
 function git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
-
 
 # Checks if working tree is dirty
 parse_git_dirty() {
@@ -25,10 +24,12 @@ parse_git_dirty() {
   if [[ $POST_1_7_2_GIT -gt 0 ]]; then
         SUBMODULE_SYNTAX="--ignore-submodules=dirty"
   fi
-  if [[ -n $(git status -s ${SUBMODULE_SYNTAX}  2> /dev/null) ]]; then
+  if [[ -n $(git status -s -uno ${SUBMODULE_SYNTAX}  2> /dev/null) ]]; then
     echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+    return 0
   else
     echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+    return 1
   fi
 }
 
@@ -36,7 +37,26 @@ parse_git_dirty() {
 function git_prompt_ahead() {
   if $(echo "$(git log origin/$(current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
     echo "$ZSH_THEME_GIT_PROMPT_AHEAD"
+    return 0
+  else
+    return 1
   fi
+}
+
+function getGitPrompt()
+{
+    if parse_git_dirty &> /dev/null; then
+        echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+        return 0
+    fi
+
+    if git_prompt_ahead &> /dev/null; then
+        echo "$ZSH_THEME_GIT_PROMPT_AHEAD"
+        return 0
+    else
+        echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+    fi
+    return 0
 }
 
 # Formats prompt string for current git commit short SHA

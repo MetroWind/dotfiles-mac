@@ -51,6 +51,12 @@
 (if (or linuxp macp) (add-to-list 'load-path (expand-file-name "~/.emacs.d/w3m")))
 (load-file (expand-file-name "~/.emacs-passwd.el"))
 
+;; Info path
+(if macp
+    (setq Info-default-directory-list
+          (append '("~/.emacs.d/info")
+                  Info-default-directory-list)))
+
 ;; =============== Coding and Language ===============>
 ;; (set-selection-coding-system 'utf-8)
 ;; (set-clipboard-coding-system 'utf-8)

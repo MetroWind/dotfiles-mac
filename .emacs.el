@@ -1206,4 +1206,5 @@ followed by a dash to an em-dash."
 ;; (load-file "~/.emacs-predictive.el")
 (load custom-file 'noerror)
 
+(if macp (progn (make-frame) (ns-toggle-fullscreen)))
 (server-start)

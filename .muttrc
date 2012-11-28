@@ -28,6 +28,7 @@ set tilde
 unset markers
 set read_inc=100
 set write_inc=100
+set wrap=82
 # set charset="utf-8"
 set send_charset="us-ascii:utf-8"
 charset-hook !utf-8 gbk
@@ -106,7 +107,7 @@ save-hook "~l" =lists
 
 # --------------- Bindings --------------->
 bind index $ last-entry
-macro index "\Co" "T~O<enter>;WO" # Mark all as read
+macro index "\Co" "<tag-pattern>~O<enter><tag-prefix><clear-flag>O" "Mark all old as read"
 # Emacs nav bindings
 bind pager "\Cn" next-line
 bind pager "\Cp" previous-line

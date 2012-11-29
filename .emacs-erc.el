@@ -58,16 +58,8 @@
                                      'rear-nonsticky t
                                      'front-nonsticky t))))
 
-(setq erc-autojoin-channels-alist '(("freenode.net"
-                                     ;; "#ubuntu-cn" "#archlinux"
-                                     ;; "#xmonad" "#ppmm"
-                                     ;; "#emacs")
-                                     "#ubuntu-cn" "#ppmm" "#archlinux-cn"
-                                     ;; "#context"
-                                     )
-                                    ("oftc.net" "#arch-cn" "#njulug")
-                                    ("esper.net" "#minecraft-cn")))
-(setq erc-pals '("juansheng" "sven" "steamedfish" "sungamma" "aBiNg"))
+(ignore-errors (setq erc-autojoin-channels-alist my-irc-channels))
+(ignore-errors (setq erc-pals my-irc-pals))
 
 (setq erc-quit-reason-various-alist
       '(("dinner" "Having dinner...")

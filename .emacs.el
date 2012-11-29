@@ -84,8 +84,8 @@
 ;;=========== Some basic settings ==============================>
 (setq custom-file "~/.emacs-custom.el") ; Go away, custom!!!  Go away!!
 (setenv "COLUMNS" "80")                 ; Kill the dumb COLUMN warning from `ls'
-(setq user-full-name "Darksair")
-(setq user-mail-address "chris.corsair@gmail.com")
+(ignore-errors (setq user-full-name my-user-name))
+(ignore-errors (setq user-mail-address my-email))
 (setq mail-user-agent 'message-user-agent)
 (setq default-major-mode 'text-mode)
 (setq-default tab-width 4)
@@ -96,7 +96,7 @@
 (setq display-time-day-and-date t)
 (setq sentence-end "\\([。！？；]\\|……\\|[.?!;][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 (setq sentence-end-double-space t)
-(setq frame-title-format "Corsair’s GNU Emacs 24 <%b>")
+(ignore-errors (setq frame-title-format my-title))
 (setq auto-window-vscroll nil)          ; Don't bring partially a visible line to fully visible before scrolling.
 ;; (setq scroll-margin 4
 ;;       scroll-conservatively 10000) ;;continuous scrolling
@@ -142,11 +142,7 @@
 (auto-image-file-mode)
 ;; Replace selected text when typing
 (delete-selection-mode t)
-;; Default input method for `C-\' set to third-party `chinese-pinyin-gb'
-(register-input-method
- "chinese-pinyin-gb" "Chinese-CNS" 'quail-use-package
- "拼音" "汉字输入∷【拼音】∷"
- "gb/pinyin")
+;; Default input method for `C-\'
 (setq default-input-method "TeX")
 ;; Remove *bar...
 (tool-bar-mode 0)
@@ -1069,12 +1065,11 @@ followed by a dash to an em-dash."
                 'execute-extended-command) ; Used to be `eval-defun'.
 
 ;; =============== Look and Feel ===============>
-(cond
- (linuxp (setq fancy-splash-image
-               "/mnt/shared/images/Logo/My_logo/bloody-smile-nb-128.png"))
- (macp
-  (setq fancy-splash-image
-        "/Volumes/Shared/images/Logo/My_logo/bloody-smile-nb-128.png")))
+(ignore-errors
+  (cond
+   (linuxp (setq fancy-splash-image my-splash-linux))
+   (macp (setq fancy-splash-image my-splash-mac))))
+
 (if macp
     (progn
       (add-to-list 'default-frame-alist '(height . 60))

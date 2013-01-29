@@ -13,5 +13,3 @@ export VIRTUAL_ENV3="/Users/corsair/Python3"
 export PATH="$VIRTUAL_ENV/bin:$VIRTUAL_ENV3/bin:$PATH"
 
 export xqcdio_const=/Volumes/Home/document/physics/lattice/io_general/constants
-
-stty discard undef

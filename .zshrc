@@ -29,3 +29,5 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u29f0"
 ZSH_THEME_GIT_PROMPT_ADDED="\u2963"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2963"
 ZSH_THEME_GIT_PROMPT_CLEAN="%#"
+
+stty discard undef

@@ -6,14 +6,13 @@ if [ "$TERM" != "dumb" ]; then
     alias grep='grep --color=auto'
 fi
 
-alias ec='emacsclient --no-wait'
-
 if [ $USER = root ]; then
     alias wtf="dmesg"
 else
     alias wtf="sudo dmesg"
 fi
 
+alias ec='emacsclient --no-wait'
 alias rtfm="man"
 alias bin2xml="plutil -convert xml1"
 alias xml2bin="plutil -convert binary1"

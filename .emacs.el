@@ -1205,6 +1205,8 @@ followed by a dash to an em-dash."
        ))
 )
 
+(require 'powerline)
+
 ;; =============== add other file ====================>
 (load-file (expand-file-name "~/.emacs-erc.el"))
 (if linuxp (load-file (expand-file-name "~/.emacs-dict.el")))

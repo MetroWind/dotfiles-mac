@@ -5,7 +5,7 @@ export INFOPATH="$HOME/.emacs.d/info:$INFOPATH"
 export EDITOR="/usr/local/bin/emacsclient"
 export PAGER="most"
 export HOMEBREW_CC="clang"
-export PKG_CONFIG_PATH=/usr/local/Library/Homebrew/pkgconfig:${PKG_CONFIG_PATH}
+export PKG_CONFIG_PATH="/usr/local/Library/ENV/pkgconfig/mountain_lion:${PKG_CONFIG_PATH}"
 
 # Python
 export VIRTUAL_ENV="/Users/corsair/Python"

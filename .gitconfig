@@ -27,5 +27,5 @@
 
 [alias]
   graph = log --all --graph --oneline --decorate=short
-[alias]
   stat = status -sb
+  discard = stash save --keep-index Discarded

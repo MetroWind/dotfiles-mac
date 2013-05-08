@@ -23,5 +23,10 @@ function zsh-stats()
     done
 }
 
+function grepp
+{
+    exec pgrep "$1" | xargs ps -p
+}
+
 # The super-awesome zmv!!
 autoload -U zmv

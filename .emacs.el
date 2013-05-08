@@ -38,7 +38,8 @@
            "gnuplot-mode.0.6.0" "haskell-mode" "mldonkey"
            "yasnippet" "pov-mode" "emacsim" "emeteo" "auctex"
            "anything" "remember" "python-mode"
-           "twittering-mode" "auto-complete" "magit")))
+           "twittering-mode" "auto-complete" "magit"
+           "company-mode")))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
                                (concat ModeDir "/" Mode))))
@@ -869,46 +870,78 @@ followed by a dash to an em-dash."
 (require 'pos-tip)
 
 ;; hippie-expand (M-/)
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-	try-expand-dabbrev-visible
-	try-expand-dabbrev-all-buffers
-	try-expand-dabbrev-from-kill
-	try-complete-file-name-partially
-	try-complete-file-name
-	try-expand-all-abbrevs
-	try-expand-list
-	try-expand-line
-	try-complete-lisp-symbol-partially
-	try-complete-lisp-symbol))
+;; (setq hippie-expand-try-functions-list
+;;       '(try-expand-dabbrev
+;; 	try-expand-dabbrev-visible
+;; 	try-expand-dabbrev-all-buffers
+;; 	try-expand-dabbrev-from-kill
+;; 	try-complete-file-name-partially
+;; 	try-complete-file-name
+;; 	try-expand-all-abbrevs
+;; 	try-expand-list
+;; 	try-expand-line
+;; 	try-complete-lisp-symbol-partially
+;; 	try-complete-lisp-symbol))
+
+;; Company-mode completion
+(setq dabbrev-case-replace t)
+(require 'company)
+(defun append-to-each (xs e)
+  ;; `e' should be a symbol
+  (if xs
+      (let ((first-e (car xs)))
+        (cons 
+         (if (symbolp first-e) (list first-e e) (append first-e (list e)))
+         (append-to-each (cdr xs) e)))
+    '()))
+
+(defun complete-with-all-backends ()
+  (interactive)
+  (if (not (company-complete))
+      (company-other-backend)))
+
+(eval-after-load "company"
+  '(progn
+     (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
+     (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
+     (define-key company-active-map (kbd "M-/") 'company-select-next-or-abort)
+     (define-key company-active-map (kbd "RET") 'company-complete-selection)
+     (define-key company-active-map (kbd "TAB") 'company-complete-common)
+     (setq company-backends
+           '(company-elisp  company-dabbrev  company-clang company-xcode
+             company-files
+             (company-gtags company-etags company-dabbrev-code company-keywords)
+             company-nxml company-css company-oddmuse company-semantic
+             company-eclim company-ropemacs))))
+(global-company-mode)
 
 ;; Auto-complete
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories 
-             (concat (getenv "HOME")
-                     "/.emacs.d/auto-complete/ac-dict"))
-(ac-config-default)
-(add-to-list 'ac-modes 'ConTeXt-mode)
-(ac-set-trigger-key "M-/")
-(setq ac-auto-show-menu nil)
-(setq ac-sources '(ac-source-words-in-same-mode-buffers
-                   ac-source-symbols
-                   ac-source-filename
-                   ac-source-functions
-                   ac-source-yasnippet
-                   ac-source-variables
-                   ac-source-symbols
-                   ac-source-features
-                   ac-source-abbrev
-                   ac-source-dictionary))
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories 
+;;              (concat (getenv "HOME")
+;;                      "/.emacs.d/auto-complete/ac-dict"))
+;; (ac-config-default)
+;; (add-to-list 'ac-modes 'ConTeXt-mode)
+;; (ac-set-trigger-key "M-/")
+;; (setq ac-auto-show-menu nil)
+;; (setq ac-sources '(ac-source-words-in-same-mode-buffers
+;;                    ac-source-symbols
+;;                    ac-source-filename
+;;                    ac-source-functions
+;;                    ac-source-yasnippet
+;;                    ac-source-variables
+;;                    ac-source-symbols
+;;                    ac-source-features
+;;                    ac-source-abbrev
+;;                    ac-source-dictionary))
 
-(setq ac-use-menu-map t)
-;; Default settings
-(define-key ac-menu-map "\C-n" 'ac-next)
-(define-key ac-menu-map (kbd "M-/") 'ac-next)
-(define-key ac-menu-map "\C-p" 'ac-previous)
-;; Disable enter completion
-(define-key ac-completing-map (kbd "RET") nil)
+;; (setq ac-use-menu-map t)
+;; ;; Default settings
+;; (define-key ac-menu-map "\C-n" 'ac-next)
+;; (define-key ac-menu-map (kbd "M-/") 'ac-next)
+;; (define-key ac-menu-map "\C-p" 'ac-previous)
+;; ;; Disable enter completion
+;; (define-key ac-completing-map (kbd "RET") nil)
 
 ;; MlDonkey
 (require 'mldonkey)
@@ -1057,6 +1090,7 @@ followed by a dash to an em-dash."
 (global-set-key "%" 'match-paren)
 (global-set-key (kbd "M-C") 'compile)
 (global-set-key (kbd "s-,") (lambda () (interactive) (find-file "~/.emacs.el")))
+(global-set-key (kbd "M-/") 'complete-with-all-backends)
 
 ;; Smex
 (global-set-key (kbd "M-x") 'smex)

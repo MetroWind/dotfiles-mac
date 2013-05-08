@@ -1106,9 +1106,9 @@ followed by a dash to an em-dash."
 
 (if macp
     (progn
-      (add-to-list 'default-frame-alist '(height . 60))
-      (add-to-list 'default-frame-alist '(width . 110))
-      (setq initial-frame-alist '((top . 52) (left . 300)))
+      ;; (add-to-list 'default-frame-alist '(height . 60))
+      ;; (add-to-list 'default-frame-alist '(width . 110))
+      (add-to-list 'default-frame-alist '(fullscreen . fullboth))
       (if window-system
           (load-theme 'Deviant t)
         (load-theme 'manoj-dark t))
@@ -1256,5 +1256,5 @@ followed by a dash to an em-dash."
 ;; (load-file "~/.emacs-predictive.el")
 (load custom-file 'noerror)
 
-(if macp (progn (make-frame) (ns-toggle-fullscreen)))
+;; (if macp (progn (make-frame) (ns-toggle-fullscreen)))
 (server-start)

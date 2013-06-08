@@ -29,3 +29,7 @@
   graph = log --all --graph --oneline --decorate=short
   stat = status -sb
   discard = stash save --keep-index Discarded
+
+[i18n]
+	commitEncoding = utf-8
+	logOutputEncoding = utf-8

@@ -483,18 +483,6 @@ where GUI apps are not started from a shell."
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 
-;; nXhtml
-;; (load (expand-file-name "~/.emacs.d/nxhtml/autostart.el"))
-
-;; HTML
-(require 'multi-web-mode)
-(setq mweb-default-major-mode 'html-mode)
-(setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-                  (javascript-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-                  (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-;; (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
-;; (multi-web-global-mode 1)
-
 ;; Lua
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
@@ -544,6 +532,10 @@ where GUI apps are not started from a shell."
 ;; From <http://chasen.org/~daiti-m/dist/math++.el>
 (autoload 'math-mode "math++" nil t)
 (add-to-list 'auto-mode-alist '("\\.math$" . math-mode))
+
+;; Web mode
+(autoload 'web-mode "web-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
 
 ;; =============== Home-made Functions ===============>
 (defun match-paren (arg)

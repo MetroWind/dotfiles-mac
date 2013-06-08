@@ -1249,4 +1249,6 @@ followed by a dash to an em-dash."
 (load custom-file 'noerror)
 
 ;; (if macp (progn (make-frame) (ns-toggle-fullscreen)))
+(delete-other-windows)
+(split-window-right)
 (server-start)

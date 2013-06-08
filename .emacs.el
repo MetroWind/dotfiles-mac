@@ -878,14 +878,14 @@ followed by a dash to an em-dash."
 ;; Company-mode completion
 (setq dabbrev-case-replace t)
 (require 'company)
-(defun append-to-each (xs e)
-  ;; `e' should be a symbol
-  (if xs
-      (let ((first-e (car xs)))
-        (cons 
-         (if (symbolp first-e) (list first-e e) (append first-e (list e)))
-         (append-to-each (cdr xs) e)))
-    '()))
+;; (defun append-to-each (xs e)
+;;   ;; `e' should be a symbol
+;;   (if xs
+;;       (let ((first-e (car xs)))
+;;         (cons 
+;;          (if (symbolp first-e) (list first-e e) (append first-e (list e)))
+;;          (append-to-each (cdr xs) e)))
+;;     '()))
 
 (defun complete-with-all-backends ()
   (interactive)
@@ -905,7 +905,7 @@ followed by a dash to an em-dash."
              (company-gtags company-etags company-dabbrev-code company-keywords)
              company-nxml company-css company-oddmuse company-semantic
              company-eclim company-ropemacs))))
-(global-company-mode)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; Auto-complete
 ;; (require 'auto-complete-config)

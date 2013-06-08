@@ -14,6 +14,7 @@ def parseMDFile(f, format="html5"):
 def dressHtml(html, lang, title, css_url="", css_file="", format="html5"):
     Parts = [HtmlHeaders[format].format(lang=lang),
                       "<head>", "<title>{}</title>".format(title)]
+    Parts.append('<meta charset="UTF-8">')
     if css_url:
         Parts.append('<link rel="stylesheet" href="{}">'.format(css_url))
     Parts += ["</head>", "<body>", html, "</body>", "</html>"]

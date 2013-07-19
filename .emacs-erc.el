@@ -37,7 +37,9 @@
 ;; Don't track server buffer
 (setq erc-track-exclude-server-buffer t)
 ;; Don't track join/quit
-(setq erc-track-exclude-types '("NICK" "333" "353" "JOIN" "PART" "QUIT"))
+(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                "324" "329" "332" "333" "353" "477"))
+;; (setq erc-track-exclude-types '("NICK" "333" "353" "JOIN" "PART" "QUIT"))
 ;; Logging
 (if linuxp
     (setq erc-log-channels t

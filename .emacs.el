@@ -46,10 +46,12 @@
     )
 )
 
-(add-to-list 'custom-theme-load-path 
+(add-to-list 'custom-theme-load-path
              (expand-file-name "~/.emacs.d/themes/"))
 
-(if (or linuxp macp) (add-to-list 'load-path (expand-file-name "~/.emacs.d/w3m")))
+(if (or linuxp macp)
+    (add-to-list 'load-path (expand-file-name "~/.emacs.d/w3m")))
+
 (load-file (expand-file-name "~/.emacs-passwd.el"))
 
 ;; Info path
@@ -70,17 +72,17 @@
 ;; Fix the width of Chinese marks.
 (if linuxp
     (let ((l '(chinese-gb2312
-	       gb18030-2-byte
-	       gb18030-4-byte-bmp
-	       gb18030-4-byte-ext-1
-	       gb18030-4-byte-ext-2
-	       gb18030-4-byte-smp)))
+               gb18030-2-byte
+               gb18030-4-byte-bmp
+               gb18030-4-byte-ext-1
+               gb18030-4-byte-ext-2
+               gb18030-4-byte-smp)))
       (dolist (elt l)
-	(map-charset-chars #'modify-category-entry elt ?|)
-	(map-charset-chars
-	 (lambda (range ignore)
-	   (set-char-table-range char-width-table range 2))
-	 elt))))
+        (map-charset-chars #'modify-category-entry elt ?|)
+        (map-charset-chars
+         (lambda (range ignore)
+           (set-char-table-range char-width-table range 2))
+         elt))))
 
 ;;=========== Some basic settings ==============================>
 (setq custom-file "~/.emacs-custom.el") ; Go away, custom!!!  Go away!!
@@ -98,12 +100,12 @@
 (setq sentence-end "\\([。！？；]\\|……\\|[.?!;][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 (setq sentence-end-double-space t)
 (ignore-errors (setq frame-title-format my-title))
-(setq auto-window-vscroll nil)          ; Don't bring partially a visible line to fully visible before scrolling.
+;; Don't bring partially a visible line to fully visible before scrolling.
+(setq auto-window-vscroll nil)
 ;; (setq scroll-margin 4
 ;;       scroll-conservatively 10000) ;;continuous scrolling
 (setq adaptive-fill-regexp "[ \t]+\\|[ \t]*\\([0-9]+\\.\\|\\*+\\)[ \t]*")
-(setq tab-stop-list
-      '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 96 100 104 108 112 116 120))
+(setq tab-stop-list (number-sequence 4 200 4))
 ;; let the delete key delete foreward
 (if linux-x-p
     (normal-erase-is-backspace-mode 1))
@@ -119,7 +121,7 @@
 (setq display-time-mail-file "~/Mail/mbox")
 
 (add-hook 'text-mode-hook
-		  (lambda () (auto-fill-mode t)))
+          (lambda () (auto-fill-mode t)))
 
 ;; Add a newline in the end if none.
 (setq require-final-newline t)
@@ -206,7 +208,8 @@
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-prompt-read-only t)
 (setq comint-input-ignoredups t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on) ; interpret ansi color sequences
+;; interpret ansi color sequences
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 ;; E-Shell
 (setq eshell-prompt-function
       (lambda nil
@@ -252,7 +255,7 @@
 used by the user's shell.  This is particularly useful in Mac,
 where GUI apps are not started from a shell."
   (interactive)
-  (let ((path-from-shell (replace-regexp-in-string 
+  (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
                           ""
                           (shell-command-to-string
@@ -342,12 +345,15 @@ where GUI apps are not started from a shell."
    (list (let* ((word (thing-at-point 'word))
                 (input (read-string
                         (format "pydoc entry%s: "
-                                (if (not word) "" (format " (default %s)" word))))))
+                                (if (not word) ""
+                                  (format " (default %s)" word))))))
            (if (string= input "")
                (if (not word) (error "No pydoc args given")
                  word) ;sinon word
              input)))) ;sinon input
-  (shell-command (concat py-python-command " -c \"from pydoc import help;help(\'" w "\')\"") "*PYDOCS*")
+  (shell-command (concat py-python-command
+                         " -c \"from pydoc import help;help(\'" w "\')\"")
+                 "*PYDOCS*")
   (view-buffer-other-window "*PYDOCS*" t 'kill-buffer-and-window))
 
 ;; iPython
@@ -525,7 +531,6 @@ where GUI apps are not started from a shell."
 (autoload 'octave-mode "octave-mod" nil t)
 (add-hook 'octave-mode-hook
           (lambda ()
-            (abbrev-mode 1)
             (auto-fill-mode 1)
             (if (eq window-system 'x)
                 (font-lock-mode 1))))
@@ -544,8 +549,8 @@ where GUI apps are not started from a shell."
   "Go to the matching paren if on a paren; otherwise insert %."
   (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-	((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-	(t (self-insert-command (or arg 1)))))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
 ;; 中英文之间增加空格
 (defun insert-space-between-eng-cn ()
   "Insert a space between English words and Chinese charactors"
@@ -772,7 +777,7 @@ followed by a dash to an em-dash."
                       ('omega #X03C9))))
 
 (defun substitute-pattern-with-unicode (pattern symbol)
-  "Add a font lock hook to replace the matched part of PATTERN with the 
+  "Add a font lock hook to replace the matched part of PATTERN with the
   Unicode symbol SYMBOL looked up with UNICODE-SYMBOL."
   (interactive)
   (font-lock-add-keywords
@@ -869,16 +874,16 @@ followed by a dash to an em-dash."
 ;; hippie-expand (M-/)
 ;; (setq hippie-expand-try-functions-list
 ;;       '(try-expand-dabbrev
-;; 	try-expand-dabbrev-visible
-;; 	try-expand-dabbrev-all-buffers
-;; 	try-expand-dabbrev-from-kill
-;; 	try-complete-file-name-partially
-;; 	try-complete-file-name
-;; 	try-expand-all-abbrevs
-;; 	try-expand-list
-;; 	try-expand-line
-;; 	try-complete-lisp-symbol-partially
-;; 	try-complete-lisp-symbol))
+;;  try-expand-dabbrev-visible
+;;  try-expand-dabbrev-all-buffers
+;;  try-expand-dabbrev-from-kill
+;;  try-complete-file-name-partially
+;;  try-complete-file-name
+;;  try-expand-all-abbrevs
+;;  try-expand-list
+;;  try-expand-line
+;;  try-complete-lisp-symbol-partially
+;;  try-complete-lisp-symbol))
 
 ;; Company-mode completion
 (setq dabbrev-case-replace t)
@@ -887,7 +892,7 @@ followed by a dash to an em-dash."
 ;;   ;; `e' should be a symbol
 ;;   (if xs
 ;;       (let ((first-e (car xs)))
-;;         (cons 
+;;         (cons
 ;;          (if (symbolp first-e) (list first-e e) (append first-e (list e)))
 ;;          (append-to-each (cdr xs) e)))
 ;;     '()))
@@ -900,7 +905,8 @@ followed by a dash to an em-dash."
 (eval-after-load "company"
   '(progn
      (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
-     (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
+     (define-key company-active-map (kbd "C-p")
+       'company-select-previous-or-abort)
      (define-key company-active-map (kbd "M-/") 'company-select-next-or-abort)
      (define-key company-active-map (kbd "RET") 'company-complete-selection)
      (define-key company-active-map (kbd "TAB") 'company-complete-common)
@@ -914,7 +920,7 @@ followed by a dash to an em-dash."
 
 ;; Auto-complete
 ;; (require 'auto-complete-config)
-;; (add-to-list 'ac-dictionary-directories 
+;; (add-to-list 'ac-dictionary-directories
 ;;              (concat (getenv "HOME")
 ;;                      "/.emacs.d/auto-complete/ac-dict"))
 ;; (ac-config-default)
@@ -1045,7 +1051,8 @@ followed by a dash to an em-dash."
 (setq twittering-use-master-password t)
 
 ;; Use Emacs with Mutt
-(add-to-list 'auto-mode-alist '("/mutt.*" . message-mode)) ; Enter `message-mode'
+;; Enter `message-mode'
+(add-to-list 'auto-mode-alist '("/mutt.*" . message-mode))
 (setq mail-header-separator "")
 (add-hook 'message-mode-hook
           (lambda ()
@@ -1061,13 +1068,16 @@ followed by a dash to an em-dash."
                                                          (server-edit))))))
 
 ;; Command-log mode
-(autoload 'command-log-mode "command-log-mode" "Load command-log-mode minor mode")
-(autoload 'global-command-log-mode "command-log-mode" "Load command-log-mode global mode")
+(autoload 'command-log-mode "command-log-mode"
+  "Load command-log-mode minor mode")
+(autoload 'global-command-log-mode "command-log-mode"
+  "Load command-log-mode global mode")
 
 ;; Multiple cursors
 (autoload 'mc/edit-lines "multiple-cursors" "Load multiple cursors" t)
 (autoload 'mc/mark-next-like-this "multiple-cursors" "Load multiple cursors" t)
-(autoload 'mc/mark-previous-like-this "multiple-cursors" "Load multiple cursors" t)
+(autoload 'mc/mark-previous-like-this "multiple-cursors"
+  "Load multiple cursors" t)
 (autoload 'mc/mark-all-like-this "multiple-cursors" "Load multiple cursors" t)
 
 ;;=============== global bindings ====================>

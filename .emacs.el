@@ -105,7 +105,7 @@
 ;; (setq scroll-margin 4
 ;;       scroll-conservatively 10000) ;;continuous scrolling
 (setq adaptive-fill-regexp "[ \t]+\\|[ \t]*\\([0-9]+\\.\\|\\*+\\)[ \t]*")
-(setq tab-stop-list (number-sequence 4 200 4))
+;; (setq tab-stop-list (number-sequence 4 200 4))
 ;; let the delete key delete foreward
 (if linux-x-p
     (normal-erase-is-backspace-mode 1))

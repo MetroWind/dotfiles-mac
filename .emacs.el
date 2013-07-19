@@ -793,6 +793,9 @@ followed by a dash to an em-dash."
 
 (add-hook 'emacs-lisp-mode-hook 'elisp-unicode)
 
+(require 'git-gutter-fringe)
+(global-git-gutter-mode t)
+
 ;; =============== External non-programming modes ===============>
 ;; htmlize
 (require 'htmlize)
@@ -1099,6 +1102,12 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-M-x")
                 'execute-extended-command) ; Used to be `eval-defun'.
+;; Git-gutter
+;; Jump to next/previous hunk
+(global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
+;; Revert current hunk
+(global-set-key (kbd "C-x r") 'git-gutter:revert-hunk)
 
 ;; =============== Look and Feel ===============>
 (ignore-errors

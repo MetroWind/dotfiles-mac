@@ -359,11 +359,13 @@ where GUI apps are not started from a shell."
       (setq ipython-command "/usr/bin/ipython"))))
 
 ;; Whitespace mode
-(require 'whitespace)
-(setq-default whitespace-style
-              '(tabs trailing lines space-before-tab))
-(setq-default whitespace-active-style
-              '(tabs trailing lines space-before-tab))
+(autoload 'whitespace-mode "whitespace" "Load whitespace" t)
+(eval-after-load "whitespace"
+  '(progn
+    (setq-default whitespace-style
+                  '(face tabs trailing lines space-before-tab))
+    (setq-default whitespace-active-style
+                  '(face tabs trailing lines space-before-tab))))
 (add-hook 'emacs-lisp-mode-hook 'whitespace-mode)
 (add-hook 'cc-mode-hook 'whitespace-mode)
 (add-hook 'c-mode-hook 'whitespace-mode)
@@ -1147,6 +1149,19 @@ want to use in the modeline *in lieu of* the original.")
                (setq mode-name mode-str)))))
 
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
+
+(eval-after-load "whitespace"
+  '(progn
+     (set-face-attribute
+      'whitespace-trailing nil
+      :foreground "unspecified"
+      :background (dv-color dv-type-fg))
+     (set-face-attribute
+      'whitespace-line nil
+      :background "black"
+      :foreground "grey"
+      :inherit 'default)))
+
 (if macp
     (progn
       ;; (add-to-list 'default-frame-alist '(height . 60))

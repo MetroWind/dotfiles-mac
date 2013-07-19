@@ -991,7 +991,7 @@ followed by a dash to an em-dash."
 (global-linum-mode t)
 (defun toggle-linum ()           ; Toggle line numbering
   (interactive)
-  (if linum-mode (linum-mode nil)
+  (if linum-mode (linum-mode -1)
     (linum-mode t)))
 
 ;; Predictive abbreviation
@@ -1080,7 +1080,7 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "C-x =") 'balance-windows)
 (global-set-key (kbd "C-x +") 'what-cursor-position)
 (global-set-key (kbd "C-x C-a") 'anything)
-(if linuxp (global-set-key (kbd "M-n") 'toggle-linum))
+(global-set-key (kbd "M-n") 'toggle-linum)
 (global-set-key (kbd "C-<f12>") 'org-remember)
 (global-set-key (kbd "C-=") 'toggle-hiding)
 (global-set-key (kbd "C-+") 'toggle-selective-display)

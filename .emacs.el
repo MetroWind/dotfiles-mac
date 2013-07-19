@@ -1300,7 +1300,8 @@ want to use in the modeline *in lieu of* the original.")
 (require 'powerline)
 
 ;; =============== add other file ====================>
-(load-file (expand-file-name "~/.emacs-erc.el"))
+(autoload 'erc-start (expand-file-name "~/.emacs-erc.el")
+  "Load my ERC configuration" t)
 (if linuxp (load-file (expand-file-name "~/.emacs-dict.el")))
 (if linuxp (load-file (expand-file-name "~/.emacs-slime.el")))
 (load-file (expand-file-name "~/.emacs-muse.el"))

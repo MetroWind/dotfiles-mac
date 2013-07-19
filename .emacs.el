@@ -39,7 +39,7 @@
            "yasnippet" "pov-mode" "emacsim" "emeteo" "auctex"
            "anything" "remember" "python-mode"
            "twittering-mode" "auto-complete" "magit"
-           "company-mode")))
+           "company-mode" "multiple-cursors")))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
                                (concat ModeDir "/" Mode))))
@@ -232,7 +232,7 @@
 (setq woman-use-own-frame nil)
 (setq woman-fill-column 75)
 ;; CUA mode
-(cua-mode t)
+(cua-mode -1)
 (setq cua-enable-cua-keys nil)          ; Disable win keys
 ;; Yow file
 (setq yow-file (expand-file-name "~/.emacs.d/yow.lines"))
@@ -1059,6 +1059,12 @@ followed by a dash to an em-dash."
 (autoload 'command-log-mode "command-log-mode" "Load command-log-mode minor mode")
 (autoload 'global-command-log-mode "command-log-mode" "Load command-log-mode global mode")
 
+;; Multiple cursors
+(autoload 'mc/edit-lines "multiple-cursors" "Load multiple cursors" t)
+(autoload 'mc/mark-next-like-this "multiple-cursors" "Load multiple cursors" t)
+(autoload 'mc/mark-previous-like-this "multiple-cursors" "Load multiple cursors" t)
+(autoload 'mc/mark-all-like-this "multiple-cursors" "Load multiple cursors" t)
+
 ;;=============== global bindings ====================>
 (if linux-x-p
     (global-set-key (kbd "<C-XF86KbdBrightnessUp>") 'list-bookmarks)
@@ -1084,6 +1090,10 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "s-,") (lambda () (interactive) (find-file "~/.emacs.el")))
 (global-set-key (kbd "M-/") 'complete-with-all-backends)
 
+(global-set-key (kbd "C-<return>") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 ;; Smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)

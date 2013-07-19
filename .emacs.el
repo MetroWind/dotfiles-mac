@@ -39,7 +39,7 @@
            "yasnippet" "pov-mode" "emacsim" "emeteo" "auctex"
            "anything" "remember" "python-mode"
            "twittering-mode" "auto-complete" "magit"
-           "company-mode" "multiple-cursors")))
+           "company-mode" "multiple-cursors" "powerline")))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
                                (concat ModeDir "/" Mode))))
@@ -115,7 +115,7 @@
 ;; Display time information in modeline.
 ;; (setq display-time-format "%Y-%m-%d %A %I:%M")
 (setq display-time-day-and-date nil)
-(display-time)
+;; (display-time)
 ;; Use an icon to represent new mail.
 (setq display-time-use-mail-icon t)
 (setq display-time-mail-file "~/Mail/mbox")
@@ -1308,6 +1308,81 @@ want to use in the modeline *in lieu of* the original.")
 )
 
 (require 'powerline)
+;; (defpowerline status "%*%Z")
+;; (defpowerline global global-mode-string)
+(defun powerline-deviant-theme ()
+  "Setup the default mode-line."
+  (interactive)
+
+  (set-face-attribute
+   'powerline-active2 nil
+   :foreground (dv-color dv-default-bg))
+  (set-face-attribute
+   'powerline-active1 nil
+   :foreground (dv-color dv-default-fg))
+  (set-face-attribute
+   'powerline-inactive2 nil
+   :foreground (dv-color dv-default-fg))
+  (set-face-attribute
+   'powerline-active1 nil
+   :foreground (dv-color dv-default-fg))
+
+  (setq-default
+   mode-line-format
+   '("%e"
+     (:eval
+      (let* ((active (powerline-selected-window-active))
+             (mode-line (if active 'mode-line 'mode-line-inactive))
+             (face1 (if active 'powerline-active1 'powerline-inactive1))
+             (face2 (if active 'powerline-active2 'powerline-inactive2))
+             (separator-left
+              (intern (format "powerline-%s-%s"
+                              powerline-default-separator
+                              (car powerline-default-separator-dir))))
+             (separator-right
+              (intern (format "powerline-%s-%s"
+                              powerline-default-separator
+                              (cdr powerline-default-separator-dir))))
+             (lhs (list (powerline-raw "%*%z" nil 'l)
+                        ;; (powerline-buffer-size nil 'l)
+                        ;; (powerline-raw mode-line-mule-info nil 'l)
+                        (powerline-buffer-id nil 'l)
+                        (when (and (boundp 'which-func-mode) which-func-mode)
+                          (powerline-raw which-func-format nil 'l))
+                        (powerline-raw " ")
+                        (funcall separator-left mode-line face1)
+                        (powerline-major-mode face1 'l)
+                        (powerline-process face1)
+                        (powerline-minor-modes face1 'l)
+                        (powerline-narrow face1 'l)
+                        (powerline-raw " " face1)
+                        (funcall separator-left face1 face2)
+                        (powerline-vc face2 'r)
+                        (when (boundp 'erc-modified-channels-object)
+                          (powerline-raw erc-modified-channels-object
+                                         face2 'l))))
+             (rhs (list (powerline-raw global-mode-string face2 'r)
+                        (funcall separator-right face2 face1)
+                        (powerline-raw "%l" face1 'l)
+                        (powerline-raw ":" face1 'l)
+                        (powerline-raw "%c" face1 'r)
+                        (funcall separator-right face1 mode-line)
+                        (powerline-raw " ")
+                        (powerline-raw "%4p" nil 'r)
+                        ;; (powerline-hud face2 face1))))
+                        )))
+        (concat (powerline-render lhs)
+                (powerline-fill face2 (powerline-width rhs))
+                (powerline-render rhs)))))))
+
+(powerline-deviant-theme)
+
+(eval-after-load (expand-file-name "~/.emacs-erc.el")
+  '(progn
+     (set-face-attribute
+      'erc-notice-face nil
+      :foreground (dv-color dv-builtin-fg)
+      :weight 'unspecified)))
 
 ;; =============== add other file ====================>
 (autoload 'erc-start (expand-file-name "~/.emacs-erc.el")

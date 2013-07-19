@@ -27,6 +27,7 @@ def main(argv):
     Parser.add_argument('MDFiles', metavar='FILE', type=str, nargs='+',
                         help='Markdown files to parse')
     Parser.add_argument("-s", "--style", metavar="URL", type=str, dest="StyleURL",
+                        default="http://darksair.org/style/general.css",
                         help="The URL of the CSS")
     Parser.add_argument("-t", "--title", metavar="TEXT", type=str, dest="Title",
                         help="Title of the HTML")

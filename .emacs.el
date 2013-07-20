@@ -1327,6 +1327,9 @@ want to use in the modeline *in lieu of* the original.")
    'powerline-active1 nil
    :foreground (dv-color dv-default-fg))
 
+  (defvar some-image (create-image "~/programs/nyan.png" 'png nil
+                                   :ascent 'center))
+
   (setq-default
    mode-line-format
    '("%e"
@@ -1369,6 +1372,9 @@ want to use in the modeline *in lieu of* the original.")
                         (funcall separator-right face1 mode-line)
                         (powerline-raw " ")
                         (powerline-raw "%4p" nil 'r)
+                        (if active (powerline-raw
+                                    (propertize "unimportant"
+                                                'display some-image)))
                         ;; (powerline-hud face2 face1))))
                         )))
         (concat (powerline-render lhs)

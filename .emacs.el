@@ -865,11 +865,18 @@ followed by a dash to an em-dash."
      (define-key company-active-map (kbd "RET") 'company-complete-selection)
      (define-key company-active-map (kbd "TAB") 'company-complete-common)
      (setq company-backends
-           '(company-elisp  company-dabbrev  company-clang company-xcode
-             company-files
-             (company-gtags company-etags company-dabbrev-code company-keywords)
-             company-nxml company-css company-oddmuse company-semantic
-             company-eclim company-ropemacs))))
+           ;; '(company-elisp  company-dabbrev-code company-dabbrev
+           ;;   company-clang company-xcode company-files
+           ;;   (company-gtags company-etags company-dabbrev-code company-keywords)
+           ;;   company-nxml company-css company-oddmuse company-semantic
+           ;;   company-eclim company-ropemacs))))
+
+           '(company-elisp company-nxml company-css
+           company-semantic company-clang company-eclim
+           company-xcode company-ropemacs
+               (company-gtags company-etags company-dabbrev-code
+               company-keywords) company-oddmuse company-files
+               company-dabbrev))))
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Auto-complete

@@ -37,9 +37,8 @@
          '("imaxima" "slime-2.0" "slime48" "emacs-jabber"
            "gnuplot-mode.0.6.0" "haskell-mode" "mldonkey"
            "yasnippet" "pov-mode" "emacsim" "emeteo" "auctex"
-           "anything" "remember" "python-mode"
-           "twittering-mode" "auto-complete" "magit"
-           "company-mode" "multiple-cursors" "powerline")))
+           "anything" "twittering-mode" "auto-complete" "magit"
+           "company-mode" "multiple-cursors" "powerline" "org-mode/lisp")))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
                                (concat ModeDir "/" Mode))))
@@ -1096,7 +1095,6 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "C-x +") 'what-cursor-position)
 (global-set-key (kbd "C-x C-a") 'anything)
 (global-set-key (kbd "M-n") 'toggle-linum)
-(global-set-key (kbd "C-<f12>") 'org-remember)
 (global-set-key (kbd "C-=") 'toggle-hiding)
 (global-set-key (kbd "C-+") 'toggle-selective-display)
 (global-set-key (kbd "M-RET") 'toggle-line-wrap)

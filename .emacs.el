@@ -872,11 +872,12 @@ followed by a dash to an em-dash."
            ;;   company-eclim company-ropemacs))))
 
            '(company-elisp company-nxml company-css
-           company-semantic company-clang company-eclim
-           company-xcode company-ropemacs
-               (company-gtags company-etags company-dabbrev-code
-               company-keywords) company-oddmuse company-files
-               company-dabbrev))))
+             company-semantic company-clang company-eclim
+             company-xcode
+             (company-gtags company-etags company-dabbrev-code
+              company-keywords)
+             company-oddmuse company-files company-dabbrev))))
+
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Auto-complete

@@ -265,48 +265,24 @@ where GUI apps are not started from a shell."
 (if macp (set-exec-path-from-shell-PATH))
 
 ;; =============== C Mode ===============>
-(add-hook 'c-mode-common-hook
-		  (lambda () (c-toggle-auto-hungry-state 1)))
 ;; CC Indention
-(defconst my-c-style
-  '((c-tab-always-indent        . t)
-    (c-comment-only-line-offset . 0)
-    (c-hanging-braces-alist     . ((substatement-open after)
-                                   (brace-list-open)))
-    (c-hanging-colons-alist     . ((member-init-intro before)
-                                   (inher-intro)
-                                   (case-label after)
-                                   (label after)
-                                   (access-label after)))
-    (c-cleanup-list             . (scope-operator
-                                   empty-defun-braces
-                                   defun-close-semi))
-    (c-offsets-alist            . ((arglist-close . c-lineup-arglist)
-                                   (substatement-open . 0)
-                                   (case-label        . 4)
-                                   (block-open        . 0)
-                                   (knr-argdecl-intro . -)))
-    (c-echo-syntactic-information-p . t)
-    )
-  "My C Programming Style")
-;; offset customizations not in my-c-style
-(setq c-offsets-alist '((member-init-intro . ++)))
-;; Customizations for all modes in CC Mode.
-(defun my-c-mode-common-hook ()
-  ;; add my personal style and set it for the current buffer
-  (c-add-style "PERSONAL" my-c-style t)
+(defun setup-cc-mode ()
   ;; we like auto-newline and hungry-delete
   (c-toggle-auto-hungry-state 1)
-  ;; key bindings for all supported languages.  We can put these in
-  ;; c-mode-base-map because c-mode-map, c++-mode-map, objc-mode-map,
-  ;; java-mode-map, idl-mode-map, and pike-mode-map inherit from it.
-  (define-key c-mode-base-map "\C-m" 'c-context-line-break)
-  )
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+  (local-set-key (kbd "RET") 'newline-and-indent)
+  (local-set-key (kbd "C-j") 'newline))
+
+(setq c-echo-syntactic-information-p t
+      c-default-style "bsd"
+      c-basic-offset 4)
+(add-hook 'c-mode-common-hook 'setup-cc-mode)
 ;; Whether the indentation should be controlled by the syntactic context.
 (setq c-syntactic-indentation t)
 ;; Make make command print directory information
 (setq compile-command "make -w")
+;; Make sure indentation is consistant.
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
 
 ;; =============== Other programming settings =========>
 ;; Subword

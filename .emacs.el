@@ -267,6 +267,9 @@ where GUI apps are not started from a shell."
 ;; =============== C Mode ===============>
 ;; CC Indention
 (defun setup-cc-mode ()
+  ;; Force using line comments.
+  (setq comment-start "//"
+        comment-end   "")
   ;; we like auto-newline and hungry-delete
   (c-toggle-auto-hungry-state 1)
   (local-set-key (kbd "RET") 'newline-and-indent)

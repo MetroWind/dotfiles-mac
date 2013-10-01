@@ -44,6 +44,40 @@
                  'org-hide nil
                  :foreground "#2e3735"))))
 
+;; Export settings
+(defun my-latex-filter-headline-done (text backend info)
+  "Ensure dots in headlines."
+  (when (org-export-derived-backend-p backend 'latex)
+    (save-match-data
+      (when (let ((case-fold-search t))
+              (string-match "\\\\\\([a-z]+\\){\\(.*DONE.*\\)}"
+                            text))
+        (if (not (string-match ".*hsout.*" text))
+            (replace-match "\\\\\\1{\\\\hsout{\\2}}"
+                       t nil text))))))
+(defun my-latex-filter-headline-canceled (text backend info)
+  "Ensure dots in headlines."
+  (when (org-export-derived-backend-p backend 'latex)
+    (save-match-data
+      (when (let ((case-fold-search t))
+              (string-match "\\\\\\([a-z]+\\){\\(.*CANCELED.*\\)}"
+                            text))
+        (if (not (string-match ".*hsout.*" text))
+            (replace-match "\\\\\\1{\\\\hsout{\\2}}"
+                       t nil text))))))
+
+(eval-after-load 'ox
+  '(progn
+     (add-to-list 'org-export-filter-headline-functions
+                  'my-latex-filter-headline-done)
+     (add-to-list 'org-export-filter-headline-functions
+                  'my-latex-filter-headline-canceled)
+     (setq
+      org-format-latex-header
+      (concat
+       org-format-latex-header
+       "\n\\DeclareRobustCommand{\\hsout}[1]{\\texorpdfstring{\\sout{#1}}{#1}}"))))
+
 (setq org-export-html-style
       "<style type=\"text/css\">
 html

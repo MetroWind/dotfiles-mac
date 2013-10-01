@@ -1,6 +1,6 @@
-(require 'org-install)
+;; (require 'org-install)
 
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (add-hook 'org-mode-hook 'turn-on-font-lock)
@@ -10,6 +10,7 @@
 (setq org-icalendar-include-todo t)
 (setq org-startup-folded nil)           ;Show all content on startup.
 (setq org-todo-keywords '((sequence "TODO" "|" "DONE" "CANCELED")))
+(setq org-agenda-dim-blocked-tasks t)
 
 ;; Set to the location of your Org files on your local system
 (setq org-directory

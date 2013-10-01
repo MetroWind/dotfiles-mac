@@ -36,9 +36,10 @@
   (let ((Modes
          '("imaxima" "slime-2.0" "slime48" "emacs-jabber"
            "gnuplot-mode.0.6.0" "haskell-mode" "mldonkey"
-           "yasnippet" "pov-mode" "emacsim" "emeteo" "auctex"
+           "yasnippet" "pov-mode" "auctex"
            "anything" "twittering-mode" "auto-complete" "magit"
-           "company-mode" "multiple-cursors" "powerline" "org-mode/lisp")))
+           "company-mode" "multiple-cursors" "powerline" 
+           "org-mode/lisp" "org-mode/contrib/lisp")))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
                                (concat ModeDir "/" Mode))))
@@ -376,7 +377,7 @@ where GUI apps are not started from a shell."
 (setq auto-mode-alist (append '(("\\.hs$" . haskell-mode)) auto-mode-alist))
 
 ;; Graphviz DOT mode
-(load-file (expand-file-name "~/.emacs.d/graphviz-dot-mode.el"))
+(require 'graphviz-dot-mode)
 (add-hook 'graphviz-dot-mode-hook
           (lambda ()
              (define-key graphviz-dot-mode-map "\C-c\C-c" 'compile)))

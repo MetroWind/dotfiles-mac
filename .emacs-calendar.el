@@ -15,10 +15,10 @@
   (setq todo-file-done "/mnt/shared/text/Non-books/Misc/calendar/todo-done")
   (setq todo-file-top "/mnt/shared/text/Non-books/Misc/calendar/todo-top"))
  (macp
-  (setq diary-file "/Volumes/Shared/text/Non-books/Misc/calendar/diary")
-  (setq todo-file-do "/Volumes/Shared/text/Non-books/Misc/calendar/todo-do")
-  (setq todo-file-done "/Volumes/Shared/text/Non-books/Misc/calendar/todo-done")
-  (setq todo-file-top "/Volumes/Shared/text/Non-books/Misc/calendar/todo-top")))
+  (setq diary-file "/Volumes/Stuff/text/Non-books/Misc/calendar/diary")
+  (setq todo-file-do "/Volumes/Stuff/text/Non-books/Misc/calendar/todo-do")
+  (setq todo-file-done "/Volumes/Stuff/text/Non-books/Misc/calendar/todo-done")
+  (setq todo-file-top "/Volumes/Stuff/text/Non-books/Misc/calendar/todo-top")))
 
 ;;Appointment Settings
 (setq appt-issue-message t)

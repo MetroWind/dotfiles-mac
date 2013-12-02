@@ -16,7 +16,7 @@
 (setq org-directory
       (cond
        (linuxp "/mnt/shared/text/Non-books/Misc/org")
-       (macp "/Volumes/Shared/text/Non-books/Misc/org")))
+       (macp "/Volumes/Stuff/text/Non-books/Misc/org")))
 
 (cond
  (linuxp
@@ -24,7 +24,7 @@
                            "~/document/physics/lattice/doc/tech.org")))
  (macp
   (setq org-agenda-files `(,(concat org-directory "/plan.org")
-                           "/Volumes/Home/document/physics/lattice/doc/tech.org"))))
+                           "/Volumes/Stuff/document/physics/lattice/doc/tech.org"))))
 
 ;; Set to the name of the file where new notes will be stored
 (setq org-mobile-inbox-for-pull (concat org-directory "/plan.org"))

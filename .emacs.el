@@ -38,6 +38,7 @@
            "gnuplot-mode.0.6.0" "haskell-mode" "mldonkey"
            "yasnippet" "pov-mode" "auctex"
            "anything" "twittering-mode" "auto-complete" "magit"
+           "git-modes"
            "company-mode" "multiple-cursors" "powerline" 
            "org-mode/lisp" "org-mode/contrib/lisp")))
     (dolist (Mode Modes)

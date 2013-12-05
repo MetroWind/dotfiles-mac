@@ -78,6 +78,27 @@
        org-format-latex-header
        "\n\\DeclareRobustCommand{\\hsout}[1]{\\texorpdfstring{\\sout{#1}}{#1}}"))))
 
+(setq org-latex-default-packages-alist
+  '(("AUTO" "inputenc"  t)
+    ("T1"   "fontenc"   t)
+    ("" "lmodern" t)
+    (""     "fixltx2e"  nil)
+    (""     "graphicx"  t)
+    (""     "longtable" nil)
+    (""     "float"     nil)
+    (""     "wrapfig"   nil)
+    (""     "rotating"  nil)
+    ("normalem" "ulem"  t)
+    (""     "amsmath"   t)
+    (""     "textcomp"  t)
+    (""     "marvosym"  t)
+    (""     "wasysym"   t)
+    (""     "amssymb"   t)
+    (""     "hyperref"  nil)
+    "\\tolerance=1000"
+    "\\DeclareRobustCommand{\\hsout}[1]{\\texorpdfstring{\\sout{#1}}{#1}}"
+  ))
+
 (setq org-export-html-style
       "<style type=\"text/css\">
 html

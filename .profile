@@ -6,7 +6,7 @@ export INFOPATH="$HOME/.emacs.d/info:$INFOPATH"
 export EDITOR="/usr/local/bin/emacsclient"
 export PAGER="most"
 export HOMEBREW_CC="clang"
-export PKG_CONFIG_PATH="/usr/local/Library/ENV/pkgconfig/10.8:${PKG_CONFIG_PATH}"
+export PKG_CONFIG_PATH="/usr/local/Library/ENV/pkgconfig/10.9:${PKG_CONFIG_PATH}"
 
 # Python
 export VIRTUAL_ENV="$HOME/Python"

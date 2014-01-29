@@ -232,9 +232,11 @@
 (require 'printing)
 (pr-update-menus)
 ;; Let woman not open new frame
-(require 'woman)
-(setq woman-use-own-frame nil)
-(setq woman-fill-column 75)
+(autoload 'woman "woman" "Load woman" t)
+(eval-after-load "woman"
+  '(progn
+     (setq woman-use-own-frame nil)
+     (setq woman-fill-column 75)))
 ;; CUA mode
 (cua-mode -1)
 (setq cua-enable-cua-keys nil)          ; Disable win keys

@@ -306,9 +306,7 @@ where GUI apps are not started from a shell."
 (eval-after-load "whitespace"
   '(progn
     (setq-default whitespace-style
-                  '(face tabs trailing lines space-before-tab))
-    (setq-default whitespace-active-style
-                  '(face tabs trailing lines space-before-tab))))
+                  '(face tabs trailing lines-tail space-before-tab))))
 (add-hook 'emacs-lisp-mode-hook 'whitespace-mode)
 (add-hook 'cc-mode-hook 'whitespace-mode)
 (add-hook 'c-mode-hook 'whitespace-mode)

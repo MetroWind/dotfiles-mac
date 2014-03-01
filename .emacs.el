@@ -1071,7 +1071,7 @@ followed by a dash to an em-dash."
 
 ;; Shorter modeline
 (defvar mode-line-cleaner-alist
-  `((auto-complete-mode . " α")
+  '((auto-complete-mode . " α")
     (yas/minor-mode . " υ")
     (git-gutter-mode . " γ")
     (company-mode . " κ")
@@ -1081,6 +1081,9 @@ followed by a dash to an em-dash."
     (hi-lock-mode . "")
     (python-mode . "π")
     (emacs-lisp-mode . "Λ")
+    (c++-mode . "C++")
+    (c-mode . "C")
+    (help-mode . "?")
     )
   "Alist for `clean-mode-line'.
 
@@ -1102,25 +1105,14 @@ want to use in the modeline *in lieu of* the original.")
 
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
-(eval-after-load "whitespace"
-  '(progn
-     (set-face-attribute
-      'whitespace-trailing nil
-      :foreground "unspecified"
-      :background (dv-color dv-type-fg))
-     (set-face-attribute
-      'whitespace-line nil
-      :background "black"
-      :foreground "grey"
-      :inherit 'default)))
-
 (if macp
     (progn
       ;; (add-to-list 'default-frame-alist '(height . 60))
       ;; (add-to-list 'default-frame-alist '(width . 110))
       (add-to-list 'default-frame-alist '(fullscreen . fullboth))
       (if window-system
-          (load-theme 'Deviant t)
+          ;; (load-theme 'Deviant t)
+          (load-theme 'FlatUI t)
         (load-theme 'manoj-dark t))
       ;; Main font
       (set-face-attribute
@@ -1252,26 +1244,12 @@ want to use in the modeline *in lieu of* the original.")
 (require 'powerline)
 ;; (defpowerline status "%*%Z")
 ;; (defpowerline global global-mode-string)
-(defun powerline-deviant-theme ()
-  "Setup the default mode-line."
+(defun set-powerline-scheme ()
+  "Setup the mode-line."
   (interactive)
-
-  (set-face-attribute
-   'powerline-active2 nil
-   :foreground (dv-color dv-default-bg))
-  (set-face-attribute
-   'powerline-active1 nil
-   :foreground (dv-color dv-default-fg))
-  (set-face-attribute
-   'powerline-inactive2 nil
-   :foreground (dv-color dv-default-fg))
-  (set-face-attribute
-   'powerline-active1 nil
-   :foreground (dv-color dv-default-fg))
 
   (defvar some-image (create-image "~/programs/nyan.png" 'png nil
                                    :ascent 'center))
-
   (setq-default
    mode-line-format
    '("%e"
@@ -1323,14 +1301,7 @@ want to use in the modeline *in lieu of* the original.")
                 (powerline-fill face2 (powerline-width rhs))
                 (powerline-render rhs)))))))
 
-(powerline-deviant-theme)
-
-(eval-after-load (expand-file-name "~/.emacs-erc.el")
-  '(progn
-     (set-face-attribute
-      'erc-notice-face nil
-      :foreground (dv-color dv-builtin-fg)
-      :weight 'unspecified)))
+(set-powerline-scheme)
 
 ;; =============== add other file ====================>
 (autoload 'erc-start (expand-file-name "~/.emacs-erc.el")

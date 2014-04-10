@@ -12,6 +12,7 @@ export PKG_CONFIG_PATH="/usr/local/Library/ENV/pkgconfig/10.9:${PKG_CONFIG_PATH}
 export VIRTUAL_ENV="$HOME/Python"
 export VIRTUAL_ENV3="$HOME/Python3"
 export PATH="$VIRTUAL_ENV/bin:$VIRTUAL_ENV3/bin:$PATH"
+export PYTHONPATH="$HOME/.Python"
 
 # Node.js
 export PATH="/usr/local/share/npm/bin:$PATH"

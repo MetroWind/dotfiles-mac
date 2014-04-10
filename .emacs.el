@@ -34,12 +34,7 @@
 (let ((ModeDir "~/.emacs.d"))
   (add-to-list 'load-path (expand-file-name ModeDir))
   (let ((Modes
-         '("imaxima" "slime-2.0" "slime48" "emacs-jabber"
-           "gnuplot-mode.0.6.0" "haskell-mode" "mldonkey"
-           "yasnippet" "pov-mode" "auctex"
-           "anything" "twittering-mode" "auto-complete" "magit"
-           "git-modes"
-           "company-mode" "multiple-cursors" "powerline" 
+         '("company-mode" "multiple-cursors" "powerline"
            "org-mode/lisp" "org-mode/contrib/lisp")))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
@@ -204,7 +199,7 @@
 ;; Version Control Settings
 (require 'vc-git)
 (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
-(require 'magit)
+;; (require 'magit)
 ;; Shell Mode settings
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-prompt-read-only t)
@@ -308,6 +303,10 @@ where GUI apps are not started from a shell."
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
 
+;; =========================== ELPA ==========================>
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
 ;; =============== Other programming settings =========>
 ;; Subword
 (add-hook 'c-mode-common-hook
@@ -368,7 +367,7 @@ where GUI apps are not started from a shell."
 ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
 
 ;; Haskell Mode
-(load (expand-file-name "~/.emacs.d/haskell-mode/haskell-site-file"))
+;; (load (expand-file-name "~/.emacs.d/haskell-mode/haskell-site-file"))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
@@ -420,20 +419,22 @@ where GUI apps are not started from a shell."
 
 ;; POV-Ray mode
 ;; (require 'pov-mode)
-(autoload 'pov-mode "pov-mode.el" "PoVray scene file mode" t)
+;; (autoload 'pov-mode "pov-mode.el" "PoVray scene file mode" t)
 (add-to-list 'auto-mode-alist '("\\.pov$" . pov-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . pov-mode))
-(setq pov-command-alist
-      '(("Render" "povray" "+A0.2 +i%s")
-        ("Test quality render" "povray" "res120 -Q3 +i%s" nil)
-        ("Low quality render" "povray" "res320 +i%s" nil)
-        ("Medium quality render" "povray" "res1k +i%s" nil)
-        ("High quality render" "povray" "res800 +i%s" nil)
-        ("External view" "feh" "%s" nil)
-        ("Internal view"
-         ("Internal view")
-         nil)))
-(setq pov-default-view-internal nil)
+(eval-after-load "pov-mode"
+  '(progn
+     (setq pov-command-alist
+           '(("Render" "povray" "+A0.2 +i%s")
+             ("Test quality render" "povray" "res120 -Q3 +i%s" nil)
+             ("Low quality render" "povray" "res320 +i%s" nil)
+             ("Medium quality render" "povray" "res1k +i%s" nil)
+             ("High quality render" "povray" "res800 +i%s" nil)
+             ("External view" "feh" "%s" nil)
+             ("Internal view"
+              ("Internal view")
+              nil)))
+     (setq pov-default-view-internal nil)))
 
 ;; Mode for asciidoc
 (add-to-list 'auto-mode-alist '("\\.doc$" . doc-mode))
@@ -880,37 +881,6 @@ followed by a dash to an em-dash."
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-;; Auto-complete
-;; (require 'auto-complete-config)
-;; (add-to-list 'ac-dictionary-directories
-;;              (concat (getenv "HOME")
-;;                      "/.emacs.d/auto-complete/ac-dict"))
-;; (ac-config-default)
-;; (add-to-list 'ac-modes 'ConTeXt-mode)
-;; (ac-set-trigger-key "M-/")
-;; (setq ac-auto-show-menu nil)
-;; (setq ac-sources '(ac-source-words-in-same-mode-buffers
-;;                    ac-source-symbols
-;;                    ac-source-filename
-;;                    ac-source-functions
-;;                    ac-source-yasnippet
-;;                    ac-source-variables
-;;                    ac-source-symbols
-;;                    ac-source-features
-;;                    ac-source-abbrev
-;;                    ac-source-dictionary))
-
-;; (setq ac-use-menu-map t)
-;; ;; Default settings
-;; (define-key ac-menu-map "\C-n" 'ac-next)
-;; (define-key ac-menu-map (kbd "M-/") 'ac-next)
-;; (define-key ac-menu-map "\C-p" 'ac-previous)
-;; ;; Disable enter completion
-;; (define-key ac-completing-map (kbd "RET") nil)
-
-;; MlDonkey
-(require 'mldonkey)
-
 ;; Ascii table
 (require 'ascii-table)
 
@@ -927,17 +897,11 @@ followed by a dash to an em-dash."
 ;; (load-library "g")
 ;; (setq g-user-email user-mail-address)
 
-(if linuxp
-    ((lambda ()
-      (autoload 'maxima-mode "maxima" "Maxima editing mode" t)
-      (autoload 'maxima "maxima" "Running Maxima interactively" t)
-      (autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
-      (autoload 'imath-mode "imath" "Imath mode for math formula input" t)
-)))
-
 ;; Yet another snippet extension for Emacs.
-(require 'yasnippet) ;; not yasnippet-bundle
-(yas/global-mode 1)
+(add-hook 'after-init-hook
+          (lambda ()
+            (require 'yasnippet) ;; not yasnippet-bundle
+            (yas-global-mode 1)))
 ;; (require 'yasnippet)
 ;; (yas/initialize)
 ;; (yas/load-directory (expand-file-name "~/.emacs.d/yasnippet/snippets"))
@@ -978,8 +942,10 @@ followed by a dash to an em-dash."
 ;; (load "folding" 'nomessage 'noerror)
 ;; (folding-mode-add-find-file-hook)
 
-;; Anything
-(require 'anything)
+;; Helm (previously Anything)
+(add-hook 'after-init-hook
+          (lambda ()
+            (require 'helm-config)))
 
 ;; Protect buffers
 (require 'keep-buffers)
@@ -1007,10 +973,6 @@ followed by a dash to an em-dash."
 ;; Smex: M-x enhanced.  Built apon Ido
 (require 'smex)
 (smex-initialize)
-
-;; Twittering-mode
-(require 'twittering-mode)
-(setq twittering-use-master-password t)
 
 ;; Use Emacs with Mutt
 ;; Enter `message-mode'
@@ -1056,7 +1018,7 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "C-x M-r") 'revert-buffer)
 (global-set-key (kbd "C-x =") 'balance-windows)
 (global-set-key (kbd "C-x +") 'what-cursor-position)
-(global-set-key (kbd "C-x C-a") 'anything)
+(global-set-key (kbd "C-x C-a") 'helm-mini)
 (global-set-key (kbd "M-n") 'toggle-linum)
 (global-set-key (kbd "C-=") 'toggle-hiding)
 (global-set-key (kbd "C-+") 'toggle-selective-display)
@@ -1326,14 +1288,14 @@ want to use in the modeline *in lieu of* the original.")
 (autoload 'erc-start (expand-file-name "~/.emacs-erc.el")
   "Load my ERC configuration" t)
 (if linuxp (load-file (expand-file-name "~/.emacs-dict.el")))
-(if linuxp (load-file (expand-file-name "~/.emacs-slime.el")))
 (load-file (expand-file-name "~/.emacs-muse.el"))
 ;; (load-file (expand-file-name "~/.emacs-icicles.el"))
 (load-file (expand-file-name "~/.emacs-org.el"))
 (load-file (expand-file-name "~/.emacs-calendar.el"))
 (load-file (expand-file-name "~/.emacs-skeletons.el"))
 (if linuxp (load-file (expand-file-name "~/.emacs-emms.el")))
-(load-file (expand-file-name "~/.emacs-tex.el"))
+(autoload 'ConTeXt-mode (expand-file-name "~/.emacs-tex.el"))
+(autoload 'LaTeX-mode (expand-file-name "~/.emacs-tex.el"))
 ;; (load-file "/home/corsair/.emacs-blogmax.el")
 ;; (load-file "~/.emacs-predictive.el")
 (load custom-file 'noerror)

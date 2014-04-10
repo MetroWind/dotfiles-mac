@@ -1,4 +1,5 @@
 ;; AucTEX
+;; (require 'tex)
 (load "auctex.el" nil t t)
 ;; (load "~/.emacs.d/auctex/preview/preview-latex.el" nil t t)
 (setq TeX-parse-self t)                 ; Enable parse on load.

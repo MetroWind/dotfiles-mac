@@ -28,7 +28,7 @@ set tilde
 unset markers
 set read_inc=100
 set write_inc=100
-set wrap=82
+unset wrap
 # set charset="utf-8"
 set send_charset="us-ascii:utf-8"
 charset-hook !utf-8 gbk
@@ -142,7 +142,7 @@ unignore X-Virus-hagbard:
 hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
 
 # --------------- Colors --------------->
-color index brightwhite   default "~N"
+color index brightdefault   default "~N"
 source ~/.mutt-color
 color index white         red     "~D"
 

@@ -236,7 +236,14 @@
 (eval-after-load "woman"
   '(progn
      (setq woman-use-own-frame nil)
-     (setq woman-fill-column 75)))
+     (setq woman-fill-column 75)
+     (setq woman-manpath '("/usr/share/man"
+                           "/usr/local/share/man"
+                           "/opt/X11/share/man"
+                           "/Library/TeX/Distributions/.DefaultTeX/Contents/Man"
+                           "/Applications/Xcode.app/Contents/Developer/usr/share/man"))))
+
+
 ;; CUA mode
 (cua-mode -1)
 (setq cua-enable-cua-keys nil)          ; Disable win keys
@@ -446,11 +453,11 @@ where GUI apps are not started from a shell."
 (autoload 'php-mode "php-mode" "PHP editing mode." t)
 
 ;; Scheme program
-(autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
-(autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
-(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
-(add-hook 'scheme-mode-hook (function gambit-mode))
-(setq scheme-program-name "gsi -:d-")
+;; (autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
+;; (autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
+;; (add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
+;; (add-hook 'scheme-mode-hook (function gambit-mode))
+(setq scheme-program-name "csi")
 
 ;; Rainbow delimiters
 (require 'rainbow-delimiters)
@@ -734,6 +741,7 @@ followed by a dash to an em-dash."
          (cons " +\\(nil\\)[ )]" 'nil))))
 
 (add-hook 'emacs-lisp-mode-hook 'elisp-unicode)
+(add-hook 'scheme-mode-hook 'elisp-unicode)
 
 (require 'git-gutter-fringe)
 (global-git-gutter-mode t)

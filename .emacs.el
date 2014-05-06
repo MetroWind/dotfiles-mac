@@ -34,7 +34,7 @@
 (let ((ModeDir "~/.emacs.d"))
   (add-to-list 'load-path (expand-file-name ModeDir))
   (let ((Modes
-         '("company-mode" "multiple-cursors" "powerline"
+         '("multiple-cursors" "powerline"
            "org-mode/lisp" "org-mode/contrib/lisp")))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
@@ -842,7 +842,7 @@ followed by a dash to an em-dash."
 
 ;; Company-mode completion
 (setq dabbrev-case-replace t)
-(require 'company)
+(autoload 'company-mode "company" nil t)
 ;; (defun append-to-each (xs e)
 ;;   ;; `e' should be a symbol
 ;;   (if xs
@@ -859,6 +859,8 @@ followed by a dash to an em-dash."
 
 (eval-after-load "company"
   '(progn
+     (setq company-dabbrev-ignore-case nil)
+     (setq company-dabbrev-downcase nil)
      (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
      (define-key company-active-map (kbd "C-p")
        'company-select-previous-or-abort)
@@ -866,19 +868,12 @@ followed by a dash to an em-dash."
      (define-key company-active-map (kbd "RET") 'company-complete-selection)
      (define-key company-active-map (kbd "TAB") 'company-complete-common)
      (setq company-backends
-           ;; '(company-elisp  company-dabbrev-code company-dabbrev
-           ;;   company-clang company-xcode company-files
-           ;;   (company-gtags company-etags company-dabbrev-code company-keywords)
-           ;;   company-nxml company-css company-oddmuse company-semantic
-           ;;   company-eclim company-ropemacs))))
-
            '(company-elisp company-nxml company-css
              company-semantic company-clang company-eclim
              company-xcode
              (company-gtags company-etags company-dabbrev-code
               company-keywords)
              company-oddmuse company-files company-dabbrev))))
-
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; Ascii table

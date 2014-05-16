@@ -274,6 +274,17 @@ where GUI apps are not started from a shell."
     (setq exec-path (split-string path-from-shell path-separator))))
 (if macp (set-exec-path-from-shell-PATH))
 
+;; Prevent Emacs to display a graphical yes-or-no dialog box.  Use the
+;; minibuffer instead.
+(defadvice yes-or-no-p (around prevent-dialog activate)
+  "Prevent yes-or-no-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+(defadvice y-or-n-p (around prevent-dialog-yorn activate)
+  "Prevent y-or-n-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+
 ;; =============== C Mode ===============>
 ;; CC Indention
 (defun setup-cc-mode ()

@@ -318,6 +318,10 @@ where GUI apps are not started from a shell."
 (add-hook 'python-mode-hook
           (lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
 
+;; Ruby mode
+(add-hook 'ruby-mode-hook
+          (lambda () (setq ruby-indent-level c-basic-offset)))
+
 ;; Whitespace mode
 (autoload 'whitespace-mode "whitespace" "Load whitespace" t)
 (eval-after-load "whitespace"
@@ -353,11 +357,6 @@ where GUI apps are not started from a shell."
 (add-hook 'perl-mode-hook       'hs-minor-mode)
 (add-hook 'sh-mode-hook         'hs-minor-mode)
 (add-hook 'python-mode-hook     'hs-minor-mode)
-
-;; CSS Mode
-(autoload 'css-mode "css-mode")
-(setq auto-mode-alist
-     (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 
 ;; Gnuplot Mode
 (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
@@ -441,8 +440,6 @@ where GUI apps are not started from a shell."
 (autoload 'doc-mode "doc-mode")
 
 ;; Markdown
-(autoload 'markdown-mode "markdown-mode.el"
-  "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 
 ;; Lua
@@ -450,7 +447,6 @@ where GUI apps are not started from a shell."
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ;; Rainbow mode
-(require 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
 
 ;; Muttrc mode
@@ -472,11 +468,9 @@ where GUI apps are not started from a shell."
 (setq scheme-program-name "csi")
 
 ;; Rainbow delimiters
-(require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+(add-hook 'after-init-hook 'global-rainbow-delimiters-mode)
 
 ;; YAML mode
-(autoload 'yaml-mode "yaml-mode" "YAML major mode.")
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 (add-hook 'yaml-mode-hook (lambda () (setq tab-width 2)))
@@ -495,7 +489,6 @@ where GUI apps are not started from a shell."
 (add-to-list 'auto-mode-alist '("\\.math$" . math-mode))
 
 ;; Web mode
-(autoload 'web-mode "web-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
 
 ;; =============== Home-made Functions ===============>

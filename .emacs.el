@@ -861,6 +861,7 @@ followed by a dash to an em-dash."
   '(progn
      (setq company-dabbrev-ignore-case nil)
      (setq company-dabbrev-downcase nil)
+     (setq company-async-timeout 5)
      (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
      (define-key company-active-map (kbd "C-p")
        'company-select-previous-or-abort)

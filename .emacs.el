@@ -1133,7 +1133,8 @@ want to use in the modeline *in lieu of* the original.")
        'default nil
        :family "The Sans Mono Condensed"
        :height 125
-       :weight 'light)
+       ;; :weight 'light
+       )
       ;; CJK
       (set-fontset-font
        (frame-parameter nil 'font)

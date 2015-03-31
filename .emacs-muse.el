@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/muse")
+(add-to-list 'load-path "~/.emacs-pkgs/muse")
 
 (require 'muse-mode)
 (require 'muse-publish)

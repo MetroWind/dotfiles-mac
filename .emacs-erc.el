@@ -77,7 +77,7 @@
 
 ;; Smiley
 (setq gnus-smiley-file-types '("xpm" "pbm" "png"))
-(setq smiley-data-directory (expand-file-name "~/.emacs.d/smiley/tango"))
+(setq smiley-data-directory (expand-file-name "~/.emacs-pkgs/smiley/tango"))
 (setq smiley-style 'tango)
 (setq smiley-cached-regexp-alist nil)
 (smiley-update-cache)

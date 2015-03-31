@@ -31,11 +31,12 @@
 )))
 
 ;; =============== add load path ====================>
-(let ((ModeDir "~/.emacs.d"))
+(let ((ModeDir "~/.emacs-pkgs"))
   (add-to-list 'load-path (expand-file-name ModeDir))
   (let ((Modes
-         '("multiple-cursors" "powerline"
-           "org-mode/lisp" "org-mode/contrib/lisp")))
+         '(
+           ;; "multiple-cursors" "powerline"
+           )))
     (dolist (Mode Modes)
       (add-to-list 'load-path (expand-file-name
                                (concat ModeDir "/" Mode))))
@@ -43,17 +44,17 @@
 )
 
 (add-to-list 'custom-theme-load-path
-             (expand-file-name "~/.emacs.d/themes/"))
+             (expand-file-name "~/.emacs-pkgs/themes/"))
 
 (if (or linuxp macp)
-    (add-to-list 'load-path (expand-file-name "~/.emacs.d/w3m")))
+    (add-to-list 'load-path (expand-file-name "~/.emacs-pkgs/w3m")))
 
 (load-file (expand-file-name "~/.emacs-passwd.el"))
 
 ;; Info path
 (if macp
     (setq Info-default-directory-list
-          (append '("~/.emacs.d/info")
+          (append '("~/.emacs-pkgs/info")
                   Info-default-directory-list)))
 
 ;; =============== Coding and Language ===============>
@@ -243,7 +244,7 @@
 (cua-mode -1)
 (setq cua-enable-cua-keys nil)          ; Disable win keys
 ;; Yow file
-(setq yow-file (expand-file-name "~/.emacs.d/yow.lines"))
+(setq yow-file (expand-file-name "~/.emacs-pkgs/yow.lines"))
 ;; Change the initial message in `*scratch'
 (setq initial-scratch-message
       ";; What is thy bidding, my master?\n\n")
@@ -366,7 +367,7 @@ where GUI apps are not started from a shell."
 ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
 
 ;; Haskell Mode
-;; (load (expand-file-name "~/.emacs.d/haskell-mode/haskell-site-file"))
+;; (load (expand-file-name "~/.emacs-pkgs/haskell-mode/haskell-site-file"))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
@@ -890,10 +891,14 @@ followed by a dash to an em-dash."
 (add-hook 'after-init-hook
           (lambda ()
             (require 'yasnippet) ;; not yasnippet-bundle
-            (yas-global-mode 1)))
+            (add-to-list 'yas-snippet-dirs "~/.emacs-pkgs/snippets")
+            ;; Don't need bundled snippets.
+            (delq 'yas-installed-snippets-dir yas-snippet-dirs)
+            (yas-global-mode 1)
+            ))
 ;; (require 'yasnippet)
 ;; (yas/initialize)
-;; (yas/load-directory (expand-file-name "~/.emacs.d/yasnippet/snippets"))
+;; (yas/load-directory (expand-file-name "~/.emacs-pkgs/yasnippet/snippets"))
 
 (require 'two-mode-mode)
 (require 'asy-mode)

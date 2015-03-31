@@ -1,10 +1,5 @@
 # -*- mode: muttrc; -*-
-
-alternates "chris.corsair@gmail.com"
-# alternates "uky@darksair.org"
-alternates "mingyang.sun@uky.edu"
-alternates "msu225@uky.edu"
-alternates "msu225@g.uky.edu"
+source ~/.mutt-secret
 my_hdr X-Operating-System: `uname -s -r -p`
 my_hdr X-Useless-Header: Use the Force, Luke!
 set quit
@@ -66,8 +61,6 @@ subscribe python-dev@python.org
 set sendmail="msmtp"
 set sendmail_wait=10
 set use_from=yes
-set realname="Darksair"
-set from=chris.corsair@gmail.com
 set envelope_from=yes
 
 set folder="~/Mail"
@@ -94,14 +87,6 @@ fcc-hook '(~s "600.*([Hh][Ww]|[Hh]omework) *[0-9]+" | \
            ~s "([Hh][Ww]|[Hh]omework) *[0-9]+.*600") \
            (! ~t "rkk@pa\.uky\.edu")' =computation
 fcc-hook . =inbox
-
-send-hook ".*" "set from=chris.corsair@gmail.com ;\
-                set realname=\"Darksair\" ;\
-                set signature=\"rand-sig.py ~/.signatures |\""
-send-hook "~t .*\\.edu>*$ | ~t .*@teragrid\\.org>* | ~t .*@fnal\\.gov>* | ~t .*@nersc\\.gov>*" \
-          "set from=mingyang.sun@uky.edu ;\
-           set realname=\"Mingyang Sun\" ;\
-           set signature=~/.signature"
 
 save-hook "~l" =lists
 

@@ -140,7 +140,7 @@
           (lambda()
             (add-to-list 'TeX-command-list 
                          '("MkIV"
-                           "~/bin/context-minimal-exec.sh context --nonstopmode --purge %t"
+                           "~/bin/context-minimal-exec.sh context --nonstopmode --purgeall %t"
                            TeX-run-TeX nil t))))
 
 (defun set-tex-faces ()
@@ -395,5 +395,5 @@ Sounds strange? Try it out.
      (,(gen-tex-macro-regex "psi") . psi)
      (,(gen-tex-macro-regex "omega") . omega))))
 
-;; (add-hook 'LaTeX-mode-hook 'TeX-unicode)
+(add-hook 'LaTeX-mode-hook 'TeX-unicode)
 (add-hook 'ConTeXt-mode-hook 'TeX-unicode)

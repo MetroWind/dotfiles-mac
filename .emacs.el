@@ -965,7 +965,8 @@ followed by a dash to an em-dash."
 ;; Helm (previously Anything)
 (add-hook 'after-init-hook
           (lambda ()
-            (require 'helm-config)))
+            (require 'helm-config)
+            (helm-mode 1)))
 
 ;; Protect buffers
 (require 'keep-buffers)
@@ -1063,6 +1064,12 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
 ;; Revert current hunk
 (global-set-key (kbd "C-x R") 'git-gutter:revert-hunk)
+
+;; Helm
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-.") 'helm-gtags-dwim) ; Default: find-tag
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
 ;; =============== Look and Feel ===============>
 (ignore-errors

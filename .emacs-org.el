@@ -1,8 +1,6 @@
 ;; (require 'org-install)
 
 (message "Loading org configurations...")
-(require 'ox-latex)
-(require 'org-table)
 
 ;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
@@ -15,6 +13,7 @@
 (setq org-startup-folded nil)           ;Show all content on startup.
 (setq org-todo-keywords '((sequence "TODO" "|" "DONE" "CANCELED")))
 (setq org-agenda-dim-blocked-tasks t)
+(setq org-enforce-todo-dependencies t)
 
 ;; When creating a sparse tree from matching, show the whole content
 ;; of the sparse tree.  This is for convenient LaTeX export.
@@ -111,82 +110,12 @@
     "\\DeclareRobustCommand{\\hsout}[1]{\\texorpdfstring{\\sout{#1}}{#1}}"
   ))
 
-(setq org-export-html-style
-      "<style type=\"text/css\">
-html
-{ 
-    font-family: sans-serif;
-    font-size: 12pt;
-    background-color: #262626;
-}
+(setq org-html-doctype "html5")
+(setq org-html-html5-fancy t)
+(setq org-html-head
+      "<link rel=\"stylesheet\" href=\"style.css\">")
 
-body
-{
-    width: 540pt;
-    padding: 20pt;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0pt;
-    color: #bbb;
-    border-top: 10pt solid #ffbc00;
-}
-
-a
-{
-    color: #ffbc00;
-}
-
-b
-{
-    font-family: monospace;
-    font-weight: normal;
-    font-size: 80%;
-}
-
-ul
-{
-    list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAfwAAAH8BuLbMiQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAWSURBVAiZYzx16tR/BiTAxIAGCAsAAN1QA2Xx3HxpAAAAAElFTkSuQmCC);
-}
-
-h1, h2, h3, h4
-{
-    font-weight: normal;
-}
-
-h3
-{
-    font-family: serif;
-    font-variant: italic;
-}
-
-.title
-{
-    text-align: center;
-    font-family: serif;
-}
-
-.todo, .done, .timestamp, .timestamp-kwd
-{
-    font-family: monospace;
-    font-size: 50%;
-    background-color: transparent;
-}
-
-.tag
-{
-    font-family: monospace;
-    font-size: 70%;
-    color: #666;
-    background-color: transparent;
-}
-
-pre, code
-{
-    background-color: #303030;
-    color: #b6beb4;
-    border: none; 
-    font-family: monospace;
-    font-size: 80%;
-}
-
-</style>")
+;; (require 'org-install)
+;; (message "Loading org configurations...")
+;; (require 'ox-latex)
+;; (require 'org-table)

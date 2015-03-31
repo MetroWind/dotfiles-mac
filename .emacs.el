@@ -778,6 +778,30 @@ followed by a dash to an em-dash."
 (require 'git-gutter-fringe)
 (global-git-gutter-mode t)
 
+;; See http://emacs.stackexchange.com/a/9916/514.  The 1st time this
+;; function is called with an active region, it will prompt whether
+;; you want to call `cua-or-multicursor' for all cursors.  You should
+;; say no.
+(defun cua-or-multicursor ()
+  (interactive)
+  (if (use-region-p)
+      (mc/edit-lines)
+    (cua-rectangle-mark-mode)))
+;; This releases you from the comment above.
+(eval-after-load "multiple-cursors-core"
+  (lambda ()
+     (add-to-list 'mc--default-cmds-to-run-once 'cua-or-multicursor)))
+
+(defun sum-cua-rectangle ()
+  ;; Treat the content of current cua rectangle as numbers, and
+  ;; calculate sum.
+  (interactive)
+  (message
+   (number-to-string
+    (reduce (lambda (x y) (+ x y))
+            (mapcar (lambda (n) (string-to-number n))
+                    (cua--extract-rectangle))))))
+
 ;; =============== External non-programming modes ===============>
 ;; htmlize
 (require 'htmlize)
@@ -1048,8 +1072,8 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "M-C") 'compile)
 (global-set-key (kbd "s-,") (lambda () (interactive) (find-file "~/.emacs.el")))
 (global-set-key (kbd "M-/") 'complete-with-all-backends)
-
-(global-set-key (kbd "C-<return>") 'mc/edit-lines)
+(global-set-key (kbd "C-<return>") 'cua-or-multicursor)
+(global-set-key (kbd "C-@") 'cua-or-multicursor)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)

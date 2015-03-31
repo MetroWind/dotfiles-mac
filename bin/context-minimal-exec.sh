@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 TeXSetup=$HOME/programs/context/tex/setuptex
 Args=$*

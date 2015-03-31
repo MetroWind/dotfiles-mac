@@ -138,6 +138,8 @@
 (put 'narrow-to-region 'disabled nil)
 ;; 鼠标要挡住正在打的字时自动移开
 (mouse-avoidance-mode 'animate)
+;; Blink cursor forever!!!
+(setq blink-cursor-blinks 0)
 ;; Automatically identify image files.
 (auto-image-file-mode)
 ;; Replace selected text when typing

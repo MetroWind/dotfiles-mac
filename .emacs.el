@@ -206,6 +206,7 @@
 (require 'vc-git)
 (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
 ;; (require 'magit)
+(eval-after-load "magit" '(magit-auto-revert-mode -1))
 ;; Shell Mode settings
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-prompt-read-only t)
@@ -311,7 +312,8 @@ where GUI apps are not started from a shell."
 
 ;; =========================== ELPA ==========================>
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("melpa" . "http://melpa.org/packages/")))
+(package-initialize)
 
 ;; =============== Other programming settings =========>
 ;; Subword
@@ -447,6 +449,9 @@ where GUI apps are not started from a shell."
 
 ;; Markdown
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
+;; This doesn't work.  Don't know why...
+(eval-after-load  "markdown-mode"
+  '(define-key markdown-mode-map (kbd "M-RET") nil))
 
 ;; Lua
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
@@ -474,7 +479,12 @@ where GUI apps are not started from a shell."
 (setq scheme-program-name "csi")
 
 ;; Rainbow delimiters
-(add-hook 'after-init-hook 'global-rainbow-delimiters-mode)
+(add-hook 'cc-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'LaTeX-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'ConTeXt-mode-hook 'rainbow-delimiters-mode)
 
 ;; YAML mode
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
@@ -495,6 +505,9 @@ where GUI apps are not started from a shell."
 (add-to-list 'auto-mode-alist '("\\.math$" . math-mode))
 
 ;; Web mode
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq web-mode-markup-indent-offset 2)))
 (add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
 
 ;; Flycheck
@@ -877,10 +890,10 @@ followed by a dash to an em-dash."
      (define-key company-active-map (kbd "TAB") 'company-complete-common)
      (setq company-backends
            '(company-elisp company-nxml company-css
-             company-semantic company-clang company-eclim
-             company-xcode
              (company-gtags company-etags company-dabbrev-code
               company-keywords)
+             company-semantic company-clang company-eclim
+             company-xcode
              company-oddmuse company-files company-dabbrev))))
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -1059,14 +1072,20 @@ followed by a dash to an em-dash."
 
 ;; Shorter modeline
 (defvar mode-line-cleaner-alist
-  '((auto-complete-mode . " α")
-    (yas/minor-mode . " υ")
-    (git-gutter-mode . " γ")
-    (company-mode . " κ")
+  '((auto-complete-mode . "α")
+    (git-gutter-mode . "γ")
+    (company-mode . "κ")
     (abbrev-mode . "")
+    (helm-mode . "^")
+    (whitespace-mode . "_")
+    (hs-minor-mode . "±")
+    (yas-minor-mode . "Y")
+    (hi-lock-mode . "")
+    (flyspell-mode . "✓")
+    (auto-fill-function . "↵")
+    (achievements-mode . "A")
     ;; Major modes
     (lisp-interaction-mode . "λ")
-    (hi-lock-mode . "")
     (python-mode . "π")
     (emacs-lisp-mode . "Λ")
     (c++-mode . "C++")
@@ -1229,7 +1248,7 @@ want to use in the modeline *in lieu of* the original.")
        ))
 )
 
-(require 'powerline)
+;; (require 'powerline)
 ;; (defpowerline status "%*%Z")
 ;; (defpowerline global global-mode-string)
 (defun set-powerline-scheme ()
@@ -1289,19 +1308,22 @@ want to use in the modeline *in lieu of* the original.")
                 (powerline-fill face2 (powerline-width rhs))
                 (powerline-render rhs)))))))
 
-(set-powerline-scheme)
+;; (set-powerline-scheme)
+;; (powerline-default-theme)
+(add-hook 'after-init-hook
+          (lambda ()
+            (require 'powerline)
+            (set-powerline-scheme)))
 
 ;; =============== add other file ====================>
-(package-initialize)
 (autoload 'erc-start (expand-file-name "~/.emacs-erc.el")
   "Load my ERC configuration" t)
 (if linuxp (load-file (expand-file-name "~/.emacs-dict.el")))
-(load-file (expand-file-name "~/.emacs-muse.el"))
+;; (load-file (expand-file-name "~/.emacs-muse.el"))
 ;; (load-file (expand-file-name "~/.emacs-icicles.el"))
 (load-file (expand-file-name "~/.emacs-org.el"))
 (load-file (expand-file-name "~/.emacs-calendar.el"))
 (load-file (expand-file-name "~/.emacs-skeletons.el"))
-(if linuxp (load-file (expand-file-name "~/.emacs-emms.el")))
 (autoload 'context-mode (expand-file-name "~/.emacs-tex.el") "" t)
 (autoload 'latex-mode (expand-file-name "~/.emacs-tex.el") "" t)
 ;; (load-file "/home/corsair/.emacs-blogmax.el")

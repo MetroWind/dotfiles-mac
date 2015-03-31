@@ -696,6 +696,8 @@ followed by a dash to an em-dash."
                       ('prime #X2032)
                       ('double-prime #X2033)
                       ('dagger #x2020)
+                      ('angle-right #x27e9)
+                      ('angle-left #x27e8)
                       ;; mathematical operators
                       ('square-root #X221A)
                       ('squared #X00B2)

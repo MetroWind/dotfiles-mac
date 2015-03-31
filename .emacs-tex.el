@@ -368,6 +368,10 @@ Sounds strange? Try it out.
      (,(gen-tex-macro-regex "cdot") . cdot)
      (,(gen-tex-macro-regex "ll") . much-less-than)
      (,(gen-tex-macro-regex "gg") . much-greater-than)
+     (,(gen-tex-macro-regex "langle") . angle-left)
+     (,(gen-tex-macro-regex "rangle") . angle-right)
+     (,(gen-tex-macro-regex "<") . angle-left)
+     (,(gen-tex-macro-regex ">") . angle-right)
      ;,; Greek letters
      (,(gen-tex-macro-regex "lambda") . lambda)
      (,(gen-tex-macro-regex "alpha") . alpha)

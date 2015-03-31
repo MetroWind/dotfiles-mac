@@ -191,6 +191,9 @@
 (setq delete-old-versions nil)
 (setq backup-directory-alist '(("." . "~/.backup/")))
 (setq backup-by-copying t)
+;; Don't backup for tramp files
+(add-to-list 'backup-directory-alist
+             (cons tramp-file-name-regexp nil))
 ;; Spell Checking
 (setq-default ispell-program-name
               (cond (linuxp "aspell")
@@ -493,6 +496,12 @@ where GUI apps are not started from a shell."
 
 ;; Web mode
 (add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
+
+;; Flycheck
+(add-hook 'python-mode-hook
+          (lambda ()
+            (if (not (string-match-p tramp-file-name-regexp buffer-file-name))
+                (flycheck-mode))))
 
 ;; =============== Home-made Functions ===============>
 (defun match-paren (arg)

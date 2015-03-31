@@ -124,9 +124,9 @@
 (setq require-final-newline t)
 
 ;; time stamp
-(add-hook 'write-file-hooks 'time-stamp)
+(add-hook 'before-save-hook 'time-stamp)
 (setq time-stamp-active t)
-(setq time-stamp-format "%:u %04y-%02m-%02d %02H:%02M:%02S")
+(setq time-stamp-format "%:U %04y-%02m-%02d %02H:%02M:%02S %Z")
 (setq time-stamp-end: "\n")
 ;; 所有的 yes or no 全都用 y or n 代替 :-)
 (fset 'yes-or-no-p 'y-or-n-p)

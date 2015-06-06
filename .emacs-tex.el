@@ -143,32 +143,32 @@
                            "~/bin/context-minimal-exec.sh context --nonstopmode --purgeall %t"
                            TeX-run-TeX nil t))))
 
-(defun set-tex-faces ()
-  (set-face-attribute
-   'font-latex-superscript-face nil
-   :height 1.0)
-  (set-face-attribute
-   'font-latex-subscript-face nil
-   :height 1.0)
-)
+;; (defun set-tex-faces ()
+;;   (set-face-attribute
+;;    'font-latex-superscript-face nil
+;;    :height 1.0)
+;;   (set-face-attribute
+;;    'font-latex-subscript-face nil
+;;    :height 1.0)
+;; )
 
-(add-hook 'LaTeX-mode-hook
-          (lambda ()
-            ;; Some faces
-            (set-face-attribute
-             'font-latex-verbatim-face nil
-             :inherit 'fixed-pitch 
-             :foreground "burlywood" 
-             :family "Courier New")
-))
+;; (add-hook 'LaTeX-mode-hook
+;;           (lambda ()
+;;             ;; Some faces
+;;             (set-face-attribute
+;;              'font-latex-verbatim-face nil
+;;              :inherit 'fixed-pitch 
+;;              :foreground "burlywood" 
+;;              :family "Courier New")
+;; ))
 
-(add-hook 'ConTeXt-mode-hook
-          (lambda ()
-            (set-face-attribute
-             'font-latex-sedate-face nil
-             :foreground "#66ccff")
-            (set-tex-faces)
-))
+;; (add-hook 'ConTeXt-mode-hook
+;;           (lambda ()
+;;             (set-face-attribute
+;;              'font-latex-sedate-face nil
+;;              :foreground "#66ccff")
+;;             (set-tex-faces)
+;; ))
 
 (defun insert-context-single-quotes ()
   "Inserts a proper pair of single quotes in ConTeXt."

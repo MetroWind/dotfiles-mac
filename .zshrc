@@ -10,12 +10,22 @@ for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
 done
 PR_NO_COLOUR="%{$terminfo[sgr0]%}"
 
-source ${HOME}/.zsh-util
-source ${HOME}/.zsh-git
-source ${HOME}/.zsh-completion
-source ${HOME}/.zsh-param-opts
-source ${HOME}/.zsh-zle
-source ${HOME}/.zsh-alias
+source ${HOME}/.zsh/zsh-util
+source ${HOME}/.zsh/zsh-git
+source ${HOME}/.zsh/zsh-completion
+source ${HOME}/.zsh/zsh-param-opts
+source ${HOME}/.zsh/zsh-zle
+source ${HOME}/.zsh/zsh-alias
+
+source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh
+# Enable autosuggestions automatically.
+zle-line-init()
+{
+    zle autosuggest-start
+}
+zle -N zle-line-init
+
 # completion
 # compdef pacman-color=pacman
 

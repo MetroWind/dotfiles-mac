@@ -52,10 +52,10 @@
 (load-file (expand-file-name "~/.emacs-passwd.el"))
 
 ;; Info path
-(if macp
-    (setq Info-default-directory-list
-          (append '("~/.emacs-pkgs/info")
-                  Info-default-directory-list)))
+;; (if macp
+;;     (setq Info-default-directory-list
+;;           (append '("~/.emacs-pkgs/info")
+;;                   Info-default-directory-list)))
 
 ;; =============== Coding and Language ===============>
 ;; (set-selection-coding-system 'utf-8)

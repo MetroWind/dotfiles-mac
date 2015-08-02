@@ -206,7 +206,7 @@
 (require 'vc-git)
 (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
 ;; (require 'magit)
-(eval-after-load "magit" '(magit-auto-revert-mode -1))
+;; (eval-after-load "magit" '(magit-auto-revert-mode -1))
 ;; Shell Mode settings
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-prompt-read-only t)
@@ -325,6 +325,7 @@ where GUI apps are not started from a shell."
 ;; Python mode (python.el)
 (add-hook 'python-mode-hook
           (lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
+(setenv "PYTHONPATH" (expand-file-name "~/.Python"))
 
 ;; Ruby mode
 (add-hook 'ruby-mode-hook

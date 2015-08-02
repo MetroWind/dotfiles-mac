@@ -803,6 +803,27 @@ followed by a dash to an em-dash."
             (mapcar (lambda (n) (string-to-number n))
                     (cua--extract-rectangle))))))
 
+(defun comment-sectional ()
+  "Start a sectional comment if at empty line, otherwise finish
+the sectional comment."
+  (interactive)
+  (defun chomp (str)
+    "Chomp leading and tailing whitespace from STR."
+    (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'" str)
+      (setq str (replace-match "" t t str))) str)
+  (let* ((line (buffer-substring-no-properties
+                (line-beginning-position) (line-end-position)))
+         (len-line (length line))
+         (len-line-bare (length (chomp line))))
+    (if (= len-line-bare 0)
+        (progn
+          (comment-dwim nil)
+          (insert "========== "))
+      (progn
+        (insert " ")
+        (insert (make-string (- fill-column len-line 2) ?=))
+        (insert ">")))))
+
 ;; =============== External non-programming modes ===============>
 ;; htmlize
 (require 'htmlize)
@@ -1075,6 +1096,7 @@ followed by a dash to an em-dash."
 (global-set-key (kbd "M-/") 'complete-with-all-backends)
 (global-set-key (kbd "C-<return>") 'cua-or-multicursor)
 (global-set-key (kbd "C-@") 'cua-or-multicursor)
+(global-set-key (kbd "C-;") 'comment-sectional)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)

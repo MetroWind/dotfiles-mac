@@ -18,13 +18,13 @@ source ${HOME}/.zsh/zsh-zle
 source ${HOME}/.zsh/zsh-alias
 
 source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh
-# Enable autosuggestions automatically.
-zle-line-init()
-{
-    zle autosuggest-start
-}
-zle -N zle-line-init
+# source ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh
+# # Enable autosuggestions automatically.
+# zle-line-init()
+# {
+#     zle autosuggest-start
+# }
+# zle -N zle-line-init
 
 # completion
 # compdef pacman-color=pacman

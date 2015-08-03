@@ -2,7 +2,7 @@
   email = chris.corsair@gmail.com
 	name = M. Sun
 [core]
-  excludesfile = /Users/corsair/.gitignore_global
+	excludesfile = /Users/darksair/.gitignore_global
 
 [color]
   branch = auto

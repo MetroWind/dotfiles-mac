@@ -18,28 +18,10 @@
 ;; When creating a sparse tree from matching, show the whole content
 ;; of the sparse tree.  This is for convenient LaTeX export.
 (setq org-show-entry-below '((default . nil) (tags-tree . t) (occur-tree . t)))
-
 ;; Set to the location of your Org files on your local system
-(setq org-directory
-      (cond
-       (linuxp "/mnt/shared/text/Non-books/Misc/org")
-       (macp "/Volumes/Stuff/text/Non-books/Misc/org")))
-
-(cond
- (linuxp
-  (setq org-agenda-files `(,(concat org-directory "/plan.org")
-                           "~/document/physics/lattice/doc/tech.org")))
- (macp
-  (setq org-agenda-files `(,(concat org-directory "/plan.org")
-                           "/Volumes/Stuff/document/physics/lattice/doc/tech.org"))))
-
-;; Set to the name of the file where new notes will be stored
-(setq org-mobile-inbox-for-pull (concat org-directory "/plan.org"))
+(setq org-agenda-files my-org-files)
 ;; Set `org-capture'
-(setq org-default-notes-file (concat org-directory "/plan.org"))
-;; Set to <your Dropbox root directory>/MobileOrg.
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
-
+(setq org-default-notes-file (car my-org-files))
 (add-hook 'org-mode-hook
           (lambda () (define-key org-mode-map (kbd "C-c C-a") 'show-all)))
 
@@ -76,6 +58,12 @@
         (if (not (string-match ".*hsout.*" text))
             (replace-match "\\\\\\1{\\\\hsout{\\2}}"
                        t nil text))))))
+
+(defun org-open ()
+  "Open my org files."
+  (interactive)
+  (dolist (f my-org-files)
+    (find-file-noselect f)))
 
 (eval-after-load 'ox
   '(progn

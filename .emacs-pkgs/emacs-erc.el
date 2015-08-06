@@ -4,20 +4,13 @@
 (require 'erc-fill)
 (require 'erc-autoaway)
 (if linuxp (require 'erc-log))
-(require 'ssl)
+;; (require 'ssl)
 (require 'smiley)
 
 (erc-netsplit-mode t)
 (erc-ring-enable)
-(if linuxp (erc-log-enable))
 
-(setq erc-nick "Darksair")
-(setq erc-nick-oftc "Corsair")
-(setq erc-nick-minbif "Corsair")
-(setq erc-bitlbee-server "localhost")
-;; (setq erc-away-nickname "Awaysair")
-(setq erc-user-full-name "Darksair Sun")
-
+(setq erc-user-full-name irc-full-name)
 
 (erc-services-mode 1)
 (setq erc-prompt-for-nickserv-password nil)
@@ -40,12 +33,6 @@
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                 "324" "329" "332" "333" "353" "477"))
 ;; (setq erc-track-exclude-types '("NICK" "333" "353" "JOIN" "PART" "QUIT"))
-;; Logging
-(if linuxp
-    (setq erc-log-channels t
-          erc-log-channels-directory "~/logs/erc"
-          erc-log-insert-log-on-open nil
-          erc-log-file-coding-system 'utf-8))
 
 ;; Channel specific prompt
 (setq erc-prompt (lambda ()
@@ -60,8 +47,8 @@
                                      'rear-nonsticky t
                                      'front-nonsticky t))))
 
-(ignore-errors (setq erc-autojoin-channels-alist my-irc-channels))
-(ignore-errors (setq erc-pals my-irc-pals))
+(ignore-errors (setq erc-autojoin-channels-alist irc-channels))
+(ignore-errors (setq erc-pals irc-pals))
 
 (setq erc-quit-reason-various-alist
       '(("dinner" "Having dinner...")
@@ -104,32 +91,17 @@
           (lambda (SERVER NICK)
             (cond
              ((string-match "oftc\\.net" SERVER)
-              (erc-message "PRIVMSG" (concat "NickServ identify " oftcpw))))))
+              (erc-message "PRIVMSG" (concat "NickServ identify " irc-password))))))
 
 ;; Functions
 (defun erc-start ()
   (interactive)
-  (erc :server "irc.freenode.net" :port 6667 :nick erc-nick :password freenodepw :full-name "Darksair Sun")
-  (erc-tls :server "irc.oftc.net" :port 6697 :nick erc-nick-oftc :password oftcpw :full-name "Darksair Sun")
-  (erc-tls :server "irc.esper.net" :port 6697 :nick erc-nick :password freenodepw :full-name "Darksair Sun"))
-
-(defun erc-minbif ()
-  (interactive)
-  (erc :server "localhost" :port 6667 :nick erc-nick-minbif :password bitlbeepw))
-
-(defun erc-bitlbee ()
-  (interactive)
-  ;; (erc :server "127.0.0.1" :port 6667 :nick erc-nick :password bitlbeepw))
-  (erc :server erc-bitlbee-server :port 6667 :nick erc-nick :password bitlbeepw))
-(add-hook 'erc-join-hook 'bitlbee-identify)
-(defun bitlbee-identify ()
-  "If we're on the bitlbee server, send the identify command to
- the &bitlbee channel."
-  (when (and (string= erc-bitlbee-server erc-session-server)
-             (string= "&bitlbee" (buffer-name)))
-    (erc-message "PRIVMSG" (format "%s identify %s"
-                                   (erc-default-target)
-                                   bitlbeepw))))
+  (erc :server "irc.freenode.net" :port 6667 :nick irc-nick
+       :password irc-password :full-name irc-full-name)
+  (erc-tls :server "irc.oftc.net" :port 6697 :nick irc-nick-oftc
+           :password irc-password :full-name irc-full-name)
+  (erc-tls :server "irc.esper.net" :port 6697 :nick irc-nick
+           :password irc-password :full-name irc-full-name))
 
 (defun erc-cmd-THINK (&rest line)
   (let ((text
@@ -303,56 +275,15 @@
           (lambda (s1)
             (setq str (erc-my-replace s1))))
 
-(cond (linuxp
-       (progn
-         (defun erc-play-sound (file-name)
-           (call-process "/usr/bin/aplay" nil 0 nil file-name))
-         ;;   (shell-command (concat "aplay \"" file-name "\" &")))
-
-         ;; (defun erc-osd-display (text)
-         ;;   (call-process "/bin/sh" nil 0 nil "-c"
-         ;;                 (concat "echo '" (replace-regexp-in-string
-         ;;                                   "^<\\(.*\\)> \\(.*\\)"
-         ;;                                   "<span foreground=\"yellow\">&lt;\\1&gt;</span> \\2"
-         ;;                                   text)
-         ;;                         "' | ghosd_cat -F 'Consolas 12' -d 2000 -m 200 -s 0 -x 50 -y 2")))
-         (defun erc-osd-display (text)
-           (let ((nick (replace-regexp-in-string "^<\\(.*\\)> \\(.*\\)"
-                                                 "\\1" text))
-                 (msg (replace-regexp-in-string "^<\\(.*\\)> \\(.*\\)"
-                                                "\\2" text)))
-             (call-process "/usr/bin/notify-send" nil 0 nil nick msg
-                           "-i" "notification-message-IM")
-             ))
-
-         ;; Sound notification
-         (setq erc-play-command "aplay")
-         (add-hook 'erc-insert-pre-hook
-                   (lambda (msg-str)
-                     (if (and (string= erc-session-server erc-bitlbee-server)
-                              (string-match "^<" msg-str)
-                              (not (string-match "^<root>" (propertize msg-str 'face nil))))
-                         ((lambda ()
-                            (erc-play-sound "/mnt/shared/sounds/mac/New Mail.wav")
-                            (erc-osd-display (substring msg-str 0 -1))))))
-                   t)
-
-         (add-hook 'erc-text-matched-hook
-                   (lambda (match-type nickuserhost message)
-                     (if (and (eq match-type 'current-nick)
-                              (not (string= erc-session-server erc-bitlbee-server)))
-                         (erc-play-sound "/mnt/shared/sounds/mac/New Messages.wav"))))))
-
-      (macp
-       (progn
-         (defun erc-notify (nick msg)
-           (let ((coding-system-for-read 'utf-8)
-                 (coding-system-for-write 'utf-8))
-             (call-process "~/bin/notify.sh" nil 0 nil
-                           "-t" nick
-                           msg)))
-         (add-hook 'erc-text-matched-hook
-                   (lambda (match-type nickuserhost message)
-                     (if (and (eq match-type 'current-nick)
-                              (not (string= erc-session-server erc-bitlbee-server)))
-                         (erc-notify nickuserhost message)))))))
+(if (file-exists-p "~/bin/notify.sh")
+    (progn
+      (defun erc-notify (nick msg)
+        (let ((coding-system-for-read 'utf-8)
+              (coding-system-for-write 'utf-8))
+          (call-process "~/bin/notify.sh" nil 0 nil
+                        "-t" nick
+                        msg)))
+      (add-hook 'erc-text-matched-hook
+                (lambda (match-type nickuserhost message)
+                  (if (eq match-type 'current-nick)
+                      (erc-notify nickuserhost message))))))

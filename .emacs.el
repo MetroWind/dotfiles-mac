@@ -79,7 +79,7 @@ Return a list of installed packages or nil for every skipped package."
       (ensure-package-installed 'linum 'whitespace 'company
                                 'company-jedi 'web-mode
                                 'magit 'helm 'helm-gtags
-                                'multiple-cursors
+                                'multiple-cursors 'yasnippet
                                 'auctex 'smart-mode-line
                                 'ggtags 'rainbow-delimiters)))
 

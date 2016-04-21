@@ -16,6 +16,7 @@ export PYTHONPATH="$HOME/.Python"
 
 # Node.js
 export PATH="/usr/local/share/npm/bin:$PATH"
-
+# Go
+export PATH="/usr/local/opt/go/libexec/bin/go:$PATH"
 export xpath=/Volumes/Stuff/document/physics/lattice/programs/x
 export xqcdio_const=${xpath}/constants

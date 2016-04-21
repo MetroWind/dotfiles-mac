@@ -1,4 +1,4 @@
-# -*- mode: muttrc; -*-
+# -*- mode: conf-space; -*-
 source ~/.mutt-secret
 my_hdr X-Operating-System: `uname -s -r -p`
 my_hdr X-Useless-Header: Use the Force, Luke!

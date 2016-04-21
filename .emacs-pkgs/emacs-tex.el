@@ -185,7 +185,7 @@ Sounds strange? Try it out.
    (LaTeX-math-mode)
    (setq TeX-electric-sub-and-superscript t)
 
-   (local-set-key "$" 
+   (local-set-key "$"
                   '(lambda ()
                      (interactive)
                      (insert-balanced ?\$ ?\$)))
@@ -202,6 +202,7 @@ Sounds strange? Try it out.
                      (interactive)
                      (insert-balanced ?\( ?\))))
 
+   (define-key TeX-mode-map (kbd "M-q") 'LaTeX-fill-paragraph)
    (define-key LaTeX-mode-map (kbd "C-c /") 'LaTeX-close-environment)
    (define-key LaTeX-mode-map (kbd "C-TAB") 'indent-according-to-mode)))
 
@@ -210,6 +211,9 @@ Sounds strange? Try it out.
  'ConTeXt-mode-hook
  (lambda ()
    (define-key ConTeXt-mode-map (kbd "TAB") 'cdlatex-tab)
+   ;; Don't prefer breaking line at the beginning and end of inline
+   ;; math.
+   (setq LaTeX-fill-break-at-separators '(\\\[ \\\]))
 
    (setq LaTeX-math-list
          ;; Symbols
@@ -235,10 +239,14 @@ Sounds strange? Try it out.
    (add-to-list 'texmathp-tex-commands '("\\stopformula" sw-off))
    (texmathp-compile)
 
-   (add-to-list 'TeX-command-list 
+   (add-to-list 'TeX-command-list
                 '("MkIV"
                   "~/bin/context-minimal-exec.sh context --nonstopmode --purgeall %t"
                   TeX-run-TeX nil t))
+   (add-to-list 'TeX-command-list
+                '("XeLaTeX" "xelatex -halt-on-error -interaction=nonstopmode %t" TeX-run-TeX nil
+                  (latex-mode doctex-mode)
+                  :help "Run LaTeX"))
 
    (deal-with-context-quote)))
 
@@ -246,4 +254,28 @@ Sounds strange? Try it out.
  'LaTeX-mode-hook
  (lambda ()
    (message "LaTeX-mode loaded.")
-   (deal-with-latex-quote)))
+   (define-key LaTeX-mode-map (kbd "TAB") 'cdlatex-tab)
+   ;; Don't prefer breaking line at the beginning and end of inline
+   ;; math.
+   (setq LaTeX-fill-break-at-separators '(\\\[ \\\]))
+   (deal-with-latex-quote)
+
+      (setq LaTeX-math-list
+         ;; Symbols
+         '((?\] "Rightarrow")
+           (?\[ "Leftarrow")
+           (?} "to")
+           (?{ "gets")
+           (?= "approx")
+           ;; Greek
+           (?q "theta")
+           (?Q "Theta")
+           (?c "chi")
+           (?o "omega")
+           (?O "Omega")
+           ;; Complicated stuff
+           (?/ (lambda () (interactive) (insert "\\Slash{}") (backward-char)))))
+   ;; This will properly append `LaTeX-math-list' to
+   ;; `LaTeX-math-default'.
+   (LaTeX-math-initialize)
+))

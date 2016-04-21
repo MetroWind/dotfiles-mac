@@ -11,9 +11,14 @@
 (setq org-agenda-include-diary t)
 (setq org-icalendar-include-todo t)
 (setq org-startup-folded nil)           ;Show all content on startup.
-(setq org-todo-keywords '((sequence "TODO" "|" "DONE" "CANCELED")))
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "WAIT(w@)" "|" "DONE(d)" "CANCELED(c)")))
 (setq org-agenda-dim-blocked-tasks t)
 (setq org-enforce-todo-dependencies t)
+(setq org-clock-idle-time 10)
+(setq org-clock-string-limit 16)
+(setq org-export-headline-levels 5)
+(setq org-highlight-latex-and-related '(latex))
 
 ;; When creating a sparse tree from matching, show the whole content
 ;; of the sparse tree.  This is for convenient LaTeX export.
@@ -21,7 +26,7 @@
 ;; Set to the location of your Org files on your local system
 (setq org-agenda-files my-org-files)
 ;; Set `org-capture'
-(setq org-default-notes-file (car my-org-files))
+(setq org-default-notes-file my-org-capture-file)
 (add-hook 'org-mode-hook
           (lambda () (define-key org-mode-map (kbd "C-c C-a") 'show-all)))
 

@@ -53,7 +53,7 @@
 (setq erc-quit-reason-various-alist
       '(("dinner" "Having dinner...")
         ("z" "Zzz...")
-        ("^$" yow)))
+        ("^$" (lambda () (cookie nil)))))
 (setq erc-quit-reason 'erc-quit-reason-various)
 
 ;; Automatically truncate buffer
@@ -98,7 +98,7 @@
   (interactive)
   (erc :server "irc.freenode.net" :port 6667 :nick irc-nick
        :password irc-password :full-name irc-full-name)
-  (erc-tls :server "irc.oftc.net" :port 6697 :nick irc-nick-oftc
+  (erc-tls :server "irc.oftc.net" :port 6697 :nick irc-nick
            :password irc-password :full-name irc-full-name)
   (erc-tls :server "irc.esper.net" :port 6697 :nick irc-nick
            :password irc-password :full-name irc-full-name))
@@ -112,10 +112,10 @@
 
 (defun erc-cmd-SLAP (&rest nick)
   (if (not (equal '() nick))
-      (erc-send-action (erc-default-target)
-                       (concat "slaps "
-                               (car nick)
-                               " with a UNIX manual."))))
+      (erc-send-action
+       (erc-default-target)
+       (concat "slaps " (car nick)
+               " with Peskin's Introduction to QFT."))))
 
 (defun erc-cmd-HOWMANY (&rest ignore)
   "Display how many users (and ops) the current channel has."

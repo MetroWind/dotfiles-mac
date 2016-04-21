@@ -41,4 +41,3 @@ ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2963"
 ZSH_THEME_GIT_PROMPT_CLEAN="%#"
 
 stty discard undef
-archey -c

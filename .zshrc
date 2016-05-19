@@ -16,6 +16,7 @@ source ${HOME}/.zsh/zsh-completion
 source ${HOME}/.zsh/zsh-param-opts
 source ${HOME}/.zsh/zsh-zle
 source ${HOME}/.zsh/zsh-alias
+source ${HOME}/.zsh/zsh-user
 
 source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh

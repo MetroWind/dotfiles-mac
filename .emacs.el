@@ -843,6 +843,11 @@ the sectional comment."
 (global-set-key (kbd "M-s o") 'helm-occur)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
+;; Change font size
+(global-set-key (kbd "s-=") 'text-scale-adjust)
+(global-set-key (kbd "s--") 'text-scale-adjust)
+(global-set-key (kbd "s-0") 'text-scale-adjust)
+
 ;; ========== Look & feel ===========================================>
 ;; Shorter modeline
 (defvar mode-line-cleaner-alist

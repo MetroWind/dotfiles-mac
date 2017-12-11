@@ -1,8 +1,8 @@
 [user]
   email = chris.corsair@gmail.com
-	name = M. Sun
+	name = MetroWind
 [core]
-	excludesfile = /Users/darksair/.gitignore_global
+	excludesfile = /Users/metrowind/.gitignore_global
 
 [color]
   branch = auto

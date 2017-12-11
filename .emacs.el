@@ -48,6 +48,8 @@
 (if (>= emacs-major-version 24)
     (add-to-list 'custom-theme-load-path 
                  (concat ModeDir "/themes/")))
+(add-to-list 'load-path (concat ModeDir "/notmuch"))
+(add-to-list 'load-path (concat ModeDir "/lilypond"))
 
 (load "emacs-user" t)
 ;; ========== Packages ==============================================>
@@ -76,10 +78,12 @@ Return a list of installed packages or nil for every skipped package."
       (or (file-exists-p package-user-dir)
           (package-refresh-contents))
 
-      (ensure-package-installed
-       'linum 'whitespace 'company 'company-jedi 'web-mode 'magit
+      (ensure-package-installed 'session 'linum 'whitespace
+       'company 'company-jedi 'company-quickhelp 'web-mode 'magit
        'helm 'helm-gtags 'multiple-cursors 'yasnippet 'auctex
-       'smart-mode-line 'ggtags 'rainbow-delimiters)))
+       'smart-mode-line 'ggtags 'rainbow-delimiters 'flycheck
+       'cmake-mode 'indent-guide 'scss-mode 'markdown-mode 'which-key
+       'buffer-move)))
 
 ;; ========== Coding and Language ===================================>
 (if (<= emacs-major-version 22)
@@ -102,7 +106,7 @@ Return a list of installed packages or nil for every skipped package."
 (setq kill-ring-max 255)
 (setq next-screen-context-lines 5)
 ;; (setq sentence-end "\\([。！？；]\\|……\\|[.?!;][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
-(setq sentence-end-double-space t)
+(setq sentence-end-double-space nil)
 (ignore-errors (setq frame-title-format my-frame-title))
 ;; Don't bring partially a visible line to fully visible before
 ;; scrolling.
@@ -221,20 +225,17 @@ Return a list of installed packages or nil for every skipped package."
 ;; Mac.
 (if macp (setq ns-pop-up-frames nil))
 ;; PATH
-;; (setq exec-path (cons "/usr/local/bin" exec-path))
-(defun set-exec-path-from-shell-PATH ()
-  "Set up `exec-path' and PATH environment variable to match that
-used by the user's shell.  This is particularly useful in Mac,
-where GUI apps are not started from a shell."
-  (interactive)
-  (let ((path-from-shell (replace-regexp-in-string 
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string
-                           "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-(if macp (set-exec-path-from-shell-PATH))
+(defun stripStr(str)
+  "Strip leading and tailing whitespace from STR."
+  (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
+                                    (: (* (any " \t\n")) eos)))
+                            ""
+                            str))
+(if macp
+    (let ((Path (stripStr (shell-command-to-string "zsh -l -c 'echo $PATH'"))))
+      (setenv "PATH" Path)
+      (setq exec-path (split-string Path ":" t))))
+
 ;; Write time stamp when saving
 (add-hook 'before-save-hook 'time-stamp)
 
@@ -250,6 +251,14 @@ where GUI apps are not started from a shell."
 (setq dired-dwim-target t)
 (setq insert-directory-program "gls")
 (setq dired-listing-switches "-lXGh --group-directories-first")
+(setq delete-by-moving-to-trash t)
+(defun system-move-file-to-trash (file)
+  "Use \"trash\" to move FILE to the system trash.
+When using Homebrew, install it using \"brew install trash\"."
+  (call-process (executable-find "trash")
+                nil 0 nil
+                file))
+
 (defun open-file-with-default-thing ()
   "Open the current file or dired marked files in external app."
   (interactive)
@@ -279,6 +288,29 @@ where GUI apps are not started from a shell."
 (define-key dired-mode-map (kbd "C-o") 'open-file-with-default-thing)
 (define-key dired-mode-map (kbd "M-o") 'open-tmux-in-current-dir)
 ))
+
+;; (electric-quote-mode)
+
+;; Save 256 recent files
+(require 'recentf)
+(setq recentf-max-saved-items 256)
+
+;; Completely disable the yes/no graphical dialogs.
+;; https://superuser.com/a/125571
+(defadvice yes-or-no-p (around prevent-dialog activate)
+  "Prevent yes-or-no-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+(defadvice y-or-n-p (around prevent-dialog-yorn activate)
+  "Prevent y-or-n-p from activating a dialog"
+  (let ((use-dialog-box nil))
+    ad-do-it))
+
+;; Automatically kill old buffers
+(require 'midnight)
+
+;; Info dir
+(add-to-list 'Info-directory-list (concat ModeDir "/info"))
 
 ;; ========== CC Mode ===============================================>
 ;; CC Indention
@@ -315,17 +347,32 @@ where GUI apps are not started from a shell."
          (progn
            (autoload 'whitespace-mode "whitespace" nil t)
            (autoload 'whitespace-cleanup "whitespace" nil t)))
-(setq-default whitespace-style
-              '(face tab-mark trailing lines-tail space-before-tab))
-(setq-default whitespace-active-style
-              '(face tab-mark trailing lines-tail space-before-tab))
+(defvar my-whitespace-style '(face tab-mark trailing lines-tail space-before-tab))
+(setq-default whitespace-style my-whitespace-style)
+(setq-default whitespace-active-style my-whitespace-style)
+(setq-default whitespace-line-column 80)
 (add-hook 'emacs-lisp-mode-hook 'whitespace-mode)
 (add-hook 'cc-mode-hook 'whitespace-mode)
 (add-hook 'c-mode-hook 'whitespace-mode)
 (add-hook 'c++-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook 'whitespace-mode)
+(add-hook 'yaml-mode-hook 'whitespace-mode)
+
+;; Indent guide
+(autoload 'indent-guide-mode "indent-guide" nil t)
+(eval-after-load "indent-guide"
+  (progn
+    (setq indent-guide-char "⎸")))
+(add-hook 'yaml-mode-hook 'indent-guide-mode)
 
 (add-hook 'python-mode-hook (lambda () (setq python-shell-interpreter "python3")))
+;; There’s a bug in python-mode that fills the 1st line of a docstring
+;; incorrectly.  The fill width is counted from the """, where for the
+;; rest of the lines, the fill is counted from the beginning of the
+;; line.  See bugs https://debbugs.gnu.org/cgi/bugreport.cgi?bug=20860
+;; and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=21254, and my showcase 
+(add-hook 'python-mode-hook (lambda () (setq-local fill-column 80)))
+(setq python-fill-docstring-style 'pep-257-nn)
 
 ;; Hide show mode (from emacswiki)
 (defun toggle-selective-display (column)
@@ -358,6 +405,16 @@ where GUI apps are not started from a shell."
 (add-hook 'python-mode-hook 'flycheck-mode)
 (setq flycheck-mode-line
       '(:eval (format "x%d" (length flycheck-current-errors))))
+
+;; Add XSLT 2.0 and 3.0 schemas
+(add-hook
+ 'nxml-mode-hook
+ (lambda ()
+   (setq rng-schema-locating-files
+         (append (list (car rng-schema-locating-files)) ; Schemas.xml in current dir.
+                 (list (expand-file-name
+                        "~/.emacs-pkgs/schemas/xslt-relax-ng/xslt.rnc"))
+                 (cdr rng-schema-locating-files))))) ; Emacs' schemas.xml
 
 ;; =============== Home-made Functions ===============>
 (defun match-paren (arg)
@@ -484,14 +541,29 @@ followed by a dash to an em-dash."
       (if (search-backward "–-" (- (point) 2) t)
           (replace-match "—")))))
 
-(define-key text-mode-map "-" 'auto-insert-and-convert-dash)
-(define-key text-mode-map "'" 'insert-single-quotes)
-(define-key text-mode-map (kbd "C-'") (lambda () (interactive) (insert ?\")))
-(define-key text-mode-map "\"" 'insert-double-quotes)
+(defun enable-smart-quote-in-map (mode-map)
+  (define-key mode-map "-" 'auto-insert-and-convert-dash)
+  (define-key mode-map "'" 'insert-single-quotes)
+  (define-key mode-map (kbd "C-'") (lambda () (interactive) (insert ?\")))
+  (define-key mode-map "\"" 'insert-double-quotes))
+
+(enable-smart-quote-in-map text-mode-map)
+(eval-after-load "scribble-mode"
+  (lambda () (enable-smart-quote-in-map scribble-mode-map)))
+
+(eval-after-load "markdown-mode"
+  (lambda ()
+    (define-key markdown-mode-map "'" 'insert-single-quotes)
+    (define-key markdown-mode-map "\"" 'insert-double-quotes)))
+
 (eval-after-load "nxml-mode"
   (lambda ()
     (define-key nxml-mode-map "\"" nil)
     (define-key nxml-mode-map "-" nil)))
+
+(eval-after-load "twittering-mode"
+  (lambda ()
+    (enable-smart-quote-in-map twittering-edit-mode-map)))
 
 ;; Replace stuff like `lambda', `->' with actual unicode chars.
 (defun unicode-symbol (name)
@@ -638,6 +710,58 @@ the sectional comment."
             (setq web-mode-markup-indent-offset 2)))
 (add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
 
+;; Maximize and restore window.
+(defvar window-confs (make-hash-table))
+;; window-confs looks like this:
+;;
+;; { frame1: {"zoomed": false, "conf": <some conf>},
+;;   frame2: {"zoomed": true, "conf": <some other conf>} }
+
+(defun save-window-conf ()
+  "Save current window configuration of current frame."
+  (let ((this-frame (selected-frame))
+        (this-conf (current-window-configuration)))
+    (if (gethash this-frame window-confs)
+        (puthash 'conf this-conf
+                 (gethash this-frame window-confs))
+      (let ((new-state (make-hash-table)))
+        (puthash 'zoomed nil new-state)
+        (puthash 'conf this-conf new-state)
+        (puthash this-frame new-state window-confs)))))
+
+(defun load-window-conf ()
+  "Load saved window configuration of current frame."
+  (let* ((this-frame (selected-frame))
+         (saved-state (gethash this-frame window-confs)))
+    (if saved-state
+        (set-window-configuration (gethash 'conf saved-state)))))
+
+(defun maximize-or-restore-window ()
+  "If current window is not maximized, or no window in current
+frame has been maximized before, store window configuration, and
+maximize current window.  If current window is maximized, and
+there's a saved window configuration for current frame, restore
+that window configuartion."
+  (interactive)
+  (let* ((this-frame (selected-frame))
+         (saved-state (gethash this-frame window-confs)))
+    (if saved-state
+        (if (gethash 'zoomed saved-state)
+            ;; Already maximized.  Restore.
+            (progn
+              (load-window-conf)
+              (puthash 'zoomed nil saved-state))
+          ;; Not maximized.  Save window conf and maximize.
+          (progn
+            (save-window-conf)
+            (delete-other-windows)
+            (puthash 'zoomed t saved-state)))
+
+      ;; Never maximized before.  Save window conf and maximize.
+      (progn
+        (puthash this-frame (make-hash-table) window-confs)
+        (maximize-or-restore-window)))))
+
 ;; =============== External non-programming modes ===============>
 ;; ibuffer
 (if (or (<= emacs-major-version 21)
@@ -719,12 +843,16 @@ the sectional comment."
 (if (not use-pkg-p)
     (require 'helm-config))
 (helm-mode 1)
+(setq helm-buffer-max-length 40)
 
 ;; Protect buffers
-(require 'keep-buffers)
-(keep-buffers-erase-on-kill nil)
-(keep-buffers-protect-buffer "*scratch*")
-(keep-buffers-protect-buffer "*Messages*")
+(defconst protected-buffers
+  '("*scratch*" "*Messages*"))
+(add-hook
+ 'after-init-hook
+ (lambda ()
+   (dolist (buff protected-buffers)
+     (with-current-buffer buff (emacs-lock-mode 'kill)))))
 
 ;; Ido
 (if (>= emacs-major-version 22)
@@ -755,10 +883,9 @@ the sectional comment."
            (setq company-backends
                  '(company-elisp
                    company-jedi
-                   (company-gtags company-etags
-                    company-semantic company-clang company-eclim
-                    company-xcode)
-                   company-nxml company-css
+                   (company-clang company-xcode company-gtags
+                    company-etags company-semanticcompany-eclim)
+                    company-nxml company-css
                    (company-files company-keywords)
                    (company-dabbrev-code company-dabbrev)))
            (company-quickhelp-mode 1)))
@@ -790,11 +917,142 @@ the sectional comment."
    (yas-global-mode 1)
    ))
 
+(add-hook 'git-commit-mode-hook
+          #'(lambda ()
+              (yas-activate-extra-mode 'git-commit-mode)))
+
 ;; Beancount
 (add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
 (autoload 'beancount-mode "beancount.el" "Load Beancount mode" t)
 (add-hook 'beancount-mode-hook
           #'(lambda () (yas-activate-extra-mode 'beancount-mode)))
+
+;; Notmuch and mail
+(setq message-directory "~/mail")
+(setq mail-host-address my-mail-host)
+(autoload 'notmuch "notmuch.el" "Load notmuch mail searcher" t)
+(add-hook 'notmuch-tree-mode-hook
+          (lambda () (interactive)
+            (define-key notmuch-tree-mode-map "g" 'notmuch-show-reply)
+            (define-key notmuch-tree-mode-map "r" 'notmuch-show-reply-sender)))
+(add-hook 'notmuch-show-mode-hook
+          (lambda () (interactive)
+            (define-key notmuch-show-mode-map "g" 'notmuch-show-reply)
+            (define-key notmuch-show-mode-map "r" 'notmuch-show-reply-sender)))
+
+(setq mail-specify-envelope-from t)
+(setq message-sendmail-envelope-from 'header)
+(setq mail-envelope-from 'header)
+(setq send-mail-function 'sendmail-send-it)
+(setq sendmail-program "msmtp")
+(setq mail-default-headers
+      (concat "X-Operating-System: "
+              ;; This ends with a ‘\n’.
+              (shell-command-to-string "uname -s -r -m")
+              "X-Useless-Header: Use the Force, Luke!"))
+
+;; If send from work, manually FCC sent_items, because of weird reasons.
+(setq notmuch-fcc-dirs my-fcc-dirs)
+(defun assoc-regexp (key dict)
+  (if (null dict)
+      nil
+    (if (string-match (car (car dict)) key)
+        (car dict)
+      (assoc-regexp key (cdr dict)))))
+
+(defun my-fcc-header-setup ()
+  (let ((subdir (cdr (assoc-regexp (message-fetch-field "from") notmuch-fcc-dirs))))
+    (if subdir
+        (message-add-header (concat "Fcc: " subdir)))))
+(add-hook 'message-send-hook 'my-fcc-header-setup)
+(setq message-fcc-handler-function
+      '(lambda (destdir)
+         (notmuch-maildir-fcc-write-buffer-to-maildir destdir t)))
+
+;; Signature
+(defun get-random-element (list)
+  "Returns a random element of LIST."
+  (if (and list (listp list))
+      (nth (random (1- (1+ (length list)))) list)
+    (error "Argument to get-random-element not a list or the list is empty")))
+
+(defun get-string-from-file (filePath)
+  "Return filePath's file content."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+
+(defun choose-sig-by-type (type)
+  (cond ((eq type 'file)
+         (get-string-from-file my-signature-file))
+        ((eq type 'dir)
+         (get-string-from-file
+          (get-random-element
+           (directory-files-recursively my-signature-dir ".*"))))
+        ((eq type 'fortune) (fortune))
+        ((eq type 'cookie) (cookie nil))))
+
+(defun choose-sig-by-condition (condition)
+  (if (null condition)
+      nil
+    (let ((this-cond (car condition)))
+      (if (string-match
+           (cdr (assoc 'pattern this-cond))
+           (message-fetch-field (cdr (assoc 'header this-cond))))
+          (choose-sig-by-type (cdr (assoc 'sig-type this-cond)))
+        (choose-sig-by-condition (cdr condition))))))
+
+(defun choose-sig ()
+  (interactive)
+  (choose-sig-by-condition my-sig-condition))
+
+(defun choose-from-by-to ()
+  (interactive)
+  (let ((to-field (message-fetch-field "to")))
+    (if to-field
+        (let ((correct-from
+               (cdr (assoc-regexp to-field my-from-by-to))))
+          (if correct-from
+              (message-replace-header "From" correct-from))))))
+
+(add-hook 'message-signature-setup-hook
+          (lambda () (interactive)
+            (choose-from-by-to)
+            (setq message-signature 'choose-sig)
+            (message-insert-signature)
+            (setq message-signature nil)))
+
+;; (add-hook 'message-setup-hook 'choose-from-by-to)
+
+;; Projectile
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+;; For log viewing conveniences.
+(define-generic-mode 'python-log-mode
+  '()                                   ; comments
+  '("INFO" "WARN" "CRIT" "ERRO")          ; Keywords
+  '(("[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\},[0-9]+" . 'font-lock-constant-face)
+    ("ERROR?" . 'error)
+    ("FATAL" . 'error)
+    ("[nN]ot expected" . 'error)
+    ("[uU]nexpected" . 'error))
+  '()
+  nil
+  "A mode for python log")
+
+;; Twittering mode
+(eval-after-load "twittering-mode"
+  (lambda ()
+    (setq twittering-status-format
+          "%i%RT{♺}%QT{❝} @%s %FACE[font-lock-type-face]{%S} %FACE[font-lock-comment-face]{%@}\n%FOLD[    ]{%T\n%QT{+----\n%FOLD[|]{%i @%s %FACE[font-lock-type-face]{%S} %FACE[font-lock-comment-face]{%@}\n%FOLD[  ]{%T}}\n+----\n}%RT{(Retweeted from @%s)\n}")))
+
+;; Lilypond
+(load "lilypond-init.el" t)
+
+;; Which-key
+(add-hook 'after-init-hook 'which-key-mode)
 
 ;;=============== global bindings ====================>
 (if linux-x-p
@@ -802,6 +1060,18 @@ the sectional comment."
   (global-set-key (kbd "C-<f10>") 'list-bookmarks))
 (global-set-key (kbd "s-p") 'previous-buffer)
 (global-set-key (kbd "s-n") 'next-buffer)
+(global-set-key (kbd "<s-up>") 'windmove-up)
+(global-set-key (kbd "<s-down>") 'windmove-down)
+(global-set-key (kbd "<s-left>") 'windmove-left)
+(global-set-key (kbd "<s-right>") 'windmove-right)
+(global-set-key (kbd "s-k") 'windmove-up)
+(global-set-key (kbd "s-j") 'windmove-down)
+(global-set-key (kbd "s-h") 'windmove-left)
+(global-set-key (kbd "s-l") 'windmove-right)
+(global-set-key (kbd "s-K") 'buf-move-up)
+(global-set-key (kbd "s-J") 'buf-move-down)
+(global-set-key (kbd "s-H") 'buf-move-left)
+(global-set-key (kbd "s-L") 'buf-move-right)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "M-w") 'copy-line-or-region)
@@ -842,11 +1112,15 @@ the sectional comment."
 (global-set-key (kbd "C-x C-a") 'helm-mini)
 (global-set-key (kbd "M-s o") 'helm-occur)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x r b") 'helm-filtered-bookmarks)
 
 ;; Change font size
 (global-set-key (kbd "s-=") 'text-scale-adjust)
 (global-set-key (kbd "s--") 'text-scale-adjust)
 (global-set-key (kbd "s-0") 'text-scale-adjust)
+
+;; Maximize and restore windows
+(global-set-key (kbd "C-`") 'maximize-or-restore-window)
 
 ;; ========== Look & feel ===========================================>
 ;; Shorter modeline
@@ -863,6 +1137,8 @@ the sectional comment."
     (flyspell-mode . "✓")
     (auto-fill-function . "↵")
     (achievements-mode . "A")
+    (projectile-mode . "p")
+    (which-key-mode . "")
     ;; Major modes
     (lisp-interaction-mode . "λ")
     (python-mode . "π")
@@ -871,7 +1147,7 @@ the sectional comment."
     (c-mode . "C")
     (help-mode . "?")
     (dired-mode . "ls")
-    )
+    (emacs-lock-mode . ""))
   "Alist for `clean-mode-line'.
 When you add a new element to the alist, keep in mind that you
 must pass the correct minor/major mode symbol and a string you
@@ -937,16 +1213,18 @@ want to use in the modeline *in lieu of* the original.")
        :height my-font-size
        :weight 'normal)
       ;; Font fallback
-      (set-fontset-font
-       (frame-parameter nil 'font)
-       (cons my-font-fallback-boundary #xe007f)
-       (font-spec :family my-unicode-font))))
+      ;; (set-fontset-font
+      ;;  (frame-parameter nil 'font)
+      ;;  (cons my-font-fallback-boundary #xe007f)
+      ;;  (font-spec :family my-unicode-font))
+      ))
 
 ;; (add-to-list 'face-font-rescale-alist '("Noto Sans Mono CJK SC" . 1.1))
 
 ;; Startup screen
-(if my-splash-image
-    (setq fancy-splash-image my-splash-image))
+(if (boundp 'my-splash-image)
+    (if my-splash-image
+        (setq fancy-splash-image my-splash-image)))
 
 ;; preserve the size of the frames when changeing fonts and stuff.
 (if (and window-system (> emacs-major-version 24))
@@ -962,7 +1240,11 @@ want to use in the modeline *in lieu of* the original.")
 (if my-full-screen
     (progn
       (toggle-frame-fullscreen)
-      (split-window-horizontally)))
+      (split-window-horizontally)
+      (split-window-horizontally)
+      (select-window (previous-window))
+      (split-window-vertically)
+      (balance-windows)))
 
 (load custom-file 'noerror)
 (load-theme 'FlatUI t)

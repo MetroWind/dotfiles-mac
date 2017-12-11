@@ -31,7 +31,7 @@ source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # compdef pacman-color=pacman
 
 PROMPT=$'$PR_STITLE%{${fg[cyan]}%}$SHLVL%{${fg_bold[cyan]}%}-> %{${fg_no_bold[cyan]}%}%60<...<%~%<<
-%{${fg_bold[yellow]}%}%n%{${fg_bold[blue]}%}@%m$(getGitPrompt)%{$reset_color%} '
+%{${fg_no_bold[yellow]}%}%n%{${fg_bold[blue]}%}@%m$(getGitPrompt)%{$reset_color%} '
 RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""

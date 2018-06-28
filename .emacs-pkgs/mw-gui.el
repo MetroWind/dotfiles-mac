@@ -4,6 +4,9 @@
   ;; Size
   (add-to-list 'default-frame-alist (cons 'height my-frame-height))
   (add-to-list 'default-frame-alist (cons 'width my-frame-width))
+  ;; Remove frame border
+  (add-to-list 'default-frame-alist (cons 'internal-border-width 0))
+  (add-to-list 'default-frame-alist (cons 'border-width 0))
 
   ;; Font
   (if my-font
@@ -32,9 +35,6 @@
   (if (and macp (>= emacs-major-version 26))
       (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 
-  ;; Load theme
-  (if my-theme
-      (load-theme my-theme t))
 )
 
 ;; Go full screen and split
@@ -49,5 +49,9 @@
            (select-window (previous-window))
            (split-window-vertically)
            (balance-windows))))
+
+;; Load theme
+(if my-theme
+    (load-theme my-theme t))
 
 (provide 'mw-gui)

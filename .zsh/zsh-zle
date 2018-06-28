@@ -1,5 +1,6 @@
 # -*- mode: sh; -*-
 
+bindkey -e
 # Use $EDITOR to edit command line...
 autoload -U   edit-command-line
 zle -N        edit-command-line
@@ -30,6 +31,14 @@ user-ret()
 }
 zle -N user-ret
 
+go-up()
+{
+    pushd ..
+    zle reset-prompt
+    echo
+}
+zle -N go-up
+
 # Custom Key Bindings
 bindkey "\e;" vi-pound-insert
 bindkey . rationalise-dot
@@ -47,3 +56,4 @@ bindkey "\e[4~" end-of-line
 
 bindkey "\r" user-ret
 bindkey '\ee' edit-command-line
+bindkey '\e6' go-up

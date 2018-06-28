@@ -2,7 +2,7 @@
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
-    alias ls='gls --color=auto -h -X -F --group-directories-first -v'
+    alias ls='gls --color=auto -h -X -F --group-directories-first -v --time-style=iso'
     alias grep='grep --color=auto'
 fi
 
@@ -13,9 +13,12 @@ else
 fi
 
 alias ec='emacsclient --no-wait'
+alias ecc=emacsclient
+alias emacs='emacsclient -nw'
 alias rm="rm -v"
 alias rtfm="man"
 alias bin2xml="plutil -convert xml1"
 alias xml2bin="plutil -convert binary1"
 alias Rsync="rsync -rLptDz --progress"
 alias ldd="otool -L"
+alias pgrep="pgrep -lf"

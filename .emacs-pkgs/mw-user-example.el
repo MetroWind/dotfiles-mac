@@ -59,6 +59,9 @@
   '((".*@mycompany\\.com>?" . "My Real Name <my.r.name@mycompany.com>")
     (".*" . "Secret Identity <secret.identity@personal-mail.com>")))
 
+;; This will become `notmuch-saved-searches'.
+(defconst my-notmuch-searchs nil)
+
 ;; IRC
 
 ;; Master nick for freenode: Darksair, and for OFTC: Corsair.

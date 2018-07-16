@@ -101,6 +101,11 @@
           (message-add-header (concat "Fcc: " subdir)))))
   (setq message-fcc-handler-function
         '(lambda (destdir)
-           (notmuch-maildir-fcc-write-buffer-to-maildir destdir t))))
+           (notmuch-maildir-fcc-write-buffer-to-maildir destdir t)))
+  (setq notmuch-hello-thousands-separator "")
+  (if (boundp 'my-notmuch-searchs)
+      (if my-notmuch-searchs
+          (setq notmuch-saved-searches my-notmuch-searchs)))
+  )
 
 (provide 'mw-mail)

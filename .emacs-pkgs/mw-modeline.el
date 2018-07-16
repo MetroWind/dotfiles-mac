@@ -13,9 +13,10 @@
     (hi-lock-mode . "")
     (flyspell-mode . "✓")
     (auto-fill-function . "↵")
-    (achievements-mode . "A")
     (projectile-mode . "p")
     (which-key-mode . "")
+    (auto-revert-mode . "∀")
+    (eldoc-mode . "?")
     ;; Major modes
     (lisp-interaction-mode . "λ")
     (python-mode . "π")

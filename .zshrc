@@ -18,20 +18,24 @@ source ${HOME}/.zsh/zsh-zle
 source ${HOME}/.zsh/zsh-alias
 source ${HOME}/.zsh/zsh-user
 
-source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh
-# # Enable autosuggestions automatically.
-# zle-line-init()
-# {
-#     zle autosuggest-start
-# }
-# zle -N zle-line-init
+if [ -d ${HOME}/.zsh/zsh-syntax-highlighting ]; then
+    source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -d ${HOME}/.zsh/zsh-autosuggestions ]; then
+    source ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh
+    # Enable autosuggestions automatically.
+    zle-line-init()
+    {
+        zle autosuggest-start
+    }
+    zle -N zle-line-init
+fi
 
 # completion
 # compdef pacman-color=pacman
 
-PROMPT=$'$PR_STITLE%{${fg[cyan]}%}$SHLVL%{${fg_bold[cyan]}%}-> %{${fg_no_bold[cyan]}%}%60<...<%~%<<
-%{${fg_no_bold[yellow]}%}%n%{${fg_bold[blue]}%}@%m$(getGitPrompt)%{$reset_color%} '
+PROMPT=$'%F{cyan}$SHLVL-> %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
 RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""

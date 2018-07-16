@@ -1,6 +1,8 @@
 ;; Mail
 (use-package message
   ;; :hook (message-setup . choose-from-by-to)
+  :mode ("/mutt-.*-[0-9\\-]+" . message-mode)
+
   :config
   (setq message-directory "~/mail")
   (setq mail-host-address my-mail-host)

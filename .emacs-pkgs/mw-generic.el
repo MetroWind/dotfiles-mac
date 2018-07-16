@@ -1,13 +1,17 @@
 ;; Stuff that doesn't fit anywhere else.
 
 (use-package mw-lib-generic
-  :commands enable-smart-quote-in-map
+  :commands
+  (enable-smart-quote-in-map insert-single-quotes insert-double-quotes
+   auto-insert-and-convert-dash)
+
   :bind (("M-RET" . toggle-line-wrap)
          ("C-;" . comment-sectional)
          ("%" . match-paren)
          ("M-w" . copy-line-or-region)
          ("C-<return>" . cua-or-multicursor)
-         ("C-@" . cua-or-multicursor)))
+         ("C-@" . cua-or-multicursor))
+  )
 
 (use-package mw-lib-window-focus
   :bind ("C-`" . maximize-or-restore-window))

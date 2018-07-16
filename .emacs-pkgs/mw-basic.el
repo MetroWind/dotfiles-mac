@@ -235,13 +235,11 @@
   :config
   (setq cookie-file (concat ModeDir "/fortune.txt")))
 
-(use-package message
-  :mode ("/mutt-.*-[0-9\\-]+" . message-mode))
-
 (use-package dired
   :bind (:map dired-mode-map
            ("C-o" . open-file-with-default-thing)
-           ("M-o" . open-tmux-in-current-dir))
+           ("M-o" . open-tmux-in-current-dir)
+           ("@" . dired-omit-mode))
   :config
   (setq dired-recursive-deletes 'always)
   (setq dired-recursive-copies 'always)
@@ -283,6 +281,12 @@ When using Homebrew, install it using \"brew install trash\"."
   (defun open-tmux-in-current-dir ()
     "Open a new Tmux window in current directory."
     (interactive)
-    (shell-command "tmux new-window")))
+    (shell-command "tmux new-window"))
+
+  ;; For `dired-omit-mode'.
+  (require 'dired-x)
+  ;; Omit dot files.
+  (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+")
+  )
 
 (provide 'mw-basic)

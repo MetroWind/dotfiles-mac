@@ -246,8 +246,10 @@
   (setq dired-recursive-deletes 'always)
   (setq dired-recursive-copies 'always)
   (setq dired-dwim-target t)
-  (setq insert-directory-program "gls")
-  (setq dired-listing-switches "-lXGh --group-directories-first")
+  (if (and macp (executable-find "gls"))
+      (progn
+        (setq insert-directory-program "gls")
+        (setq dired-listing-switches "-alXGh --group-directories-first")))
   (setq delete-by-moving-to-trash t)
   (defun system-move-file-to-trash (file)
     "Use \"trash\" to move FILE to the system trash.

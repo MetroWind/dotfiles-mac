@@ -2,31 +2,22 @@
 
 My dot files for GNU Emacs and Zsh, mainly.
 
+** Installation
+
+    Run =install.py= and follow the instructions. Run =install.py -h=
+    for more options.
+
 ** The Emacs dot files
 
-*** Installation
+   This configuration is designed so that you don’t have to install a
+   lot of packages to make it work. But if you have a package that it
+   is configured for, the configuration would take effect, thanks to
+   [[https://github.com/jwiegley/use-package][use-package]].
 
-    1. Copy =.emacs.el= and the =.emacs-pkgs= directory to your home
-       directory.
-    2. Edit =~/.emacs-pkgs/mw-user-example.el= by uncommenting the
-       last line. Rename the file to =~/.emacs-pkgs/mw-user.el=.
-    3. Start Emacs. The 1st start is going to take some time, as Emacs
-       is going to download some packages. It will also prompt you to
-       install some other packages.
-    4. You may want to change some of the settings by editing the
-       =mw-user.el= file.
+   The bulk of the configuration is in the =.emacs-pkgs= directory.
+   After the installation, this directory should be at
+   =$HOME/.emacs-pkgs=. This can be changed by editing the 1st line of
+   =.emacs.el= file.
 
-*** Usage
-
-    This configuration is designed so that you don’t have to install a
-    lot of packages to make it work. But if you have a package that it
-    is configured for, the configuration would take effect, thanks to
-    [[https://github.com/jwiegley/use-package][use-package]].
-
-    The bulk of the configuration is in the =.emacs-pkgs= directory.
-    After the installation, this directory should be at
-    =$HOME/.emacs-pkgs=. This can be changed by editing the 1st line
-    of =.emacs.el= file.
-
-    The =*Simple Splash*= buffer shows some of the modified key
-    bindings.
+   The =*Simple Splash*= buffer shows some of the modified key
+   bindings.

@@ -16,13 +16,16 @@ source ${HOME}/.zsh/zsh-completion
 source ${HOME}/.zsh/zsh-param-opts
 source ${HOME}/.zsh/zsh-zle
 source ${HOME}/.zsh/zsh-alias
-source ${HOME}/.zsh/zsh-user
 
-if [ -d ${HOME}/.zsh/zsh-syntax-highlighting ]; then
+if [[ -e ${HOME}/.zsh/zsh-user ]]; then
+    source ${HOME}/.zsh/zsh-user
+fi
+
+if [[ -e ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-if [ -d ${HOME}/.zsh/zsh-autosuggestions ]; then
+if [[ -e ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh ]]; then
     source ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh
     # Enable autosuggestions automatically.
     zle-line-init()

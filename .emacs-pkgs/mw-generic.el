@@ -83,6 +83,7 @@
 
 (use-package linum
   :commands global-linum-mode
+  :unless (>= emacs-major-version 26)
   :bind ("M-n" . toggle-linum)
   :config
   ;; Acutally linum is slow, so don't use it globally.
@@ -91,6 +92,10 @@
     (interactive)
     (if linum-mode (linum-mode -1)
       (linum-mode t))))
+
+(use-package display-line-numbers
+  :if (>= emacs-major-version 26)
+  :bind ("M-n" . display-line-numbers-mode))
 
 ;; Protect buffers
 (use-package emacs

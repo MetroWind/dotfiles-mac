@@ -145,4 +145,18 @@
   :hook (git-commit-mode
          . (lambda () (yas-activate-extra-mode 'git-commit-mode))))
 
+;; I need to change my habit *a lot* to use this. Disable for now.
+(use-package mwim
+  :hook prog-mode
+  :disabled
+  :bind (:map prog-mode-map
+              ("C-a" . mwim-beginning)
+              ("C-e" . mwim-end)))
+
+(use-package hungry-delete
+  ;; For some reason C-d is binded by default, but backspace is not...
+  :bind (:map hungry-delete-mode-map
+              ("DEL" . hungry-delete-backward))
+  :hook (prog-mode . hungry-delete-mode))
+
 (provide 'mw-programming)

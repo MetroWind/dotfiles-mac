@@ -211,4 +211,7 @@ s-,      Open Emacs configuration directory.
 
   (simple-splash-setup-startup-hook))
 
+(use-package smart-text
+  :hook ((prog-mode text-mode) . smart-text-mode))
+
 (provide 'mw-generic)

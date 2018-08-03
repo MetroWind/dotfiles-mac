@@ -69,6 +69,13 @@ class FileInstaller(object):
         :rtype: str
         """
 
+        if os.path.islink(dest):
+            if promptYN("{} is a link. Delete it?".format(dest)):
+                os.remove(dest)
+            else:
+                Log.error("Target dir {} is a link. Stopping...".format(dest))
+                raise OSError("Target dir {} is a link.".format(dest))
+
         if not os.path.exists(dest):
             os.makedirs(dest)
 
@@ -80,10 +87,10 @@ class FileInstaller(object):
         Target = os.path.join(dest, Basename)
 
         if os.path.isdir(Target):
-            Log.fatal("Target {} is a directory. Stopping...".format(Target))
+            Log.error("Target {} is a directory. Stopping...".format(Target))
             raise OSError("Target {} is a directory".format(Target))
 
-        if os.path.exists(Target):
+        if os.path.exists(Target) or os.path.islink(Target):
             if self.Overwrite is True:
                 os.remove(Target)
             elif self.Overwrite == "ask":
@@ -156,7 +163,8 @@ def doInstall(link, overwrite, all=False):
         Installer.installTo(os.path.join(Home, ".emacs-pkgs"))
         DotEmacs = Installer.install(os.path.join(RepoDir, ".emacs.el"), Home)
 
-        if DotEmacs and os.path.exists(os.path.join(Home, ".emacs")):
+        if DotEmacs and (os.path.exists(os.path.join(Home, ".emacs")) or
+                       os.path.islink(os.path.join(Home, ".emacs"))):
             if promptYN(".emacs.el installed. Remove ~/.emacs?"):
                 os.remove(os.path.join(Home, ".emacs"))
 
@@ -178,6 +186,7 @@ def doInstall(link, overwrite, all=False):
 
         Installer.installTo(os.path.join(Home, ".zsh"))
         Installer.install(os.path.join(RepoDir, ".zshrc"), Home)
+        Installer.install(os.path.join(RepoDir, ".profile"), Home)
 
         ProfileInstall = FileInstaller(True, Overwrite)
         ProfileInstall(os.path.join(Home, ".profile"), Home, ".zprofile")

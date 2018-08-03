@@ -157,6 +157,7 @@
   ;; For some reason C-d is binded by default, but backspace is not...
   :bind (:map hungry-delete-mode-map
               ("DEL" . hungry-delete-backward))
-  :hook (prog-mode . hungry-delete-mode))
+  :hook ((prog-mode . hungry-delete-mode)
+         (python-mode . (lambda () (hungry-delete-mode -1)))))
 
 (provide 'mw-programming)

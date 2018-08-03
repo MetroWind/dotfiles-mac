@@ -214,4 +214,6 @@ s-,      Open Emacs configuration directory.
 (use-package smart-text
   :hook ((prog-mode text-mode) . smart-text-mode))
 
+(use-package adoc-mode :mode "\\.adoc\\'")
+
 (provide 'mw-generic)

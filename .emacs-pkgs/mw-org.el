@@ -73,8 +73,6 @@
     (interactive)
     (dolist (f my-org-files)
       (find-file-noselect f)))
-
-  (enable-smart-quote-in-map org-mode-map)
 )
 
 ;; Org export

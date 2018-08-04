@@ -154,10 +154,15 @@
               ("C-e" . mwim-end)))
 
 (use-package hungry-delete
+  :if (package-installed-p 'hungry-delete)
   ;; For some reason C-d is binded by default, but backspace is not...
   :bind (:map hungry-delete-mode-map
               ("DEL" . hungry-delete-backward))
   :hook ((prog-mode . hungry-delete-mode)
          (python-mode . (lambda () (hungry-delete-mode -1)))))
+
+(use-package gdb
+  :init
+  (setq gud-key-prefix (kbd "C-M-G")))
 
 (provide 'mw-programming)

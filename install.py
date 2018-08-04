@@ -20,6 +20,17 @@ def get_logger(name=__name__, level=logging.DEBUG):
 
 Log = get_logger()
 
+def copyfile(src, dst, follow_symlinks=True):
+    if sys.version_info >= (3, 3):
+        shutil.copyfile(src, dst, follow_symlinks)
+    else:
+        shutil.copyfile(src, dst)
+
+def chmod(path, mode, dir_fd=None, follow_symlinks=True):
+    if sys.version_info >= (3, 3):
+        os.chmod(path, mode, dir_fd, follow_symlinks)
+    else:
+        os.chmod(path, mode)
 
 def promptWithChoices(msg, choices, answer=None):
     """Prompt user with `msg` and `choices` (list/tuple of strings). Return the item
@@ -33,7 +44,11 @@ def promptWithChoices(msg, choices, answer=None):
         return answer
 
     RealMsg = "{} [{}] ".format(msg, '/'.join(choices))
-    Input = input(RealMsg)      # type: str
+    if sys.version_info.major >= 3:
+        Input = input(RealMsg)      # type: str
+    else:
+        Input = raw_input(RealMsg)
+
     try:
         Idx = tuple(item.lower() for item in choices).index(Input.lower())
     except ValueError:
@@ -104,9 +119,9 @@ class FileInstaller(object):
         if self.Link is True:
             os.symlink(os.path.abspath(source), Target)
         else:
-            shutil.copyfile(source, Target, follow_symlinks=True)
+            copyfile(source, Target, follow_symlinks=True)
             if mode is not None:
-                os.chmod(Target, mode, follow_symlinks=False)
+                chmod(Target, mode, follow_symlinks=False)
 
         Log.debug("{} --> {}".format(source, Target))
 

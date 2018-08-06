@@ -24,7 +24,9 @@
   (add-to-list 'vc-handled-backends 'git))
 
 (use-package magit
-  :commands magit-status)
+  :commands magit-status
+  :config
+  (add-to-list 'same-window-regexps "^\\*magit: .*"))
 
 (use-package compile
   :bind ("M-C" . compile)

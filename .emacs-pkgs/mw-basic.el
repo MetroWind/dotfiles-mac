@@ -289,4 +289,9 @@ When using Homebrew, install it using \"brew install trash\"."
   (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+")
   )
 
+;; Don't let help buffer make new window.
+(use-package help-mode
+  :config
+  (add-to-list 'same-window-buffer-names "*Help*"))
+
 (provide 'mw-basic)

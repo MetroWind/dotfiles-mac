@@ -161,7 +161,8 @@
   :bind (:map hungry-delete-mode-map
               ("DEL" . hungry-delete-backward))
   :hook ((prog-mode . hungry-delete-mode)
-         (python-mode . (lambda () (hungry-delete-mode -1)))))
+         (python-mode . (lambda () (hungry-delete-mode -1)))
+         (cc-mode . (lambda () (hungry-delete-mode -1)))))
 
 (use-package gdb
   :init

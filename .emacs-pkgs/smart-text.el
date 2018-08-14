@@ -17,9 +17,9 @@
              (or (and smart-text-in-comment (nth 4 syntax))
                  (and smart-text-in-string (nth 3 syntax)))))))
 
-(defun smart-text-insert-single-quotes ()
+(defun smart-text-insert-single-quotes (arg)
   "Inserts a proper pair of single quotes."
-  (interactive)
+  (interactive "P")
   (if (should-be-smart-p)
       ;; If the last char is "\", inserts a literal char.
       (if (search-backward "\\" (- (point) 1) t)
@@ -29,22 +29,22 @@
         (if (re-search-backward "[A-Za-z]" (- (point) 1) t)
             (progn (forward-char) (insert "’"))
           (insert-pair-and-retreat "‘’")))
-    (self-insert-command 1)))
+      (self-insert-command (prefix-numeric-value arg))))
 
-(defun smart-text-insert-double-quotes ()
+(defun smart-text-insert-double-quotes (arg)
   "Inserts a proper pair of double quotes."
-  (interactive)
+  (interactive "P")
   (if (should-be-smart-p)
       ;; If the last char is "\", inserts a literal char.
       (if (search-backward "\\" (- (point) 1) t)
           (progn (forward-char) (insert "\""))
         (insert-pair-and-retreat "“”"))
-    (self-insert-command 1)))
+    (self-insert-command (prefix-numeric-value arg))))
 
-(defun smart-text-auto-insert-and-convert-dash ()
+(defun smart-text-auto-insert-and-convert-dash (arg)
   "Converts two dashes into an en-dash, or converts a en-dash
 followed by a dash to an em-dash."
-  (interactive)
+  (interactive "P")
   (if (should-be-smart-p)
       ;; If the last char is "\", inserts a literal char.
       (if (search-backward "\\" (- (point) 1) t)
@@ -55,7 +55,7 @@ followed by a dash to an em-dash."
               (replace-match "–"))
           (if (search-backward "–-" (- (point) 2) t)
               (replace-match "—"))))
-    (self-insert-command 1)))
+    (self-insert-command (prefix-numeric-value arg))))
 
 (define-minor-mode smart-text-mode "Type smart quotes and smart dashes."
   :lighter "“"

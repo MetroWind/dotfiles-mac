@@ -131,6 +131,9 @@
     (setq gnutls-verify-error t)
     (setq gnutls-trustfiles (list cas)))
 
+  ;; Stop spliting windows without me saying so.
+  (setq split-height-threshold 160)
+
   :bind
   (("s-p" . previous-buffer)
    ("s-n" . next-buffer)
@@ -288,10 +291,5 @@ When using Homebrew, install it using \"brew install trash\"."
   ;; Omit dot files.
   (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+")
   )
-
-;; Don't let help buffer make new window.
-(use-package help-mode
-  :config
-  (add-to-list 'same-window-buffer-names "*Help*"))
 
 (provide 'mw-basic)

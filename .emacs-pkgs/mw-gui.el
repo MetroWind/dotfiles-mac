@@ -51,7 +51,7 @@
            (balance-windows))))
 
 ;; Load theme
-(if my-theme
+(if (and (boundp 'my-theme) my-theme)
     (load-theme my-theme t))
 
 (provide 'mw-gui)

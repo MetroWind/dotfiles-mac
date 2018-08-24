@@ -123,13 +123,13 @@
 
   ;; Security
   (setq tls-checktrust t)
-  (let ((cas "/etc/ssl/certs/cacert.pem"))
-    (setq tls-program
-          (list
-           (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
-                   (if (eq window-system 'w32) ".exe" "") cas)))
-    (setq gnutls-verify-error t)
-    (setq gnutls-trustfiles (list cas)))
+  (setq tls-program
+        (list
+         (concat "gnutls-cli" (if (eq window-system 'w32) ".exe" "")
+                 "-p %p --dh-bits=2048 --ocsp --x509cafile=%t --priority='SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%%PROFILE_MEDIUM' %h")))
+
+  (setq gnutls-verify-error t)
+  (setq gnutls-min-prime-bits 2048)
 
   ;; Stop spliting windows without me saying so.
   (setq split-height-threshold 160)

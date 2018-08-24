@@ -84,8 +84,8 @@ fail, return nil."
       (require 'package)
       (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                                ("melpa" . "https://melpa.org/packages/")))
-      (package-initialize)
       (setq package-enable-at-startup nil)
+      (package-initialize)
       ;; http://stackoverflow.com/a/10095853/782130
       (defun ensure-package-installed (&rest packages)
         "Assure every package is installed, ask for installation if it’s not.

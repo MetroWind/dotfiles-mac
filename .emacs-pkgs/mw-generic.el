@@ -217,4 +217,23 @@ s-,      Open Emacs configuration directory.
 
 (use-package adoc-mode :mode "\\.adoc\\'")
 
+(use-package flycheck
+  :demand t
+  :config
+  (setq-default flycheck-disabled-checkers
+                '(emacs-lisp emacs-lisp-checkdoc))
+  (global-flycheck-mode)
+
+  ;; Let proselint support more modes
+  (flycheck-define-checker proselint
+    "Flycheck checker using Proselint.
+
+See URL `http://proselint.com/'."
+    :command ("proselint" "--json" "-")
+    :standard-input t
+    :error-parser flycheck-proselint-parse-errors
+    :modes (text-mode markdown-mode gfm-mode message-mode
+            notmuch-message-mode org-mode))
+)
+
 (provide 'mw-generic)

@@ -62,7 +62,12 @@
     :ensure t
     :demand t
     :config
-    (company-quickhelp-mode 1)))
+    (company-quickhelp-mode 1))
+
+  ;; Eliminate anaconda’s “too many open files” error
+  (add-to-list 'url-proxy-services
+               '("no_proxy" . "^\\(127.0.0.1\\|localhost\\|10.*\\)"))
+)
 
 (use-package jedi-core
   :disabled

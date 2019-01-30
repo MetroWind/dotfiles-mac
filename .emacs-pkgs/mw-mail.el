@@ -85,7 +85,9 @@
               ("r" . notmuch-show-reply-sender)
               :map notmuch-show-mode-map
               ("g" . notmuch-show-reply)
-              ("r" . notmuch-show-reply-sender))
+              ("r" . notmuch-show-reply-sender)
+              :map notmuch-search-mode-map
+              ("RET" . mw-notmuch-read-thread))
 
   :config
   ;; If send from work, manually FCC sent_items, because of weird reasons.
@@ -108,6 +110,21 @@
   (if (boundp 'my-notmuch-searchs)
       (if my-notmuch-searchs
           (setq notmuch-saved-searches my-notmuch-searchs)))
+
+  (defun mw-notmuch-read-thread ()
+    "Used in a notmuch-search buffer to read the current-selected thread.
+
+  By default when you press RET in a notmuch-search
+  buffer (`notmuch-search-show-thread'), it shows the whole
+  thread as a big email, in the same buffer. This is very slow.
+  `mw-notmuch-read-thread' shows a thread tree and a single
+  email, in two buffers, which is like Mutt's behavior. This is
+  much faster."
+
+    (interactive)
+    (notmuch-tree (notmuch-search-find-thread-id)
+                  (notmuch-search-get-query)
+                  nil nil t))
   )
 
 (provide 'mw-mail)

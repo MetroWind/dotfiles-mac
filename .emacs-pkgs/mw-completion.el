@@ -51,6 +51,9 @@
   (setq company-clang-arguments '("-std=c++14"))
   (setq company-backends
         '(company-elisp
+          ;; When there’s a Jedi update, delete
+          ;; ~/.emacs.d/anaconda-mode to let Anaconda use the new
+          ;; Jedi.
           company-anaconda
           (company-clang company-xcode)
           (company-gtags company-etags)
@@ -64,12 +67,12 @@
     :config
     (company-quickhelp-mode 1))
 
-  ;; Eliminate anaconda’s “too many open files” error
-  ;; (doens’t work)
-  (add-to-list 'url-proxy-services
-               '("no_proxy" . "^\\(127.0.0.1\\|localhost\\|10.*\\)"))
-  ;; Maybe this?
-  (setq url-http-attempt-keepalives nil)
+  ;; ;; Eliminate anaconda’s “too many open files” error
+  ;; ;; (doens’t work)
+  ;; (add-to-list 'url-proxy-services
+  ;;              '("no_proxy" . "^\\(127.0.0.1\\|localhost\\|10.*\\)"))
+  ;; ;; Maybe this?
+  ;; (setq url-http-attempt-keepalives nil)
 )
 
 (use-package jedi-core

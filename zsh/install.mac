@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# The config needs gls
+brew install coreutils
+
+# Symlink files
+stow -d files -t $HOME --no-folding .
+
+# Change shell
+chpass -s `which zsh`

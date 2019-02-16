@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Symlink files
+stow -d files -t $HOME --no-folding .
+
+echo "User configuration goes into ~/.git-user"

@@ -7,6 +7,7 @@ import sys, os
 import shutil
 import glob
 import logging
+import subprocess
 
 def get_logger(name=__name__, level=logging.DEBUG):
     logger = logging.getLogger(name)
@@ -159,92 +160,47 @@ class FileSetInstaller(object):
 
             self.install(File, dest_dir)
 
+class OSType(object):
+    def __init__(self, name):
+        self.Name = name
+        self.Suffix = name
 
-def doInstall(link, overwrite, all=False):
-    Link = link
-    Overwrite = overwrite
-    RepoDir = os.path.dirname(__file__)
-    Home = os.environ["HOME"]
+    @property
+    def install_name(self):
+        return "install." + self.Suffix
 
-    if all is True:
-        SectionAnswer = 'y'
-    else:
-        SectionAnswer = None
+def install(section, os_type):
+    """Run install scription for `section` and `os_type`.
 
-    if promptYN("Install Emacs configuration?", SectionAnswer):
-        Installer = FileSetInstaller(os.path.join(RepoDir, ".emacs-pkgs"))
-        Installer.Link = Link
-        Installer.Overwrite = Overwrite
-        Installer.installTo(os.path.join(Home, ".emacs-pkgs"))
-        DotEmacs = Installer.install(os.path.join(RepoDir, ".emacs.el"), Home)
+    :type section: str
+    :type os_type: OSType
+    """
+    Pwd = os.getcwd()
+    os.chdir(section)
+    subprocess.check_call([os.path.join('.', os_type.install_name),])
+    os.chdir(Pwd)
 
-        if DotEmacs and (os.path.exists(os.path.join(Home, ".emacs")) or
-                       os.path.islink(os.path.join(Home, ".emacs"))):
-            if promptYN(".emacs.el installed. Remove ~/.emacs?"):
-                os.remove(os.path.join(Home, ".emacs"))
 
-        if not os.path.exists(os.path.join(Home, ".emacs-pkgs", "mw-user.el")):
-            if promptYN("There's one more step for Emacs: copy the example "
-                        "user file and modify it. Copy the example user file?"):
-                FileInstaller(False, True)(
-                    os.path.join(Home, ".emacs-pkgs", "mw-user-example.el"),
-                    os.path.join(Home, ".emacs-pkgs"), "mw-user.el", 0o600)
-                print("Now you need to edit {} and uncomment the last line. "
-                      "It *should* work without modification, "
-                      "but that’s not fun. (But do uncomment the last line.)\n"
-                      .format(os.path.join(Home, ".emacs-pkgs", "mw-user.el")))
+def promptInstallSections(sections, os_type):
+    install("bootstrap", os_type)
 
-    if promptYN("Install Zsh configuration?", SectionAnswer):
-        Installer = FileSetInstaller(os.path.join(RepoDir, ".zsh"))
-        Installer.Link = Link
-        Installer.Overwrite = Overwrite
-
-        Installer.installTo(os.path.join(Home, ".zsh"))
-        Installer.install(os.path.join(RepoDir, ".zshrc"), Home)
-        Installer.install(os.path.join(RepoDir, ".profile"), Home)
-
-        ProfileInstall = FileInstaller(True, Overwrite)
-        ProfileInstall(os.path.join(Home, ".profile"), Home, ".zprofile")
-
-    if promptYN("Install Git configuration?", SectionAnswer):
-        Installer = FileSetInstaller(RepoDir, ".git*")
-        Installer.Link = Link
-        Installer.Overwrite = Overwrite
-        Installer.installTo(Home)
-
-    if promptYN("Insatll tmux configuration?", SectionAnswer):
-        install = FileInstaller(Link, Overwrite)
-        install(os.path.join(RepoDir, ".tmux.conf"), Home)
-
-    return 0
+    for Section in sections:
+        if promptYN("Install {}?".format(Section)) is True:
+            install(Section, os_type)
 
 def main():
     import argparse
 
     Parser = argparse.ArgumentParser(description='Install configuration files '
                                      'by linking.')
-    OverwriteGroup = Parser.add_mutually_exclusive_group()
-    OverwriteGroup.add_argument('-y', "--overwrite", dest='Overwrite',
-                                action='store_true', default=False,
-                                help="Overwrite files without asking. Default: ask.")
-    OverwriteGroup.add_argument('-n', "--no-overwrite", dest='NoOverwrite',
-                                action='store_true', default=False,
-                                help="Never overwrite files. Default: ask")
-
-    Parser.add_argument("-c", "--copy", dest="Link", action="store_false",
-                        default=True, help="Copy file instead of linking.")
+    Parser.add_argument("-s", "--os", type=str, dest="OS", required=True,
+                                choices=["mac", "windows", "arch"],
+                                help="Type of the target operating system.")
 
     Args = Parser.parse_args()
 
-    if Args.Overwrite is True:
-        Overwrite = True
-    elif Args.NoOverwrite is True:
-        Overwrite = False
-    else:
-        Overwrite = "ask"
-
-    return doInstall(Args.Link, Overwrite)
-
+    promptInstallSections(["zsh", "git",], OSType(Args.OS))
+    return 0
 
 if __name__ == "__main__":
     sys.exit(main())

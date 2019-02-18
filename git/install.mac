@@ -1,6 +1,8 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+source ../lib/report.sh
 
 # Symlink files
 stow -d files -t $HOME --no-folding .
 
-echo "User configuration goes into ~/.git-user"
+report-info "User configuration goes into ~/.git-user"

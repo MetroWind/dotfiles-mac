@@ -21,6 +21,10 @@ def get_logger(name=__name__, level=logging.DEBUG):
 
 Log = get_logger()
 
+def file2List(filename):
+    with open(filename, 'r') as f:
+        return [Line.rstrip() for Line in f]
+
 def copyfile(src, dst, follow_symlinks=True):
     if sys.version_info >= (3, 3):
         shutil.copyfile(src, dst, follow_symlinks)
@@ -188,6 +192,41 @@ def promptInstallSections(sections, os_type):
         if promptYN("Install {}?".format(Section)) is True:
             install(Section, os_type)
 
+    # Print report
+
+    print("""
+
+============================= Installation Report =============================
+""")
+    for Section in ["bootstrap",] + sections:
+        FileOverwritten = os.path.join(Section, "report-overwritten.txt")
+        if os.path.exists(FileOverwritten):
+            print("{}: overwritten files:".format(Section))
+            for File in file2List(FileOverwritten):
+                print(File)
+            os.remove(FileOverwritten)
+
+        FileIgnored = os.path.join(Section, "report-ignored.txt")
+        if os.path.exists(FileIgnored):
+            print("{}: ignored files:".format(Section))
+            for File in file2List(FileIgnored):
+                print(File)
+            os.remove(FileIgnored)
+
+        FileError = os.path.join(Section, "report-error.txt")
+        if os.path.exists(FileError):
+            for Line in file2List(FileError):
+                print("[ERROR] {}: {}".format(Section, Line))
+            os.remove(FileError)
+
+        FileInfo = os.path.join(Section, "report-info.txt")
+        if os.path.exists(FileInfo):
+            for Line in file2List(FileInfo):
+                print("[INFO] {}: {}".format(Section, Line))
+            os.remove(FileInfo)
+
+    print()
+
 def main():
     import argparse
 
@@ -199,7 +238,7 @@ def main():
 
     Args = Parser.parse_args()
 
-    promptInstallSections(["zsh", "git",], OSType(Args.OS))
+    promptInstallSections(["zsh", "git", "emacs"], OSType(Args.OS))
     return 0
 
 if __name__ == "__main__":

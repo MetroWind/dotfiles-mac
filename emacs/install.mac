@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+
+source ../lib/report.sh
+
+# Get Emacs download URI
+UriBase="https://emacsformacosx.com/"
+UriPath=$(curl ${UriBase} | grep 'xlink.*\.dmg' | sed -E 's/.*href="(.*)">.*/\1/g')
+
+Uri="${UriBase}${UriPath}"
+DownloadPrefix="/tmp/emacs-install"
+
+# Download emacs
+wget -P "${DownloadPrefix}" "${Uri}"
+
+# Install emacs bundle
+pushd .
+cd ${DownloadPrefix}
+hdiutil attach *.dmg -mountpoint /Volumes/emacs
+echo "Copying Emacs app bundle..."
+cp -r /Volumes/emacs/Emacs.app /Applications/
+popd
+hdiutil detach /Volumes/emacs
+rm -r ${DownloadPrefix}
+
+# Linking emacsclient to somewhere in $PATH
+ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacsclient /usr/local/bin/emacsclient
+report-info "Emacsclient linked to /usr/local/bin/emacsclient."
+
+echo "Installing Emacs dotfiles..."
+stow -d files -t $HOME --no-folding .
+
+echo "Copying user configuration..."
+cp -L files/.emacs-pkgs/mw-user-example.el ${HOME}/.emacs-pkgs/mw-user.el
+echo "(provide 'mw-user)" >> ${HOME}/.emacs-pkgs/mw-user.el
+
+report-info "You should edit ~/.emacs-pkgs/mw-user.el."

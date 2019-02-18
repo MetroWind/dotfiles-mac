@@ -1,10 +1,14 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+source ../lib/report.sh
 
 # The config needs gls
-brew install coreutils
+brew install coreutils most
 
 # Symlink files
 stow -d files -t $HOME --no-folding .
 
 # Change shell
 chpass -s `which zsh`
+
+report-info "Login shell set to Zsh."

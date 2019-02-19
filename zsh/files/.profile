@@ -21,3 +21,6 @@ export PATH="/usr/local/share/npm/bin:$PATH"
 export PATH="/usr/local/opt/go/libexec/bin/go:$PATH"
 export xpath="${HOME}/Documents/document/physics/lattice/programs/x"
 export xqcdio_const=${xpath}/constants
+
+# LilyPond
+export PATH="/Applications/LilyPond.app/Contents/Resources/bin:$PATH"

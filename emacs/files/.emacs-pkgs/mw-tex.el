@@ -128,12 +128,13 @@ Sounds strange? Try it out.
             (insert "\"")
           (insert-double-quotes))))
 
-    (define-key LaTeX-mode-map "-"
-      (lambda ()
-        (interactive)
-        (if (texmathp)
-            (insert "-")
-          (auto-insert-and-convert-dash)))))
+    ;; (define-key LaTeX-mode-map "-"
+    ;;   (lambda ()
+    ;;     (interactive)
+    ;;     (if (texmathp)
+    ;;         (insert "-")
+    ;;       (smart-text-auto-insert-and-convert-dash))))
+    )
 
   (defun deal-with-context-quote ()
     "If in math mode, insert a literal ', \", or -.  If in normal
@@ -152,12 +153,13 @@ Sounds strange? Try it out.
             (insert "\"")
           (insert-context-double-quotes))))
 
-    (define-key ConTeXt-mode-map "-"
-      (lambda ()
-        (interactive)
-        (if (texmathp)
-            (insert "-")
-          (auto-insert-and-convert-dash)))))
+    ;; (define-key ConTeXt-mode-map "-"
+    ;;   (lambda ()
+    ;;     (interactive)
+    ;;     (if (texmathp)
+    ;;         (insert "-")
+    ;;       (smart-text-auto-insert-and-convert-dash))))
+    )
 
   (defun start-context-math ()
     (interactive)
@@ -209,7 +211,10 @@ Sounds strange? Try it out.
 
      (define-key TeX-mode-map (kbd "M-q") 'LaTeX-fill-paragraph)
      (define-key LaTeX-mode-map (kbd "C-c /") 'LaTeX-close-environment)
-     (define-key LaTeX-mode-map (kbd "C-TAB") 'indent-according-to-mode)))
+     (define-key LaTeX-mode-map (kbd "C-TAB") 'indent-according-to-mode)
+
+     (smart-text-mode -1)
+     ))
 
 
   (add-hook

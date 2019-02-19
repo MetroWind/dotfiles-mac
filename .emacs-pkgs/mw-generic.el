@@ -1,10 +1,6 @@
 ;; Stuff that doesn't fit anywhere else.
 
 (use-package mw-lib-generic
-  :commands
-  (enable-smart-quote-in-map insert-single-quotes insert-double-quotes
-   auto-insert-and-convert-dash)
-
   :bind (("M-RET" . toggle-line-wrap)
          ("C-;" . comment-sectional)
          ("%" . match-paren)
@@ -234,6 +230,11 @@ See URL `http://proselint.com/'."
     :error-parser flycheck-proselint-parse-errors
     :modes (text-mode markdown-mode gfm-mode message-mode
             notmuch-message-mode org-mode))
-)
+  )
+
+(use-package lilypond-mode
+  :init
+  (add-to-list 'load-path "/Applications/LilyPond.app/Contents/Resources/share/emacs/site-lisp")
+  :mode ("\\.ly\\'" . LilyPond-mode))
 
 (provide 'mw-generic)

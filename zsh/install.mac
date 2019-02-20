@@ -9,6 +9,6 @@ brew install coreutils most
 stow -d files -t $HOME --no-folding .
 
 # Change shell
-chpass -s `which zsh`
+sudo chpass -s `which zsh` ${USER}
 
 report-info "Login shell set to Zsh."

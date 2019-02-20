@@ -12,10 +12,23 @@ pool:
   vmImage: 'macOS-10.13'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: "3.x"
+    addToPath: true
+
+- script: ./install.py -a -s mac
+  displayName: Install packages
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    pip install unittest-xml-reporting
+    ./test.py -s mac --xml result.xml
+  displayName: Test installation
+  env: { IS_AZURE_PIPELINE: "1" }
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFiles: '**/result.xml'
+    testRunTitle: 'Publish test results for Installation'

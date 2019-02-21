@@ -1,0 +1,25 @@
+= My Dot Files
+MetroWind <chris.corsair@gmail.com>
+
+image::https://dev.azure.com/metrowind/dotfiles/_apis/build/status/MetroWind.dotfiles-mac?branchName=master[The Badge]
+
+All the cool projects have a build status badge, even if they don’t
+really need it.
+
+== Installation
+
+Run `install.py -s mac` and follow the instructions. Run `install.py
+-h` for more options.
+
+== The Emacs dot files
+
+This configuration is designed so that you don’t have to install a lot
+of packages to make it work. But if you have a package that it is
+configured for, the configuration would take effect, thanks to
+https://github.com/jwiegley/use-package[use-package].
+
+The bulk of the configuration is in the `.emacs-pkgs` directory. After
+the installation, this directory should be at `$HOME/.emacs-pkgs`.
+This can be changed by editing the 1st line of `.emacs.el` file.
+
+The `*Simple Splash*` buffer shows some of the modified key bindings.

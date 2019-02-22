@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+brew install tmux
+
+# Symlink files
+stow -d files -t $HOME --no-folding .

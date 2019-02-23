@@ -1,0 +1,13 @@
+dirs_inbox:
+  - personal_1/inbox
+  - personal_2/inbox
+  - school/inbox
+  - work/inbox
+  - work/inbox.my_bugs
+  - work/inbox.my_reviews
+
+dirs_outbox:
+  - personal_1/sent_mail
+  - personal_2/sent_mail
+  - school/sent_mail
+  - work/sent_items

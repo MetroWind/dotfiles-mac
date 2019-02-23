@@ -32,14 +32,14 @@ def makePlistKeyValue(key, value):
     return "\n".join([Key, Value, ""])
 
 def makeId(app_name):
-    return "com.darksair." + app_name.replace(' ', "")
+    return "org.darksair." + app_name.replace(' ', "")
 
 def main():
     Usage = "%prog [[options] SCRIPT BUNDLE_NAME | --help]"
     Desc = "Wrap script SCRIPT (an UNIX executable) inside application bundle BUNDLE_NAME."
 
     import argparse
-    
+
     OptParser = argparse.ArgumentParser(description=Desc)
     OptParser.add_argument("Script", metavar="SCRIPT", type=str, nargs=1,
                            help="The script file to wrap")
@@ -65,7 +65,7 @@ def main():
 
     if Args.Name:
         AppName = Args.Name
-    
+
     (ContentsDir, ExecDir, ResDir) = buildDirStruct(BundleName)
 
     # Copy script to bundle

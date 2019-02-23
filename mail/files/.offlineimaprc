@@ -1,0 +1,120 @@
+# -*- mode: conf; -*-
+
+[general]
+# List of accounts to be synced, separated by a comma.
+accounts = personal_1, personal_2, school, work
+pythonfile = ~/.offlineimap/password.py
+
+# ========== Gmail old ==============================================>
+[Account personal_1]
+# Identifier for the local repository; e.g. the maildir to be synced via IMAP.
+localrepository = personal_1-local
+# Identifier for the remote repository; i.e. the actual IMAP, usually non-local.
+remoterepository = personal_1-remote
+maxage = 30
+
+[Repository personal_1-local]
+# Currently, offlineimap only supports maildir and IMAP for local repositories.
+type = Maildir
+# Where should the mail be placed?
+localfolders = /path/to/mail/dir/personal_1
+
+[Repository personal_1-remote]
+# Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
+type = Gmail
+remoteuser = personal1@gmail.com
+remotepasseval = getKeychainPass("personal_1")
+auth_mechanisms = LOGIN
+# reference = "[Gmail]"
+nametrans = lambda foldername: re.sub (r'^\[gmail\]/', '',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower())))
+folderfilter = lambda foldername: foldername in ['INBOX', "[Gmail]/Sent Mail"]
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+createfolders = False
+starttls = False
+
+# ========== Gmail ==================================================>
+[Account personal_2]
+# Identifier for the local repository; e.g. the maildir to be synced via IMAP.
+localrepository = personal_2-local
+# Identifier for the remote repository; i.e. the actual IMAP, usually non-local.
+remoterepository = personal_2-remote
+maxage = 180
+
+[Repository personal_2-local]
+# Currently, offlineimap only supports maildir and IMAP for local repositories.
+type = Maildir
+# Where should the mail be placed?
+localfolders = /path/to/mail/dir/gmail
+
+[Repository personal_2-remote]
+# Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
+type = Gmail
+remoteuser = personal2@gmail.com
+remotepasseval = getKeychainPass("personal_2")
+auth_mechanisms = LOGIN
+# reference = "[Gmail]"
+nametrans = lambda foldername: re.sub (r'^\[gmail\]/', '',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower())))
+folderfilter = lambda foldername: foldername in ['INBOX', "[Gmail]/Sent Mail"]
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+createfolders = False
+starttls = False
+
+# ========== UKY Gmail ==================================================>
+[Account school]
+# Identifier for the local repository; e.g. the maildir to be synced via IMAP.
+localrepository = school-local
+# Identifier for the remote repository; i.e. the actual IMAP, usually non-local.
+remoterepository = school-remote
+maxage = 180
+
+[Repository school-local]
+# Currently, offlineimap only supports maildir and IMAP for local repositories.
+type = Maildir
+# Where should the mail be placed?
+localfolders = /path/to/mail/dir/school
+
+[Repository school-remote]
+# Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
+type = Gmail
+# remotehost = imap.gmail.com
+remoteuser = userid@g.uuu.edu
+remotepasseval = getKeychainPass("school")
+auth_mechanisms = LOGIN
+# reference = "[Gmail]"
+nametrans = lambda foldername: re.sub (r'^\[gmail\]/', '',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower())))
+folderfilter = lambda foldername: foldername in ['INBOX', "[Gmail]/Sent Mail"]
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+createfolders = False
+# starttls = False
+
+# ========== Riverbed ===============================================>
+[Account work]
+# Identifier for the local repository; e.g. the maildir to be synced via IMAP.
+localrepository = work-local
+# Identifier for the remote repository; i.e. the actual IMAP, usually non-local.
+remoterepository = work-remote
+
+[Repository work-local]
+# Currently, offlineimap only supports maildir and IMAP for local repositories.
+type = Maildir
+# Where should the mail be placed?
+localfolders = /path/to/mail/dir/work
+nametrans = lambda folder: re.sub('sent_items', 'Sent Items', folder)
+
+[Repository work-remote]
+# Remote repos can be IMAP or Work, the latter being a preconfigured IMAP.
+type = IMAP
+remotehost = outlook.office365.com
+remoteuser = userid@example.com
+remotepasseval = getKeychainPass("work")
+nametrans = lambda foldername: re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower()))
+folderfilter = lambda foldername: foldername in ['INBOX', "Sent Items", "Test Results", "Git Pushes", "Code Reviews", "INBOX/My Bugs", "INBOX/My Reviews"]
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+createfolders = False

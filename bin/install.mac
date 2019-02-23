@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+mkdir -p ${HOME}/bin
+stow -d files -t ${HOME}/bin .

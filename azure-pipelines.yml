@@ -18,7 +18,7 @@ steps:
     versionSpec: "3.x"
     addToPath: true
 
-- script: ./install.py -a -s mac
+- script: ./install.py --all --os mac --exclude mail
   displayName: Install packages
 
 - script: |

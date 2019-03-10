@@ -78,10 +78,14 @@ def main():
     Parser.add_argument("-a", "--all", dest="All", default=False,
                         action="store_true",
                         help="Install all packages without asking.")
+    Parser.add_argument("-e", "--exclude", dest="Excludes", default=[],
+                        nargs="+", metavar="PKG",
+                        help="Exclude PKGs from installation.")
 
     Args = Parser.parse_args()
 
-    promptInstallSections(AllPkgs, utils.OSType(Args.OS), not Args.All)
+    promptInstallSections([Pkg for Pkg in AllPkgs if Pkg not in Args.Excludes],
+                          utils.OSType(Args.OS), not Args.All)
     return 0
 
 if __name__ == "__main__":

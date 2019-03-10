@@ -10,7 +10,7 @@ mkdir -p ${HOME}/programs
 pushd .
 cd ${HOME}/programs
 DownloadBase="https://notmuchmail.org/releases"
-Basename=$(curl "${DownloadBase}"/ | fgrep LATEST | sed -E 's/.*href="([^"]+)">.*/\1/g')
+Basename=$(curl "${DownloadBase}"/ | fgrep LATEST | tail -n1 | sed -E 's/.*href="([^"]+)">.*/\1/g')
 Dirname=$(echo "${Basename}" | sed -E 's/LATEST-(.*)\.tar\.gz/\1/g')
 
 echo "Downloadnig Notmuch from ${DownloadBase}/${Basename}..."

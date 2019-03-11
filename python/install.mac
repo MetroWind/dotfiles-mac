@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+# For some reason offlineimap requires homebrew Python 2, might as
+# well install it.
+brew install python@2 python
+
+SYS_PY2="/usr/local/bin/python2"
+SYS_PY3="/usr/local/bin/python3"
+
+PREFIX_PY2="${HOME}/Python2"
+PREFIX_PY3="${HOME}/Python3"
+
+# Make virtual envs for python 2
+pushd .
+mkdir -pv "${TMPDIR}/python-install"
+cd "${TMPDIR}/python-install"
+wget https://github.com/pypa/virtualenv/raw/master/virtualenv.py
+"${SYS_PY2}" virtualenv.py --python "${SYS_PY2}" --system-site-packages "${PREFIX_PY2}"
+popd
+rm -r "${TMPDIR}/python-install"
+
+# Make virtual envs for python 3
+"${SYS_PY3}" -m venv "${PREFIX_PY3}"
+
+# Install packages
+"${PREFIX_PY3}"/bin/pip install --upgrade pip
+"${PREFIX_PY3}"/bin/pip install ipython matplotlib requests lxml
+
+report-info "Python installed to ${PREFIX_PY2} and ${PREFIX_PY3}."

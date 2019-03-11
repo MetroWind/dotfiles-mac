@@ -1,10 +1,12 @@
 = My Dot Files
 MetroWind <chris.corsair@gmail.com>
 
-image:https://dev.azure.com/metrowind/dotfiles/_apis/build/status/MetroWind.dotfiles-mac?branchName=Modulize[The
-Badge]
+image:https://img.shields.io/azure-devops/build/metrowind/dotfiles/1/Modulize.svg?label=Build[The
+build badge]
+image:https://img.shields.io/azure-devops/tests/metrowind/dotfiles/1.svg?label=Tests&compact_message[The
+test badge]
 image:https://img.shields.io/badge/Badge%20Rating-%E7%89%9B%E9%80%BC-brightgreen.svg?style=flat[The
-other badge]
+meta badge]
 
 All the cool projects have a build status badge, even if they don’t
 really need it.

@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: Dotfiles Testing Mac
+
+trigger:
+- master
+
+pool:
+  vmImage: 'macOS-10.13'
+
+steps:
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: "3.x"
+    addToPath: true
+
+- script: ./install.py --all --os mac --exclude mail
+  displayName: Install packages
+
+- script: |
+    pip install unittest-xml-reporting
+    ./test.py -s mac --xml result.xml
+  displayName: Test installation
+  env: { IS_AZURE_PIPELINE: "1" }
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFiles: '**/result.xml'
+    testRunTitle: 'Publish test results for Installation'

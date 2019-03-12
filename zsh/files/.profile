@@ -10,15 +10,16 @@ export HOMEBREW_CC="clang"
 export PKG_CONFIG_PATH="/usr/local/Library/ENV/pkgconfig/10.9:${PKG_CONFIG_PATH}"
 
 # Python
-export VIRTUAL_ENV="$HOME/Python"
+export VIRTUAL_ENV2="$HOME/Python2"
 export VIRTUAL_ENV3="$HOME/Python3"
-export PATH="$VIRTUAL_ENV/bin:$VIRTUAL_ENV3/bin:$PATH"
+export PATH="${VIRTUAL_ENV3}/bin:${VIRTUAL_ENV2}/bin:$PATH"
 export PYTHONPATH="$HOME/.Python"
 
 # Node.js
 export PATH="/usr/local/share/npm/bin:$PATH"
 # Go
 export PATH="/usr/local/opt/go/libexec/bin/go:$PATH"
+
 export xpath="${HOME}/Documents/document/physics/lattice/programs/x"
 export xqcdio_const=${xpath}/constants
 

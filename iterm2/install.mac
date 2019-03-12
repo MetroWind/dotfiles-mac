@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+if [ ! -e /Applications/iTerm.app ]; then
+    # Download
+    DownloadPrefix="${TMPDIR}/metrowind-config-install"
+    mkdir -p "${DownloadPrefix}"
+    wget -O "${DownloadPrefix}/iterm2.zip" "https://iterm2.com/downloads/stable/latest"
+
+    # Install app
+    pushd .
+    cd /Applications
+    unzip "${DownloadPrefix}/iterm2.zip"
+    popd
+    rm "${DownloadPrefix}/iterm2.zip"
+else
+    report-ignored "iTerm 2 application exists."
+fi
+
+# Install config
+cp files/com.googlecode.iterm2.plist ${HOME}/Library/Preferences/
+# Somehow in my tests if I don’t read this file once, it’ll be
+# overwritten with old preference.
+head ${HOME}/Library/Preferences/com.googlecode.iterm2.plist > /dev/null

@@ -14,6 +14,9 @@
 (defconst my-org-files '())
 ;; Path to the org capture file.
 (defconst my-org-capture-file nil)
+;; Inline CSS to embed
+(defvar-local my-org-inline-css-file nil)
+
 ;; Path to the splash image for the splash buffer
 (defconst my-splash-image nil)
 ;; Set this to t to automatically go full screen on Mac.

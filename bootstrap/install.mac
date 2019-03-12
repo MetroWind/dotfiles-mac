@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Commandline tools will be installed by the homebrew script.
+# xcode-select --install
+
+# Homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install GNU stow
+brew install stow wget
+exit 0

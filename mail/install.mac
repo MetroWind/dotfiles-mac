@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+brew install offlineimap
+
+# Manually install Notmuch, because brew notmuch requires Emacs.
+brew install xapian talloc pkg-config glib gmime
+mkdir -p ${HOME}/programs
+pushd .
+cd ${HOME}/programs
+DownloadBase="https://notmuchmail.org/releases"
+Basename=$(curl "${DownloadBase}"/ | fgrep LATEST | tail -n1 | sed -E 's/.*href="([^"]+)">.*/\1/g')
+Dirname=$(echo "${Basename}" | sed -E 's/LATEST-(.*)\.tar\.gz/\1/g')
+
+echo "Downloadnig Notmuch from ${DownloadBase}/${Basename}..."
+wget -O notmuch.tar.gz "${DownloadBase}/${Basename}"
+tar -xf notmuch.tar.gz
+cd "${Dirname}"
+./configure --without-emacs --without-desktop --without-api-docs \
+    && make -j2 \
+    && make install
+cd ..
+rm notmuch.tar.gz
+popd
+
+report-info "Notmuch compiled at ${HOME}/programs/${Dirname}."
+
+# Install helpers and config
+mkdir -p $HOME/bin $HOME/.offlineimap
+stow -d files -t $HOME/bin --no-folding bin
+stow -d files -t $HOME/.offlineimap --no-folding .offlineimap
+mkdir -p ${HOME}/.config
+cp -vr files/.notmuch-config files/.offlineimaprc files/.config/* ${HOME}/.config
+
+# TODO: mini-notifier
+
+report-info "Should modify ~/.notmuch-config, ~/.offlineimaprc, and ~/.config/getmails.yaml for your mail setup."

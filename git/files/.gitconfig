@@ -26,8 +26,8 @@
   untracked = cyan
 
 [alias]
-  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
-  topo = log --graph --all --decorate --simplify-by-decoration --oneline --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --all --date=short
+  topo = log --graph --all --decorate --simplify-by-decoration --oneline --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=short
   stat = status -sb
   discard = stash save --keep-index Discarded
 
@@ -36,3 +36,5 @@
 	logOutputEncoding = utf-8
 [push]
 	default = simple
+[log]
+	date = iso

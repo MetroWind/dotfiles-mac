@@ -23,7 +23,10 @@
   :config
   (add-to-list 'vc-handled-backends 'git))
 
-(use-package magit :commands magit-status)
+(use-package magit
+  :commands magit-status
+  :config
+  (setq magit-log-margin '(t "%Y-%m-%d" magit-log-margin-width t 14)))
 
 (use-package compile
   :bind ("M-C" . compile)

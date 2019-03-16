@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+brew install gnupg
+
+# Copy files
+cp -rv files/.* ${HOME}/
+
+report-info "You should set default key in ~/.gnupg/gpg.conf."
+report-info "You should set SSH authentication key in ~/.gnupg/sshcontrol."

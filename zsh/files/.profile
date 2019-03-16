@@ -25,3 +25,8 @@ export xqcdio_const=${xpath}/constants
 
 # LilyPond
 export PATH="/Applications/LilyPond.app/Contents/Resources/bin:$PATH"
+
+# GPG agent
+if which gpgconf >& /dev/null; then
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+fi

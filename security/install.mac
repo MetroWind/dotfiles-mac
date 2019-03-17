@@ -5,7 +5,7 @@ source ../lib/report.sh
 brew install gnupg pinentry-mac
 
 # Copy files
-cp -rv files/.* ${HOME}/
+cp -rv files/.{gnupg,ssh} ${HOME}/
 
 # Run this to create the sshcontrol file.
 gpg-connect-agent /bye

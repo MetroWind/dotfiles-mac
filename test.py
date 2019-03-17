@@ -8,6 +8,7 @@ import unittest
 if sys.version_info.major < 3:
     import imp
 else:
+    import importlib.machinery
     import importlib.util
 
 import install
@@ -21,9 +22,15 @@ def importFile(name, path):
         with open(path, 'r') as f:
             return imp.load_module(name, f, path, (".py", 'r', imp.PY_SOURCE))
     else:
-        Spec = importlib.util.spec_from_file_location(name, path)
+        # This seems to be the only correct way to import an arbitrary file in
+        # Python 3.4+. For any other way, the imported module itself is fine,
+        # but calling inspect.getsourcefile(<some_name_in_module>) throws an
+        # exception...
+        Loader = importlib.machinery.SourceFileLoader(name, path)
+        Spec = importlib.util.spec_from_loader(Loader.name, Loader)
         Module = importlib.util.module_from_spec(Spec)
-        Spec.loader.exec_module(Module)
+        Loader.exec_module(Module)
+        sys.modules[name] = Module
         return Module
 
 def getTestClasses(os_type):

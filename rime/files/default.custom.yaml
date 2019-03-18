@@ -1,0 +1,16 @@
+patch:
+  schema_list:
+    - schema: double_pinyin        # 自然碼雙拼
+
+  "menu/page_size": 5
+
+  switcher:
+    caption: 〔方案選單〕
+    hotkeys:
+      - Control+grave
+    save_options:
+      - simplification
+
+  "punctuator/half_shape/~": "~"
+  "punctuator/half_shape/^": "⋯⋯"
+  "punctuator/half_shape/_": "⸺"

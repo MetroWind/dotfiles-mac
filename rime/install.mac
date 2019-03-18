@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+brew cask install squirrel
+
+# Copy files
+mkdir -pv ${HOME}/Library/Rime
+stow -d files -t ${HOME}/Library/Rime --no-folding .

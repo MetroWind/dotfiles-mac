@@ -17,7 +17,12 @@ echo "Downloadnig Notmuch from ${DownloadBase}/${Basename}..."
 wget -O notmuch.tar.gz "${DownloadBase}/${Basename}"
 tar -xf notmuch.tar.gz
 cd "${Dirname}"
-./configure --without-emacs --without-desktop --without-api-docs \
+# Libffi from homebrew is not linked to /usr/local, therefore by
+# default pkg-config would not be able to find it. One of Notmuch’s
+# dependencies, libgmime, needs this.
+PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig" \
+    ./configure --prefix=/usr/local --without-emacs --without-desktop \
+    --without-api-docs \
     && make -j2 \
     && make install
 cd ..

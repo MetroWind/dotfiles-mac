@@ -8,8 +8,6 @@ sys.path.append(os.path.join("..", "lib"))
 import utils
 
 class TestInstallMail(utils.ConfigInstallTest):
-    # Notmuch 0.28.3 complains about not finding gmime.
-    @unittest.expectedFailure
     def test_executable(self):
         self.assertTrue(os.path.exists(os.path.join(
             os.getenv("HOME"), "bin", "getmails.py")))

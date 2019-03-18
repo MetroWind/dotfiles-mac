@@ -26,7 +26,35 @@
 (use-package magit
   :commands magit-status
   :config
-  (setq magit-log-margin '(t "%Y-%m-%d" magit-log-margin-width t 14)))
+  (setq magit-log-margin '(t "%Y-%m-%d" magit-log-margin-width t 14))
+
+  (if (boundp 'transient-default-level)
+      ;; Transient replaces the deprecated magit popup.
+      (progn
+        ;; The default GPG sign option prompt for a key choice (the
+        ;; option is at transient level 5, so it’s hidden by default).
+        ;; Change the enabling key to “=S”.
+        (transient-suffix-put 'magit-commit "-S" :key "=S")
+        (transient-suffix-put 'magit-rebase "-S" :key "=S")
+        (transient-suffix-put 'magit-cherry-pick "-S" :key "=S")
+        ;; Add “-S” to sign using the default GPG key specified in Git
+        ;; config.
+        (transient-insert-suffix 'magit-commit "=S"
+          '(1 "-S" "Sign using GPG’s default key" "--gpg-sign"))
+        (transient-insert-suffix 'magit-rebase "=S"
+          '(1 "-S" "Sign using GPG’s default key" "--gpg-sign"))
+        (transient-insert-suffix 'magit-cherry-pick "=S"
+          '(1 "-S" "Sign using GPG’s default key" "--gpg-sign"))
+
+        (setq transient-display-buffer-action '(display-buffer-below-selected)))
+    ;; Magit popup is deprecated
+    (progn
+      (magit-define-popup-switch 'magit-commit-popup ?S
+        "Sign commit using default key" "--gpg-sign")
+      (magit-define-popup-switch 'magit-rebase-popup ?S
+        "Sign commit using default key" "--gpg-sign")
+      (magit-define-popup-switch 'magit-cherry-pick-popup ?S
+        "Sign commit using default key" "--gpg-sign"))))
 
 (use-package compile
   :bind ("M-C" . compile)

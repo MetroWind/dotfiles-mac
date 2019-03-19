@@ -42,6 +42,14 @@
   ;;                  'org-hide nil
   ;;                  :foreground "#2e3735"))))
 
+  ;; Enable code execution
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (shell . t)
+     (python . t)
+     (sqlite . t)))
+
   ;; Export settings
   ;; Use better engine for LaTeX
   (setq org-latex-pdf-process

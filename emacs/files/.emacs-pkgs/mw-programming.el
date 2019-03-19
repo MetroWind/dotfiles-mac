@@ -80,10 +80,17 @@
   (setq-default whitespace-active-style my-whitespace-style)
   (setq-default whitespace-line-column 80))
 
-(use-package indent-guide
-  :hook (yaml-mode . indent-guide-mode)
+(use-package highlight-indent-guides
+  :hook (yaml-mode . highlight-indent-guides-mode)
   :config
-  (setq indent-guide-char "⎸"))
+  (setq highlight-indent-guides-method 'fill)
+  ;; Let theme determine indent highlight color
+  (setq highlight-indent-guides-auto-enabled nil))
+
+;; (use-package indent-guide
+;;   :hook (yaml-mode . indent-guide-mode)
+;;   :config
+;;   (setq indent-guide-char "⎸"))
 
 (use-package python
   ;; There’s a bug in python-mode that fills the 1st line of a

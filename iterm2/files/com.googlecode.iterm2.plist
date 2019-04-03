@@ -31,13 +31,13 @@
 		  <key>Alpha Component</key>
 		  <real>1</real>
 		  <key>Blue Component</key>
-		  <real>0.31372549019607843</real>
+		  <real>0.0</real>
 		  <key>Color Space</key>
 		  <string>sRGB</string>
 		  <key>Green Component</key>
-		  <real>0.25490196078431371</real>
+		  <real>0.0</real>
 		  <key>Red Component</key>
-		  <real>0.19607843137254902</real>
+		  <real>0.0</real>
 		</dict>
 		<key>Ansi 1 Color</key>
 		<dict>
@@ -202,12 +202,16 @@
 		</dict>
 		<key>Ansi 8 Color</key>
 		<dict>
+		  <key>Alpha Component</key>
+		  <real>1</real>
 		  <key>Blue Component</key>
-		  <real>0.068946248255716866</real>
+		  <real>0.31372549019607843</real>
+		  <key>Color Space</key>
+		  <string>sRGB</string>
 		  <key>Green Component</key>
-		  <real>0.2821471291866029</real>
+		  <real>0.25490196078431371</real>
 		  <key>Red Component</key>
-		  <real>0.23631863676322903</real>
+		  <real>0.19607843137254902</real>
 		</dict>
 		<key>Ansi 9 Color</key>
 		<dict>
@@ -412,6 +416,34 @@
 			<key>Text</key>
 			<string>0x7f</string>
 		  </dict>
+		  <key>0x68-0x100000</key>
+		  <dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>h</string>
+		  </dict>
+		  <key>0x6a-0x100000</key>
+		  <dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>j</string>
+		  </dict>
+		  <key>0x6b-0x100000</key>
+		  <dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>k</string>
+		  </dict>
+		  <key>0x6c-0x100000</key>
+		  <dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>l</string>
+		  </dict>
 		  <key>0xf700-0x220000</key>
 		  <dict>
 			<key>Action</key>
@@ -432,13 +464,6 @@
 			<integer>10</integer>
 			<key>Text</key>
 			<string>[1;6A</string>
-		  </dict>
-		  <key>0xf700-0x280000</key>
-		  <dict>
-			<key>Action</key>
-			<integer>11</integer>
-			<key>Text</key>
-			<string>0x1b 0x1b 0x5b 0x41</string>
 		  </dict>
 		  <key>0xf701-0x220000</key>
 		  <dict>
@@ -461,13 +486,6 @@
 			<key>Text</key>
 			<string>[1;6B</string>
 		  </dict>
-		  <key>0xf701-0x280000</key>
-		  <dict>
-			<key>Action</key>
-			<integer>11</integer>
-			<key>Text</key>
-			<string>0x1b 0x1b 0x5b 0x42</string>
-		  </dict>
 		  <key>0xf702-0x220000</key>
 		  <dict>
 			<key>Action</key>
@@ -489,13 +507,6 @@
 			<key>Text</key>
 			<string>[1;6D</string>
 		  </dict>
-		  <key>0xf702-0x280000</key>
-		  <dict>
-			<key>Action</key>
-			<integer>11</integer>
-			<key>Text</key>
-			<string>0x1b 0x1b 0x5b 0x44</string>
-		  </dict>
 		  <key>0xf703-0x220000</key>
 		  <dict>
 			<key>Action</key>
@@ -516,13 +527,6 @@
 			<integer>10</integer>
 			<key>Text</key>
 			<string>[1;6C</string>
-		  </dict>
-		  <key>0xf703-0x280000</key>
-		  <dict>
-			<key>Action</key>
-			<integer>11</integer>
-			<key>Text</key>
-			<string>0x1b 0x1b 0x5b 0x43</string>
 		  </dict>
 		  <key>0xf704-0x20000</key>
 		  <dict>

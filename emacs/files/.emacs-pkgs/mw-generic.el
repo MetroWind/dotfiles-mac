@@ -119,13 +119,15 @@
   (delq 'yas-installed-snippets-dir yas-snippet-dirs)
   (yas-global-mode 1))
 
+(use-package tsmanip
+  :commands (tsmanip-timestamp-increase tsmanip-timestamp-decrease))
+
 (use-package beancount
   :mode ("\\.beancount\\'" . beancount-mode)
   :hook (beancount-mode . (lambda () (yas-activate-extra-mode 'beancount-mode)))
   :bind (:map beancount-mode-map
          ("S-<up>" . tsmanip-timestamp-increase)
-         ("S-<down>" . tsmanip-timestamp-decrease))
-  :config (use-package tsmanip))
+         ("S-<down>" . tsmanip-timestamp-decrease)))
 
 (use-package projectile
   :demand t

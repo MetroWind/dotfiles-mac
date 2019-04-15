@@ -27,6 +27,7 @@
   :commands magit-status
   :config
   (setq magit-log-margin '(t "%Y-%m-%d" magit-log-margin-width t 14))
+  (setq magit-bury-buffer-function 'quit-window)
 
   (if (boundp 'transient-default-level)
       ;; Transient replaces the deprecated magit popup.
@@ -103,12 +104,9 @@
   :hook (python-mode . (lambda () (setq-local fill-column 80)))
   :mode ("\\.py\\'" . python-mode)
   :config
-  (message "Setting up python mode...")
-  (setq py-python-command "/Users/sun/Python3/bin/python3")
 ;; (setq python-environment-virtualenv
 ;;       (append python-environment-virtualenv
 ;;               '("--python" "/Users/sun/Python3/bin/python3")))
-  (setq-default python-shell-interpreter "python3")
   (setq python-fill-docstring-style 'pep-257-nn))
 
 (use-package anaconda-mode

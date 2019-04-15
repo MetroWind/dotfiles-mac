@@ -50,8 +50,7 @@
   (setq company-async-timeout 5)
   (setq company-clang-arguments '("-std=c++14"))
   (setq company-backends
-        '(company-elisp
-          ;; When there’s a Jedi update, delete
+        '(;; When there’s a Jedi update, delete
           ;; ~/.emacs.d/anaconda-mode to let Anaconda use the new
           ;; Jedi.
           company-anaconda
@@ -61,7 +60,8 @@
           (company-files company-keywords)
           company-capf
           (company-dabbrev-code company-dabbrev)))
-  (use-package company-quickhelp
+  (use-package company-quickheemlp
+    :disabled
     :ensure t
     :demand t
     :config

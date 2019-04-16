@@ -29,34 +29,25 @@
   :config
   (setq ibuffer-saved-filter-groups
         (quote (("default"
-                 ("TeX" (name . ".*\\.tex$"))
+                 ("Documents" (or (name . ".*\\.tex$")
+                                  (mode . adoc-mode)
+                                  (mode . markdown-mode)
+                                  (derived-mode . org-mode)))
                  ("Dired" (mode . dired-mode))
                  ("Programming" (or
-                                 (mode . python-mode)
-                                 (mode . pov-mode)
-                                 (mode . asy-mode)
-                                 (mode . c-mode)
-                                 (mode . c++-mode)
-                                 (mode . emacs-lisp-mode)
-                                 (mode . scheme-mode)
-                                 (mode . sh-mode)
-                                 (mode . makefile-mode)
+                                 (derived-mode . prog-mode)
                                  ))
-                 ("Process" (mode . comint-mode))
-                 ("Gnus" (or
-                          (mode . message-mode)
-                          (mode . bbdb-mode)
-                          (mode . mail-mode)
-                          (mode . gnus-group-mode)
-                          (mode . gnus-summary-mode)
-                          (mode . gnus-article-mode)
-                          (name . "^\\.bbdb$")
-                          (name . "^\\.newsrc-dribble")))
+                 ("Version control" (derived-mode . magit-mode))
+                 ("Process" (derived-mode . comint-mode))
+                 ("Email" (or
+                           (derived-mode . message-mode)
+                           (derived-mode . mail-mode)
+                           (mode . notmuch-show-mode)
+                           (mode . notmuch-hello-mode)
+                           (mode . gnus-group-mode)
+                           (mode . gnus-summary-mode)
+                           (mode . gnus-article-mode)))
                  ("ERC" (mode . erc-mode))
-                 ("Planner" (or
-                             (name . "^\\*Calendar\\*$")
-                             (name . "^diary$")
-                             (mode . muse-mode)))
                  ("Emacs" (or
                            (name . "^\\*scratch\\*$")
                            (name . "^\\*Messages\\*$")
@@ -65,7 +56,10 @@
                            (mode . apropos-mode)
                            (mode . help-mode)
                            ))
+                 ("Temp" (or
+                          (mode . helm-major-mode)))
                  ))))
+  (setq ibuffer-show-empty-filter-groups nil)
   :hook (ibuffer-mode
          . (lambda ()
              (ibuffer-switch-to-saved-filter-groups "default"))))

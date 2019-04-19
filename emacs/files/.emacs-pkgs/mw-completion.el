@@ -50,10 +50,7 @@
   (setq company-async-timeout 5)
   (setq company-clang-arguments '("-std=c++14"))
   (setq company-backends
-        '(;; When there’s a Jedi update, delete
-          ;; ~/.emacs.d/anaconda-mode to let Anaconda use the new
-          ;; Jedi.
-          company-anaconda
+        '(company-lsp
           (company-clang company-xcode)
           (company-gtags company-etags)
           company-nxml company-css
@@ -66,14 +63,22 @@
     :demand t
     :config
     (company-quickhelp-mode 1))
+  )
 
-  ;; ;; Eliminate anaconda’s “too many open files” error
-  ;; ;; (doens’t work)
-  ;; (add-to-list 'url-proxy-services
-  ;;              '("no_proxy" . "^\\(127.0.0.1\\|localhost\\|10.*\\)"))
-  ;; ;; Maybe this?
-  ;; (setq url-http-attempt-keepalives nil)
-)
+;; For python, python-language-server is required. Install:
+;;
+;;   pip install 'python-language-server[pycodestyle]'
+(use-package lsp-mode
+  :ensure t
+  :hook (python-mode . lsp)
+  :config
+  ;; Don’t use yasnippet to expand function calls.
+  (setq lsp-pyls-plugins-jedi-completion-include-params nil)
+  ;; Disable style checking
+  (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+  (setq lsp-prefer-flymake :none))
+
+(use-package company-lsp :commands company-lsp :ensure t)
 
 (use-package jedi-core
   :disabled

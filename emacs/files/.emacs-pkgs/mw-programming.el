@@ -110,6 +110,7 @@
   (setq python-fill-docstring-style 'pep-257-nn))
 
 (use-package anaconda-mode
+  :disabled
   :if (ensure-single-package-installed 'anaconda-mode)
   :after (python eldoc)
   :hook (python-mode

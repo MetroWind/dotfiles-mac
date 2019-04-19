@@ -26,6 +26,7 @@ rm -r "${TMPDIR}/python-install"
 
 # Install packages
 "${PREFIX_PY3}"/bin/pip install --upgrade pip
-"${PREFIX_PY3}"/bin/pip install ipython matplotlib requests lxml
+"${PREFIX_PY3}"/bin/pip install ipython matplotlib requests lxml \
+               'python-language-server[pycodestyle]'
 
 report-info "Python installed to ${PREFIX_PY2} and ${PREFIX_PY3}."

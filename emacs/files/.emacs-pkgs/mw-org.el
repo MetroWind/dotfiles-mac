@@ -17,7 +17,13 @@
   (setq org-icalendar-include-todo t)
   (setq org-startup-folded nil)           ;Show all content on startup.
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "WAIT(w@)" "|" "DONE(d)" "CANCELED(c)")))
+        '((sequence
+           "TODO(t)"
+           "SOMEDAY(s)"                    ; Basically means “never will”
+           "WAIT(w@)" "|"
+           "POTTED(p@)"                    ; 已甩锅
+           "DONE(d)"
+           "CANCELED(c)")))
   (setq org-agenda-dim-blocked-tasks t)
   (setq org-enforce-todo-dependencies t)
   (setq org-clock-idle-time 10)
@@ -33,6 +39,8 @@
   ;; Set `org-capture'
   (if my-org-capture-file
       (setq org-default-notes-file my-org-capture-file))
+  ;; Don’t mess with my windows!!!!!!!!!!!!!!
+  (setq org-agenda-window-setup 'other-window)
 
   (setq org-hide-leading-stars t)
   ;; (if (window-system)

@@ -5,7 +5,7 @@
   :mode ("\\.org$" . org-mode)
   :bind (("C-<f12>" . org-remember)
          :map org-mode-map
-         ("C-c C-a" . show-all))
+         ("C-c C-a" . outline-show-all))
   :config
 
 ;; (define-key global-map "\C-cl" 'org-store-link)

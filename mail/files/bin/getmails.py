@@ -115,7 +115,7 @@ def autoRun():
         ConfFile = findConfig()
         if os.path.exists(ConfFile):
             with open(ConfFile, 'r') as f:
-                Config = yaml.load(f)
+                Config = yaml.load(f, Loader=yaml.FullLoader)
         else:
             Logger.error("Failed to find config file at {}.".format(ConfFile))
             return 1

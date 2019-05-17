@@ -1,5 +1,10 @@
 (require 'cl)
 
+(defun null-or-unboundp (symbol)
+  (if (boundp symbol)
+      (null (symbol-value symbol))
+    t))
+
 (defun match-paren (arg)
   "Go to the matching paren if on a paren; otherwise insert %."
   (interactive "p")

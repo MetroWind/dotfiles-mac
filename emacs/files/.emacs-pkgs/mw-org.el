@@ -132,22 +132,24 @@
 
   ;; Embed inline CSS read from a file.
   (defun my-org-inline-css-hook (exporter)
-  "Insert custom inline css"
-  (when (eq exporter 'html)
-    (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
-           (path (concat dir "style.css"))
-           (homestyle (and (or (null dir) (null (file-exists-p path)))
-                           (not (null my-org-inline-css-file))))
-           (final (if homestyle my-org-inline-css-file path)))
-      (setq org-html-head-include-default-style nil)
-      (setq org-html-head (concat
-                           "<style type=\"text/css\">\n"
-                           "<!--/*--><![CDATA[/*><!--*/\n"
-                           (with-temp-buffer
-                             (insert-file-contents final)
-                             (buffer-string))
-                           "/*]]>*/-->\n"
-                           "</style>\n")))))
+    "Insert custom inline css"
+    (when (eq exporter 'html)
+      (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
+             (path (concat dir "style.css"))
+             (homestyle (and (or (null dir) (null (file-exists-p path)))
+                             (not (null-or-unboundp 'my-org-inline-css-file))))
+             (final (if homestyle my-org-inline-css-file path)))
+        (if (file-exists-p final)
+            (progn
+              (setq-local org-html-head-include-default-style nil)
+              (setq-local org-html-head (concat
+                                         "<style type=\"text/css\">\n"
+                                         "<!--/*--><![CDATA[/*><!--*/\n"
+                                         (with-temp-buffer
+                                           (insert-file-contents final)
+                                           (buffer-string))
+                                         "/*]]>*/-->\n"
+                                         "</style>\n")))))))
 
   (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)
   )

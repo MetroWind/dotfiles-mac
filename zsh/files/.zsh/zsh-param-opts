@@ -17,7 +17,9 @@ setopt PUSHD_IGNORE_DUPS
 setopt GLOB_COMPLETE
 setopt LIST_PACKED
 setopt NO_LIST_ROWS_FIRST
-setopt APPEND_HISTORY
+# The history entry is written out to the file after the command is
+# finished.
+setopt INC_APPEND_HISTORY_TIME
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_DUPS

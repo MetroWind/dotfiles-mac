@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+if [ ! -e /Applications/Firefox.app ]; then
+    # Download
+    DownloadPrefix="${TMPDIR}/metrowind-config-install"
+    mkdir -p "${DownloadPrefix}"
+    wget -O "${DownloadPrefix}/firefox.dmg" "https://download.mozilla.org/?product=firefox-latest-ssl&os=osx&lang=en-US"
+
+    # Install app
+    hdiutil attach "${DownloadPrefix}/firefox.dmg" -mountpoint /Volumes/firefox
+    echo "Copying Firefox app bundle..."
+    cp -r /Volumes/firefox/Firefox.app /Applications/
+    hdiutil detach /Volumes/firefox
+    rm "${DownloadPrefix}/firefox.dmg"
+else
+    report-ignored "Firefox application exists."
+fi
+
+# Install config
+"/Applications/Firefox.app/Contents/MacOS/firefox" -CreateProfile default
+# The following line currently doesn’t work, Because Firefox always
+# creates a new profile called “default-release”. Could be a bug in
+# v67.
+ProfileDir=$(ls -d -1 "${HOME}/Library/Application Support/Firefox/Profiles"/*.default | head -n1)
+ln -s "${PWD}/files/user.js" "${ProfileDir}/"
+
+report-info "The user style is not installed. You'll need to install manually."

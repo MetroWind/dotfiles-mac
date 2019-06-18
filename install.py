@@ -66,7 +66,7 @@ def promptInstallSections(sections, os_type, prompt_packages=True):
     print()
 
 AllPkgs = ["zsh", "git", "python", "emacs", "tmux", "iterm2", "bin", "mail",
-           "security", "rime"]
+           "security", "rime", "firefox"]
 
 def main():
     import argparse
@@ -82,11 +82,36 @@ def main():
     Parser.add_argument("-e", "--exclude", dest="Excludes", default=[],
                         nargs="+", metavar="PKG",
                         help="Exclude PKGs from installation.")
+    Parser.add_argument("-o", "--only", dest="Only", default=None,
+                        nargs="+", metavar="PKG",
+                        help="Install only PKGs.")
 
     Args = Parser.parse_args()
 
-    promptInstallSections([Pkg for Pkg in AllPkgs if Pkg not in Args.Excludes],
-                          utils.OSType(Args.OS), not Args.All)
+    Prompt = True
+    if Args.All is True:
+        Prompt = False
+
+    if Args.Only is not None:
+        Prompt = False
+
+    Excludes = set(Args.Excludes)
+
+    Pkgs = AllPkgs
+    AllPkgsSet = set(AllPkgs)
+    if Args.Only is not None:
+        Pkgs = []
+        for Pkg in Args.Only:
+            if Pkg in AllPkgsSet:
+                if Pkg in Excludes:
+                    print("Excluding {}...".format(Pkg))
+                else:
+                    Pkgs.append(Pkg)
+            else:
+                print("Ignoring unknown package '{}'...".format(Pkg))
+
+
+    promptInstallSections(Pkgs, utils.OSType(Args.OS), Prompt)
     return 0
 
 if __name__ == "__main__":

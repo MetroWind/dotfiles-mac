@@ -1,0 +1,161 @@
+[
+	{
+		"installDate": 1513897460329,
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"name": "知乎字体修正",
+		"sections": [
+			{
+				"code": "html body, html input, html textarea, html select, html button\n{\n    font-family: Lato, 'Helvetica Neue', Helvetica, Arial, \"Source Han Sans SC\", sans-serif;\n}\n\nh1.QuestionHeader-title, .AnswerAuthor .AnswerAuthor-user a.UserLink-link\n{\n    font-family: Baskerville, \"Source Han Serif\", serif;\n}\n\n.zm-editable-content, .zm-item-rich-text > div:first-child\n{\n    font-size: 13pt;\n}\n\n.zu-top\n{\n    background: #0767c8;\n}\n\n.zu-top-search-input\n{\n    box-shadow: none;\n}\n\n.zu-top-search-form .zu-top-search-button\n{\n    box-shadow: none;\n    background: #0e78e7;\n}\n\n.zu-top-add-question\n{\n    box-shadow: none;\n    background: #0e78e7;\n}",
+				"urls": [],
+				"urlPrefixes": [],
+				"domains": [
+					"zhihu.com"
+				],
+				"regexps": []
+			}
+		],
+		"id": 1
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"name": "Bugzilla",
+		"sections": [
+			{
+				"code": ":root\n{\n    --color-bg: #ecf0f1;\n    --color-fg: #2c3e50;\n    --color-deco: #2980b9;\n    --color-deco-hilight: #3498db;\n    --color-ui: #95a5a6;\n    --color-light-ui: #bdc3c7;\n    --main-width: 900px;\n}\n\nhtml, body\n{\n    background-color: var(--color-bg);\n    color: var(--color-fg);\n}\n\nbody\n{\n    background: none;\n    max-width: var(--main-width);\n    margin-left: auto;\n    margin-right: auto;\n}\n\na, a:visited\n{\n    color: var(--color-deco);\n    text-decoration: none;\n}\n\na:hover\n{\n    background-color: var(--color-deco);\n    color: var(--color-bg);\n}\n\nbody, td, th, input\n{\n    font-family: -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Helvetica Neue\", Arial, \"Noto Sans CJK SC\", \"Source Han Sans SC\", sans-serif;\n    font-size: 13px;\n}\n\npre, code, .bz_comment_text, .uneditable_textarea, tbody.file pre, textarea\n{\n    font-family: \"Source Code Pro\", \"TheSansMono\", \"The Sans Mono\", \"Input Mono\", \"Fira Code\", \"Inconsolata\", \"Menlo\", \"Monaco\", \"Consolas\", monospace;\n    font-size: 100%;\n}\n\nh1#MainTitle\n{\n    text-align: center;\n    font-size: 500%;\n    font-weight: lighter;\n}\n\ndiv#banner\n{\n    display: none;\n}\n\n#header\n{\n    /* font-size: 90%; */\n    text-align: center;\n}\n\n#header .links\n{\n    border: none;\n    margin-bottom: 20px;\n    background-color: var(--color-deco);\n    color: var(--color-bg);\n    border-radius: 10px;\n}\n\n#header .links a\n{\n    color: var(--color-bg);\n    text-decoration: underline;\n}\n\n#header .links a:visited\n{\n    color: inherit;\n}\n\ndiv.navigation\n{\n    display: none;\n}\n\n.bz_alias_short_desc_container\n{\n    font-weight: 300;\n    background-color: transparent;\n    border-style: none;\n    font-size: 200%;\n    margin-bottom: 20px;\n    margin-bottom: 40px;\n    margin-top: 20px;\n}\n\n.bz_alias_short_desc_container a b\n{\n    font-weight: 300;\n}\n\ntable.edit_form > tbody > tr:nth-child(2)\n{\n    display: none;\n}\n\n.field_label, .field_label b, .field_value, form#Create th, form#Create td\n{\n    font-weight: normal;\n    vertical-align: middle;\n    background-color: transparent;\n}\n\nselect, select.required\n{\n    /* disable default appearance */\n    outline: none;\n    -moz-appearance: none;\n    -webkit-appearance: none;\n    appearance: none;\n\n    background-image: url(\"data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20448%22%20enable-background%3D%22new%200%200%20256%20448%22%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E.arrow%7Bfill%3A@{arrow}%3B%7D%3C%2Fstyle%3E%3Cpath%20class%3D%22arrow%22%20d%3D%22M255.9%20168c0-4.2-1.6-7.9-4.8-11.2-3.2-3.2-6.9-4.8-11.2-4.8H16c-4.2%200-7.9%201.6-11.2%204.8S0%20163.8%200%20168c0%204.4%201.6%208.2%204.8%2011.4l112%20112c3.1%203.1%206.8%204.6%2011.2%204.6%204.4%200%208.2-1.5%2011.4-4.6l112-112c3-3.2%204.5-7%204.5-11.4z%22%2F%3E%3C%2Fsvg%3E%0A\");\n    background-position: right 10px center;\n    background-repeat: no-repeat;\n    background-size: auto 50%;\n    border-radius:2px;\n    border: none;\n    padding: 5px;\n    min-width: 4em;\n    background-color: var(--color-ui);\n    color: var(--color-bg);\n}\n\ninput.text_input, input.txt, input.yui-ac-input\n{\n    background-color: transparent;\n    border: none;\n    border-bottom: 2px solid var(--color-ui);\n    color: var(--color-fg);\n}\n\n#header form input.txt\n{\n    color: var(--color-bg);\n}\n\ninput[type=\"submit\"]\n{\n    outline: none;\n    -moz-appearance: none;\n    -webkit-appearance: none;\n    appearance: none;\n\n    border: none;\n    background-color: var(--color-ui);\n    color: var(--color-bg);\n    padding: 6px 10px 6px 10px;\n    border-radius: 3px;\n}\n\n#header form input[type=\"submit\"]\n{\n    background-color: var(--color-deco-hilight);\n}\n\ntextarea\n{\n    background-color: transparent;\n    border: none;\n    border-left: 4px solid var(--color-ui);\n}\n\n.bz_show_bug_column .field_section_label\n{\n    font-weight: normal;\n    font-size: 100%;\n    font-style: italic;\n}\n\n#add_comment > label > b\n{\n    font-weight: normal;\n    font-style: italic;\n    font-size: 120%;\n}\n\n.bz_show_bug_column td, th\n{\n    font-size: 100%;\n}\n\n#attachment_table td, .bz_sighting_table th, .bz_sighting_table td, .bz_time_tracking_table th, .bz_time_tracking_table td\n{\n    border: none;\n    font-size: 100%;\n}\n\n#attachment_table th, .bz_attach_footer, .bz_sighting_table th, .bz_sighting_footer, .bz_time_tracking_table th\n{\n    background-color: transparent;\n}\n\n#attachment_table, #sighting_table, #sighting_table_footer\n{\n    border: none;\n}\n\n#attachment_table b\n{\n    font-weight: normal;\n}\n\n#attachment_table tr#a0\n{\n    border-bottom: 1px solid var(--color-light-ui);\n}\n\n#attachment_table tr#a0 > th\n{\n    text-align: center;\n    font-weight: normal;\n    color: var(--color-fg);\n}\n\ntable#bz_big_form_parts, div#add_comment, div#add_comment > table, textarea#comment\n{\n    width: 100%;\n}\n\n.bz_comment\n{\n    border: none;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n\n.bz_comment_head, .bz_first_comment_head\n{\n    background-color: var(--color-light-ui);\n    padding: 20px;\n    box-sizing: border-box;\n}\n\n.bz_activity\n{\n    background-color: var(--color-light-ui);\n    border: none;\n    font-size: 100%;\n    padding: 20px;\n}\n\n#footer\n{\n    display: none;\n}",
+				"domains": [
+					"bugzilla.nbttech.com"
+				]
+			},
+			{
+				"code": "/* Bug list page */\n\ntable.bz_buglist\n{\n    margin-top: 30px;\n    margin-bottom: 30px;\n}\n\n#bugzilla-body > hr\n{\n    display: none;\n}\n\nul.search_description\n{\n    margin-top: 30px;\n    margin-bottom: 30px;\n}\n\nul.search_description > li > strong\n{\n    font-style: italic;\n    font-weight: normal;\n}\n\n.bz_row_even, .bz_row_odd\n{\n    color: inherit;\n    background-color: inherit;\n}\n\n.bz_enhancement\n{\n    background-color: inherit;\n}\n\ntable.bz_buglist th\n{\n    font-weight: normal;\n    font-style: italic;\n\tborder-bottom: 1px solid var(--color-light-ui);\n}\n\n#bugzilla-body > table:last-of-type\n{\n    display: none;\n}\n",
+				"urlPrefixes": [
+					"https://bugzilla.nbttech.com/buglist.cgi"
+				]
+			}
+		],
+		"id": 2,
+		"updateDate": 1553632806404
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"name": "Geekhack Typography",
+		"sections": [
+			{
+				"code": ":root\n{\n    --main-font: \"IBM Plex Sans\", sans-serif;\n    --font-serif: \"IBM Plex Serif\", serif;\n    --width: 660pt;\n    --font-size: 13pt;\n}\n\nbody\n{\n    font-family: var(--main-font);\n}\n\ndiv#wrapper\n{\n    max-width: var(--width);\n}\n\n.navigate_section\n{\n    font-weight: bolder;\n}\n\n.catbg, .catbg2, tr.catbg td, tr.catbg2 td, tr.catbg th, tr.catbg2 th\n{\n    font-family: var(--main-font);\n}\n\nh3.catbg, h3.catbg2, h3.titlebg, h4.titlebg, h4.catbg, h5\n{\n    font-weight: normal;\n}\n\nh5\n{\n    font-size: var(--font-size);\n    line-height: 140%;\n}\n\n.poster > h4\n{\n    font-weight: normal;\n    font-family: var(--font-serif);\n    font-size: var(--font-size);\n}\n\ndiv.post\n{\n    font-size: var(--font-size);\n    line-height: 160%;\n}\n\nblockquote.bbc_standard_quote, blockquote.bbc_alternate_quote\n{\n    font-size: var(--font-size);\n    font-family: var(--font-serif);\n}\n\ntable.table_grid td\n{\n    padding: 8pt;\n}\n\ntd.subject span\n{\n    font-size: var(--font-size);\n}\n\ntd.subject span > a\n{\n    color: #ccc;\n}\n",
+				"domains": [
+					"geekhack.org"
+				]
+			}
+		],
+		"id": 3,
+		"updateDate": 1556052147014
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"name": "Reddit fix & typography",
+		"sections": [
+			{
+				"code": ".link .score\n{\n    margin: 0px;\n}\n\np.title, .link .title, .thing.stickied.link a.title\n\n{\n    font-family: \"Zilla Slab\", \"PT Serif\", serif;\n    font-weight: normal;\n    font-size: 1.4em;\n}",
+				"urls": [],
+				"urlPrefixes": [],
+				"domains": [
+					"reddit.com"
+				],
+				"regexps": []
+			}
+		],
+		"id": 4
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"name": "Review board typography",
+		"sections": [
+			{
+				"code": "/* Fonts */\nbody, .changedesc .body .diffed-text-area td\n{\n    font-family: \"IBM Plex Sans\", Lato, \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n\ntextarea, .rich-text, .editable.field-text-area\n{\n    font-family: \"IBM Plex Sans\", Lato, \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n    font-size: 14px;\n}\n\ncode, pre, .changedesc .body .changed td, .changedesc .body .changed th, .diff-file-info\n{\n    font-family: PragmataPro, \"Source Code Pro\", \"Fantasque Sans Mono\", \"The Sans Mono\", TheSansMono, \"Input Mono\", monospace;\n}\n\n.sidebyside pre\n{\n    font-size: 12px;\n}\n\n:root \n{\n    --bg-color: #324150;\n    --fg-color: #C0C7CE;\n    --comment-fg-color: #6B7887;\n    --link-color: #31C6FF;\n    --hilight-bg-color: #273644;\n    --lighter-bg-color: #535F6E;\n    --darker-bg-color: #273644;\n    --label-color: #ECA964;\n    --star-color: #FF96B3;\n    --good-color: #8DC85F;\n    --diff-bg-old: #D04245;\n    --diff-bg-new: #008C36;\n    --diff-fg-old: #FF96B3;\n    --diff-fg-new: #8DC85F;\n    --diff-bg-replace: #897500;\n    --diff-fg-replace: #ECA964;\n}\n\npre\n{\n    white-space: pre-wrap;\n    word-break: break-all;\n}\n\na, .box .header a, \n.review-request #review_request_details a,\n.reviewable-page #navbar a,\n#issue-summary-table tr td a,\n#diff_index table td a, \n.diff-index table td a, \n#reviews .review .reply-comments > li dl dt label a\n{\n    color: var(--link-color);\n}\n\na:hover, \n.box .header a:hover, \n.review-request #review_request_details a:hover,\n.reviewable-page #navbar a:hover,\n#issue-summary-table tr td a:hover,\n#diff_index table td a:hover,\n.diff-index table td a:hover,\n#reviews .review .reply-comments > li dl dt label a:hover\n{\n    color: var(--bg-color);\n    background: var(--link-color);\n}\n\n\n/* Style in general */\nbody\n{\n    background-color: var(--bg-color);\n    color: var(--fg-color);\n}\n\n.btn, input[type=\"button\"], input[type=\"submit\"]\n{\n    background: var(--hilight-bg-color);\n    color: var(--fg-color);\n    border: none;\n    text-shadow: none;\n}\n\n.btn:hover, input[type=\"button\"]:hover, input[type=\"submit\"]:hover\n{\n    background: unset;\n    color: unset;\n}\n.reviewable-page #headerbar\n{\n    border: none;\n    color: inherit;\n}\n\n.reviewable-page #topbar\n{\n    color: inherit;\n    background: none;\n}\n\n.reviewable-page #navbar-container\n{\n    background: none;\n}\n\n#navbar\n{\n    border: none;\n}\n\n.banner\n{\n    background: var(--hilight-bg-color);\n    border: none;\n}\n\n.box, .modalbox\n{\n    box-shadow: none;\n}\n\n.actions-container\n{\n    background: none;\n    border: none;\n}\n\n.actions a\n{\n    color: inherit;\n    background: var(--bg-color);\n}\n\n.actions a:hover\n{\n    color: inherit;\n    background: var(--hilight-bg-color);\n}\n\n.actions .menu\n{\n    background: var(--hilight-bg-color);\n    border: none;\n    overflow: hidden;\n    box-shadow: none;\n}\n\n.actions .menu li\n{\n    background: unset;\n}\n\n.actions .menu li a\n{\n    color: inherit;\n}\n\n.actions.page-tabs\n{\n    border: none;\n    background: none;\n}\n\n.actions.page-tabs li\n{\n    border: none;\n    background: none;\n}\n\n.actions.page-tabs li:hover\n{\n    border: none;\n    background: var(--darker-bg-color);\n}\n\n.actions.page-tabs li.active\n{\n    border: none;\n    background: var(--darker-bg-color);\n}\n\n.actions.page-tabs a, .actions.page-tabs a:hover\n{\n    background: none;\n}\n\n.review-request-header\n{\n    border: none;\n}\n\n.review-request .main\n{\n    background: var(--darker-bg-color);\n    border: none;\n}\n\n.review-request label, \n.review-request #review_request_details thead th, \n.review-request #status, \n.review-request #review_request_extra h3,\n.changedesc .body h3,\n#diff-details #diff_revision_label h1\n{\n    color: var(--label-color);\n}\n\n.review-request .required-flag\n{\n    color: var(--star-color);\n}\n\n.review-request .content .field-container > pre\n{\n    background: var(--bg-color);\n    border: none;\n    border-radius: 6px;\n}\n\n#issue-summary .issue-summary-header .issue-summary-tabs .issue-summary-tab label\n{\n    color: unset;\n}\n\n#issue-summary .issue-summary-header .issue-summary-tabs .issue-summary-tab.active, \n#issue-summary-table .no-issues td,\n#issue-summary .issue-summary-header .issue-summary-tabs .issue-summary-tab:hover\n{\n    background: var(--bg-color);\n    border: none;\n}\n\n#issue-summary-table\n{\n    border: none;\n}\n\n#issue-summary-table thead th,\n#issue-summary-table thead:hover th,\n#issue-summary-table .issue.resolved td,\n#issue-summary-table .issue.resolved:hover td,\n#issue-summary-table .issue.dropped td,\n#issue-summary-table .issue.dropped:hover td\n{\n    background: var(--bg-color);\n    border: none;\n}\n\n#issue-summary-table .issue.open td\n{\n    background: var(--bg-color);\n}\n\n#view_controls a, #view_controls a:hover\n{\n    background: var(--hilight-bg-color);\n    border: none;\n    color: unset;\n}\n\n#reviews .box.collapsed .box-inner, #reviews .box .box-inner\n{\n    background: var(--darker-bg-color);\n    border: none;\n}\n\n.changedesc.box, \n#reviews .review .box, .box, \n.modalbox\n{\n    background: none;\n}\n\n#reviews .box::before, #reviews .box::after\n{\n    content: unset;\n}\n\n.changedesc .body .changed\n{\n    background: unset;\n    border: none;\n}\n\n.changedesc .body .changed td\n{\n    background: unset;\n}\n\n.changedesc .body .changed .old-value .marker\n{\n    background: unset;\n    color: var(--diff-fg-old);\n}\n\n.changedesc .body .changed .new-value .marker\n{\n    background: unset;\n    color: var(--diff-fg-new);\n}\n\n.changedesc .body .diff-changes .line-counts .insert-count\n{\n    color: var(--diff-fg-new);\n}\n\n.changedesc .body .diff-changes .line-counts .delete-count\n{\n    color: var(--diff-fg-old);\n}\n\n#diff_index table, .diff-index table\n{\n    background: unset;\n}\n\n#diff_index table td, .diff-index table td\n{\n    background: unset;\n}\n\n#diff_index, .diff-index, #diff_index table td, .diff-index table td\n{\n    border: none;\n}\n\n#reviews .review .controls a, #reviews .review .controls a:hover\n{\n    background: var(--bg-color);\n    color: unset;\n    border: none;\n}\n\n.issue-state.open\n{\n    background: var(--bg-color);\n    border: none;\n}\n\n.issue-state.open .back-to-issue-summary, .issue-state.open .back-to-issue-summary:visited\n{\n    color: var(--label-color);\n}\n\n.changedesc .body > pre, .changedesc .body .diffed-text-area\n{\n    background: var(--bg-color);\n    border: none;\n}\n\n.changedesc .body .diffed-text-area .marker\n{\n    background: var(--darker-bg-color);\n}\n\n.changedesc .body .diffed-text-area .insert .marker, .changedesc .body .diffed-text-area .replace-new .marker\n{\n    background: var(--darker-bg-color);\n    color: var(--diff-fg-new);\n}\n\n.changedesc .body .diffed-text-area .delete .marker, .changedesc .body .diffed-text-area .replace-old .marker\n{\n    background: var(--darker-bg-color);\n    color: var(--diff-fg-old);\n}\n\n\n.changedesc .body .diffed-text-area .insert .line, .changedesc .body .diffed-text-area .replace-new .line\n{\n    background: unset;\n    color: var(--diff-fg-new);\n}\n\n.changedesc .body .diffed-text-area .delete .line, .changedesc .body .diffed-text-area .replace-old .line\n{\n    background: unset;\n    color: var(--diff-fg-old);\n}\n\n.changedesc .body .diffed-text-area .replace-old .line .hl\n{\n    background: var(--diff-bg-old);\n    color: unset;\n}\n\n.changedesc .body .diffed-text-area .replace-new .line .hl\n{\n    background: var(--diff-bg-new);\n    color: unset;\n}\n\n#reviews .box-statuses .box-status label.ship-it-label\n{\n    border: none;\n    background: var(--hilight-bg-color);\n    color: var(--good-color);\n}\n\n.revision-selector .revision-selector-range\n{\n    background: var(--bg-color);\n}\n\n.revision-selector .revision-selector-tick\n{\n    border-left: 1px solid var(--bg-color);\n}\n\n#diffs .diff-box\n{\n    border: none;\n}\n\n.sidebyside\n{\n    background: var(--darker-bg-color);\n}\n\n.sidebyside thead .filename-row th,\n.sidebyside thead th,\n.sidebyside tbody tr th,\n.sidebyside tbody.diff-header td,\n.sidebyside tbody.diff-header th\n{\n    background: unset;\n}\n\n.sidebyside thead .revision-row th\n{\n    border: none;\n}\n\n.sidebyside tbody.replace tr td,\n.sidebyside tbody.replace tr th\n{\n    border: none;\n    background: unset;\n    color: var(--diff-fg-replace);\n}\n\n.sidebyside tbody.insert tr td,\n.sidebyside tbody.insert tr th\n{\n    border: none;\n    background: unset;\n    color: var(--diff-fg-new);\n}\n\n.sidebyside tbody.delete tr td,\n.sidebyside tbody.delete tr th\n{\n    border: none;\n    background: unset;\n    color: var(--diff-fg-old);\n}\n\n\n.sidebyside tbody.replace .hl\n{\n    background: var(--darker-bg-color);\n}\n\n.sidebyside tbody.diff-header tr:first-child,\n.sidebyside tbody.diff-header tr:last-child\n{\n    border: none;\n}\n\n.sidebyside tbody.diff-header a\n{\n    color: unset;\n}\n\n.rich-text code\n{\n    color: unset;\n}\n\n#review-form\n{\n    background: var(--bg-color);\n}\n\n#review-form label\n{\n    color: inherit;\n}\n\n#review-form dt label\n{\n    color: var(--label-color);\n}\n\n.c, .com, .cm, .c1, .cm-s-rb .cm-comment,\n.o,\n.cm-s-rb .cm-operator,\n.cp,\n.cm-s-rb .cm-meta,\n.gd,\n.ge,\n.gr,\n.gh,\n.gi,\n.go,\n.gp,\n.gs,\n.gu,\n.gt,\n.kp,\n.m,\n.lit,\n.cm-s-rb .cm-number,\n.s,\n.str,\n.atv,\n.sd,\n.cm-s-rb .cm-string,\n.na,\n.atn,\n.nc,\n.no,\n.nd,\n.ni,\n.ne,\n.nf,\n.fun,\n.nl,\n.nn,\n.nt,\n.tag,\n.tag,\n.cm-s-rb .cm-tag,\n.nv,\n.dec,\n.var,\n.mf,\n.mh,\n.mi,\n.mo,\n.sb,\n.sc,\n.s2,\n.se,\n.sh,\n.si,\n.sx,\n.sr,\n.s1,\n.ss,\n.bp,\n.cm-s-rb .cm-variable-2,\n.vc,\n.vg,\n.vi,\n.il,\n.cs\n{\n    color: unset;\n}\n\n.c, .com, .cm, .c1, .cm-s-rb .cm-comment\n{\n    color: var(--comment-fg-color);\n}",
+				"domains": [
+					"review.lab.nbttech.com"
+				]
+			}
+		],
+		"id": 5
+	},
+	{
+		"installDate": 1513106114515,
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"name": "Stage1st",
+		"sections": [
+			{
+				"code": "body\n{\n    font-family: \"Avenir Next\", Helvetica, \"Helvetica Neue\", \"Source Han Sans SC\", \"Noto Sans CJK SC\", sans-serif;\n    width: 1000px;\n    margin-left: auto;\n    margin-right: auto;\n    color: #2c3e50;\n}\n\na, a:visited\n{\n    color: #2980b9;\n    text-decoration: none;\n}\n\na:hover\n{\n    color: #ecf0f1;\n    background-color: #2980b9;\n    text-decoration: none;\n}\n\n.xst\n{\n    font-family: inherit;\n}\n\nbody, .bm\n{\n    background: #ecf0f1;\n}\n\n.bm\n{\n    border: none;\n}\n\n/* Top most color bar... */\n#toptb\n{\n    display: none;\n}\n\n/* Top ad */\nbody > .a_h\n{\n    display: none;\n}\n\n#postlist .pbn\n{\n    border: none;\n}\n\n/* Main nav */\n#nv, #scbar\n{\n    display: none;\n}\n\n/* Nav */\n#pt\n{\n    margin: 20px 0px 20px 0px;\n}\n\n/* Thread title */\ntd.vwthd\n{\n    background-color: inherit;\n}\n\ntd.vwthd > span.xg1, td.vwthd > div.y\n{\n    display: none;\n}\n\ntd.vwthd > h1\n{\n    font-weight: normal;\n    font-size: 200%;\n    line-height: 150%;\n}\n\n/*  */\n.ad .pls\n{\n    background: none !important;\n}\n\n/* Page selection */\n.pg a, .pg strong, .pgb a, .pg label\n{\n    border: none;\n    background-color: inherit;\n    color: inherit;\n}\n\n/* Input controlls */\n.px, .pt, .ps, select\n{\n    border-color: none;\n    border: 2px solid #bdc3c7;\n    background: white;\n}\n\n/*  */\ntable.plhin\n{\n    margin: 20px 0px 20px 0px;\n    background: white;\n    border-radius: 10px;\n    border: none;\n}\n\n.pi strong a\n{\n    border: none;\n    color: #bdc3c7;\n}\n\n/* ========== Thread view ========================================> */\n\ntd.pls\n{\n    background: transparent;\n    border: none;\n}\n\ntd.pls > .favatar > div:nth-child(3)\n{\n    line-height: 0px;\n}\n\ntd.pls div.avatar\n{\n    margin: 10px 0px 10px 10px;\n}\n\ntd.pls div.avatar img\n{\n    width: 64px;\n}\n\ntd.pls a.avtm\n{\n    border: none;\n    box-shadow: none;\n}\n\ntd.pls > .favatar > .xg2\n{\n    padding: 0px 0px 0px 10px;\n    color: #bdc3c7;\n}\n\n.xi2, .xi2 a, .xi3 a\n{\n    color: inherit;\n}\n\ntd.pls > div.pls > div > img\n{\n    display: none;\n}\n\ntd.pls > div.pls > p, td.pls > div.pls > div.tip, td.pls > div.pls > dl, td.pls > div.pls > ul\n{\n    display: none;\n}\n\ntd.plc .pi\n{\n    border: none;\n}\n\ntd.plc div.authi\n{\n    display: none;\n}\n\ntd.plc > div.po\n{\n    border: none;\n}\n\n.t_f, .t_f td\n{\n    font-size: inherit;\n}\n\ntd.plc > div.pct\n{\n    font-size: 144%;\n}\n\ntr.ad\n{\n    display: none;\n}\n\ndiv#scrolltop\n{\n    display: none;\n}\n\n.quote\n{\n    color: inherit;\n}\n\n.ratl th, .ratl td, .ratc\n{\n    border: none;\n}\n\n/* ========== List view ==========================================> */\n\n.tl tr:hover th, .tl tr:hover td\n{\n    background-color: inherit !important;\n}\n\n.tl th, .tl td\n{\n    border: none;\n}\n\n/* Seporator */\n.tl .ts th, .tl .ts td\n{\n    background: #bdc3c7;\n}\n\n/* Head */\n.tl .th\n{\n    border: none;\n    background: #bdc3c7;\n}\n\n/* Tag list */\n#thread_types\n{\n    display: none;\n}\n\n/* Category meta */\n.pbn\n{\n    display: none;\n}\n\n/* “子版块” */\n.bmw .bm_h\n{\n    border: none;\n    border-top: none !important;\n    background: #bdc3c7;\n}\n\n.tl td em\n{\n    color: inherit;\n}\n\n.tl td em a\n{\n    color: #2980b9;\n}\n\n.tl th a:visited, .tl td.fn a:visited\n{\n    color: #2980b9;\n    text-decoration: none;\n}\n\n.tl th a:hover, .tl td.fn a:hover\n{\n    color: #ecf0f1;\n    background-color: #2980b9;\n    text-decoration: none;\n}\n\n.newthread tr th, .newthread tr td\n{\n    background: white;\n}",
+				"urls": [],
+				"urlPrefixes": [],
+				"domains": [
+					"bbs.saraba1st.com"
+				],
+				"regexps": []
+			}
+		],
+		"id": 6
+	},
+	{
+		"installDate": 1536188342204,
+		"enabled": false,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"name": "Antialiasing adjust",
+		"sections": [
+			{
+				"code": "*\n{\n    -moz-osx-font-smoothing: grayscale;\n}",
+				"urls": [],
+				"urlPrefixes": [],
+				"domains": [],
+				"regexps": []
+			}
+		],
+		"id": 7
+	},
+	{
+		"enabled": true,
+		"updateUrl": null,
+		"md5Url": null,
+		"url": null,
+		"originalMd5": null,
+		"installDate": 1560811324391,
+		"name": "Duckduckgo Flex Result",
+		"sections": [
+			{
+				"code": ".results\n{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n\n.result\n{\n    max-width: 500px;\n/*    margin-left: 1em;\n    margin-right: 1em; */\n}\n\n.result__check\n{\n    margin-right: 0px;\n}\n\n.result--sep\n{\n    max-width: unset;\n    width: 100%;\n}",
+				"domains": [
+					"duckduckgo.com"
+				]
+			}
+		],
+		"updateDate": 1560811924573,
+		"id": 10
+	}
+]

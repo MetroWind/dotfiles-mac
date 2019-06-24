@@ -150,7 +150,8 @@
   :config
   (setq flycheck-mode-line
         '(:eval (format "x%d" (length flycheck-current-errors))))
-  (setq flycheck-python-pycompile-executable "python3"))
+  (setq flycheck-python-pycompile-executable "python3")
+  (setq-default flycheck-clang-language-standard "c++17"))
 
 (use-package nxml-mode
   :if (package-installed-p 'nxml-mode)

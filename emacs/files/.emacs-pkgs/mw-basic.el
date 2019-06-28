@@ -73,6 +73,9 @@
   (setq backup-directory-alist '(("." . "~/.backup/")))
   (setq backup-by-copying t)
 
+  ;; Don’t create lock file.
+  (setq create-lockfiles nil)
+
   ;; Delete duplicates in minibuffer history
   (setq history-delete-duplicates t)
 

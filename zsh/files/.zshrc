@@ -38,14 +38,14 @@ fi
 # completion
 # compdef pacman-color=pacman
 
-PROMPT=$'%F{cyan}$SHLVL-> %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
+PROMPT=$'%F{cyan}$SHLVL ‡ %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
 RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u29f0"
-ZSH_THEME_GIT_PROMPT_ADDED="\u2963"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2963"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u2260"
+ZSH_THEME_GIT_PROMPT_ADDED="\u0444"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2642"
 ZSH_THEME_GIT_PROMPT_CLEAN="%#"
 
 stty discard undef

@@ -63,7 +63,7 @@ sslcacertfile = /usr/local/etc/openssl/cert.pem
 createfolders = False
 starttls = False
 
-# ========== UKY Gmail ==================================================>
+# ========== School Gmail ==================================================>
 [Account school]
 # Identifier for the local repository; e.g. the maildir to be synced via IMAP.
 localrepository = school-local
@@ -93,7 +93,7 @@ sslcacertfile = /usr/local/etc/openssl/cert.pem
 createfolders = False
 # starttls = False
 
-# ========== Riverbed ===============================================>
+# ========== Work ===============================================>
 [Account work]
 # Identifier for the local repository; e.g. the maildir to be synced via IMAP.
 localrepository = work-local

@@ -174,6 +174,12 @@
   ("s-H" . buf-move-left)
   ("s-L" . buf-move-right))
 
+;; This doesn’t work correctly sometimes but I’ll just put it here...
+(use-package winner
+  :bind
+  ("C-M-h" . winner-undo)
+  ("C-M-l" . winner-redo))
+
 ;; Restore previous session
 (use-package session
   :ensure t

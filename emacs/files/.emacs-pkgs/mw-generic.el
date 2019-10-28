@@ -155,7 +155,6 @@
   :hook (after-init . atomic-chrome-start-server))
 
 (use-package windmove
-  :demand t
   :bind
   ("<s-up>" . windmove-up)
   ("<s-down>" . windmove-down)

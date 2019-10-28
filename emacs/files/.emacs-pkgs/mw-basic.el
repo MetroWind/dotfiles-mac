@@ -137,6 +137,10 @@
   ;; Stop spliting windows without me saying so.
   (setq split-height-threshold 160)
 
+  ;; They are safe.
+  (put 'downcase-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+
   :bind
   (("s-p" . previous-buffer)
    ("s-n" . next-buffer)

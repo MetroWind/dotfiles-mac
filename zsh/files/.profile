@@ -24,7 +24,7 @@ export xpath="${HOME}/Documents/document/physics/lattice/programs/x"
 export xqcdio_const=${xpath}/constants
 
 # LilyPond
-export PATH="/Applications/LilyPond.app/Contents/Resources/bin:$PATH"
+# export PATH="/Applications/LilyPond.app/Contents/Resources/bin:$PATH"
 
 # GPG agent
 if which gpgconf >& /dev/null; then

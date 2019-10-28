@@ -1,0 +1,6 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+scrollbar
+{
+    scrollbar-color: #00000044 #88888833 !important;
+}

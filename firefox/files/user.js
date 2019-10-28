@@ -34,3 +34,5 @@ user_pref("privacy.trackingprotection.fingerprinting.enabled", true);
 // Data reporting
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
+
+user_pref("layout.css.scrollbar-color.enabled", true);

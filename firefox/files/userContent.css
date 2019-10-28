@@ -1,0 +1,13 @@
+:root
+{
+    scrollbar-color: #00000044 #88888833;
+}
+
+@-moz-document url-prefix("about:reader")
+{
+    /* Reader font */
+    body.serif
+    {
+        font-family: "IBM Plex Serif", serif !important;
+    }
+}

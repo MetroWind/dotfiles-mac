@@ -6,7 +6,8 @@
          ("%" . match-paren)
          ("M-w" . copy-line-or-region)
          ("C-<return>" . cua-or-multicursor)
-         ("C-@" . cua-or-multicursor))
+         ("C-@" . cua-or-multicursor)
+         ("C-S-y" . yank-with-indent))
   )
 
 (use-package mw-lib-window-focus

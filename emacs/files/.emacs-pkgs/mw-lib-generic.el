@@ -139,4 +139,16 @@ the sectional comment."
   nil
   "A mode for python log")
 
+(defun yank-with-indent ()
+  "Yank and indent the region to the current position."
+  (interactive)
+  (let ((indent
+         (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+    (message indent)
+    (yank)
+    (narrow-to-region (mark t) (point))
+    (pop-to-mark-command)
+    (replace-string "\n" (concat "\n" indent))
+    (widen)))
+
 (provide 'mw-lib-generic)

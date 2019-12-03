@@ -70,7 +70,7 @@
 ;;   pip install 'python-language-server[pycodestyle]'
 (use-package lsp-mode
   :ensure t
-  :hook (python-mode . lsp)
+  :hook ((python-mode rust-mode) . lsp)
   :config
   ;; Don’t use yasnippet to expand function calls.
   (setq lsp-pyls-plugins-jedi-completion-include-params nil)

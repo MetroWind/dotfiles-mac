@@ -38,6 +38,8 @@
                       ('element-of #X2208)
                       ('not-element-of #X2209)
                       ('cdot #x22c5)
+                      ('two-ldots #x2025)
+                      ('ldots #x2026)
                       ;; boxes
                       ('double-vertical-bar #X2551)
                       ;; relational operators
@@ -52,6 +54,7 @@
                       ('square-root #X221A)
                       ('squared #X00B2)
                       ('cubed #X00B3)
+                      ('colon-colon #x2237)
                       ;; letters
                       ('lambda #X03BB)
                       ('alpha #X03B1)
@@ -135,5 +138,24 @@
           (cons "<=" (unicode-symbol 'less-than-or-equal-to))
           ))
   )
+
+(use-package rust-mode
+  :if have-prettify-symbols
+  :hook ((rust-mode . prettify-symbols-mode)
+         (rust-mode . (lambda () (setq prettify-symbols-alist rust-unicode))))
+  :config
+  (message "Setting Rust symbols...")
+  (defvar rust-unicode
+    (list (cons "!=" (unicode-symbol 'not-equal))
+          (cons "==" (unicode-symbol 'identical))
+          (cons ">=" (unicode-symbol 'greater-than-or-equal-to))
+          (cons "<=" (unicode-symbol 'less-than-or-equal-to))
+          (cons "->" (unicode-symbol 'right-arrow))
+          (cons "=>" (unicode-symbol 'Right-arrow))
+          (cons ".." (unicode-symbol 'two-ldots))
+          (cons "::" (unicode-symbol 'colon-colon))
+          ))
+  )
+
 
 (provide 'mw-unicode-symbols-subst)

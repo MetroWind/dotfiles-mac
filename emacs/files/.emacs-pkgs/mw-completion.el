@@ -76,7 +76,9 @@
   (setq lsp-pyls-plugins-jedi-completion-include-params nil)
   ;; Disable style checking
   (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-  (setq lsp-prefer-flymake :none))
+  (setq lsp-prefer-flymake :none)
+  (setq lsp-signature-render-documentation nil) ; Only show sig, not doc.
+  )
 
 (use-package company-lsp :commands company-lsp :ensure t)
 

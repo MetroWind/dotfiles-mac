@@ -88,7 +88,7 @@
   ;; Don't open new frame when open file by dragging and emacsclient in
   ;; Mac.
   (if macp (setq ns-pop-up-frames nil))
-  ;; PATH
+  ;; Environment
   (defun stripStr(str)
     "Strip leading and tailing whitespace from STR."
     (replace-regexp-in-string (rx (or (: bos (* (any " \t\n")))
@@ -100,6 +100,10 @@
         (setenv "PATH" Path)
         (setq exec-path (split-string Path ":" t))))
 
+  (if macp
+      (let ((Sock (stripStr (shell-command-to-string "zsh -l -c 'echo $SSH_AUTH_SOCK'"))))
+        (setenv "SSH_AUTH_SOCK" Sock))
+    (shell-copy-environment-variable "SSH_AUTH_SOCK"))
 
   ;; (electric-quote-mode)
 

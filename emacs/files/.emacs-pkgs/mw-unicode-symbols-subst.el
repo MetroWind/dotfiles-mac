@@ -153,7 +153,6 @@
           (cons "->" (unicode-symbol 'right-arrow))
           (cons "=>" (unicode-symbol 'Right-arrow))
           (cons ".." (unicode-symbol 'two-ldots))
-          (cons "::" (unicode-symbol 'colon-colon))
           ))
   )
 

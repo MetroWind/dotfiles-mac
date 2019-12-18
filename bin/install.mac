@@ -2,3 +2,4 @@
 
 mkdir -p ${HOME}/bin
 stow -d files -t ${HOME}/bin .
+zsh --login -c "rustc -O -o ${HOME}/bin/run source/run.rs"

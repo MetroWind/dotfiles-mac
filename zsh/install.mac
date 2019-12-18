@@ -3,7 +3,7 @@
 source ../lib/report.sh
 
 # The config needs gls
-brew install coreutils most
+brew install coreutils most exa
 
 # Symlink files
 stow -d files -t $HOME --no-folding .

@@ -65,8 +65,8 @@ def promptInstallSections(sections, os_type, prompt_packages=True):
 
     print()
 
-AllPkgs = ["zsh", "git", "python", "emacs", "tmux", "iterm2", "bin", "mail",
-           "security", "rime", "firefox"]
+AllPkgs = ["zsh", "git", "python", "rust", "emacs", "tmux", "iterm2", "bin",
+           "mail", "security", "rime", "firefox"]
 
 def main():
     import argparse

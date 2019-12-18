@@ -35,6 +35,9 @@ if [[ -e ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh ]]; then
     zle -N zle-line-init
 fi
 
+# Exa colors, requires 24 bit color.
+export EXA_COLORS="da=38;2;108;107;135:uu=0;33:gu=0;33"
+
 # completion
 # compdef pacman-color=pacman
 

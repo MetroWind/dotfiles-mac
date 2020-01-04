@@ -43,7 +43,9 @@
   :hook (after-init
          .
          (lambda ()
-           (toggle-frame-fullscreen)
+           (if truemacp
+               (setq initial-frame-alist '((fullscreen . fullscreen)))
+             (toggle-frame-fullscreen))
            (split-window-horizontally)
            (split-window-horizontally)
            (select-window (previous-window))

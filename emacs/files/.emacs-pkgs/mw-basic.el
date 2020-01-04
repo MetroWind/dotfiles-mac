@@ -303,4 +303,12 @@ When using Homebrew, install it using \"brew install trash\"."
   (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+")
   )
 
+(use-package mac
+  :config
+  ;; Fix modifiers in Mitsuharu’s Mac port, and enable ligatures.
+  (setq mac-command-modifier 'super)
+  (setq mac-option-modifier 'meta)
+
+  (mac-auto-operator-composition-mode))
+
 (provide 'mw-basic)

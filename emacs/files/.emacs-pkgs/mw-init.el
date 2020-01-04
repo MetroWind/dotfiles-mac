@@ -6,6 +6,7 @@
   "Are we running on a WinTel system?")
 (defconst aquap (featurep 'aquamacs) "Are we using AquaEmacs?")
 (defconst macp (eq system-type 'darwin) "Are we running in Mac OS?")
+(defconst truemacp (featurep 'mac) "Are we running in Mitsuharu's Mac port?")
 (defconst cygwinp
     (eq system-type 'cygwin)
   "Are we running on a WinTel cygwin system?")

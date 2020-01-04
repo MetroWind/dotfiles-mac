@@ -127,20 +127,24 @@
   :config
   (message "Setting python symbols...")
   (defvar python-unicode
-    (list (cons "not in" (unicode-symbol 'not-element-of))
-          (cons "in" (unicode-symbol 'element-of))
-          (cons "and" (unicode-symbol 'logical-and))
-          (cons "or" (unicode-symbol 'logical-or))
-          (cons "not" (unicode-symbol 'logical-neg))
-          (cons "!=" (unicode-symbol 'not-equal))
-          (cons "==" (unicode-symbol 'identical))
-          (cons ">=" (unicode-symbol 'greater-than-or-equal-to))
-          (cons "<=" (unicode-symbol 'less-than-or-equal-to))
-          ))
+    (append
+     (list (cons "not in" (unicode-symbol 'not-element-of))
+           (cons "in" (unicode-symbol 'element-of))
+           (cons "and" (unicode-symbol 'logical-and))
+           (cons "or" (unicode-symbol 'logical-or))
+           (cons "not" (unicode-symbol 'logical-neg)))
+     (if truemacp
+         nil
+       (list
+        (cons "!=" (unicode-symbol 'not-equal))
+        (cons "==" (unicode-symbol 'identical))
+        (cons ">=" (unicode-symbol 'greater-than-or-equal-to))
+        (cons "<=" (unicode-symbol 'less-than-or-equal-to))
+        ))))
   )
 
 (use-package rust-mode
-  :if have-prettify-symbols
+  :if (and have-prettify-symbols (not truemacp))
   :hook ((rust-mode . prettify-symbols-mode)
          (rust-mode . (lambda () (setq prettify-symbols-alist rust-unicode))))
   :config

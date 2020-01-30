@@ -1,3 +1,5 @@
+source ${HOME}/.zsh/system
+
 # See if we can use colors.
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]]; then
@@ -50,5 +52,13 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u2260"
 ZSH_THEME_GIT_PROMPT_ADDED="\u0444"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2642"
 ZSH_THEME_GIT_PROMPT_CLEAN="%#"
+
+# Welcome message
+if [[ -e $HOME/.motd ]]; then
+    print -n "${fg[red]}"
+    cat $HOME/.motd
+    print "$reset_color"
+    uptime
+fi
 
 stty discard undef

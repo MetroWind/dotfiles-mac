@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+for f in xmonad.hs xmonad-*.hs; do
+    cat $f >> to-build.hs
+done
+shopt -u nullglob
+
+ghc -fforce-recomp -o "$1" to-build.hs
+
+rm to-build.*

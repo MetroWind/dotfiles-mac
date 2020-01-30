@@ -1,0 +1,9 @@
+source $HOME/.xinitrc
+
+xcompmgr -n &
+stalonetray &
+
+source $HOME/.xmonad/user.env
+
+system-config-printer-applet &
+start-pulseaudio-x11 &

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+mkdir -pv $HOME/.config/kitty
+# Symlink files
+stow -d files -t $HOME/.config/kitty --no-folding .

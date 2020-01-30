@@ -19,7 +19,12 @@ def install(section, os_type):
     """
     Pwd = os.getcwd()
     os.chdir(section)
-    subprocess.check_call([os.path.join('.', os_type.InstallName),])
+    if os.path.exists(os_type.InstallName):
+        subprocess.check_call([os.path.join('.', os_type.InstallName),],
+                              shell=True)
+    else:
+        Log.warning("Do not know how to install {} for {}. Skipping..."
+                    .format(section, os_type.Name))
     os.chdir(Pwd)
 
 def promptInstallSections(sections, os_type, prompt_packages=True):
@@ -66,7 +71,7 @@ def promptInstallSections(sections, os_type, prompt_packages=True):
     print()
 
 AllPkgs = ["zsh", "git", "python", "rust", "emacs", "tmux", "iterm2", "bin",
-           "mail", "security", "rime", "firefox"]
+           "mail", "security", "rime", "firefox", "xmonad", "xorg", "kitty"]
 
 def main():
     import argparse
@@ -74,7 +79,7 @@ def main():
     Parser = argparse.ArgumentParser(description='Install configuration files '
                                      'by linking.')
     Parser.add_argument("-s", "--os", type=str, dest="OS", required=True,
-                        choices=["mac", "windows", "arch"],
+                        choices=["mac", "linux"],
                         help="Type of the target operating system.")
     Parser.add_argument("-a", "--all", dest="All", default=False,
                         action="store_true",

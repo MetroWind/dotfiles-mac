@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+source ../lib/report.sh
+
+echo "Installing Emacs dotfiles..."
+stow -d files -t $HOME --no-folding .
+
+if [[ ! -e ${HOME}/.emacs-pkgs/mw-user.el ]]; then
+    echo "Copying user configuration..."
+    cp -L files/.emacs-pkgs/mw-user-example.el ${HOME}/.emacs-pkgs/mw-user.el
+    echo "(provide 'mw-user)" >> ${HOME}/.emacs-pkgs/mw-user.el
+fi
+
+report-info "You should edit ~/.emacs-pkgs/mw-user.el."

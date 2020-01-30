@@ -203,4 +203,10 @@
   :init
   (setq gud-key-prefix (kbd "C-M-G")))
 
+(use-package soy-mode
+  :mode "\\.soy$"
+  :config
+  (setq default-tab-width 2)
+  (make-local-variable 'default-tab-width))
+
 (provide 'mw-programming)

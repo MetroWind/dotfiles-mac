@@ -14,11 +14,15 @@ fi
 
 alias ec='emacsclient --no-wait'
 alias ecc=emacsclient
-alias emacs='emacsclient -nw'
 alias rm="rm -v"
 alias rtfm="man"
-alias bin2xml="plutil -convert xml1"
-alias xml2bin="plutil -convert binary1"
+if [[ $System = "Darwin" ]]; then
+    alias bin2xml="plutil -convert xml1"
+    alias xml2bin="plutil -convert binary1"
+    alias ldd="otool -L"
+fi
 alias Rsync="rsync -rLptDz --progress"
-alias ldd="otool -L"
 alias pgrep="pgrep -lf"
+if [[ $System = "Linux" ]]; then
+    alias feh="/usr/bin/feh -d."
+fi

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Symlink files
+stow -d files -t $HOME --no-folding .

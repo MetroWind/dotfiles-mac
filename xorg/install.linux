@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+# Symlink files
+stow -d files -t $HOME --no-folding .
+
+if [[ ! -e $HOME/.xinit-user ]]; then
+    touch $HOME/.xinit-user
+fi
+
+report-info 'User env goes to $HOME/.xinit-user.'

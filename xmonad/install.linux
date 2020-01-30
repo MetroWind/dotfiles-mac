@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source ../lib/report.sh
+
+mkdir -pv $HOME/.xmonad
+# Symlink files
+stow -d files -t $HOME/.xmonad --no-folding .
+
+if [[ ! -e $HOME/.xmonad/user.env ]]; then
+    touch $HOME/.xmonad/user.env
+fi
+
+report-info 'User env goes to $HOME/.xmonad/user.env.'

@@ -4,6 +4,7 @@
 (require 'mw-user)
 (require 'mw-init)
 (require 'mw-basic)
+(require 'mw-work nil t)
 (require 'mw-programming)
 (require 'mw-unicode-symbols-subst)
 (require 'mw-completion)

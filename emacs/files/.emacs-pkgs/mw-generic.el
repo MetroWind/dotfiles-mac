@@ -246,4 +246,10 @@ See URL `http://proselint.com/'."
   (add-to-list 'load-path "/Applications/LilyPond.app/Contents/Resources/share/emacs/site-lisp")
   :mode ("\\.ly\\'" . LilyPond-mode))
 
+(use-package telega
+  :commands telega
+  :config
+  (setq telega-chat-use-markdown-version 2)
+  (setq telega-msg-rainbow-title nil))
+
 (provide 'mw-generic)

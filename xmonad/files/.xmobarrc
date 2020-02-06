@@ -54,7 +54,7 @@ Config {
                              ] 20,
 
         -- cpu activity monitor
-        Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
+        Run MultiCpu       [ "--template" , "Cpu: <total>%"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
                              , "--low"      , "#8DC85F"
@@ -62,9 +62,9 @@ Config {
                              , "--high"     , "#FF96B3"
                              ] 20,
 
-        -- cpu core temperature monitor
-        Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
-                             , "--Low"      , "70"        -- units: °C
+        -- cpu core temperature monitor, not sure why MultiCoreTemp doesn’t work.
+        Run CoreTemp       [ "--template" , "Temp: <core0>°C"
+                             , "--Low"      , "60"        -- units: °C
                              , "--High"     , "80"        -- units: °C
                              , "--low"      , "#8DC85F"
                              , "--normal"   , "#C0C7CE"

@@ -4,7 +4,8 @@ source ../lib/report.sh
 
 mkdir -pv $HOME/.xmonad
 # Symlink files
-stow -d files -t $HOME/.xmonad --no-folding .
+stow -d files -t $HOME/.xmonad --no-folding --ignore xmobarrc .
+ln -s "$PWD/files/.xmobarrc" $HOME/
 
 if [[ ! -e $HOME/.xmonad/user.env ]]; then
     touch $HOME/.xmonad/user.env

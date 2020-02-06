@@ -249,7 +249,7 @@ See URL `http://proselint.com/'."
 (use-package telega
   :commands telega
   :config
-  (setq telega-chat-use-markdown-version 2)
+  (setq telega-chat-use-markdown-version 1)
   (setq telega-msg-rainbow-title nil))
 
 (provide 'mw-generic)

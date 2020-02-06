@@ -29,7 +29,8 @@ main = do
       logHook = dynamicLogWithPP xmobarPP
                 { ppOutput = hPutStrLn xmproc,
                   ppCurrent = xmobarColor "#ECA964" "" . wrap "[" "]",
-                  ppTitle = xmobarColor "#8DC85F" "" . shorten 50
+                  -- ppTitle = xmobarColor "#8DC85F" "" . shorten 50,
+                  ppOrder = \(spaces:layout:_) -> [spaces, layout] -- Don’t display window title.
                 }
     }
 

@@ -250,6 +250,7 @@ See URL `http://proselint.com/'."
   :commands telega
   :config
   (setq telega-chat-use-markdown-version 1)
-  (setq telega-msg-rainbow-title nil))
+  (setq telega-msg-rainbow-title nil)
+  (setq telega-sticker-size (cons 7 24)))
 
 (provide 'mw-generic)

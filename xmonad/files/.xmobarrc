@@ -4,6 +4,7 @@ Config {
 
    -- appearance
      font =         "xft:Iosevka SS09:size=10:bold:antialias=true"
+     additionalFonts = ["xft:Noto Sans CJK JP:size=10"]
    , bgColor =      "#324150"
    , fgColor =      "#C0C7CE"
    , position =     Top
@@ -13,7 +14,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%StdinReader% | %multicpu% | %coretemp% | %memory% | %dynnetwork% }{ %date% "
+   , template = "%StdinReader% | %multicpu% | %coretemp% | %memory% | %dynnetwork% | <fn=1>%mpd%</fn> }{ %date% "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -84,6 +85,11 @@ Config {
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
         Run Date           "%F (%a) %H:%M" "date" 100,
 
-        Run StdinReader
+        Run StdinReader,
+
+        -- MPD status
+        Run Com "mpc" ["current"] "mpd" 50
+
+
         ]
    }

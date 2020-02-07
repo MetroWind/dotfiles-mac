@@ -17,7 +17,7 @@ import XMonad.Util.Run(spawnPipe)
 main = do
   xmproc <- spawnPipe "xmobar"
   xmonad $ desktopConfig
-    { terminal = "kitty",
+    { terminal = "kitty -1",
       modMask = mod4Mask,
       workspaces = ["main", "web", "3", "4"],
       borderWidth = 3,

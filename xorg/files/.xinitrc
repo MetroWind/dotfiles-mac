@@ -5,7 +5,7 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
-# export XSECURELOCK_COMPOSITE_OBSCURER=0
+export XSECURELOCK_COMPOSITE_OBSCURER=0
 export XSECURELOCK_SAVER=saver_xscreensaver
 
 xinput set-prop "PixArt Lenovo USB Optical Mouse" 'Coordinate Transformation Matrix' \

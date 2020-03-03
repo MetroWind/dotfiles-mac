@@ -46,8 +46,8 @@ findWindows name = do
     )
 
 myLayout =
-  onWorkspace "web" (avoidStruts $ multiCol [1] 1 0.02 (-0.5) ||| Full) $
-  (avoidStruts $ ThreeCol 1 0.02 (2/5) ||| Full)
+  onWorkspace "web" (avoidStruts $ Mirror (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
+  (avoidStruts $ Mirror (ThreeColMid 1 0.02 (1/2)) ||| Full)
 
 myManageHook = composeAll [
     -- send applications to the right workspace

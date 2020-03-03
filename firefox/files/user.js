@@ -23,6 +23,10 @@ user_pref("media.mediasource.webm.enabled", true);
 user_pref("reader.color_scheme", "dark");
 user_pref("reader.font_type", "serif");
 user_pref("browser.download.useDownloadDir", true);
+// Show right-click menu when right click is released. Without this,
+// on certain configurations of Linux the right click would activate
+// the 1st menu item.
+user_pref("ui.context_menus.after_mouseup", true);
 
 // Content blocking
 user_pref("network.cookie.cookieBehavior", 4);

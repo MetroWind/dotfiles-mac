@@ -2,7 +2,7 @@
 
 image::shot.png[Screenshot]
 
-Simple Xmonad configuration.
+Simple Xmonad configuration, intended for a dual-portrait monitor setup.
 
 == Usage
 

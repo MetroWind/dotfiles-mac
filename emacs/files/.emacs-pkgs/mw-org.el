@@ -1,5 +1,7 @@
 ;; (require 'org-install)
 
+(require 'mw-lib-generic)
+
 (use-package org
   :commands org-open
   :mode ("\\.org$" . org-mode)

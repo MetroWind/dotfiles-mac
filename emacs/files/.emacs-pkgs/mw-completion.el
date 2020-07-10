@@ -51,7 +51,7 @@
   (setq company-clang-arguments '("-std=c++14"))
   (setq company-backends
         '(company-lsp
-          (company-clang company-xcode)
+          (company-cmake company-clang company-xcode)
           (company-gtags company-etags)
           company-nxml company-css
           (company-files company-keywords)

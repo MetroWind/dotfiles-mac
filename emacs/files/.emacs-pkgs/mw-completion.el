@@ -71,6 +71,8 @@
 (use-package lsp-mode
   :ensure t
   :hook ((python-mode rust-mode) . lsp)
+  :init
+  (setq lsp-keymap-prefix "M-S-l")
   :config
   ;; Don’t use yasnippet to expand function calls.
   (setq lsp-pyls-plugins-jedi-completion-include-params nil)

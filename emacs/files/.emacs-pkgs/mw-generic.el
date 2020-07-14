@@ -157,10 +157,10 @@
 
 (use-package windmove
   :bind
-  ("<s-up>" . windmove-up)
-  ("<s-down>" . windmove-down)
-  ("<s-left>" . windmove-left)
-  ("<s-right>" . windmove-right)
+  ("<M-up>" . windmove-up)
+  ("<M-down>" . windmove-down)
+  ("<M-left>" . windmove-left)
+  ("<M-right>" . windmove-right)
   ("s-k" . windmove-up)
   ("s-j" . windmove-down)
   ("s-h" . windmove-left)
@@ -172,7 +172,11 @@
   ("s-K" . buf-move-up)
   ("s-J" . buf-move-down)
   ("s-H" . buf-move-left)
-  ("s-L" . buf-move-right))
+  ("s-L" . buf-move-right)
+  ("<M-S-up>" . buf-move-up)
+  ("<M-S-down>" . buf-move-down)
+  ("<M-S-left>" . buf-move-left)
+  ("<M-S-right>" . buf-move-right))
 
 ;; This doesn’t work correctly sometimes but I’ll just put it here...
 (use-package winner

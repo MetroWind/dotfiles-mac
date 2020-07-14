@@ -8,11 +8,6 @@ export QT_IM_MODULE=ibus
 export XSECURELOCK_COMPOSITE_OBSCURER=0
 export XSECURELOCK_SAVER=saver_xscreensaver
 
-xrandr --output DP-6 --rotate left --pos 0x0 --output DP-4 --rotate left --right-of DP-6
-
-xinput set-prop "PixArt Lenovo USB Optical Mouse" 'Coordinate Transformation Matrix' \
-       0.4 0 0 0 0.4 0 0 0 1
-setxkbmap -option altwin:swap_alt_win
 ibus-daemon -drx
 if ! [ -e "/usr/bin/ibus-daemon" ] && [ "x$XDG_SESSION_TYPE" = "xwayland" ] ; then
   exec env IM_CONFIG_CHECK_ENV=1 im-launch true;

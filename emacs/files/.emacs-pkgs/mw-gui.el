@@ -37,6 +37,13 @@
 
 )
 
+;; Config for Emacs in terminal
+(use-package emacs
+  :disabled
+  :if (not window-system)
+  :config
+  (xterm-mouse-mode))
+
 ;; Go full screen and split
 (use-package emacs
   :if (and window-system my-full-screen)
@@ -53,7 +60,17 @@
            (balance-windows))))
 
 ;; Load theme
-(if (and (boundp 'my-theme) my-theme)
-    (load-theme my-theme t))
+(if (and (boundp 'my-theme) my-theme (tty-color-24bit "black"))
+    (progn
+      (message (format "Loading theme %s..." my-theme))
+      (load-theme my-theme t))
+  (defun on-after-init ()
+    (unless (display-graphic-p (selected-frame))
+      (set-face-background 'default "unspecified-bg" (selected-frame))))
+  (add-hook 'window-setup-hook 'on-after-init)
+  (progn
+    (message (format "Loading theme %s..." my-theme))
+    (load-theme my-theme t)))
+
 
 (provide 'mw-gui)

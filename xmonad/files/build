@@ -7,5 +7,8 @@ done
 shopt -u nullglob
 
 ghc -fforce-recomp -o "$1" to-build.hs
+code=$?
 
 rm to-build.*
+
+exit $code

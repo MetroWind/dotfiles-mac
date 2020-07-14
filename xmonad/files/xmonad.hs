@@ -1,4 +1,5 @@
 import qualified Data.Map as M
+import System.Environment
 
 import XMonad
 import XMonad.Config.Desktop
@@ -11,19 +12,23 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import Control.Monad
 import Data.Bool  (bool)
+import Data.Maybe
 import System.IO
 import XMonad.Util.Run(spawnPipe)
 
 main = do
   xmproc <- spawnPipe "xmobar"
-  xmonad $ desktopConfig
-    { terminal = "kitty -1",
+  -- Use different set of layouts if it’s a remote session. See
+  -- https://stackoverflow.com/a/60715978/782130.
+  isRemoteEnv <- lookupEnv "CHROME_REMOTE_DESKTOP_SESSION"
+  case myLayout (fromMaybe "0" isRemoteEnv) of Layout l -> xmonad $ desktopConfig {
+      terminal = "kitty -1",
       modMask = mod4Mask,
       workspaces = ["main", "web", "3", "4"],
       borderWidth = 3,
       focusedBorderColor = "#D04245",
       normalBorderColor = "#273644",
-      layoutHook = myLayout,
+      layoutHook = l,
       manageHook = myManageHook <+> manageHook desktopConfig,
       keys = myKeys,
       logHook = dynamicLogWithPP xmobarPP
@@ -45,9 +50,13 @@ findWindows name = do
       ) >>= return . join
     )
 
-myLayout =
-  onWorkspace "web" (avoidStruts $ Mirror (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
-  (avoidStruts $ Mirror (ThreeColMid 1 0.02 (1/2)) ||| Full)
+-- https://stackoverflow.com/a/60715978/782130
+myLayout :: Show a => String -> Layout a
+myLayout remote = if remote == "1"
+  then Layout $ onWorkspace "web" (avoidStruts $ (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
+       (avoidStruts $ (ThreeColMid 1 0.02 (1/2)) ||| Full)
+  else Layout $ onWorkspace "web" (avoidStruts $ Mirror (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
+       (avoidStruts $ Mirror (ThreeColMid 1 0.02 (1/2)) ||| Full)
 
 myManageHook = composeAll [
     -- send applications to the right workspace

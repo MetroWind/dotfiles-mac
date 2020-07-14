@@ -21,7 +21,7 @@
   (setq inhibit-startup-screen t))
 
 (defun simple-splash-invade-current-buffer ()
-  (if simple-splash-image
+  (if (and simple-splash-image (display-graphic-p))
       (let* ((img-spec (create-image simple-splash-image))
              (img-width (car (image-size img-spec))))
         (insert (make-string

@@ -50,12 +50,11 @@
   (setq company-async-timeout 5)
   (setq company-clang-arguments '("-std=c++17"))
   (setq company-backends
-        '(company-lsp
+        '(company-capf
           (company-cmake company-clang company-xcode)
           (company-gtags company-etags)
           company-nxml company-css
           (company-files company-keywords)
-          company-capf
           (company-dabbrev-code company-dabbrev)))
   (use-package company-quickheemlp
     :disabled

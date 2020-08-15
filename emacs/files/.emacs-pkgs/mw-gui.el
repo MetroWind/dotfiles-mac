@@ -60,7 +60,7 @@
            (balance-windows))))
 
 ;; Load theme
-(if (and (boundp 'my-theme) my-theme (tty-color-24bit "black"))
+(if (and (boundp 'my-theme) my-theme (tty-color-24bit (list 0 0 0)))
     (progn
       (message (format "Loading theme %s..." my-theme))
       (load-theme my-theme t))

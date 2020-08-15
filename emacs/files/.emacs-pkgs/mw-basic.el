@@ -7,6 +7,8 @@
   :config
   (message "Doing basic configs...")
   (setq custom-file "~/.emacs-custom.el") ; Go away, custom!!!  Go away!!
+  (setq gc-cons-threshold (* 1024 1024 100)) ; 100 MiB GC limit.
+  (setq read-process-output-max (* 1024 1024))
   (setenv "COLUMNS" "80")                 ; Kill the dumb COLUMN warning from `ls'
   (ignore-errors (setq user-full-name my-user-name))
   (ignore-errors (setq user-mail-address my-email))

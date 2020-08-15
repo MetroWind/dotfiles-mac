@@ -48,7 +48,7 @@
   (setq company-dabbrev-ignore-case nil)
   (setq company-dabbrev-downcase nil)
   (setq company-async-timeout 5)
-  (setq company-clang-arguments '("-std=c++14"))
+  (setq company-clang-arguments '("-std=c++17"))
   (setq company-backends
         '(company-lsp
           (company-cmake company-clang company-xcode)

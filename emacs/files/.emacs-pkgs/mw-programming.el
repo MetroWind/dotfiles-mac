@@ -68,8 +68,8 @@
          (python-mode . subword-mode)))
 
 (use-package whitespace
-  :after (:any cc-mode python yaml-mode)
-  :hook ((emacs-lisp-mode c-mode-common python-mode yaml-mode)
+  :after (:any cc-mode python yaml-mode rust-mode)
+  :hook ((emacs-lisp-mode c-mode-common python-mode yaml-mode rust-mode)
          . whitespace-mode)
   :config
   ;; (if (not use-pkg-p)

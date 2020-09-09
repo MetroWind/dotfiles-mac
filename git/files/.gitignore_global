@@ -150,9 +150,6 @@ flycheck_*.el
 .projectile
 projectile-bookmarks.eld
 
-# directory configuration
-.dir-locals.el
-
 # url cache
 url/cache/
 

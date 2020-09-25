@@ -72,5 +72,4 @@
     (message (format "Loading theme %s..." my-theme))
     (load-theme my-theme t)))
 
-
 (provide 'mw-gui)

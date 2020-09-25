@@ -1,3 +1,5 @@
+source $HOME/.profile-user
+
 export OSFONTDIR="$HOME/Library/Fonts;/Library/Fonts"
 export OSCOLORDIR="/System/Library/ColorSync/Profiles;/Library/Application Support/Adobe/Color"
 export PATH="/usr/local/sbin:$PATH"
@@ -25,6 +27,6 @@ export PATH="${HOME}/.cargo/bin:$PATH"
 # export PATH="/Applications/LilyPond.app/Contents/Resources/bin:$PATH"
 
 # GPG agent
-if which gpgconf >& /dev/null; then
+if which gpgconf >& /dev/null && [[ $USE_GPG == 1 ]]; then
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi

@@ -316,6 +316,14 @@ When using Homebrew, (insert )nstall it using \"brew install trash\"."
   (setq mac-command-modifier 'super)
   (setq mac-option-modifier 'meta)
 
+  ;; Some fonts has ligature for “**” or even “***” (for example
+  ;; Recursive). This could confuse org-mode with
+  ;; `org-hide-leading-stars' active. Disable this ligature by
+  ;; removing “*” from the list of composible chars.
+  (setq-default mac-auto-operator-composition-characters
+                "!\"#$%&'()+,-./:;<=>?@[\\]^_`{|}~")
+
+  ;; Enable ligature.
   (mac-auto-operator-composition-mode))
 
 (provide 'mw-basic)

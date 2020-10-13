@@ -8,6 +8,10 @@
          ("C-<return>" . cua-or-multicursor)
          ("C-@" . cua-or-multicursor)
          ("C-S-y" . yank-with-indent))
+
+  :config
+  ;; Add timestamp to messages
+  (advice-add 'message :before 'ad-timestamp-message)
   )
 
 (use-package mw-lib-window-focus

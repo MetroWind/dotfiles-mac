@@ -151,4 +151,31 @@ the sectional comment."
     (replace-string "\n" (concat "\n" indent))
     (widen)))
 
+;; Timestamp in messages
+(defun current-time-microseconds ()
+  "Return the current time formatted to include microseconds."
+  (let* ((nowtime (current-time))
+         (now-ms (nth 2 nowtime)))
+    (concat (format-time-string "[%Y-%m-%d %T" nowtime) (format ".%d]" now-ms))))
+
+(defun current-time-no-microseconds ()
+  "Return the current time formatted to include microseconds."
+  (let* ((nowtime (current-time))
+         (now-ms (nth 2 nowtime)))
+    (format-time-string "[%Y-%m-%d %T]" nowtime)))
+
+(defun ad-timestamp-message (FORMAT-STRING &rest args)
+  "Advice to run before `message' that prepends a timestamp to each message.
+
+Activate this advice with:
+(advice-add 'message :before 'sh/ad-timestamp-message)"
+  (unless (string-equal FORMAT-STRING "%s%s")
+    (let ((deactivate-mark nil)
+          (inhibit-read-only t))
+      (with-current-buffer "*Messages*"
+        (goto-char (point-max))
+        (if (not (bolp))
+          (newline))
+        (insert (current-time-no-microseconds) " ")))))
+
 (provide 'mw-lib-generic)

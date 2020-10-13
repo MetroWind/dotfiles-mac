@@ -6,9 +6,13 @@
 
   :config
   (message "Doing basic configs...")
+
+  ;; Performance
   (setq custom-file "~/.emacs-custom.el") ; Go away, custom!!!  Go away!!
   (setq gc-cons-threshold (* 1024 1024 100)) ; 100 MiB GC limit.
   (setq read-process-output-max (* 1024 1024))
+  (setq garbage-collection-messages t)  ; Log GC
+
   (setenv "COLUMNS" "80")                 ; Kill the dumb COLUMN warning from `ls'
   (ignore-errors (setq user-full-name my-user-name))
   (ignore-errors (setq user-mail-address my-email))
@@ -316,7 +320,7 @@ When using Homebrew, (insert )nstall it using \"brew install trash\"."
   (setq mac-command-modifier 'super)
   (setq mac-option-modifier 'meta)
 
-  ;; Some fonts has ligature for “**” or even “***” (for example
+  ;; Some fonts have ligature for “**” or even “***” (for example
   ;; Recursive). This could confuse org-mode with
   ;; `org-hide-leading-stars' active. Disable this ligature by
   ;; removing “*” from the list of composible chars.

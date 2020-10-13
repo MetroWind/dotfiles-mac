@@ -60,16 +60,17 @@
            (balance-windows))))
 
 ;; Load theme
-(if (and (boundp 'my-theme) my-theme (tty-color-24bit (list 0 0 0)))
+(if (and (boundp 'my-theme) my-theme)
     (progn
+      (if (not (tty-color-24bit (list 0 0 0)))
+          (progn
+            (defun on-after-init ()
+              (unless (display-graphic-p (selected-frame))
+                (set-face-background 'default "unspecified-bg"
+                                     (selected-frame))))
+            (add-hook 'window-setup-hook 'on-after-init)))
+
       (message (format "Loading theme %s..." my-theme))
-      (load-theme my-theme t))
-  (defun on-after-init ()
-    (unless (display-graphic-p (selected-frame))
-      (set-face-background 'default "unspecified-bg" (selected-frame))))
-  (add-hook 'window-setup-hook 'on-after-init)
-  (progn
-    (message (format "Loading theme %s..." my-theme))
-    (load-theme my-theme t)))
+      (load-theme my-theme t)))
 
 (provide 'mw-gui)

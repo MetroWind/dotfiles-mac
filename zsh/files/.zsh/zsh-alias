@@ -15,6 +15,7 @@ fi
 alias ec='emacsclient --no-wait'
 alias ecc=emacsclient
 alias rm="rm -v"
+alias less="less -r"
 alias rtfm="man"
 if [[ $System = "Darwin" ]]; then
     alias bin2xml="plutil -convert xml1"

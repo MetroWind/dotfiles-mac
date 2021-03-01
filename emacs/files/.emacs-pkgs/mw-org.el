@@ -131,6 +131,7 @@
   (setq org-html-html5-fancy t)
   (setq org-html-head
         "<link rel=\"stylesheet\" href=\"style.css\">")
+  (setq org-html-htmlize-output-type 'css)
 
   ;; Embed inline CSS read from a file.
   (defun my-org-inline-css-hook (exporter)

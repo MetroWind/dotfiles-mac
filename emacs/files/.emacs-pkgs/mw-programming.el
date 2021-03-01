@@ -9,7 +9,10 @@
   :config
   ;; CC Indention
   ;; offset customizations not in my-c-style
-  (setq-default c-offsets-alist '((member-init-intro . ++)))
+  (setq-default c-offsets-alist
+                '((member-init-intro . ++)
+                  (innamespace . [0])
+                  ))
 
   (setq-default c-basic-offset 4)
   ;; add my personal style and set it for the current buffer

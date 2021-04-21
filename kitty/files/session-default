@@ -1,0 +1,10 @@
+new_tab Local
+launch
+new_tab Remote
+layout tall:bias=66;full_size=2;mirrored=true
+launch
+launch
+launch
+launch
+new_tab Remote Emacs
+launch

@@ -16,6 +16,8 @@
 (defconst my-org-capture-file nil)
 ;; Inline CSS to embed
 (defvar-local my-org-inline-css-file nil)
+;; Dir for org-raom
+(defconst my-roam-dir nil)
 
 ;; Path to the splash image for the splash buffer
 (defconst my-splash-image nil)

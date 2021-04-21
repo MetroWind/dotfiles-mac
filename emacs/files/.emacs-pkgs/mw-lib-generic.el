@@ -178,4 +178,13 @@ Activate this advice with:
           (newline))
         (insert (current-time-no-microseconds) " ")))))
 
+(defun close-and-delete-file ()
+  "Close the current buffer and delete the associated file."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (save-buffer)
+    (kill-this-buffer)
+    (if (not (null filename))
+        (delete-file filename))))
+
 (provide 'mw-lib-generic)

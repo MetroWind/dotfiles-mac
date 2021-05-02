@@ -266,4 +266,18 @@ See URL `http://proselint.com/'."
   (if (not (null-or-unboundp 'my-roam-dir))
       (setq org-roam-directory my-roam-dir)))
 
+;; https://github.com/beancount/beancount-mode
+(use-package beancount-mode
+  :if (locate-library "beancount")
+  :mode "\\.beancount\\'"
+  :init
+  (add-hook 'beancount-mode-hook #'outline-minor-mode)
+  ;; Don’t auto-align amounts.
+  (add-hook 'beancount-mode-hook
+            (lambda () (setq-local electric-indent-chars nil)))
+  :config
+  ;; automatically determine the minimum column that will allow to
+  ;; align all amounts
+  (setq beancount-number-alignment-column 0))
+
 (provide 'mw-generic)

@@ -157,4 +157,12 @@
   (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)
   )
 
+(use-package org-roam
+  :ensure t
+  :disabled
+  :hook (after-init . org-roam-mode)
+  :config
+  (if (not (null-or-unboundp 'my-roam-dir))
+      (setq org-roam-directory my-roam-dir)))
+
 (provide 'mw-org)

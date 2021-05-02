@@ -260,12 +260,6 @@ See URL `http://proselint.com/'."
   (setq telega-msg-rainbow-title nil)
   (setq telega-sticker-size (cons 7 24)))
 
-(use-package org-roam
-  :hook (after-init . org-roam-mode)
-  :config
-  (if (not (null-or-unboundp 'my-roam-dir))
-      (setq org-roam-directory my-roam-dir)))
-
 ;; https://github.com/beancount/beancount-mode
 (use-package beancount-mode
   :if (locate-library "beancount")

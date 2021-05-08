@@ -6,4 +6,5 @@ brew cask install squirrel
 
 # Copy files
 mkdir -pv ${HOME}/Library/Rime
-stow -d files -t ${HOME}/Library/Rime --no-folding .
+# Since version 0.15(?), linking config files stopped working...
+cp files/*.yaml ${HOME}/Library/Rime/

@@ -31,6 +31,7 @@ main = do
       layoutHook = l,
       manageHook = myManageHook <+> manageHook desktopConfig,
       keys = myKeys,
+      mouseBindings = myMouseBindings,
       logHook = dynamicLogWithPP xmobarPP
                 { ppOutput = hPutStrLn xmproc,
                   ppCurrent = xmobarColor "#ECA964" "" . wrap "[" "]",
@@ -61,7 +62,24 @@ myLayout remote = if remote == "1"
 myManageHook = composeAll [
     -- send applications to the right workspace
     className =? "Firefox-esr" --> doShift "web",
+    className =? "Firefox" --> doShift "web",
     className =? "Google-chrome" --> doShift "web" ]
+
+myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
+
+    -- mod-button1, Set the window to floating mode and move by dragging
+    [ ((modMask .|. shiftMask, button1), (\w -> focus w >> mouseMoveWindow w
+                                           >> windows W.shiftMaster))
+
+    -- mod-button2, Raise the window to the top of the stack
+    , ((modMask, button2), (\w -> focus w >> windows W.shiftMaster))
+
+    -- mod-button3, Set the window to floating mode and resize by dragging
+    , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w
+                                       >> windows W.shiftMaster))
+
+    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    ]
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -79,7 +97,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, xK_grave ), sendMessage NextLayout) -- %! Rotate through the available layout algorithms
     , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf) -- %!  Reset the layouts on the current workspace to default
 
-    , ((modMask,               xK_n     ), refresh) -- %! Resize viewed windows to the correct size
+    -- , ((modMask,               xK_n     ), refresh) -- %! Resize viewed windows to the correct size
 
     -- move focus up or down the window stack
     , ((modMask,               xK_Tab   ), windows W.focusDown) -- %! Move focus to the next window
@@ -98,7 +116,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- , ((modMask,               xK_l     ), sendMessage Expand) -- %! Expand the master area
 
     -- floating layer support
-    , ((modMask,               xK_t     ), withFocused $ windows . W.sink) -- %! Push window back into tiling
+    , ((modMask .|. shiftMask, xK_t     ), withFocused $ windows . W.sink) -- %! Push window back into tiling
 
     -- increase or decrease number of windows in the master area
     , ((modMask              , xK_comma ), sendMessage (IncMasterN 1)) -- %! Increment the number of windows in the master area

@@ -38,3 +38,6 @@
 	default = simple
 [log]
 	date = iso
+
+[init]
+defaultBranch = master

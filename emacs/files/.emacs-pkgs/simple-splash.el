@@ -4,6 +4,11 @@
   "The image file used in the splash"
   :type '(string))
 
+(defcustom simple-splash-image-scale 1.0
+  "The displayed image is scaled by this factor. <1.0 is smaller,
+  >1.0 is larger. This is useful for \"retina\" displays."
+  :type '(number))
+
 (defcustom simple-splash-user-name user-full-name
   "The name of user"
   :type '(string))
@@ -22,13 +27,15 @@
 
 (defun simple-splash-invade-current-buffer ()
   (if (and simple-splash-image (display-graphic-p))
-      (let* ((img-spec (create-image simple-splash-image))
+      (let* ((img-spec (create-image simple-splash-image nil nil
+                                     :scale simple-splash-image-scale))
              (img-width (car (image-size img-spec))))
-        (insert (make-string
-                 (max 0 (floor (/ (- (window-body-width (get-buffer-window))
-                                     img-width)
-                                  2)))
-                 ?\ ))
+        ;; Try to center the image.
+        ;; (insert (make-string
+        ;;          (max 0 (floor (/ (- (window-body-width (get-buffer-window))
+        ;;                              img-width)
+        ;;                           2)))
+        ;;          ?\ ))
         (insert-image img-spec)
         (insert "\n\n")))
 

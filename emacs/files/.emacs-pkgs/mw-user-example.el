@@ -21,6 +21,7 @@
 
 ;; Path to the splash image for the splash buffer
 (defconst my-splash-image nil)
+(defconst my-splash-image-scale 1.0)
 ;; Set this to t to automatically go full screen on Mac.
 (defconst my-full-screen nil)
 (defconst my-smart-mode-line-theme 'light)

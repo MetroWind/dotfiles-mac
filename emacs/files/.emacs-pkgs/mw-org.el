@@ -33,6 +33,9 @@
   (setq org-export-headline-levels 5)
   (setq org-highlight-latex-and-related '(latex))
 
+  (setq org-fontify-done-headline nil)
+  (setq org-fontify-todo-headline nil)
+
   ;; When creating a sparse tree from matching, show the whole content
   ;; of the sparse tree.  This is for convenient LaTeX export.
   (setq org-show-entry-below '((default . nil) (tags-tree . t) (occur-tree . t)))

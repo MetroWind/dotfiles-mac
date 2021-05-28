@@ -196,6 +196,7 @@
   :demand t
   :config
   (setq simple-splash-image my-splash-image)
+  (setq simple-splash-image-scale my-splash-image-scale)
   (setq simple-splash-content
         "* Key Bindings
 

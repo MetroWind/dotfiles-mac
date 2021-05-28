@@ -72,12 +72,11 @@
 
 ;; Master nick for freenode: Darksair, and for OFTC: Corsair.
 (defconst irc-nick "Nick")
-;; (defconst irc-nick-oftc "Corsair")
 (defconst irc-full-name "Full Name")
 (defconst irc-password "secret")
 (defconst irc-channels
-  '(("freenode.net" "#channel1" "#channel2")
-    ("oftc.net" "#channel3" "#channel4")))
+  '(((host . "irc.libera.chat") (tls . t) (channels "#emacs"))
+    ((host . "oftc.net") (tls . t) (channels "#channel1" "#channel2"))))
 
 (defconst irc-pals '("joe" "john"))
 

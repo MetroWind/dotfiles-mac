@@ -4,12 +4,14 @@
   :init
   (defun erc-start ()
     (interactive)
-    (erc :server "irc.freenode.net" :port 6667 :nick irc-nick
-         :password irc-password :full-name irc-full-name)
-    (erc-tls :server "irc.oftc.net" :port 6697 :nick irc-nick
-             :password irc-password :full-name irc-full-name)
-    (erc-tls :server "irc.esper.net" :port 6697 :nick irc-nick
-             :password irc-password :full-name irc-full-name))
+    (dolist (server-spec irc-channels)
+      (if (cdr (assoc 'tls server-spec))
+          (erc-tls :server (cdr (assoc 'host server-spec))
+                   :port 6697 :nick irc-nick :password irc-password
+                   :full-name irc-full-name)
+        (erc-tls :server (cdr (assoc 'host server-spec))
+                 :port 6667 :nick irc-nick :password irc-password
+                 :full-name irc-full-name))))
 
   :config
   (require 'erc-ring)
@@ -60,7 +62,13 @@
                                        'rear-nonsticky t
                                        'front-nonsticky t))))
 
-  (ignore-errors (setq erc-autojoin-channels-alist irc-channels))
+  (ignore-errors
+    (setq erc-autojoin-channels-alist
+          (mapcar (lambda (server-spec)
+                    (cons (cdr (assoc 'host server-spec))
+                          (cdr (assoc 'channels server-spec))))
+                  irc-channels)))
+
   (ignore-errors (setq erc-pals irc-pals))
 
   (setq erc-quit-reason-various-alist

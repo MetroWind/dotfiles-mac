@@ -16,7 +16,12 @@
 
   (setq-default c-basic-offset 4)
   ;; add my personal style and set it for the current buffer
-  (setq-default c-default-style "bsd"
+  (defconst my-cc-style
+    '("bsd"
+      (c-offsets-alist . ((innamespace . [0])))))
+  (c-add-style "my-style" my-cc-style)
+
+  (setq-default c-default-style "my-style"
                 c-basic-offset 4)
 
   ;; Whether the indentation should be controlled by the syntactic context.

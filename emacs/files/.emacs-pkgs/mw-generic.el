@@ -257,7 +257,8 @@ See URL `http://proselint.com/'."
 (use-package telega
   :commands telega
   :config
-  (setq telega-chat-use-markdown-version 1)
+  (setq telega-chat-use-markdown-version 2)
+  (setq telega-chat-input-markups (list "markdown2" "markdown1" nil))
   (setq telega-msg-rainbow-title nil)
   (setq telega-sticker-size (cons 7 24)))
 

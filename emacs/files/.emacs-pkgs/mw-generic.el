@@ -60,6 +60,7 @@
                            (name . "^\\*Completions\\*$")
                            (mode . apropos-mode)
                            (mode . help-mode)
+                           (mode . helpful-mode)
                            ))
                  ("Temp" (or
                           (mode . helm-major-mode)))
@@ -262,10 +263,13 @@ See URL `http://proselint.com/'."
   (setq telega-msg-rainbow-title nil)
   (setq telega-sticker-size (cons 7 24)))
 
-;; https://github.com/beancount/beancount-mode
-(use-package beancount-mode
-  :if (locate-library "beancount")
-  :mode "\\.beancount\\'"
+;; Https://github.com/beancount/beancount-mode
+(use-package beancount
+  :mode ("\\.beancount\\'" . beancount-mode)
+  :bind (:map beancount-mode-map
+              ("M-n" . outline-next-visible-heading)
+              ("M-p" . outline-previous-visible-heading)
+              ("<backtab>" . beancount-toggle-hide))
   :init
   (add-hook 'beancount-mode-hook #'outline-minor-mode)
   ;; Don’t auto-align amounts.
@@ -274,6 +278,21 @@ See URL `http://proselint.com/'."
   :config
   ;; automatically determine the minimum column that will allow to
   ;; align all amounts
-  (setq beancount-number-alignment-column 0))
+  (setq beancount-number-alignment-column 0)
+  (setq beancount-hide nil)
+  (defun beancount-toggle-hide ()
+    (interactive)
+    (if beancount-hide
+        (progn
+          (outline-show-all)
+          (setq beancount-hide nil))
+      (outline-hide-body)
+      (setq beancount-hide t))))
+
+(use-package helpful
+  :bind
+  ("C-h f" . helpful-callable)
+  ("C-h v" . helpful-variable)
+  ("C-h k" . helpful-key))
 
 (provide 'mw-generic)

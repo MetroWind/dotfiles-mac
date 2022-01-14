@@ -28,7 +28,9 @@
     (dired-mode . "ls")
     (emacs-lock-mode . "")
     (mpdel-mode . "▶")
-    (lsp-mode . ""))
+    (lsp-mode . "")
+    (editorconfig-mode . "")
+    )
   "Alist for `clean-mode-line'.
 When you add a new element to the alist, keep in mind that you
 must pass the correct minor/major mode symbol and a string you

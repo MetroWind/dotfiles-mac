@@ -272,14 +272,16 @@
         (setq insert-directory-program "gls")
         (setq dired-listing-switches "-alXGh --group-directories-first")))
 
-  (setq delete-by-moving-to-trash t)
-  (if macp
-      (defun system-move-file-to-trash (file)
-        "Use \"trash\" to move FILE to the system trash.
+  (cond ((and macp (executable-find "trash"))
+         (setq delete-by-moving-to-trash t)
+         (defun system-move-file-to-trash (file)
+           "Use \"trash\" to move FILE to the system trash.
 When using Homebrew, (insert )nstall it using \"brew install trash\"."
-        (call-process (executable-find "trash")
-                      nil 0 nil
-                      file)))
+           (call-process (executable-find "trash")
+                         nil 0 nil
+                         file)))
+        (linuxp (setq delete-by-moving-to-trash t))
+        (t (setq delete-by-moving-to-trash nil)))
 
   (defun open-file-with-default-thing ()
     "Open the current file or dired marked files in external app."

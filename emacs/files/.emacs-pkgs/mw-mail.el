@@ -70,7 +70,8 @@
   (setq mail-specify-envelope-from t)
   (setq mail-envelope-from 'header)
   (setq send-mail-function 'sendmail-send-it)
-  (setq sendmail-program "msmtp")
+  (if (not (null-or-unboundp my-sendmail))
+      (setq sendmail-program my-sendmail))
   (setq mail-default-headers
         (concat "X-Operating-System: "
                 ;; This ends with a ‘\n’.

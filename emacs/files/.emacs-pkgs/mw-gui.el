@@ -39,10 +39,21 @@
 
 ;; Config for Emacs in terminal
 (use-package emacs
-  :disabled
   :if (not window-system)
+  :hook (tty-setup
+         .
+         (lambda ()
+           (message "Setting TTY...")
+           ;; By default in terminal the vertical divider between
+           ;; windows is a “|” char. Change it to a space.
+           (add-hook 'window-configuration-change-hook
+                     (lambda ()
+                       (let ((display-table (or buffer-display-table
+                                                standard-display-table)))
+                         (set-display-table-slot display-table 5 ? ))))))
   :config
-  (xterm-mouse-mode))
+  ;; (xterm-mouse-mode)
+  )
 
 ;; Go full screen and split
 (use-package emacs

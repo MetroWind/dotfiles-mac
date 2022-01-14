@@ -139,7 +139,7 @@
   (("s-p" . previous-buffer)
    ("s-n" . next-buffer)
    ("M-SPC" . set-mark-command)
-   ("C-x C-k" . kill-this-buffer)
+   ("C-x C-k" . kill-current-buffer)
    ("s-v" . clipboard-yank)
    ("C-x M-f" . find-file-at-point)
    ("C-x M-r" . revert-buffer)

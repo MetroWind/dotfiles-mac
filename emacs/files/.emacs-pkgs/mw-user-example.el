@@ -35,6 +35,7 @@
     (".*" . nil)
     ))
 (defconst my-mail-host "localhost")
+(defconst my-sendmail nil)
 
 ;; How to choose signature when composing an email. Each element in
 ;; `my-sig-condition' is a associative list containing three keys:

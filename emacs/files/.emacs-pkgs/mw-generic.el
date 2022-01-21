@@ -290,12 +290,12 @@ See URL `http://proselint.com/'."
       (setq beancount-hide t))))
 
 (use-package helpful
-  ;; Helpful loads edebug, which interfere with C-x C-a. We don’t like
-  ;; that.
-  :disabled
+  :ensure t
   :bind
   ("C-h f" . helpful-callable)
   ("C-h v" . helpful-variable)
   ("C-h k" . helpful-key))
+;; NOTE: helpful and helm-eval automatically load edebug, which
+;; interferes with C-x C-a in elisp-mode.
 
 (provide 'mw-generic)

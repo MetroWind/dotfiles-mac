@@ -290,6 +290,7 @@ See URL `http://proselint.com/'."
       (setq beancount-hide t))))
 
 (use-package helpful
+  :ensure t
   :bind
   ("C-h f" . helpful-callable)
   ("C-h v" . helpful-variable)

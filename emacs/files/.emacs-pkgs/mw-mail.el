@@ -1,3 +1,5 @@
+(require 'mw-lib-generic)
+
 ;; Mail
 (use-package message
   ;; :hook (message-setup . choose-from-by-to)
@@ -70,7 +72,7 @@
   (setq mail-specify-envelope-from t)
   (setq mail-envelope-from 'header)
   (setq send-mail-function 'sendmail-send-it)
-  (if (not (null-or-unboundp my-sendmail))
+  (if (not (null-or-unboundp 'my-sendmail))
       (setq sendmail-program my-sendmail))
   (setq mail-default-headers
         (concat "X-Operating-System: "

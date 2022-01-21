@@ -290,7 +290,9 @@ See URL `http://proselint.com/'."
       (setq beancount-hide t))))
 
 (use-package helpful
-  :ensure t
+  ;; Helpful loads edebug, which interfere with C-x C-a. We don’t like
+  ;; that.
+  :disabled
   :bind
   ("C-h f" . helpful-callable)
   ("C-h v" . helpful-variable)

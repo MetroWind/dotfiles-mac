@@ -14,7 +14,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%StdinReader% | %multicpu% | %coretemp% | %memory% | %dynnetwork% | <fn=1>%mpd%</fn> }{ %date% "
+   , template = "%StdinReader% | %multicpu% | %multicoretemp% | %memory% | %dynnetwork% | <fn=1>%mpd%</fn> }{ %date% "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -46,7 +46,7 @@ Config {
           --                    ] 36000
 
         -- network activity monitor (dynamic interface resolution)
-        Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+        Run DynNetwork     [ "--template" , "<dev>: ↑<tx>kB/s ↓<rx>kB/s"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
                              , "--low"      , "#8DC85F"
@@ -63,14 +63,16 @@ Config {
                              , "--high"     , "#FF96B3"
                              ] 20,
 
-        -- cpu core temperature monitor, not sure why MultiCoreTemp doesn’t work.
-        Run CoreTemp       [ "--template" , "Temp: <core0>°C"
-                             , "--Low"      , "60"        -- units: °C
-                             , "--High"     , "80"        -- units: °C
-                             , "--low"      , "#8DC85F"
-                             , "--normal"   , "#C0C7CE"
-                             , "--high"     , "#FF96B3"
-                             ] 50,
+        -- cpu core temperature monitor, Ryzen needs to use multicoretemp.
+        Run MultiCoreTemp       [
+            "--template" , "Temp: <max>°C"
+            , "--Low"      , "60"        -- units: °C
+            , "--High"     , "80"        -- units: °C
+            , "--low"      , "#8DC85F"
+            , "--normal"   , "#C0C7CE"
+            , "--high"     , "#FF96B3"
+            , "--", "--hwmon-path", "/sys/class/hwmon/hwmon1/"
+            ] 50,
 
         -- memory usage monitor
         Run Memory         [ "--template" ,"Mem: <usedratio>%"

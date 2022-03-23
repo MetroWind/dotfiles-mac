@@ -298,4 +298,12 @@ See URL `http://proselint.com/'."
 ;; NOTE: helpful and helm-eval automatically load edebug, which
 ;; interferes with C-x C-a in elisp-mode.
 
+(use-package pyim
+  :config
+  (setq default-input-method "pyim")
+  (pyim-default-scheme 'microsoft-shuangpin)
+  (setq pyim-page-length 5)
+  (require 'pyim-basedict)
+  (pyim-basedict-enable))
+
 (provide 'mw-generic)

@@ -67,9 +67,12 @@
 ;; For python, python-language-server is required. Install:
 ;;
 ;;   pip install 'python-language-server[pycodestyle]'
+;;
+;; For C++, clangd (which is part of clang) should be installed, and
+;; `lsp-clangd' should be loaded in Emacs.
 (use-package lsp-mode
   :ensure t
-  :hook ((python-mode rust-mode) . lsp)
+  :hook ((python-mode rust-mode c++-mode) . lsp)
   :init
   (setq lsp-keymap-prefix "M-S-l")
   :config
@@ -79,6 +82,8 @@
   (setq lsp-pyls-plugins-pycodestyle-enabled nil)
   (setq lsp-prefer-flymake :none)
   (setq lsp-signature-render-documentation nil) ; Only show sig, not doc.
+  ;; In general don’t use LSP for `indent-region'.
+  (setq lsp-enable-indentation nil)
   )
 
 (use-package company-lsp :commands company-lsp :ensure t)

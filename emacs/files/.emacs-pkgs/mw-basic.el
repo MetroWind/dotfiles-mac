@@ -46,8 +46,8 @@
   (setq auto-save-default t)
   ;; Replace selected text when typing
   (delete-selection-mode t)
-  ;; Default input method for `C-\'
-  (setq default-input-method "TeX")
+  ;; TODO: Use TeX as transient input method in Emacs 28
+  ;; (setq default-input-method "TeX")
   ;; Remove *bar...
   (progn
     (if window-system

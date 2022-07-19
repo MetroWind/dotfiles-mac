@@ -161,7 +161,7 @@
   )
 
 (use-package org-roam
-  :ensure t
+  :if (featurep 'org-roam)
   :hook (after-init . org-roam-mode)
   :config
   (if (not (null-or-unboundp 'my-roam-dir))
@@ -169,6 +169,5 @@
         (message (concat "Setting roam dir to " my-roam-dir))
         (setq org-roam-directory my-roam-dir))
     (message ("Not setting roam dir."))))
-
 
 (provide 'mw-org)

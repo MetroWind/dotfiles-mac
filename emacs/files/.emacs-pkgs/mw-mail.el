@@ -27,11 +27,15 @@
 
   (defun choose-sig-by-type (type)
     (cond ((eq type 'file)
-           (get-string-from-file my-signature-file))
+           (if (null-or-unboundp 'my-signature-file)
+               ""
+             (get-string-from-file my-signature-file)))
           ((eq type 'dir)
-           (get-string-from-file
-            (get-random-element
-             (directory-files-recursively my-signature-dir ".*"))))
+           (if (null-or-unboundp 'my-signature-dir)
+               ""
+             (get-string-from-file
+              (get-random-element
+               (directory-files-recursively my-signature-dir ".*")))))
           ((eq type 'fortune) (fortune))
           ((eq type 'cookie) (cookie nil))))
 

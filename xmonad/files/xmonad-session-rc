@@ -1,5 +1,5 @@
-source $HOME/.xinitrc
 source $HOME/.xinit-local
+source $HOME/.xinitrc
 
 xcompmgr -n &
 stalonetray &

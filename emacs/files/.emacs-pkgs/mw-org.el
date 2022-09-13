@@ -55,6 +55,13 @@
   ;;                  'org-hide nil
   ;;                  :foreground "#2e3735"))))
 
+  ;; Enable virtual indentation globally. This will indent the lines
+  ;; according to head level, with virtual spaces. This also means
+  ;; `org-adapt-indentation’ being nil. This looks awful for files
+  ;; with hard-coded indentation. To turn this off in a file, write
+  ;; “#+STARTUP: noindent”.
+  (setq org-startup-indented t)
+
   ;; Enable code execution
   (org-babel-do-load-languages
    'org-babel-load-languages

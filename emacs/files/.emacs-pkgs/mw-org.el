@@ -103,6 +103,39 @@
       (find-file-noselect f)))
 )
 
+(use-package org-agenda
+  :bind (([remap org-agenda-goto-today] . org-agenda-schedule-today)
+         ([remap org-agenda-date-prompt] . org-agenda-schedule-tomorrow)
+         ([remap org-agenda-filter] . org-agenda-schedule-next-monday)
+         ("C-c ." . org-agenda-goto-today)
+         ("C-c >" . org-agenda-date-prompt)
+         ("C-c /" . org-agenda-filter))
+  :init
+  (defun org-agenda-schedule-today (arg)
+    "Schedule the current time to today."
+    (interactive "P")
+    (org-agenda-schedule arg (current-time)))
+
+  (defun org-agenda-schedule-tomorrow (arg)
+    "Schedule the current time to tomorrow."
+    (interactive "P")
+    (org-agenda-schedule
+     arg
+     (encode-time (decoded-time-add (decode-time)
+                                    (make-decoded-time :day 1)))))
+
+  (defun org-agenda-schedule-next-monday (arg)
+    "Schedule the current time to next Monday."
+    (interactive "P")
+    (let* ((time (decode-time))
+           (dow (decoded-time-weekday time))
+           (delta (if (= dow 0)
+                      1
+                    (+ (- 7 dow) 1)))
+           (new-time (decoded-time-add time (make-decoded-time :day delta))))
+      (org-agenda-schedule arg (encode-time new-time))))
+  )
+
 ;; Org export
 (use-package ox
   :config

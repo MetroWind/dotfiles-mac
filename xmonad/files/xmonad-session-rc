@@ -1,7 +1,7 @@
 source $HOME/.xinit-local
 source $HOME/.xinitrc
 
-xcompmgr -n &
+# xcompmgr -n &
 stalonetray &
 
 source $HOME/.xmonad/user.env

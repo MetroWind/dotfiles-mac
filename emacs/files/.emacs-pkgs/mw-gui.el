@@ -74,11 +74,26 @@
 (use-package emacs
   :config
   (defun apply-random-theme ()
+    "Apply a random theme."
     (interactive)
     (let ((random-excludes (with-default 'my-random-theme-excludes nil))
           (theme-hooks (with-default 'my-theme-hooks nil))
           (sml-excludes (with-default 'my-auto-sml-theme-excludes nil)))
-      (mw-apply-random-theme random-excludes theme-hooks sml-excludes))))
+      (mw-apply-random-theme random-excludes theme-hooks sml-excludes)))
+
+  (defun apply-theme (theme)
+    "Apply a theme"
+    (interactive
+     (list
+      (intern (completing-read
+               "Load custom theme: "
+               (mapcar #'symbol-name (custom-available-themes))))))
+    (unless (custom-theme-name-valid-p theme)
+      (error "Invalid theme name `%s'" theme))
+
+    (let ((theme-hooks (with-default 'my-theme-hooks nil))
+          (sml-excludes (with-default 'my-auto-sml-theme-excludes nil)))
+      (mw-apply-theme theme theme-hooks sml-excludes))))
 
 ;; Load theme
 (if (not (null-or-unboundp 'my-theme))

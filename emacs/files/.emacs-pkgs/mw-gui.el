@@ -1,3 +1,5 @@
+(require 'mw-theme-utils)
+
 (use-package emacs
   :if window-system
   :config
@@ -34,7 +36,6 @@
 
   (if (and macp (>= emacs-major-version 26))
       (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
-
 )
 
 ;; Config for Emacs in terminal
@@ -70,8 +71,17 @@
            (split-window-vertically)
            (balance-windows))))
 
+(use-package emacs
+  :config
+  (defun apply-random-theme ()
+    (interactive)
+    (let ((random-excludes (with-default 'my-random-theme-excludes nil))
+          (theme-hooks (with-default 'my-theme-hooks nil))
+          (sml-excludes (with-default 'my-auto-sml-theme-excludes nil)))
+      (mw-apply-random-theme random-excludes theme-hooks sml-excludes))))
+
 ;; Load theme
-(if (and (boundp 'my-theme) my-theme)
+(if (not (null-or-unboundp 'my-theme))
     (progn
       (if (not (tty-color-24bit (list 0 0 0)))
           (progn
@@ -81,7 +91,13 @@
                                      (selected-frame))))
             (add-hook 'window-setup-hook 'on-after-init)))
 
-      (message (format "Loading theme %s..." my-theme))
-      (load-theme my-theme t)))
+      (message (format "Loading theme(s) %s..." my-theme))
+      (let ((theme-hooks (with-default 'my-theme-hooks nil))
+            (sml-excludes (with-default 'my-auto-sml-theme-excludes nil)))
+        (cl-typecase my-theme
+          (function (funcall my-theme))
+          (list (dolist (theme my-theme)
+                  (apply-theme theme theme-hooks sml-excludes)))
+          (t (apply-theme my-theme theme-hooks sml-excludes))))))
 
 (provide 'mw-gui)

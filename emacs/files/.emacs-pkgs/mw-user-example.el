@@ -4,7 +4,12 @@
 (defconst my-frame-height 60)
 (defconst my-frame-width 100)
 (defconst my-frame-title (concat my-user-name "’s GNU Emacs"))
-(defconst my-theme nil)                   ;Name of theme as a symbol
+;; Theme(s) to load. A symbol, or a list of symbols, or a function
+;; that loads the theme.
+(defconst my-theme nil)
+(defconst my-theme-hooks nil)
+(defconst my-random-theme-excludes nil)
+(defconst my-auto-sml-theme-excludes nil)
 (defconst my-font nil)
 (defconst my-font-size 130)             ;Pixel size * 10
 ;; Change the location of the .emacs.d dir (full path).

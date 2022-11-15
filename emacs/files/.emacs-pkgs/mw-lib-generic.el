@@ -5,6 +5,11 @@
       (null (symbol-value symbol))
     t))
 
+(defun with-default (symbol default)
+  (if (boundp symbol)
+      (symbol-value symbol)
+    default))
+
 (defun match-paren (arg)
   "Go to the matching paren if on a paren; otherwise insert %."
   (interactive "p")

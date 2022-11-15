@@ -1,3 +1,6 @@
+;; Fuck edebug
+(setq edebug-inhibit-emacs-lisp-mode-bindings t)
+
 (defconst ModeDir (expand-file-name "~/.emacs-pkgs"))
 (add-to-list 'load-path ModeDir)
 

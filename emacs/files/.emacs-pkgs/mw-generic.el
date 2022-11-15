@@ -162,9 +162,13 @@
 (use-package windmove
   :bind
   ("<M-up>" . windmove-up)
+  ("M-[ 1 ; 3 a" . windmove-up)
   ("<M-down>" . windmove-down)
+  ("M-[ 1 ; 3 b" . windmove-down)
   ("<M-left>" . windmove-left)
+  ("M-[ 1 ; 3 d" . windmove-left)
   ("<M-right>" . windmove-right)
+  ("M-[ 1 ; 3 c" . windmove-right)
   ("s-k" . windmove-up)
   ("s-j" . windmove-down)
   ("s-h" . windmove-left)
@@ -178,9 +182,13 @@
   ("s-H" . buf-move-left)
   ("s-L" . buf-move-right)
   ("<M-S-up>" . buf-move-up)
+  ("M-[ 1 ; 4 a" . buf-move-up)
   ("<M-S-down>" . buf-move-down)
+  ("M-[ 1 ; 4 b" . buf-move-down)
   ("<M-S-left>" . buf-move-left)
-  ("<M-S-right>" . buf-move-right))
+  ("M-[ 1 ; 4 d" . buf-move-left)
+  ("<M-S-right>" . buf-move-right)
+  ("M-[ 1 ; 4 c" . buf-move-right))
 
 ;; This doesn’t work correctly sometimes but I’ll just put it here...
 (use-package winner

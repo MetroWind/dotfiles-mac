@@ -28,6 +28,7 @@
 
 ;; Company
 (use-package company
+  :when (equal my-inline-completion 'company)
   :ensure t
   :hook (after-init . global-company-mode)
   ;; :bind ("M-/" . complete-with-all-backends)
@@ -71,6 +72,7 @@
 ;; For C++, clangd (which is part of clang) should be installed, and
 ;; `lsp-clangd' should be loaded in Emacs.
 (use-package lsp-mode
+  :unless (null my-inline-completion)
   :ensure t
   :hook ((python-mode rust-mode c++-mode) . lsp)
   :init
@@ -86,7 +88,10 @@
   (setq lsp-enable-indentation nil)
   )
 
-(use-package company-lsp :commands company-lsp :ensure t)
+(use-package company-lsp
+  :when (equal my-inline-completion 'company)
+  :commands company-lsp
+  :ensure t)
 
 (use-package jedi-core
   :disabled

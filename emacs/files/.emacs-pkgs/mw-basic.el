@@ -251,7 +251,7 @@
   (cua-mode t))
 
 (use-package time-stamp
-  :hook before-save)
+  :hook (before-save . time-stamp))
 
 (use-package cookie1
   :commands cookie

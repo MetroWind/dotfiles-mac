@@ -1,3 +1,5 @@
+(require 'mw-lib-generic)
+
 (use-package helm-mode
   :ensure helm
   :bind
@@ -28,7 +30,7 @@
 
 ;; Company
 (use-package company
-  :when (equal my-inline-completion 'company)
+  :when (equal (with-default 'my-inline-completion nil) 'company)
   :ensure t
   :hook (after-init . global-company-mode)
   ;; :bind ("M-/" . complete-with-all-backends)
@@ -72,7 +74,7 @@
 ;; For C++, clangd (which is part of clang) should be installed, and
 ;; `lsp-clangd' should be loaded in Emacs.
 (use-package lsp-mode
-  :unless (null my-inline-completion)
+  :unless (null-or-unboundp 'my-inline-completion)
   :ensure t
   :hook ((python-mode rust-mode c++-mode) . lsp)
   :init
@@ -89,7 +91,7 @@
   )
 
 (use-package company-lsp
-  :when (equal my-inline-completion 'company)
+  :when (equal (with-default 'my-inline-completion nil) 'company)
   :commands company-lsp
   :ensure t)
 

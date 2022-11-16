@@ -112,7 +112,7 @@
         (cl-typecase my-theme
           (function (funcall my-theme))
           (list (dolist (theme my-theme)
-                  (apply-theme theme theme-hooks sml-excludes)))
-          (t (apply-theme my-theme theme-hooks sml-excludes))))))
+                  (mw-apply-theme theme theme-hooks sml-excludes)))
+          (t (mw-apply-theme my-theme theme-hooks sml-excludes))))))
 
 (provide 'mw-gui)

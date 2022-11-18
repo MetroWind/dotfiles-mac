@@ -133,7 +133,7 @@
            (cons "and" (unicode-symbol 'logical-and))
            (cons "or" (unicode-symbol 'logical-or))
            (cons "not" (unicode-symbol 'logical-neg)))
-     (if truemacp
+     (if (and truemacp (< emacs-major-version 28))
          nil
        (list
         (cons "!=" (unicode-symbol 'not-equal))
@@ -144,7 +144,7 @@
   )
 
 (use-package rust-mode
-  :if (and have-prettify-symbols (not truemacp))
+  :if (and have-prettify-symbols (not truemacp) (< emacs-major-version 28))
   :hook ((rust-mode . prettify-symbols-mode)
          (rust-mode . (lambda () (setq prettify-symbols-alist rust-unicode))))
   :config

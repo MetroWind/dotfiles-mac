@@ -4,12 +4,55 @@
 (defconst my-frame-height 60)
 (defconst my-frame-width 100)
 (defconst my-frame-title (concat my-user-name "’s GNU Emacs"))
+(defconst my-theme-hooks
+  (list (cons "modus-vivendi"
+              (cons
+               (lambda ()
+                 (message "Loading modus theme hook...")
+                 (require 'modus-themes)
+                 (setq modus-themes-italic-constructs t
+                       modus-themes-bold-constructs t
+                       modus-themes-fringes 'subtle)
+                 (modus-themes-load-themes)
+                 (modus-themes-load-vivendi)
+                 (set-face-attribute 'vertical-border nil :inherit 'fringe))
+               nil))
+        (cons "modus-operandi"
+              (cons
+               (lambda ()
+                 (message "Loading modus theme hook...")
+                 (require 'modus-themes)
+                 (setq modus-themes-italic-constructs t
+                       modus-themes-bold-constructs t
+                       modus-themes-fringes 'subtle)
+                 (modus-themes-load-themes)
+                 (modus-themes-load-operandi)
+                 (set-face-attribute 'vertical-border nil :inherit 'fringe))
+               nil))
+        (cons "ef-.+"
+              (cons
+               nil
+               (lambda ()
+                 (message "Loading ef theme hook...")
+                 (ef-themes-with-colors
+                   (set-face-attribute 'vertical-border nil
+                                       :background bg-inactive)
+                   (set-face-attribute 'sml/global nil
+                                       :background bg-inactive
+                                       :foreground fg-main)))))))
+(defconst my-random-theme-excludes
+  '(ample moe smart-mode-line-dark smart-mode-line-light
+    smart-mode-line-respectful apropospriate solarized))
+(defconst my-auto-sml-theme-excludes
+  '(lab-light lab-dark flucui-light flucui-dark notink))
 ;; Theme(s) to load. A symbol, or a list of symbols, or a function
 ;; that loads the theme.
-(defconst my-theme nil)
-(defconst my-theme-hooks nil)
-(defconst my-random-theme-excludes nil)
-(defconst my-auto-sml-theme-excludes nil)
+(defconst my-theme
+  (lambda ()
+    (mw-apply-random-theme
+     my-random-theme-excludes
+     my-theme-hooks
+     my-auto-sml-theme-excludes)))
 (defconst my-font nil)
 (defconst my-font-size 130)             ;Pixel size * 10
 ;; Change the location of the .emacs.d dir (full path).

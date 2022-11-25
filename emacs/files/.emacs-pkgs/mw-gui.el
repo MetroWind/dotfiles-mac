@@ -1,5 +1,7 @@
 (require 'mw-theme-utils)
 
+(use-package ligature :ensure t)
+
 (use-package emacs
   :if window-system
   :config

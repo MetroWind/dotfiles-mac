@@ -4,7 +4,6 @@
 (defconst ModeDir (expand-file-name "~/.emacs-pkgs"))
 (add-to-list 'load-path ModeDir)
 
-(require 'ligature)
 (message "Loading user settings...")
 (require 'mw-user)
 (message "Initializing...")

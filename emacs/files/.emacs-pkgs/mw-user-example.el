@@ -58,7 +58,7 @@
 ;; Change the location of the .emacs.d dir (full path).
 (defconst my-emacsd-location nil)
 ;; Nil or 'company.
-(defconst my-inline-completion nil)
+(defconst my-inline-completion 'company)
 
 ;; A list of org file that are opened by command "org-open".
 (defconst my-org-files '())

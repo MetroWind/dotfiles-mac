@@ -1,7 +1,10 @@
 (require 'mw-theme-utils)
 (require 'mw-lib-generic)
 
-(use-package ligature :ensure t)
+(use-package ligature
+  :if (window-system)
+  :ensure t
+  :hook (after-init . global-ligature-mode))
 
 (use-package emacs
   :if window-system

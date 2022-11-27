@@ -1,9 +1,11 @@
 (require 'mw-theme-utils)
+(require 'mw-lib-generic)
 
 (use-package ligature :ensure t)
 
 (use-package emacs
   :if window-system
+  :bind (("<f5>" . toggle-old-man))
   :config
   ;; Size
   (add-to-list 'default-frame-alist (cons 'height my-frame-height))
@@ -38,6 +40,24 @@
 
   (if (and macp (>= emacs-major-version 26))
       (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
+
+  (defun enable-old-man ()
+    (interactive)
+    (set-face-attribute 'default nil
+      :height (truncate (* (with-default 'my-font-size 100) 1.5))))
+
+  (defun disable-old-man ()
+    (interactive)
+    (set-face-attribute 'default nil :height (with-default 'my-font-size 100)))
+
+  (defun toggle-old-man ()
+    (interactive)
+    (if (with-default 'is-old-man nil)
+        (progn
+          (disable-old-man)
+          (setq is-old-man nil))
+      (enable-old-man)
+      (setq is-old-man t)))
 )
 
 ;; Config for Emacs in terminal

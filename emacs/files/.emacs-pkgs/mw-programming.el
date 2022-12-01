@@ -217,4 +217,24 @@
   (setq default-tab-width 2)
   (make-local-variable 'default-tab-width))
 
+(use-package tree-sitter
+  :hook ((after-init . global-tree-sitter-mode)
+         (tree-sitter-after-on . tree-sitter-hl-mode)))
+
+(use-package tree-sitter-hl
+  :config
+  (set-face-attribute
+   'tree-sitter-hl-face:operator nil
+   :inherit 'shadow)
+  (set-face-attribute
+   'tree-sitter-hl-face:function.call nil
+   :slant 'normal)
+  (set-face-attribute
+   'tree-sitter-hl-face:property nil
+   :slant 'normal)
+  (set-face-attribute
+   'tree-sitter-hl-face:type nil
+   :inherit 'default)
+)
+
 (provide 'mw-programming)

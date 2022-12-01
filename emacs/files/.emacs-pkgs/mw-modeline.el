@@ -30,6 +30,7 @@
     (mpdel-mode . "▶")
     (lsp-mode . "")
     (editorconfig-mode . "")
+    (tree-sitter-mode . "T")
     )
   "Alist for `clean-mode-line'.
 When you add a new element to the alist, keep in mind that you

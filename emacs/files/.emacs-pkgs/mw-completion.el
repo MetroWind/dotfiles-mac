@@ -51,6 +51,7 @@
   (setq company-dabbrev-ignore-case nil)
   (setq company-dabbrev-downcase nil)
   (setq company-async-timeout 5)
+  (setq company-idle-delay 2)
   (setq company-clang-arguments '("-std=c++17"))
   (setq company-backends
         '(company-capf

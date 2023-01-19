@@ -218,6 +218,7 @@
   (make-local-variable 'default-tab-width))
 
 (use-package tree-sitter
+  :if (package-installed-p 'tree-sitter)
   :hook ((after-init . global-tree-sitter-mode)
          (tree-sitter-after-on . tree-sitter-hl-mode)))
 

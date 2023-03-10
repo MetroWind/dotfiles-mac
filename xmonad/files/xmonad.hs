@@ -18,10 +18,10 @@ import XMonad.Util.Run(spawnPipe)
 
 main = do
   xmproc <- spawnPipe "xmobar"
-  -- Use different set of layouts if it’s a remote session. See
+  -- Use different set of layouts if env var XMONAD_USE_VERTICAL_LAYOUT is 1. See
   -- https://stackoverflow.com/a/60715978/782130.
-  isRemoteEnv <- lookupEnv "CHROME_REMOTE_DESKTOP_SESSION"
-  case myLayout (fromMaybe "0" isRemoteEnv) of Layout l -> xmonad $ desktopConfig {
+  isVertical <- lookupEnv "XMONAD_USE_VERTICAL_LAYOUT"
+  case myLayout (fromMaybe "0" isVertical) of Layout l -> xmonad $ desktopConfig {
       terminal = "kitty -1",
       modMask = mod4Mask,
       workspaces = ["main", "web", "3", "4"],
@@ -53,9 +53,9 @@ findWindows name = do
 
 -- https://stackoverflow.com/a/60715978/782130
 myLayout :: Show a => String -> Layout a
-myLayout remote = if remote == "1"
+myLayout vertical = if vertical /= "1"
   then Layout $ onWorkspace "web" (avoidStruts $ (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
-       (avoidStruts $ (ThreeColMid 1 0.02 (1/2)) ||| Full)
+       (avoidStruts $ (ThreeColMid 1 0.02 (3/7)) ||| Full)
   else Layout $ onWorkspace "web" (avoidStruts $ Mirror (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
        (avoidStruts $ Mirror (ThreeColMid 1 0.02 (1/2)) ||| Full)
 

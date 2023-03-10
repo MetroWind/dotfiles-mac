@@ -1,0 +1,12 @@
+# Haskell has no stable keywords in Gentoo
+dev-lang/ghc
+dev-haskell/*
+
+# Only needed if using ::haskell, but harmless if not.
+# May as well put it in, just in case for future use.
+*/*::haskell
+
+x11-wm/xmonad ~amd64
+x11-wm/xmonad-contrib ~amd64
+app-admin/haskell-updater ~amd64
+x11-misc/xmobar ~amd64

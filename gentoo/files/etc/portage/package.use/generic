@@ -1,0 +1,14 @@
+dev-lang/rust-bin rust-analyzer rust-src
+x11-drivers/nvidia-drivers tools
+net-wireless/wpa_supplicant dbus
+sys-apps/systemd policykit
+app-admin/sudo offensive
+app-crypt/pinentry gtk
+app-crypt/gcr gtk
+media-gfx/imagemagick hdri opencl pango fontconfig jpeg jpeg2k lcms openexr openmp png raw tiff truetype webp zip zlib
+media-video/ffmpeg dav1d svt-av1 x264 x265 vulkan libdrm libsoxr vpx encode fontconfig jpeg2k libass mp3 opus sdl speex threads truetype vaapi vdpau vorbis webp xvid
+media-video/mpv vaapi vdpau vulkan
+media-gfx/feh exif inotify
+media-libs/imlib2 gif jpeg png tiff webp zlib heif jpeg2k
+# Thunar
+dev-libs/libdbusmenu gtk3

@@ -1,0 +1,6 @@
+# Cups, install net-print/brlaser for Brother HL-L2390DW driver.
+app-text/ghostscript-gpl cups
+app-text/xmlto text
+net-print/cups dbus zeroconf
+app-text/evince cups
+x11-libs/gtk+ cups

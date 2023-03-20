@@ -12,3 +12,8 @@ media-gfx/feh exif inotify
 media-libs/imlib2 gif jpeg png tiff webp zlib heif jpeg2k
 # Thunar
 dev-libs/libdbusmenu gtk3
+# Lilypond
+media-gfx/fontforge png
+media-sound/lilypond emacs
+# Evince
+app-text/poppler cairo cjk

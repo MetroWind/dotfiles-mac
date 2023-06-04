@@ -12,8 +12,17 @@ media-gfx/feh exif inotify
 media-libs/imlib2 gif jpeg png tiff webp zlib heif jpeg2k
 # Thunar
 dev-libs/libdbusmenu gtk3
+xfce-base/tumbler jpeg ffmpeg pdf
 # Lilypond
 media-gfx/fontforge png
 media-sound/lilypond emacs
 # Evince
 app-text/poppler cairo cjk
+# GIMP
+media-libs/gegl cairo
+media-gfx/gimp webp openexr
+# TeX
+app-text/texlive cjk context luatex graphics metapost png xetex
+app-text/texlive-core cjk xetex
+
+media-libs/libavif svt-av1

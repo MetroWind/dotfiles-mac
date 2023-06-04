@@ -63,6 +63,8 @@ myManageHook = composeAll [
     -- send applications to the right workspace
     className =? "Firefox-esr" --> doShift "web",
     className =? "Firefox" --> doShift "web",
+    className =? "firefox" --> doShift "web",
+    className =? "Navigator" --> doShift "web",
     className =? "Google-chrome" --> doShift "web" ]
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $

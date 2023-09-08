@@ -1,3 +1,4 @@
 net-print/brlaser ~amd64
 media-video/ffmpeg ~amd64
 net-im/tdlib ~amd64
+www-misc/monolith ~amd64

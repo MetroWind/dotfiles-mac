@@ -201,13 +201,44 @@
   )
 
 (use-package org-roam
-  :if (featurep 'org-roam)
-  :hook (after-init . org-roam-mode)
+  :ensure t
   :config
   (if (not (null-or-unboundp 'my-roam-dir))
       (progn
         (message (concat "Setting roam dir to " my-roam-dir))
-        (setq org-roam-directory my-roam-dir))
-    (message ("Not setting roam dir."))))
+        (setq org-roam-directory my-roam-dir)
+        (org-roam-db-autosync-mode))
+    (message ("Not setting roam dir.")))
+  (setq org-roam-dailies-directory "journal/")
+  ;; Default daily template but unnarrow.
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry "* %?" :target
+           (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>
+#+CATEGORY: journal")
+           :unnarrowed t)))
+
+  (setq org-roam-capture-templates
+        '(("d" "Random thoughts" plain nil :target
+           (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                      "#+title: ${title}
+#+CATEGORY: thoughts\n")
+           :unnarrowed t)
+          ("r" "Reading note" plain nil :target
+           (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                      ":PROPERTIES:
+:ROAM_REFS: %^{Source}
+:source_type: %^{Source type|article|book|video|podcast|microblog|paper}
+:END:
+#+title: ${title}
+#+CATEGORY: reading\n")
+           :unnarrowed t)
+          ("p" "Permanent note" plain nil :target
+           (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                      "#+title: ${title}
+#+CATEGORY: permanent\n\n")
+           :unnarrowed t)))
+
+  (setq org-roam-node-display-template "${category:10} ${title:*}")
+  )
 
 (provide 'mw-org)

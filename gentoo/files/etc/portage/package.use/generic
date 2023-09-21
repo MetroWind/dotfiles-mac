@@ -26,3 +26,6 @@ app-text/texlive cjk context luatex graphics metapost png xetex
 app-text/texlive-core cjk xetex
 
 media-libs/libavif svt-av1
+media-libs/gd truetype fontconfig
+
+x11-wm/openbox branding svg session xdg

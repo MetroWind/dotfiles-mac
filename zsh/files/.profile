@@ -1,6 +1,8 @@
-source $HOME/.profile-user
+if [[ -e $HOME/.profile-user ]]; then
+    source $HOME/.profile-user
+fi
 
-export OSFONTDIR="$HOME/Library/Fonts;/Library/Fonts"
+export OSFONTDIR="$HOME/.local/share/fonts;$HOME/Library/Fonts;/Library/Fonts"
 export OSCOLORDIR="/System/Library/ColorSync/Profiles;/Library/Application Support/Adobe/Color"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/Library/TeX/texbin:$PATH"
@@ -30,3 +32,5 @@ export PATH="${HOME}/.cargo/bin:$PATH"
 if which gpgconf >& /dev/null && [[ $USE_GPG == 1 ]]; then
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi
+
+gpgconf --launch gpg-agent

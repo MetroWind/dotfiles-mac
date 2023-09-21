@@ -230,15 +230,17 @@
 :source_type: %^{Source type|article|book|video|podcast|microblog|paper}
 :END:
 #+title: ${title}
+#+filetags: :Draft:
 #+CATEGORY: reading\n")
            :unnarrowed t)
           ("p" "Permanent note" plain nil :target
            (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                       "#+title: ${title}
-#+CATEGORY: permanent\n\n")
+#+filetags: :Draft:
+#+CATEGORY: permanent\n")
            :unnarrowed t)))
 
-  (setq org-roam-node-display-template "${category:10} ${title:*}")
+  (setq org-roam-node-display-template "${category:10} ${tags:10} ${title:*}")
   )
 
 (provide 'mw-org)

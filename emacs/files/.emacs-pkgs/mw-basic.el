@@ -13,6 +13,14 @@
   (setq read-process-output-max (* 1024 1024))
   (setq garbage-collection-messages t)  ; Log GC
 
+  ;; For Windows
+  (set-language-environment 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-keyboard-coding-system 'utf-8-unix)
+
+  ;; add this especially on Windows, else python output problem
+  (set-terminal-coding-system 'utf-8-unix)
+
   (setenv "COLUMNS" "80")                 ; Kill the dumb COLUMN warning from `ls'
   (ignore-errors (setq user-full-name my-user-name))
   (ignore-errors (setq user-mail-address my-email))

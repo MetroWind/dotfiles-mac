@@ -218,9 +218,47 @@
   (make-local-variable 'default-tab-width))
 
 (use-package tree-sitter
-  :if (package-installed-p 'tree-sitter)
+  :if (and (package-installed-p 'tree-sitter)
+           (not (featurep 'treesit)))
   :hook ((after-init . global-tree-sitter-mode)
          (tree-sitter-after-on . tree-sitter-hl-mode)))
+
+(use-package treesit
+  :if (featurep 'treesit)
+  :config
+  (setq treesit-language-source-alist
+        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+          (cmake "https://github.com/uyha/tree-sitter-cmake")
+          (c "https://github.com/tree-sitter/tree-sitter-c")
+          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+          (go "https://github.com/tree-sitter/tree-sitter-go")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (make "https://github.com/alemuller/tree-sitter-make")
+          (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (python "https://github.com/tree-sitter/tree-sitter-python")
+          (rust "https://github.com/tree-sitter/tree-sitter-rust")
+          (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+  ;; Run this to install all languages:
+  ;; (mapc #'treesit-install-language-grammar
+  ;;       (mapcar #'car treesit-language-source-alist))
+
+  (setq major-mode-remap-alist
+        '((yaml-mode . yaml-ts-mode)
+          (sh-mode . bash-ts-mode)
+          (c-mode . c-ts-mode)
+          ;; (c++-mode . c++-ts-mode)
+          (rust-mode . rust-ts-mode)
+          (js-mode . js-ts-mode)
+          (css-mode . css-ts-mode)
+          (python-mode . python-ts-mode)))
+  )
 
 (use-package tree-sitter-hl
   :config

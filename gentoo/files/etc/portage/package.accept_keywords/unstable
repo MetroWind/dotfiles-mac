@@ -3,3 +3,9 @@ media-video/ffmpeg ~amd64
 net-im/tdlib ~amd64
 www-misc/monolith ~amd64
 sys-apps/eza ~amd64
+
+# Hyprland
+gui-wm/hyprland ~amd64
+dev-libs/hyprland-protocols ~amd64
+dev-libs/libliftoff ~amd64
+media-libs/libdisplay-info ~amd64

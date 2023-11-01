@@ -28,4 +28,10 @@ app-text/texlive-core cjk xetex
 media-libs/libavif svt-av1
 media-libs/gd truetype fontconfig
 
-x11-wm/openbox branding svg session xdg
+x11-wm/openbox branding svg session xdg imlib
+x11-misc/picom opengl dbus
+x11-misc/openbox-menu svg
+
+dev-qt/qtbase opengl
+dev-qt/qttools opengl
+dev-qt/qtgui wayland egl

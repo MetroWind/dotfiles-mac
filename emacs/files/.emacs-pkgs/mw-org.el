@@ -7,7 +7,8 @@
   :mode ("\\.org$" . org-mode)
   :bind (("C-<f12>" . org-remember)
          :map org-mode-map
-         ("C-c C-a" . outline-show-all))
+         ("C-c C-a" . outline-show-all)
+         ("C-c w" . refile-subtree-to-new-file))
   :config
 
 ;; (define-key global-map "\C-cl" 'org-store-link)
@@ -32,6 +33,7 @@
   (setq org-clock-string-limit 16)
   (setq org-export-headline-levels 5)
   (setq org-highlight-latex-and-related '(latex))
+  (setq org-outline-path-complete-in-steps nil)
 
   (setq org-fontify-done-headline nil)
   (setq org-fontify-todo-headline nil)
@@ -41,8 +43,10 @@
   (setq org-show-entry-below '((default . nil) (tags-tree . t) (occur-tree . t)))
   ;; Set to the location of your Org files on your local system
   (setq org-agenda-files my-org-files)
+  (if (not (null-or-unboundp 'my-org-dir))
+      (setq org-directory my-org-dir))
   ;; Set `org-capture'
-  (if my-org-capture-file
+  (if (not (null-or-unboundp 'my-org-capture-file))
       (setq org-default-notes-file my-org-capture-file))
   ;; Don’t mess with my windows!!!!!!!!!!!!!!
   (setq org-agenda-window-setup 'other-window)
@@ -101,6 +105,25 @@
     (interactive)
     (dolist (f my-org-files)
       (find-file-noselect f)))
+
+  (defun refile-subtree-to-new-file ()
+    "Refile the current subtree into a new file under
+ `org-directory'. The filename is derived from the subtree title."
+    (interactive)
+    (let* (
+           ;; Get title of current heading
+           (title (org-element-interpret-data
+                   (org-element-property :title (org-element-at-point))))
+           (slug (sluggify title))
+           (filename (format "%s-%s.org"
+                             (format-time-string "%Y-%m-%d")
+                             slug))
+           (filepath (expand-file-name filename org-directory)))
+      (if (string-empty-p slug)
+          (error "Slug is empty.")
+        (org-copy-subtree nil t)
+        (find-file-other-window filepath)
+        (org-paste-subtree))))
 )
 
 (use-package org-agenda
@@ -215,7 +238,7 @@
         '(("d" "default" entry "* %?" :target
            (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>
 #+CATEGORY: journal")
-           :unnarrowed t)))
+           :unnarrowed nil)))
 
   (setq org-roam-capture-templates
         '(("d" "Random thoughts" plain nil :target
@@ -227,16 +250,16 @@
            (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                       ":PROPERTIES:
 :ROAM_REFS: %^{Source}
-:source_type: %^{Source type|article|book|video|podcast|microblog|paper}
+:SourceType: %^{Source type|article|book|video|podcast|microblog|paper}
 :END:
-#+title: ${title}
-#+filetags: :Draft:
+#+TITLE: ${title}
+#+FILETAGS: :Draft:
 #+CATEGORY: reading\n")
            :unnarrowed t)
           ("p" "Permanent note" plain nil :target
            (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                       "#+title: ${title}
-#+filetags: :Draft:
+#+FILETAGS: :Draft:
 #+CATEGORY: permanent\n")
            :unnarrowed t)))
 

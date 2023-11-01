@@ -192,4 +192,13 @@ Activate this advice with:
     (if (not (null filename))
         (delete-file filename))))
 
+(defun sluggify (s)
+  "Convert a string to one that is suitable as an “identifier”,
+ by down-casing the string, and converting all non-alphanumeric
+ characters to underscore. Consecutive underscores are merged."
+  (replace-regexp-in-string
+   (rx (>= 2 "_")) "_"
+   (replace-regexp-in-string
+    (rx (not alnum)) "_" (downcase s))))
+
 (provide 'mw-lib-generic)

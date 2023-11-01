@@ -314,4 +314,11 @@ See URL `http://proselint.com/'."
   (require 'pyim-basedict)
   (pyim-basedict-enable))
 
+(use-package emacs
+  :config
+  (setq word-wrap-by-category t))
+
+(use-package visual-fill-column
+  :hook (visual-line-mode . visual-fill-column-mode))
+
 (provide 'mw-generic)

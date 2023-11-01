@@ -18,6 +18,10 @@
   (set-default-coding-systems 'utf-8)
   (set-keyboard-coding-system 'utf-8-unix)
 
+  (if (file-directory-p "/nix")
+      (setenv "NIX_PROFILES" (concat "/nix/var/nix/profiles/default "
+                                     (expand-file-name "~/.nix-profile"))))
+
   ;; add this especially on Windows, else python output problem
   (set-terminal-coding-system 'utf-8-unix)
 
@@ -213,9 +217,11 @@
 (use-package flyspell
   ;; Prevent flyspell to overide this key.
   :bind (:map flyspell-mode-map ("C-;" . nil))
-  :hook (text-mode . flyspell-mode)
+  :hook (text-mode . flyspell-mode))
+
+(use-package ispell
   :config
-  (setq-default ispell-program-name "aspell"))
+  (setq-default ispell-program-name "hunspell"))
 
 (use-package comint
   :config

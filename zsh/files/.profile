@@ -7,6 +7,7 @@ export OSCOLORDIR="/System/Library/ColorSync/Profiles;/Library/Application Suppo
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/Library/TeX/texbin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 export INFOPATH="$HOME/.emacs.d/info:$INFOPATH"
 export EDITOR="/usr/local/bin/emacsclient"
 export PAGER="most"

@@ -32,6 +32,7 @@
        (one-buffer-one-frame-mode -1)
        )))
 (defconst use-pkg-p (>= emacs-major-version 24))
+(defconst use-straight-p (>= emacs-major-version 26))
 
 (if (boundp 'my-emacsd-location)
     (if my-emacsd-location
@@ -132,5 +133,21 @@ Return a list of installed packages or nil for every skipped package."
 (eval-when-compile (require 'use-package))
 (setq use-package-verbose t)
 (setq use-package-always-defer t)
+
+;; Straight
+(if use-straight-p
+    (progn
+      (defvar bootstrap-version)
+      (let ((bootstrap-file
+             (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+            (bootstrap-version 6))
+        (unless (file-exists-p bootstrap-file)
+          (with-current-buffer
+              (url-retrieve-synchronously
+               "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+               'silent 'inhibit-cookies)
+            (goto-char (point-max))
+            (eval-print-last-sexp)))
+        (load bootstrap-file nil 'nomessage))))
 
 (provide 'mw-init)

@@ -91,6 +91,9 @@
   (setq lsp-enable-indentation nil)
   )
 
+(use-package eglot
+  :hook (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode -1))))
+
 (use-package company-lsp
   :when (equal (with-default 'my-inline-completion nil) 'company)
   :commands company-lsp

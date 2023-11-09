@@ -1,6 +1,10 @@
 (require 'mw-theme-utils)
 (require 'mw-lib-generic)
 
+(if use-straight-p
+    (straight-use-package
+     '(monte-carlo-theme :type git :host github :repo "MetroWind/monte-carlo-theme")))
+
 (use-package ligature
   :if (window-system)
   :ensure t

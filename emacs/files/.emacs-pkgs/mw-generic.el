@@ -321,4 +321,15 @@ See URL `http://proselint.com/'."
 (use-package visual-fill-column
   :hook (visual-line-mode . visual-fill-column-mode))
 
+(if use-straight-p
+    (straight-use-package
+     '(eat :type git
+           :host codeberg
+           :repo "akib/emacs-eat"
+           :files ("*.el" ("term" "term/*.el") "*.texi"
+                   "*.ti" ("terminfo/e" "terminfo/e/*")
+                   ("terminfo/65" "terminfo/65/*")
+                   ("integration" "integration/*")
+                   (:exclude ".dir-locals.el" "*-tests.el")))))
+
 (provide 'mw-generic)

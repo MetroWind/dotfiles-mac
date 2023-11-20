@@ -346,4 +346,9 @@ When using Homebrew, (insert )nstall it using \"brew install trash\"."
   ;; Enable ligature.
   (mac-auto-operator-composition-mode))
 
+(use-package use-package-chords
+  :demand t
+  :ensure t
+  :config (key-chord-mode 1))
+
 (provide 'mw-basic)

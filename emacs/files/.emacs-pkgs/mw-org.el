@@ -3,6 +3,7 @@
 (require 'mw-lib-generic)
 
 (use-package org
+  :demand t
   :commands org-open
   :mode ("\\.org$" . org-mode)
   :bind (("C-<f12>" . org-remember)
@@ -224,7 +225,9 @@
   )
 
 (use-package org-roam
+  :demand t
   :ensure t
+  :chords (("ob" . org-roam-buffer-toggle))
   :config
   (if (not (null-or-unboundp 'my-roam-dir))
       (progn

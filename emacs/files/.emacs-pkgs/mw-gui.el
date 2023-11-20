@@ -6,7 +6,7 @@
      '(monte-carlo-theme :type git :host github :repo "MetroWind/monte-carlo-theme")))
 
 (use-package ligature
-  :if (window-system)
+  :if (not macp)
   :ensure t
   :hook (after-init . global-ligature-mode))
 

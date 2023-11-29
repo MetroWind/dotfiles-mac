@@ -53,9 +53,12 @@ if (( ${+commands[oh-my-posh]} )); then
                 OMP_THEME="pure"
             fi
             eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/${OMP_THEME}.omp.json)"
-            RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
         else
-            eval "$(oh-my-posh init zsh)"
+            # If there’s no homebrew, the theme is taken from a URL.
+            if [[ ! -v OMP_THEME ]]; then
+                OMP_THEME="https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/amro.omp.json"
+            fi
+            eval "$(oh-my-posh init zsh --config ${OMP_THEME})"
         fi
     fi
 else

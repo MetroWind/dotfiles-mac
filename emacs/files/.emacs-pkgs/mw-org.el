@@ -10,6 +10,7 @@
          :map org-mode-map
          ("C-c C-a" . outline-show-all)
          ("C-c w" . refile-subtree-to-new-file))
+  :chords (("oc" . org-capture))
   :config
 
 ;; (define-key global-map "\C-cl" 'org-store-link)

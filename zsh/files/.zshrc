@@ -56,7 +56,7 @@ if (( ${+commands[oh-my-posh]} )); then
         else
             # If there’s no homebrew, the theme is taken from a URL.
             if [[ ! -v OMP_THEME ]]; then
-                OMP_THEME="https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/amro.omp.json"
+                OMP_THEME="https://github.com/JanDeDobbeleer/oh-my-posh/raw/main/themes/pure.omp.json"
             fi
             eval "$(oh-my-posh init zsh --config ${OMP_THEME})"
         fi

@@ -43,15 +43,39 @@ export EXA_COLORS="da=38;2;108;107;135:uu=0;33:gu=0;33"
 # completion
 # compdef pacman-color=pacman
 
-PROMPT=$'%F{cyan}$SHLVL ‡ %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
-RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
+if (( ${+commands[oh-my-posh]} )); then
+    if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+        if (( ${+commands[brew]} )); then
+            # If OME_THEME is not defined, use a default theme.
+            if [[ ! -v OMP_THEME ]]; then
+                # OMP_THEME="amro“”
+                # OMP_THEME="wopian"
+                OMP_THEME="pure"
+            fi
+            eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/${OMP_THEME}.omp.json)"
+            RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
+        else
+            eval "$(oh-my-posh init zsh)"
+        fi
+    fi
+else
 
-ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u2260"
-ZSH_THEME_GIT_PROMPT_ADDED="\u0444"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2642"
-ZSH_THEME_GIT_PROMPT_CLEAN="%#"
+    PROMPT=$'%F{cyan}$SHLVL ‡ %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
+    RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
+
+    ZSH_THEME_GIT_PROMPT_PREFIX=""
+    ZSH_THEME_GIT_PROMPT_SUFFIX=""
+    ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u2260"
+    ZSH_THEME_GIT_PROMPT_ADDED="\u0444"
+    ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2642"
+    ZSH_THEME_GIT_PROMPT_CLEAN="%#"
+fi
+
+if (( ${+commands[fastfetch]} )); then
+    fastfetch -c neofetch
+elif (( ${+commands[neofetch]} )); then
+    neofetch
+fi
 
 # Welcome message
 if [[ -e $HOME/.motd ]]; then

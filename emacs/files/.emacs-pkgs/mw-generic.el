@@ -269,7 +269,9 @@ See URL `http://proselint.com/'."
   (setq telega-chat-use-markdown-version 2)
   (setq telega-chat-input-markups (list "markdown2" "markdown1" nil))
   (setq telega-msg-rainbow-title nil)
-  (setq telega-sticker-size (cons 7 24)))
+  (setq telega-sticker-size (cons 7 24))
+  (if macp
+      (setq telega-server-libs-prefix "/opt/homebrew")))
 
 ;; Https://github.com/beancount/beancount-mode
 (use-package beancount

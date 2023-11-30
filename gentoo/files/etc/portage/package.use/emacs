@@ -1,5 +1,2 @@
 sys-devel/gcc jit
-app-editors/emacs harfbuzz jit libxml2 threads tree-sitter xwidgets imagemagick json toolkit-scroll-bars svg inotify cairo gui sound gtk xft jpeg
-app-emacs/emacs-common gui
-media-libs/harfbuzz icu
-app-crypt/pinentry emacs
+app-editors/emacs harfbuzz jit libxml2 threads tree-sitter xwidgets imagemagick json toolkit-scroll-bars svg

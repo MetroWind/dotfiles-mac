@@ -7,6 +7,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.MultiColumns
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Spacing
 import XMonad.Hooks.ManageDocks
 import System.Exit
 import qualified XMonad.StackSet as W
@@ -28,7 +29,7 @@ main = do
       borderWidth = 3,
       focusedBorderColor = "#D04245",
       normalBorderColor = "#273644",
-      layoutHook = l,
+      layoutHook = spacingRaw True (Border 20 20 20 20) False (Border 20 20 20 20) True $ l,
       manageHook = myManageHook <+> manageHook desktopConfig,
       keys = myKeys,
       mouseBindings = myMouseBindings,

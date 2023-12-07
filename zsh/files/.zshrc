@@ -43,6 +43,7 @@ export EXA_COLORS="da=38;2;108;107;135:uu=0;33:gu=0;33"
 # completion
 # compdef pacman-color=pacman
 
+# Set up oh-my-posh if available.
 if (( ${+commands[oh-my-posh]} )); then
     if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
         if (( ${+commands[brew]} )); then
@@ -62,15 +63,16 @@ if (( ${+commands[oh-my-posh]} )); then
         fi
     fi
 else
+    # No oh-my-posh, just use my own prompt, which is actually better
+    # :-> Uf413 is the “folder” icon in Nerd Font.
+    PROMPT=$'%F{cyan}$SHLVL \uf413  %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
+    RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) $(git_prompt_info)%{$reset_color%}'
 
-    PROMPT=$'%F{cyan}$SHLVL ‡ %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
-    RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) %{$fg_no_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
-
-    ZSH_THEME_GIT_PROMPT_PREFIX=""
+    ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}\ueafc%F{blue}"
     ZSH_THEME_GIT_PROMPT_SUFFIX=""
-    ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}\u2260"
-    ZSH_THEME_GIT_PROMPT_ADDED="\u0444"
-    ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\u2642"
+    ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}±"
+    ZSH_THEME_GIT_PROMPT_ADDED="\uf407"
+    ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\uf418"
     ZSH_THEME_GIT_PROMPT_CLEAN="%#"
 fi
 

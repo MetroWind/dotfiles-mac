@@ -66,7 +66,7 @@ else
     # No oh-my-posh, just use my own prompt, which is actually better
     # :-> Uf413 is the “folder” icon in Nerd Font.
     PROMPT=$'%F{cyan}$SHLVL \uf413  %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
-    RPROMPT=$'%{${fg_no_bold[red]}%}%(?..(%?%)) $(git_prompt_info)%{$reset_color%}'
+    RPROMPT=$'%{${fg_no_bold[red]}%}%(?..\u21b3%?) $(git_prompt_info)%{$reset_color%}'
 
     ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}\ueafc%F{blue}"
     ZSH_THEME_GIT_PROMPT_SUFFIX=""

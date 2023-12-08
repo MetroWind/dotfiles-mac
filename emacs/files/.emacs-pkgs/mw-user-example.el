@@ -55,6 +55,8 @@
      my-auto-sml-theme-excludes)))
 (defconst my-font nil)
 (defconst my-font-size 130)             ;Pixel size * 10
+;; Whether to use the nerd font code points.
+(defconst my-use-nerd-font nil)
 ;; Change the location of the .emacs.d dir (full path).
 (defconst my-emacsd-location nil)
 ;; Nil or 'company.

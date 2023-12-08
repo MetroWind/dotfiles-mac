@@ -19,6 +19,7 @@
         '(eldoc-mode . "?")
         (cons 'visual-line-mode (if my-use-nerd-font "\U000f05b6 " "↩"))
         ;; Major modes
+        '(text-mode . "¶")
         '(lisp-interaction-mode . "λ")
         (cons 'python-mode (if my-use-nerd-font "\U0000e73c " "π"))
         '(emacs-lisp-mode . "Λ")
@@ -32,6 +33,9 @@
         '(lsp-mode . "")
         '(editorconfig-mode . "")
         (cons 'tree-sitter-mode (if my-use-nerd-font "\U0000f1bb " "T"))
+        (cons 'magit-status-mode (if my-use-nerd-font "\U000f02a2 " "Mg"))
+        (cons 'magit-rev-mode (if my-use-nerd-font "\U000f0718 " ""))
+        (cons 'magit-diff-mode (if my-use-nerd-font "\U0000f47f " ""))
         )
   "Alist for `clean-mode-line'.
 When you add a new element to the alist, keep in mind that you

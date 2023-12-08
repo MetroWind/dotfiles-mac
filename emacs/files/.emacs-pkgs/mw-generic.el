@@ -321,7 +321,14 @@ See URL `http://proselint.com/'."
   (setq word-wrap-by-category t))
 
 (use-package visual-fill-column
-  :hook (visual-line-mode . visual-fill-column-mode))
+  :hook (visual-line-mode
+         .
+         (lambda ()
+           (if visual-line-mode
+               (visual-fill-column-mode 1)
+             (visual-fill-column-mode -1))))
+  :config
+  (setq visual-fill-column-width 80))
 
 (if use-straight-p
     (straight-use-package

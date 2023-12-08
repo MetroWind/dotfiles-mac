@@ -50,9 +50,8 @@ want to use in the modeline *in lieu of* the original.")
              (when (eq mode major-mode)
                (setq mode-name mode-str)))))
 
-(if (boundp 'my-shorten-mode-string)
-    (if my-shorten-mode-string
-        (add-hook 'after-change-major-mode-hook 'clean-mode-line)))
+(if (bound-and-true 'my-shorten-mode-string)
+    (add-hook 'after-change-major-mode-hook 'clean-mode-line))
 
 ;; Smart modeline
 (use-package smart-mode-line

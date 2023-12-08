@@ -5,6 +5,9 @@
       (null (symbol-value symbol))
     t))
 
+(defun bound-and-true (symbol)
+  (not (null-or-unboundp symbol)))
+
 (defun with-default (symbol default)
   (if (boundp symbol)
       (symbol-value symbol)

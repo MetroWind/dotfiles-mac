@@ -45,10 +45,10 @@
   (setq org-show-entry-below '((default . nil) (tags-tree . t) (occur-tree . t)))
   ;; Set to the location of your Org files on your local system
   (setq org-agenda-files my-org-files)
-  (if (not (null-or-unboundp 'my-org-dir))
+  (if (bound-and-true 'my-org-dir)
       (setq org-directory my-org-dir))
   ;; Set `org-capture'
-  (if (not (null-or-unboundp 'my-org-capture-file))
+  (if (bound-and-true 'my-org-capture-file)
       (setq org-default-notes-file my-org-capture-file))
   ;; Don’t mess with my windows!!!!!!!!!!!!!!
   (setq org-agenda-window-setup 'other-window)
@@ -208,7 +208,7 @@
       (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
              (path (concat dir "style.css"))
              (homestyle (and (or (null dir) (null (file-exists-p path)))
-                             (not (null-or-unboundp 'my-org-inline-css-file))))
+                             (bound-and-true 'my-org-inline-css-file)))
              (final (if homestyle my-org-inline-css-file path)))
         (if (file-exists-p final)
             (progn
@@ -230,7 +230,7 @@
   :ensure t
   :chords (("ob" . org-roam-buffer-toggle))
   :config
-  (if (not (null-or-unboundp 'my-roam-dir))
+  (if (bound-and-true 'my-roam-dir)
       (progn
         (message (concat "Setting roam dir to " my-roam-dir))
         (setq org-roam-directory my-roam-dir)

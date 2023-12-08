@@ -147,7 +147,7 @@
       (mw-apply-theme theme theme-hooks sml-excludes))))
 
 ;; Load theme
-(if (not (null-or-unboundp 'my-theme))
+(if (bound-and-true 'my-theme)
     (progn
       (if (not (tty-color-24bit (list 0 0 0)))
           (progn

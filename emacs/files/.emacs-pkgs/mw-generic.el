@@ -341,4 +341,9 @@ See URL `http://proselint.com/'."
                    ("integration" "integration/*")
                    (:exclude ".dir-locals.el" "*-tests.el")))))
 
+(use-package edit-server
+  :demand t
+  :config
+  (edit-server-start))
+
 (provide 'mw-generic)

@@ -132,16 +132,19 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [((m .|. modMask, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
-    -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
-    [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- ++
+    -- -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
+    -- -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
+    -- [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
     ++
     -- Keys to switch to specific windows
     [ ((modMask, xK_o), do
           win' <- findWindows "kitty"
+          when (length win' > 0) (windows $ W.focusWindow $ head win'))
+    , ((modMask, xK_e), do
+          win' <- findWindows "Emacs"
           when (length win' > 0) (windows $ W.focusWindow $ head win'))
     ]

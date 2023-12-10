@@ -1,2 +1,2 @@
 sys-devel/gcc jit
-app-editors/emacs harfbuzz jit libxml2 threads tree-sitter xwidgets imagemagick json toolkit-scroll-bars svg
+app-editors/emacs harfbuzz jit libxml2 threads tree-sitter xwidgets imagemagick json toolkit-scroll-bars svg gui cairo jpeg gtk

@@ -18,6 +18,8 @@
       (require 'helm-config))
 
   :config
+  ;; Let C-n go across sources (sections).
+  (setq helm-move-to-line-cycle-in-source nil)
   (setq helm-buffer-max-length 40))
 
 ;; Ido

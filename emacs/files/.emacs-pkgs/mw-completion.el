@@ -32,7 +32,7 @@
 
 ;; Company
 (use-package company
-  :when (equal (with-default 'my-inline-completion nil) 'company)
+  :when (equal my-inline-completion 'company)
   :ensure t
   :hook (after-init . global-company-mode)
   ;; :bind ("M-/" . complete-with-all-backends)
@@ -68,6 +68,18 @@
     :demand t
     :config
     (company-quickhelp-mode 1))
+  )
+
+(use-package corfu
+  :if (equal my-inline-completion 'corfu)
+  :ensure t
+  :init
+  (global-corfu-mode)
+  :custom
+  (corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)  ;; Enable auto completion
+  (corfu-quit-at-boundary nil) ;; Never quit at completion boundary
+  (corfu-on-exact-match nil)   ;; Configure handling of exact matches
   )
 
 ;; For python, python-language-server is required. Install:

@@ -104,6 +104,7 @@ Can be one of these:
 Right now the choices are 'company or nil.
 "
   :type '(radio (const company)
+                (const corfu)
                 (const :tag "No inline completion" nil)))
 
 (defcustom my-org-files '()

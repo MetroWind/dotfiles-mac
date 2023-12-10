@@ -37,3 +37,5 @@ x11-misc/openbox-menu svg
 # dev-qt/qtgui wayland egl
 
 media-libs/harfbuzz icu
+
+app-text/hunspell en

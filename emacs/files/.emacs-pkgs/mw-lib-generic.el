@@ -204,4 +204,78 @@ Activate this advice with:
    (replace-regexp-in-string
     (rx (not alnum)) "_" (downcase s))))
 
+(defun -apply-window-configuration (conf window)
+  (defun -split-to-windows (conf window)
+    (if (null conf)
+        nil
+      (let* ((this-split (car conf))
+            (new-window
+             (cond ((eq (car this-split) 'column)
+                    (split-window-right nil window))
+                   ((eq (car this-split) 'row)
+                    (split-window-below nil window))
+                   (t (error (format "Invalid window split direction %s"
+                                     this-split))))))
+        (cons new-window (-split-to-windows (cdr conf) new-window)))))
+
+  (defun split-to-windows (conf window)
+    (cons window (-split-to-windows (cdr conf) window)))
+
+  (defun apply-configuration-in-sub-windows (conf sub-windows)
+    (if (null conf)
+        nil
+      (-apply-window-configuration (cdr (car conf)) (car sub-windows))
+      (apply-configuration-in-sub-windows (cdr conf) (cdr sub-windows))))
+
+  (if (null conf)
+      nil
+    (apply-configuration-in-sub-windows
+     conf
+     (split-to-windows conf window))))
+
+(defun apply-window-configuration (conf)
+  "Apply a configuration to the current frame. A configuration is a
+list of columns or rows with their own configuration. For
+example:
+
+- ((row) (row))
+
+  Splits the current frame into two rows.
+
+- ((column) (column) (column))
+
+  Splits the current frame into three columns.
+
+- ((column) (column . ((row) (row))))
+
+  Splits the current frame into this configuration:
+
+  ┌─────┬─────┐
+  │     │     │
+  │     ├─────┤
+  │     │     │
+  └─────┴─────┘
+
+- ((row)
+   (row . ((column)
+           (column . ((row) (row)))
+           (column)))
+   (row))
+
+  Splits the current frame into this configuration:
+
+  ┌────────────┐
+  │            │
+  ├───┬────┬───┤
+  │   │    │   │
+  │   ├────┤   │
+  │   │    │   │
+  ├───┴────┴───┤
+  │            │
+  └────────────┘
+"
+  (delete-other-windows)
+  (-apply-window-configuration conf (selected-window))
+  (balance-windows))
+
 (provide 'mw-lib-generic)

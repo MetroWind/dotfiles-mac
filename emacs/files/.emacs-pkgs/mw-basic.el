@@ -36,7 +36,9 @@
   (setq next-screen-context-lines 5)
   ;; (setq sentence-end "\\([。！？；]\\|……\\|[.?!;][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
   (setq sentence-end-double-space nil)
-  (ignore-errors (setq frame-title-format my-frame-title))
+  (if (stringp my-frame-title)
+      (setq frame-title-format my-frame-title)
+    (setq frame-title-format (funcall my-frame-title)))
   ;; Don't bring partially a visible line to fully visible before
   ;; scrolling.
   (setq auto-window-vscroll nil)

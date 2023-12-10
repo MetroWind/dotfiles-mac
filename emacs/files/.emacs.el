@@ -4,6 +4,8 @@
 (defconst ModeDir (expand-file-name "~/.emacs-pkgs"))
 (add-to-list 'load-path ModeDir)
 
+(message "Loading customozation group...")
+(require 'mw-customization)
 (message "Loading user settings...")
 (require 'mw-user)
 (message "Initializing...")

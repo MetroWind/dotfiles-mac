@@ -89,20 +89,11 @@
   ;; (xterm-mouse-mode)
   )
 
-;; Go full screen and split
 (use-package emacs
-  :if (and window-system my-full-screen)
   :hook (after-init
          .
          (lambda ()
-           (if truemacp
-               (setq initial-frame-alist '((fullscreen . fullscreen)))
-             (toggle-frame-fullscreen))
-           (split-window-horizontally)
-           (split-window-horizontally)
-           (select-window (previous-window))
-           (split-window-vertically)
-           (balance-windows))))
+           (apply-window-configuration my-initial-frame-configuration))))
 
 ;; Ligature
 (use-package ligature
@@ -157,13 +148,25 @@
                                      (selected-frame))))
             (add-hook 'window-setup-hook 'on-after-init)))
 
-      (message (format "Loading theme(s) %s..." my-theme))
       (let ((theme-hooks (with-default 'my-theme-hooks nil))
             (sml-excludes (with-default 'my-auto-sml-theme-excludes nil)))
         (cl-typecase my-theme
-          (function (funcall my-theme))
-          (list (dolist (theme my-theme)
+          (symbol
+           (if (equal my-theme 'random)
+               (progn
+                 (message "Loading a random theme...")
+                 (mw-apply-random-theme
+                  my-random-theme-excludes
+                  my-theme-hooks
+                  my-auto-sml-theme-excludes))
+             (message (format "Loading theme %s..." my-theme))
+             (mw-apply-theme my-theme theme-hooks sml-excludes)))
+          (list
+           (message (format "Loading themes %s..." my-theme))
+           (dolist (theme my-theme)
                   (mw-apply-theme theme theme-hooks sml-excludes)))
-          (t (mw-apply-theme my-theme theme-hooks sml-excludes))))))
+          (function (funcall my-theme))
+          (t
+           (message "Invalid type of `my-theme'."))))))
 
 (provide 'mw-gui)

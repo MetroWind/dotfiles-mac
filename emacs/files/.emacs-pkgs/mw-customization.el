@@ -74,6 +74,19 @@ Can be one of these:
   "Pixel size of the font, multiplied by 10."
   :type 'integer)
 
+(defcustom my-font-width 'normal
+  "Width of the font"
+  :type '(radio
+          (const ultra-condensed)
+          (const extra-condensed)
+          (const condensed)
+          (const semi-condensed)
+          (const normal)
+          (const semi-expanded)
+          (const expanded)
+          (const extra-expanded)
+          (const ultra-expanded)))
+
 (defcustom my-use-nerd-font nil
   "Whether to use the icons in Nerd Font."
   :type 'boolean)
@@ -108,8 +121,11 @@ Right now the choices are 'company or nil.
                 (const :tag "No inline completion" nil)))
 
 (defcustom my-org-files '()
-  "A list of org file that are opened by command `org-open'."
-  :type '(repeat file))
+  "A list of org files or directories that are opened by command
+`org-open'. This also becomes `org-agenda-files'."
+  :type '(repeat string))
+
+(defcustom my-org-directory "~/Org" "`org-directory'" :type 'directory)
 
 (defcustom my-org-capture-file nil "The org capture file"
   :type '(radio (const :tag "No org capture file" nil) file))

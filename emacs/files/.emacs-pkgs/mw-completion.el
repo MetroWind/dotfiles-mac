@@ -73,13 +73,11 @@
 (use-package corfu
   :if (equal my-inline-completion 'corfu)
   :ensure t
+  :bind (("M-/" . completion-at-point))
   :init
   (global-corfu-mode)
   :custom
   (corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)  ;; Enable auto completion
-  (corfu-quit-at-boundary nil) ;; Never quit at completion boundary
-  (corfu-on-exact-match nil)   ;; Configure handling of exact matches
   )
 
 ;; For python, python-language-server is required. Install:

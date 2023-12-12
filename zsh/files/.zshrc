@@ -49,7 +49,7 @@ if (( ${+commands[oh-my-posh]} )); then
         if (( ${+commands[brew]} )); then
             # If OME_THEME is not defined, use a default theme.
             if [[ ! -v OMP_THEME ]]; then
-                # OMP_THEME="amro“”
+                # OMP_THEME="amro"
                 # OMP_THEME="wopian"
                 OMP_THEME="pure"
             fi
@@ -65,14 +65,27 @@ if (( ${+commands[oh-my-posh]} )); then
 else
     # No oh-my-posh, just use my own prompt, which is actually better
     # :-> Uf413 is the “folder” icon in Nerd Font.
-    PROMPT=$'%F{cyan}$SHLVL \uf413  %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
+
+    if [[ $USE_NERD_FONT = 1 ]]; then
+        SYMBOL_FOLDER=$'\uf413 '
+        SYMBOL_GIT_BRANCH=$'\ueafc'
+        SYMBOL_GIT_NEED_COMMIT=$'\uf407'
+        SYMBOL_GIT_NEED_UPLOAD=$'\uf418'
+    else
+        SYMBOL_FOLDER="¶"
+        SYMBOL_GIT_BRANCH="ф"
+        SYMBOL_GIT_NEED_COMMIT="ſ"
+        SYMBOL_GIT_NEED_UPLOAD="↑"
+    fi
+
+    PROMPT=$'%F{cyan}$SHLVL ${SYMBOL_FOLDER} %60<...<%~\n%F{yellow}%n%F{blue}@%m%f$(getGitPrompt) '
     RPROMPT=$'%{${fg_no_bold[red]}%}%(?..\u21b3%?) $(git_prompt_info)%{$reset_color%}'
 
-    ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}\ueafc%F{blue}"
+    ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}${SYMBOL_GIT_BRANCH}%F{blue}"
     ZSH_THEME_GIT_PROMPT_SUFFIX=""
     ZSH_THEME_GIT_PROMPT_DIRTY="%{${fg_bold[magenta]}%}±"
-    ZSH_THEME_GIT_PROMPT_ADDED="\uf407"
-    ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}\uf418"
+    ZSH_THEME_GIT_PROMPT_ADDED="${SYMBOL_GIT_NEED_COMMIT}"
+    ZSH_THEME_GIT_PROMPT_AHEAD="%{${fg_bold[magenta]}%}${SYMBOL_GIT_NEED_UPLOAD}"
     ZSH_THEME_GIT_PROMPT_CLEAN="%#"
 fi
 

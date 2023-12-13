@@ -1,6 +1,7 @@
 new_tab Local
 layout tall:bias=75;full_size=3;mirrored=false
 launch
+launch --type=background kitty-random-theme.sh
 new_tab Remote
 layout tall:bias=80;full_size=4;mirrored=true
 launch

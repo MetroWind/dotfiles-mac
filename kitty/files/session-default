@@ -1,8 +1,8 @@
 new_tab Local
+layout tall:bias=75;full_size=3;mirrored=false
 launch
 new_tab Remote
-layout tall:bias=66;full_size=2;mirrored=true
-launch
+layout tall:bias=80;full_size=4;mirrored=true
 launch
 launch
 launch

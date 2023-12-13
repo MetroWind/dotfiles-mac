@@ -114,6 +114,9 @@
   ;; it per mode with `ligature-mode'.
   (global-ligature-mode t))
 
+;; Recommended themes: flucui, lab, notink, monte-carlo, ef, ample,
+;; anti-zenburn, apropospriate, badwolf, challenger-deep, chocolate,
+;; dracula, kaolin, modus, moe, solarized, srcery, subatomic.
 (use-package emacs
   :config
   (defun apply-random-theme ()

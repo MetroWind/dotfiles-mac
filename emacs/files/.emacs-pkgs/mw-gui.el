@@ -32,7 +32,7 @@
        :family my-font
        :height my-font-size
        :width my-font-width
-       :weight 'normal)
+       :weight my-font-weight)
     (set-face-attribute
      'default nil
      :height my-font-size

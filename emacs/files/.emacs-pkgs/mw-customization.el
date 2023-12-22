@@ -87,6 +87,20 @@ Can be one of these:
           (const extra-expanded)
           (const ultra-expanded)))
 
+(defcustom my-font-weight 'normal
+  "Weight of the font"
+  :type '(radio (const ultra-heavy)
+                (const heavy)
+                (const ultra-bold)
+                (const bold)
+                (const semi-bold)
+                (const medium)
+                (const normal)
+                (const semi-light)
+                (const light)
+                (const extra-light)
+                (const thin)))
+
 (defcustom my-use-nerd-font nil
   "Whether to use the icons in Nerd Font."
   :type 'boolean)

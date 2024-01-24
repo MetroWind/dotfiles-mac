@@ -328,7 +328,7 @@ See URL `http://proselint.com/'."
                (visual-fill-column-mode 1)
              (visual-fill-column-mode -1))))
   :config
-  (setq visual-fill-column-width 80))
+  (setq-default visual-fill-column-width 80))
 
 (if use-straight-p
     (straight-use-package

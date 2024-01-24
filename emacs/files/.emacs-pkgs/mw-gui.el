@@ -50,6 +50,12 @@
   (if (> emacs-major-version 24)
       (setq frame-inhibit-implied-resize t))
 
+  (if (and macp (emacs-version>= 24 4))
+      (progn
+        (setq ns-use-native-fullscreen t)
+        (if my-full-screen
+            (set-frame-parameter nil 'fullscreen 'fullboth))))
+
   (if (and macp (>= emacs-major-version 26))
       (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 

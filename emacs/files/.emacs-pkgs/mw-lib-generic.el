@@ -278,4 +278,10 @@ example:
   (-apply-window-configuration conf (selected-window))
   (balance-windows))
 
+(defun emacs-version>= (major minor)
+  (cond ((= emacs-major-version major)
+         (>= emacs-minor-version minor))
+        ((> emacs-major-version major) t)
+        (t nil)))
+
 (provide 'mw-lib-generic)

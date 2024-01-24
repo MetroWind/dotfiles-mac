@@ -32,7 +32,7 @@
 
 ;; Company
 (use-package company
-  :when (equal my-inline-completion 'company)
+  :when (equal my-inline-completion-frontend 'company)
   :ensure t
   :hook (after-init . global-company-mode)
   ;; :bind ("M-/" . complete-with-all-backends)
@@ -71,7 +71,7 @@
   )
 
 (use-package corfu
-  :if (equal my-inline-completion 'corfu)
+  :if (equal my-inline-completion-frontend 'corfu)
   :ensure t
   :bind (("M-/" . completion-at-point))
   :init
@@ -87,7 +87,8 @@
 ;; For C++, clangd (which is part of clang) should be installed, and
 ;; `lsp-clangd' should be loaded in Emacs.
 (use-package lsp-mode
-  :unless (null-or-unboundp 'my-inline-completion)
+  :if (and (not (null-or-unboundp 'my-inline-completion-frontend))
+           (equal my-inline-completion-backend 'lsp-mode))
   :ensure t
   :hook ((python-mode rust-mode c++-mode) . lsp)
   :init
@@ -104,10 +105,13 @@
   )
 
 (use-package eglot
+  :if (and (not (null-or-unboundp 'my-inline-completion-frontend))
+           (equal my-inline-completion-backend 'eglot))
   :hook (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode -1))))
 
 (use-package company-lsp
-  :when (equal (with-default 'my-inline-completion nil) 'company)
+  :if (and (equal (with-default 'my-inline-completion-frontend nil) 'company)
+           (equal my-inline-completion-backend 'lsp-mode))
   :commands company-lsp
   :ensure t)
 

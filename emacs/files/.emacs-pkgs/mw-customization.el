@@ -125,14 +125,25 @@ Can be one of these:
   :type '(radio (const :tag "No change" nil)
                 (directory)))
 
-(defcustom my-inline-completion 'company
+(defcustom my-inline-completion-frontend 'company
   "Choose an inline completion package to use.
 
-Right now the choices are 'company or nil.
+Right now the choices are 'company, 'corfu, and nil.
 "
   :type '(radio (const company)
                 (const corfu)
                 (const :tag "No inline completion" nil)))
+
+;; The current behavior is just to disable LSP packages if this is not
+;; lsp-mode.
+(defcustom my-inline-completion-backend 'lsp-mode
+  "Choose an inline completion backend package to use.
+
+Right now the choices are 'lsp-mode and 'eglot.
+"
+  :type '(radio (const lsp-mode)
+                (const eglot)
+                (const :tag "No inline completion backend" nil)))
 
 (defcustom my-org-files '()
   "A list of org files or directories that are opened by command

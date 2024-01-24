@@ -348,7 +348,9 @@ When using Homebrew, (insert )nstall it using \"brew install trash\"."
   ;; Enable ligature.
   (mac-auto-operator-composition-mode))
 
+;; Keycords have problems in remote sessions.
 (use-package use-package-chords
+  :disabled
   :demand t
   :ensure t
   :config (key-chord-mode 1))

@@ -9,8 +9,9 @@
   :bind (("C-<f12>" . org-remember)
          :map org-mode-map
          ("C-c C-a" . outline-show-all)
+         ("C-c o c" . org-capture)
          ("C-c w" . refile-subtree-to-new-file))
-  :chords (("oc" . org-capture))
+  ;; :chords (("oc" . org-capture))
   :config
 
 ;; (define-key global-map "\C-cl" 'org-store-link)
@@ -159,6 +160,10 @@
                     (+ (- 7 dow) 1)))
            (new-time (decoded-time-add time (make-decoded-time :day delta))))
       (org-agenda-schedule arg (encode-time new-time))))
+
+  :config
+  ;; Ignore files with no work time clocked in clockreport.
+  (setq org-agenda-clockreport-parameter-plist '(:stepskip0 t :link t :fileskip0 t))
   )
 
 ;; Org export
@@ -228,7 +233,9 @@
 (use-package org-roam
   :demand t
   :ensure t
-  :chords (("ob" . org-roam-buffer-toggle))
+  :bind (:map org-roam-mode-map
+         ("C-c o b" . org-roam-buffer-toggle))
+  ;; :chords (("ob" . org-roam-buffer-toggle))
   :config
   (if (bound-and-true 'my-roam-dir)
       (progn

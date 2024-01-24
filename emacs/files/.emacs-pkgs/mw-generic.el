@@ -341,9 +341,9 @@ See URL `http://proselint.com/'."
                    ("integration" "integration/*")
                    (:exclude ".dir-locals.el" "*-tests.el")))))
 
-(use-package edit-server
+(use-package atomic-chrome
   :demand t
   :config
-  (edit-server-start))
+  (atomic-chrome-start-server))
 
 (provide 'mw-generic)

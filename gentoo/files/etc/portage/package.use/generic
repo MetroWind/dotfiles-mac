@@ -5,7 +5,8 @@ sys-apps/systemd policykit
 app-admin/sudo offensive
 app-crypt/pinentry gtk
 app-crypt/gcr gtk
-media-gfx/imagemagick hdri opencl pango fontconfig jpeg jpeg2k lcms openexr openmp png raw tiff truetype webp zip zlib svg xml
+media-gfx/imagemagick hdri opencl pango fontconfig jpeg jpeg2k lcms openexr openmp png raw tiff truetype webp zip zlib svg xml heif
+media-libs/libheif x265 rav1e -aom
 media-video/ffmpeg dav1d svt-av1 x264 x265 vulkan libdrm libsoxr vpx encode fontconfig jpeg2k libass mp3 opus sdl speex threads truetype vaapi vdpau vorbis webp xvid
 media-video/mpv vaapi vdpau vulkan
 media-gfx/feh exif inotify
@@ -39,3 +40,6 @@ x11-misc/openbox-menu svg
 media-libs/harfbuzz icu
 
 app-text/hunspell en
+
+# Inkscape
+dev-python/pillow webp

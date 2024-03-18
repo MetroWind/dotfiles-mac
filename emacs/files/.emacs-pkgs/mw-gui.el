@@ -22,8 +22,8 @@
   (add-to-list 'default-frame-alist (cons 'border-width 0))
   (if (>= emacs-major-version 29)
       (progn
-        (set-frame-parameter nil 'alpha-background 80)
-        (add-to-list 'default-frame-alist (cons 'alpha-background 80))))
+        (set-frame-parameter nil 'alpha-background 85)
+        (add-to-list 'default-frame-alist (cons 'alpha-background 85))))
 
   ;; Font
   (if my-font

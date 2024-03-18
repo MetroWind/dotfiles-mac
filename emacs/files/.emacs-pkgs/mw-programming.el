@@ -8,10 +8,32 @@
   :hook (c-mode-common . (lambda () (c-toggle-auto-hungry-state 1)))
   :config
   ;; CC Indention
+
+  (defun my-c-lineup-arglist-intro (_)
+    "If the beginning of a function's argument list starts at a
+newline, indent at the previous line's indentation plus one unit.
+See https://emacs.stackexchange.com/q/80747/514."
+    (save-excursion
+      (back-to-indentation)
+      ;; Go to beginning of *previous* line:
+      (c-backward-syntactic-ws)
+      (back-to-indentation)
+      (cond
+       ;; We are making a reasonable assumption that if there is a control
+       ;; structure to indent past, it has to be at the beginning of the line.
+       ((looking-at "\\(\\(if\\|for\\|while\\)\\s *(\\)")
+        (goto-char (match-end 1)))
+       ;; For constructor initializer lists, the reference point for line-up is
+       ;; the token after the initial colon.
+       ((looking-at ":\\s *")
+        (goto-char (match-end 0))))
+      (vector (+ c-basic-offset (current-column)))))
+
   ;; offset customizations not in my-c-style
   (setq-default c-offsets-alist
                 '((member-init-intro . ++)
                   (innamespace . [0])
+                  (arglist-intro . my-c-lineup-arglist-intro)
                   ))
 
   (setq-default c-basic-offset 4)

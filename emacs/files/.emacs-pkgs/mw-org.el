@@ -261,7 +261,7 @@
            (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                       ":PROPERTIES:
 :ROAM_REFS: %^{Source}
-:SourceType: %^{Source type|article|book|video|podcast|microblog|paper}
+:SourceType: %^{Source type|article|book|video|podcast|microblog|paper|code}
 :END:
 #+TITLE: ${title}
 #+FILETAGS: :Draft:

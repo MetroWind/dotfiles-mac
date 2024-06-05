@@ -346,4 +346,21 @@ See URL `http://proselint.com/'."
   :config
   (atomic-chrome-start-server))
 
+(use-package goggles
+  :hook ((prog-mode text-mode) . goggles-mode)
+  :config
+  (setq-default goggles-pulse t)
+  (set-face-attribute
+   'goggles-added nil
+   :background 'unspecified
+   :inherit 'region)
+  (set-face-attribute
+   'goggles-changed nil
+   :background 'unspecified
+   :inherit 'region)
+  (set-face-attribute
+   'goggles-removed nil
+   :background 'unspecified
+   :inherit 'region))
+
 (provide 'mw-generic)

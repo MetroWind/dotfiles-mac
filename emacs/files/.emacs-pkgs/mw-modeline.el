@@ -18,6 +18,7 @@
         '(auto-revert-mode . "⤾ ")
         '(eldoc-mode . "?")
         (cons 'visual-line-mode (if my-use-nerd-font "\U000f05b6 " "↩"))
+        '(goggle-mode . "")
         ;; Major modes
         '(text-mode . "¶")
         '(lisp-interaction-mode . "λ")

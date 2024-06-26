@@ -112,8 +112,7 @@
 (use-package company-lsp
   :if (and (equal (with-default 'my-inline-completion-frontend nil) 'company)
            (equal my-inline-completion-backend 'lsp-mode))
-  :commands company-lsp
-  :ensure t)
+  :commands company-lsp)
 
 (use-package jedi-core
   :disabled

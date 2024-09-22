@@ -41,3 +41,5 @@
 
 [init]
 defaultBranch = master
+[user]
+	name = MetroWind

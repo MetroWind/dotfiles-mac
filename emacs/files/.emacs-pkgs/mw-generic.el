@@ -358,6 +358,7 @@ See URL `http://proselint.com/'."
   (atomic-chrome-start-server))
 
 (use-package goggles
+  :ensure t
   :hook ((prog-mode text-mode) . goggles-mode)
   :config
   (setq-default goggles-pulse t)

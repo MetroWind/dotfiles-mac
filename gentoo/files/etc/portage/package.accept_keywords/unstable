@@ -10,5 +10,6 @@ gui-wm/hyprland ~amd64
 dev-libs/hyprland-protocols ~amd64
 dev-libs/libliftoff ~amd64
 media-libs/libdisplay-info ~amd64
+gui-libs/aquamarine ~amd64
 
 dev-util/nvidia-cuda-toolkit ~amd64

@@ -353,7 +353,7 @@ See URL `http://proselint.com/'."
                    (:exclude ".dir-locals.el" "*-tests.el")))))
 
 (use-package atomic-chrome
-  :demand t
+  :ensure t
   :config
   (atomic-chrome-start-server))
 

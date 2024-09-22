@@ -11,6 +11,7 @@ media-video/ffmpeg dav1d svt-av1 x264 x265 vulkan libdrm libsoxr vpx encode font
 media-video/mpv vaapi vdpau vulkan
 media-gfx/feh exif inotify
 media-libs/imlib2 gif jpeg png tiff webp zlib heif jpeg2k
+x11-misc/xscreensaver glx xinerama
 # Thunar
 dev-libs/libdbusmenu gtk3
 xfce-base/tumbler jpeg ffmpeg pdf

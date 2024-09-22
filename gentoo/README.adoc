@@ -1,0 +1,4 @@
+= Configuration for Gentoo Linux
+
+`files/kernel.config` is the current kernel configuration (`.config`
+in kernel source directory).

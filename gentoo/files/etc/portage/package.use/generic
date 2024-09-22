@@ -1,3 +1,6 @@
+*/* PYTHON_TARGETS: python3_11 python3_12
+*/* PYTHON_SINGLE_TARGET: -* python3_12
+
 dev-lang/rust-bin rust-analyzer rust-src
 x11-drivers/nvidia-drivers tools
 net-wireless/wpa_supplicant dbus

@@ -91,8 +91,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_space), spawn "dmenu_run -i -p '>' -fn 'Iosevka SS09-10'") -- %! Launch dmenu
     , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun") -- %! Launch gmrun
     , ((modMask .|. shiftMask, xK_c     ), kill) -- %! Close the focused window
-    , ((modMask .|. controlMask, xK_3), spawn "maim -u ~/pictures/Screenshots/$(date '+%FT%T').png")
-    , ((modMask .|. controlMask, xK_4), spawn "maim -su ~/pictures/Screenshots/partial-$(date '+%FT%T').png")
+    , ((modMask .|. controlMask, xK_3), spawn "maim -u ~/pictures/Screenshots/$(date '+%FT%H_%M_%S').png")
+    , ((modMask .|. controlMask, xK_4), spawn "maim -su ~/pictures/Screenshots/partial-$(date '+%FT%H_%M_%S').png")
 
     , ((modMask, xK_grave ), sendMessage NextLayout) -- %! Rotate through the available layout algorithms
     , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf) -- %!  Reset the layouts on the current workspace to default

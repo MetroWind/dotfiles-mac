@@ -122,6 +122,17 @@
 (use-package tsmanip
   :commands (tsmanip-timestamp-increase tsmanip-timestamp-decrease))
 
+(if use-straight-p
+    (straight-use-package
+     '(beancount :type git
+           :host github
+           :repo "beancount/beancount-mode"
+           :files ("*.el" ("term" "term/*.el") "*.texi"
+                   "*.ti" ("terminfo/e" "terminfo/e/*")
+                   ("terminfo/65" "terminfo/65/*")
+                   ("integration" "integration/*")
+                   (:exclude ".dir-locals.el" "*-tests.el")))))
+
 (use-package beancount
   :mode ("\\.beancount\\'" . beancount-mode)
   :hook (beancount-mode . (lambda () (yas-activate-extra-mode 'beancount-mode)))

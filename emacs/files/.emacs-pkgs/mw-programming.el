@@ -91,7 +91,8 @@ See https://emacs.stackexchange.com/q/80747/514."
   :bind ("M-C" . compile)
   :config
   ;; Make make command print directory information
-  (setq-default compile-command "make -w"))
+  (setq-default compile-command "make -w")
+  (setq compilation-scroll-output t))
 
 (use-package subword
   :hook ((c-mode-common . subword-mode)

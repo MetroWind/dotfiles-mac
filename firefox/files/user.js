@@ -15,7 +15,7 @@ user_pref("general.autoScroll", false);
 user_pref("general.smoothScroll", false);
 user_pref("general.warnOnAboutConfig", false);
 user_pref("gfx.color_management.enablev4", true);
-user_pref("gfx.color_management.mode", 2);
+user_pref("gfx.color_management.mode", 1);
 user_pref("intl.accept_languages", "en-us,zh-cn");
 user_pref("media.autoplay.allow-muted", false);
 user_pref("media.autoplay.default", 1);

@@ -126,4 +126,13 @@
               "--virtual-env" (expand-file-name "~/Python3")
               "--virtual-env" (expand-file-name "~/Python"))))
 
+(use-package completion-preview
+  :hook ((prog-mode text-mode comint-mode) . completion-preview-mode)
+  :bind (:map completion-preview-active-mode-map
+              ("M-n" . completion-preview-next-candidate)
+              ("M-p" . completion-preview-prev-candidate))
+  :config
+  ;; Show the preview already after two symbol characters
+  (setq completion-preview-minimum-symbol-length 2))
+
 (provide 'mw-completion)

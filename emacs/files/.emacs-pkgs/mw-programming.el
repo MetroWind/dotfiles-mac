@@ -29,18 +29,13 @@ See https://emacs.stackexchange.com/q/80747/514."
         (goto-char (match-end 0))))
       (vector (+ c-basic-offset (current-column)))))
 
-  ;; offset customizations not in my-c-style
-  (setq-default c-offsets-alist
-                '((member-init-intro . ++)
-                  (innamespace . [0])
-                  (arglist-intro . my-c-lineup-arglist-intro)
-                  ))
-
   (setq-default c-basic-offset 4)
   ;; add my personal style and set it for the current buffer
   (defconst my-cc-style
     '("bsd"
-      (c-offsets-alist . ((innamespace . [0])))))
+      (c-offsets-alist . ((member-init-intro . ++)
+                          (innamespace . [0])
+                          (arglist-intro . my-c-lineup-arglist-intro)))))
   (c-add-style "my-style" my-cc-style)
 
   (setq-default c-default-style "my-style"

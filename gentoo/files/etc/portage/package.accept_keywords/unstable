@@ -13,3 +13,5 @@ media-libs/libdisplay-info ~amd64
 gui-libs/aquamarine ~amd64
 
 dev-util/nvidia-cuda-toolkit ~amd64
+app-i18n/fcitx-rime ~amd64
+media-video/obs-studio ~amd64

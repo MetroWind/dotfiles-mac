@@ -107,6 +107,7 @@
 (use-package eglot
   :if (and (not (null-or-unboundp 'my-inline-completion-frontend))
            (equal my-inline-completion-backend 'eglot))
+  :hook ((python-mode rust-mode c++-mode) . eglot-ensure)
   :hook (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode -1))))
 
 (use-package company-lsp

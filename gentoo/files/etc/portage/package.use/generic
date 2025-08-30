@@ -7,7 +7,7 @@ app-crypt/pinentry gtk
 app-crypt/gcr gtk
 media-gfx/imagemagick hdri opencl pango fontconfig jpeg jpeg2k lcms openexr openmp png raw tiff truetype webp zip zlib svg xml heif
 media-libs/libheif x265 rav1e -aom
-media-video/ffmpeg dav1d svt-av1 x264 x265 vulkan libdrm libsoxr vpx encode fontconfig jpeg2k libass mp3 opus sdl speex threads truetype vaapi vdpau vorbis webp xvid
+media-video/ffmpeg dav1d svt-av1 x264 x265 vulkan libdrm libsoxr vpx encode fontconfig jpeg2k libass lame opus sdl speex threads truetype vaapi vdpau vorbis webp xvid nvenc
 media-video/mpv vaapi vdpau vulkan
 media-gfx/feh exif inotify
 media-libs/imlib2 gif jpeg png tiff webp zlib heif jpeg2k
@@ -44,3 +44,6 @@ app-text/hunspell en
 
 # Inkscape
 dev-python/pillow webp
+
+media-video/obs-studio nvenc
+llvm-core/clang extra static-analyzer

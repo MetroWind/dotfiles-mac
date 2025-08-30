@@ -43,3 +43,5 @@
 defaultBranch = master
 [user]
 	name = MetroWind
+[http "https://git.xeno.darksair.org/"]
+	proactiveAuth = basic

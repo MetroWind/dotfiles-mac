@@ -69,6 +69,9 @@
   ;; “#+STARTUP: noindent”.
   (setq org-startup-indented t)
 
+  ;; Allow image scaling
+  (setq org-image-actual-width nil)
+
   ;; Enable code execution
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -276,5 +279,10 @@
 
   (setq org-roam-node-display-template "${category:10} ${tags:10} ${title:*}")
   )
+
+(use-package org-tree-slide
+  :bind (:map org-tree-slide-mode-map
+              ("SPC" . org-tree-slide-move-next-tree)
+              ("DEL" . org-tree-slide-move-previous-tree)))
 
 (provide 'mw-org)

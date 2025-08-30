@@ -62,7 +62,7 @@
   (defun enable-old-man ()
     (interactive)
     (set-face-attribute 'default nil
-      :height (truncate (* (with-default 'my-font-size 100) 1.5))))
+      :height (truncate (* (with-default 'my-font-size 100) 3))))
 
   (defun disable-old-man ()
     (interactive)

@@ -57,6 +57,7 @@ myLayout :: Show a => String -> Layout a
 myLayout vertical = if vertical /= "1"
   then Layout $ onWorkspace "web" (avoidStruts $ (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
        (avoidStruts $ (ThreeColMid 1 0.02 (3/7)) ||| Full)
+       -- (avoidStruts $ (ThreeColMid 1 0.02 (31/42)) ||| Full)
   else Layout $ onWorkspace "web" (avoidStruts $ Mirror (multiCol [1] 1 0.02 (-0.5)) ||| Full) $
        (avoidStruts $ Mirror (ThreeColMid 1 0.02 (1/2)) ||| Full)
 

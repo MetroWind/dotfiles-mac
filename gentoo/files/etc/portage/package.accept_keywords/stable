@@ -1,1 +1,4 @@
 sys-kernel/gentoo-sources -~amd64
+
+# Needed for QMK
+cross-avr/gcc **

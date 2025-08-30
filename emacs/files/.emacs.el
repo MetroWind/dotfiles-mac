@@ -37,3 +37,4 @@
 
 (load custom-file 'noerror)
 (server-start)
+(put 'narrow-to-region 'disabled nil)

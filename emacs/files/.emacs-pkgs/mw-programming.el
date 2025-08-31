@@ -94,8 +94,8 @@ See https://emacs.stackexchange.com/q/80747/514."
          (python-mode . subword-mode)))
 
 (use-package whitespace
-  :after (:any cc-mode python yaml-mode rust-mode)
-  :hook ((emacs-lisp-mode c-mode-common python-mode yaml-mode rust-mode)
+  :after (:any cc-mode python yaml-mode rust-mode js-mode)
+  :hook ((emacs-lisp-mode c-mode-common python-mode yaml-mode rust-mode js-mode)
          . whitespace-mode)
   :config
   ;; (if (not use-pkg-p)

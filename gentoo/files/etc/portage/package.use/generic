@@ -36,7 +36,7 @@ x11-misc/openbox-menu svg
 
 # dev-qt/qtbase opengl
 # dev-qt/qttools opengl
-# dev-qt/qtgui wayland egl
+dev-qt/qtgui -wayland egl
 
 media-libs/harfbuzz icu
 

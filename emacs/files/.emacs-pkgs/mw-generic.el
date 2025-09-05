@@ -375,4 +375,20 @@ See URL `http://proselint.com/'."
    :background 'unspecified
    :inherit 'region))
 
+(if use-straight-p (straight-use-package 'gptel))
+(use-package gptel
+  :config
+  (setopt
+   gptel-model 'gemini-2.5-pro
+   gptel-include-reasoning nil
+   gptel-backend (gptel-make-gemini "Gemini"
+                   :key my-gemini-api-key
+                   :stream t)
+   gptel-directives
+   '((default . "You are a large language model living in Emacs and a helpful assistant. Respond concisely.")
+     (programming . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
+     (writing . "You are a large language model and a writing assistant. Respond concisely.")
+     (obfuscation . "I would like you to act as a language assistant who specializes in rephrasing with obfuscation. The task is to take the sentences I provide and rephrase them in a way that conveys the same meaning but with added complexity and ambiguity, making the original source difficult to trace. This should be achieved while maintaining coherence and readability. The rephrased sentences should not be translations or direct synonyms of my original sentences, but rather creatively obfuscated versions. Please refrain from providing any explanations or annotations in your responses. Reply in English using professional tone for everyone."))))
+
+
 (provide 'mw-generic)

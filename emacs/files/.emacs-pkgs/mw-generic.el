@@ -1,5 +1,11 @@
 ;; Stuff that doesn't fit anywhere else.
 
+;; Supress use-package warnings
+(use-package warnings
+  :config
+  (add-to-list 'warning-suppress-log-types '(use-package))
+  (add-to-list 'warning-suppress-types '(use-package)))
+
 (use-package mw-lib-generic
   :bind (("M-RET" . toggle-line-wrap)
          ("C-;" . comment-sectional)

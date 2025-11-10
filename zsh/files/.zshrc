@@ -25,6 +25,8 @@ fi
 
 if [[ -e ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -e /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 if [[ -e ${HOME}/.zsh/zsh-autosuggestions/autosuggestions.zsh ]]; then
@@ -93,6 +95,9 @@ if (( ${+commands[fastfetch]} )); then
     fastfetch -c neofetch
 elif (( ${+commands[neofetch]} )); then
     neofetch
+else
+    test-bold-italic
+    test-24bit-colors
 fi
 
 # Welcome message

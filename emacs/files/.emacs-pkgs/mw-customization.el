@@ -285,8 +285,13 @@ matching the to field against the car."
   "This will become `notmuch-saved-searches'."
   :type 'sexp)
 
-(defcustom my-gemini-api-key ""
+(defcustom my-llm-api-key ""
   "This is used to construct gptel backend."
   :type 'string)
+
+(defcustom my-llm-type ""
+  "This is used to construct gptel backend."
+  :type '(choice (const gemini)
+                 (const xeno)))
 
 (provide 'mw-customization)

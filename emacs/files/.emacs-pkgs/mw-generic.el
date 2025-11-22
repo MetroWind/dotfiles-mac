@@ -384,12 +384,21 @@ See URL `http://proselint.com/'."
 (if use-straight-p (straight-use-package 'gptel))
 (use-package gptel
   :config
+  (cond ((eq my-llm-type 'gemini)
+         (setopt
+          gptel-model 'gemini-2.5-pro
+          gptel-backend (gptel-make-gemini "Gemini"
+                          :key my-llm-api-key
+                          :stream t)))
+        ((eq my-llm-type 'xeno)
+         (setopt
+          gptel-backend (gptel-make-openai "xeno"
+                          :stream t
+                          :protocol "https"
+                          :host "llm.xeno.darksair.org"
+                          :models '(dummy)))))
   (setopt
-   gptel-model 'gemini-2.5-pro
    gptel-include-reasoning nil
-   gptel-backend (gptel-make-gemini "Gemini"
-                   :key my-gemini-api-key
-                   :stream t)
    gptel-directives
    '((default . "You are a large language model living in Emacs and a helpful assistant. Respond concisely.")
      (programming . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
